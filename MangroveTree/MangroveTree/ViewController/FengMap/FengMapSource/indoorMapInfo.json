@@ -1,0 +1,49 @@
+{
+	"indoormaps": [
+				   {
+				   "map_mid": "70144",
+				   "model_fid": "999800125",
+				   "model_name": "国际会展中心"
+				   },
+				   {
+				   "map_mid": "70145",
+				   "model_fid": "999800126",
+				   "model_name": "椰林酒店"
+				   },
+				   {
+				   "map_mid": "70146",
+				   "model_fid": "999800127",
+				   "model_name": "棕榈酒店"
+				   },
+				   {
+				   "map_mid": "70147",
+				   "model_fid": "99980012",
+				   "model_name": "木棉酒店A"
+				   },
+				   {
+				   "map_mid": "79981",
+				   "model_fid": "999800130",
+				   "model_name": "皇后棕酒店"
+				   },
+				   {
+				   "map_mid": "79981",
+				   "model_fid": "999800128",
+				   "model_name": "大王棕酒店"
+				   },
+				   {
+				   "map_mid": "79981",
+				   "model_fid": "999800129",
+				   "model_name": ""
+				   },
+				   {
+				   "map_mid": "70148",
+				   "model_fid": "99980011",
+				   "model_name": "木棉酒店B"
+				   },
+				   {
+				   "map_mid": "79982",
+				   "model_fid": "999800131",
+				   "model_name": "菩提酒店"
+				   }
+				   ]
+}

@@ -1,0 +1,577 @@
+{
+    "activity_list": [
+                      {
+                      "activity_code": "1",
+                      "zone_code": "001",
+                      "model_fid": "999800127",
+                      "model_name": "棕榈酒店",
+                      "activity_name": "亿航",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "2",
+                      "zone_code": "001",
+                      "model_fid": "999800127",
+                      "model_name": "棕榈酒店",
+                      "activity_name": "CRZ",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "3",
+                      "zone_code": "001",
+                      "model_fid": "999800127",
+                      "model_name": "棕榈酒店",
+                      "activity_name": "Mothercare",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "4",
+                      "zone_code": "001",
+                      "model_fid": "999800127",
+                      "model_name": "棕榈酒店",
+                      "activity_name": "H&M",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "5",
+                      "zone_code": "001",
+                      "model_fid": "999800128",
+                      "model_name": "大王棕酒店",
+                      "activity_name": "Beach style",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "6",
+                      "zone_code": "001",
+                      "model_fid": "999800128",
+                      "model_name": "大王棕酒店",
+                      "activity_name": "水生活馆",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "7",
+                      "zone_code": "001",
+                      "model_fid": "999800128",
+                      "model_name": "大王棕酒店",
+                      "activity_name": "o'neal",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "8",
+                      "zone_code": "001",
+                      "model_fid": "999800128",
+                      "model_name": "大王棕酒店",
+                      "activity_name": "巴西烤肉",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "9",
+                      "zone_code": "001",
+                      "model_fid": "999800131",
+                      "model_name": "菩提酒店",
+                      "activity_name": "BOWIECARLO",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "10",
+                      "zone_code": "001",
+                      "model_fid": "999800131",
+                      "model_name": "菩提酒店",
+                      "activity_name": "聚雅阁黄花梨",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "11",
+                      "zone_code": "001",
+                      "model_fid": "999800131",
+                      "model_name": "菩提酒店",
+                      "activity_name": "菩提游泳池",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "12",
+                      "zone_code": "001",
+                      "model_fid": "999800131",
+                      "model_name": "菩提酒店",
+                      "activity_name": "菩提中餐厅",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "13",
+                      "zone_code": "001",
+                      "model_fid": "999800131",
+                      "model_name": "菩提酒店",
+                      "activity_name": "菩提珍珠吧",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "14",
+                      "zone_code": "001",
+                      "model_name": "木棉酒店B",
+                      "model_fid": "99980011",
+                      "activity_name": "沙滩文化",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "15",
+                      "zone_code": "001",
+                      "model_name": "木棉酒店B",
+                      "model_fid": "99980011",
+                      "activity_name": "健身房",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "16",
+                      "zone_code": "001",
+                      "model_name": "木棉酒店B",
+                      "model_fid": "99980011",
+                      "activity_name": "木棉餐厅",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "17",
+                      "zone_code": "001",
+                      "model_fid": "999800125",
+                      "model_name": "国际会展中心",
+                      "activity_name": "会议中心",
+                      "activity_position": [
+                                            12188009,
+                                            2071207.375
+                                            ]
+                      },
+                      {
+                      "activity_code": "18",
+                      "zone_code": "001",
+                      "model_fid": "999800125",
+                      "model_name": "国际会展中心",
+                      "activity_name": "国际影城",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "19",
+                      "zone_code": "001",
+                      "model_fid": "999800125",
+                      "model_name": "国际会展中心",
+                      "activity_name": "探险王国",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "20",
+                      "zone_code": "001",
+                      "model_fid": "999800126",
+                      "model_name": "椰林酒店",
+                      "activity_name": "绍兴小馆",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "21",
+                      "zone_code": "001",
+                      "model_fid": "999800126",
+                      "model_name": "椰林酒店",
+                      "activity_name": "墨西哥餐吧",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "22",
+                      "zone_code": "001",
+                      "model_fid": "999800126",
+                      "model_name": "椰林酒店",
+                      "activity_name": "老上海餐吧",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "23",
+                      "zone_code": "001",
+                      "model_fid": "999800126",
+                      "model_name": "椰林酒店",
+                      "activity_name": "红磨坊餐厅",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "24",
+                      "zone_code": "001",
+                      "model_fid": "999800126",
+                      "model_name": "椰林酒店",
+                      "activity_name": "大粮仓",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "25",
+                      "zone_code": "001",
+                      "model_fid": "999800130",
+                      "model_name": "皇后棕酒店",
+                      "activity_name": "UP+精品超市",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "26",
+                      "zone_code": "001",
+                      "model_fid": "999800130",
+                      "model_name": "皇后棕酒店",
+                      "activity_name": "皇后棕游泳池",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "27",
+                      "zone_code": "001",
+                      "model_fid": "999800130",
+                      "model_name": "皇后棕酒店",
+                      "activity_name": "大王棕餐厅",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "28",
+                      "zone_code": "001",
+                      "model_fid": "999800131",
+                      "model_name": "菩提酒店",
+                      "activity_name": "艺术汇",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "29",
+                      "zone_code": "001",
+                      "model_fid": "999800131",
+                      "model_name": "菩提酒店",
+                      "activity_name": "潘维曼Spa",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "30",
+                      "zone_code": "001",
+                      "model_fid": "99980012",
+                      "model_name": "木棉酒店A",
+                      "activity_name": "木棉游泳池",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "31",
+                      "zone_code": "001",
+                      "model_fid": "99980012",
+                      "model_name": "木棉酒店A",
+                      "activity_name": "棋牌室",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "32",
+                      "zone_code": "001",
+                      "model_fid": "99980012",
+                      "model_name": "木棉酒店A",
+                      "activity_name": "木棉珊瑚吧",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "33",
+                      "zone_code": "001",
+                      "model_fid": "999800119",
+                      "model_name": "水乐园",
+                      "activity_name": "水乐园",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "34",
+                      "zone_code": "001",
+                      "model_fid": "999800120",
+                      "model_name": "水乐园",
+                      "activity_name": "水乐园",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "35",
+                      "zone_code": "001",
+                      "model_fid": "999800158",
+                      "model_name": "水乐园",
+                      "activity_name": "水乐园",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "36",
+                      "zone_code": "001",
+                      "model_fid": "999800163",
+                      "model_name": "水乐园",
+                      "activity_name": "水乐园",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "37",
+                      "zone_code": "001",
+                      "model_fid": "999800166",
+                      "model_name": "水乐园",
+                      "activity_name": "水乐园",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "38",
+                      "zone_code": "001",
+                      "model_fid": "999800167",
+                      "model_name": "水乐园",
+                      "activity_name": "水乐园",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "39",
+                      "zone_code": "001",
+                      "model_fid": "999800168",
+                      "model_name": "水乐园",
+                      "activity_name": "水乐园",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "40",
+                      "zone_code": "001",
+                      "model_fid": "999800169",
+                      "model_name": "水乐园",
+                      "activity_name": "水乐园",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "41",
+                      "zone_code": "001",
+                      "model_fid": "999800170",
+                      "model_name": "水乐园",
+                      "activity_name": "水乐园",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "42",
+                      "zone_code": "001",
+                      "model_fid": "999800171",
+                      "model_name": "水乐园",
+                      "activity_name": "水乐园",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "43",
+                      "zone_code": "001",
+                      "model_fid": "999800181",
+                      "model_name": "水乐园",
+                      "activity_name": "水乐园",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "44",
+                      "zone_code": "001",
+                      "model_fid": "999800182",
+                      "model_name": "水乐园",
+                      "activity_name": "水乐园",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "45",
+                      "zone_code": "001",
+                      "model_fid": "999800164",
+                      "model_name": "水乐园",
+                      "activity_name": "水乐园",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "46",
+                      "zone_code": "001",
+                      "model_fid": "999800165",
+                      "model_name": "水乐园",
+                      "activity_name": "水乐园",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "47",
+                      "zone_code": "001",
+                      "model_fid": "999800162",
+                      "model_name": "水乐园",
+                      "activity_name": "水乐园",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "48",
+                      "zone_code": "001",
+                      "model_fid": "999800160",
+                      "model_name": "水乐园",
+                      "activity_name": "水乐园",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "49",
+                      "zone_code": "001",
+                      "model_fid": "999800161",
+                      "model_name": "水乐园",
+                      "activity_name": "水乐园",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "50",
+                      "zone_code": "001",
+                      "model_fid": "999800159",
+                      "model_name": "水乐园",
+                      "activity_name": "水乐园",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "51",
+                      "zone_code": "001",
+                      "model_fid": "999800118",
+                      "model_name": "水乐园",
+                      "activity_name": "水乐园",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "52",
+                      "zone_code": "001",
+                      "model_fid": "999800126",
+                      "model_name": "椰林酒店",
+                      "activity_name": "椰林游泳池",
+                      "activity_position": []
+                      },
+                      {
+                      "activity_code": "53",
+                      "zone_code": "001",
+                      "model_fid": "999800129",
+                      "model_name": "大王棕餐厅",
+                      "activity_name": "临风吧",
+                      "activity_position": [
+                                            12188393,
+                                            2071301.75
+                                            ]
+                      },
+                      {
+                      "activity_code": "54",
+                      "zone_code": "001",
+                      "model_fid": "999800126",
+                      "model_name": "椰林酒店",
+                      "activity_name": "国际影城",
+                      "activity_position": [
+                                            12188064,
+                                            2071274.375
+                                            ]
+                      },
+                      {
+                      "activity_code": "55",
+                      "zone_code": "001",
+                      "model_fid": "999800126",
+                      "model_name": "骑士部落",
+                      "activity_name": "骑士部落",
+                      "activity_position": [
+                                            12188058,
+                                            2071182.125
+                                            ]
+                      },
+                      {
+                      "activity_code": "56",
+                      "zone_code": "001",
+                      "model_fid": "999800162",
+                      "model_name": "纳咪日本料理",
+                      "activity_name": "纳咪日本料理",
+                      "activity_position": [
+                                            12188130,
+                                            2071230.5
+                                            ]
+                      },
+                      {
+                      "activity_code": "57",
+                      "zone_code": "001",
+                      "model_fid": "999800161",
+                      "model_name": "丽江小街",
+                      "activity_name": "丽江小街",
+                      "activity_position": [
+                                            12188154,
+                                            2071206.625
+                                            ]
+                      },
+                      {
+                      "activity_code": "58",
+                      "zone_code": "001",
+                      "model_fid": "999800172",
+                      "model_name": "柳鶯亭",
+                      "activity_name": "柳鶯亭",
+                      "activity_position": [
+                                            12188191,
+                                            2071256
+                                            ]
+                      },
+                      {
+                      "activity_code": "59",
+                      "zone_code": "001",
+                      "model_fid": "999800157",
+                      "model_name": "汉拿山",
+                      "activity_name": "汉拿山",
+                      "activity_position": [
+                                            12188225,
+                                            2071253.875
+                                            ]
+                      },
+                      {
+                      "activity_code": "60",
+                      "zone_code": "001",
+                      "model_fid": "999800152",
+                      "model_name": "湘聚",
+                      "activity_name": "湘聚",
+                      "activity_position": [
+                                            12188343,
+                                            2071203.125
+                                            ]
+                      },
+                      {
+                      "activity_code": "61",
+                      "zone_code": "001",
+                      "model_fid": "999800147",
+                      "model_name": "意面工坊",
+                      "activity_name": "意面工坊",
+                      "activity_position": [
+                                            12188330,
+                                            2071165.75
+                                            ]
+                      },
+                      {
+                      "activity_code": "62",
+                      "zone_code": "001",
+                      "model_fid": "999800177",
+                      "model_name": "皇后广场",
+                      "activity_name": "皇后广场",
+                      "activity_position": [
+                                            12187879,
+                                            2071341.625
+                                            ]
+                      },
+                      {
+                      "activity_code": "63",
+                      "zone_code": "001",
+                      "model_fid": "999800128",
+                      "model_name": "大王棕酒店",
+                      "activity_name": "VERO MODA",
+                      "activity_position": [
+                                            12188138,
+                                            2071218.5
+                                            ]
+                      },
+                      {
+                      "activity_code": "64",
+                      "zone_code": "001",
+                      "model_fid": "999800128",
+                      "model_name": "大王棕酒店",
+                      "activity_name": "SELECTED",
+                      "activity_position": [
+                                            12188244,
+                                            2071257.5
+                                            ]
+                      },
+                      {
+                      "activity_code": "65",
+                      "zone_code": "001",
+                      "model_fid": "999800128",
+                      "model_name": "大王棕酒店",
+                      "activity_name": "JACK&JONES",
+                      "activity_position": [
+                                            12188353.0,
+                                            2071252.375
+                                            ]
+                      },
+                      {
+                      "activity_code": "66",
+                      "zone_code": "001",
+                      "model_fid": "999800126",
+                      "model_name": "椰林酒店",
+                      "activity_name": "H&M",
+                      "activity_position": [
+                                            12188108,
+                                            2071221.625
+                                            ]
+                      }
+                      ]
+}

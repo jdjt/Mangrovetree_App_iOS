@@ -1,0 +1,389 @@
+{
+    "associationmap": [
+                       {
+                       "externel_fid": "999800131",
+                       "externel_name": "菩提酒店",
+                       "label_ids": [
+                                     20,
+                                     85
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800133",
+                       "externel_name": "德国扎啤吧",
+                       "label_ids": [
+                                     22
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800135",
+                       "externel_name": "纨美贝艺",
+                       "label_ids": [
+                                     23
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800143",
+                       "externel_name": "行动书屋",
+                       "label_ids": [
+                                     25
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800145",
+                       "externel_name": "陶艺吧",
+                       "label_ids": [
+                                     26
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800158",
+                       "externel_name": "原味主张",
+                       "label_ids": [
+                                     36
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800170",
+                       "externel_name": "沙滩",
+                       "label_ids": [
+                                     88
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800125",
+                       "externel_name": "国际会展中心",
+                       "label_ids": [
+                                     56
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800124",
+                       "externel_name": "ICE冰酷",
+                       "label_ids": [
+                                     57
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800123",
+                       "externel_name": "果然",
+                       "label_ids": [
+                                     58
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800122",
+                       "externel_name": "黎家小院",
+                       "label_ids": [
+                                     59
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800121",
+                       "externel_name": "骑士部落",
+                       "label_ids": [
+                                     60
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800164",
+                       "externel_name": "储物间",
+                       "label_ids": [
+                                     61
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800165",
+                       "externel_name": "淋浴间",
+                       "label_ids": [
+                                     62
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800162",
+                       "externel_name": "纳咪日本料理",
+                       "label_ids": [
+                                     63
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800160",
+                       "externel_name": "面包树",
+                       "label_ids": [
+                                     64
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800161",
+                       "externel_name": "丽江小街",
+                       "label_ids": [
+                                     65
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800159",
+                       "externel_name": "原味蔬食",
+                       "label_ids": [
+                                     66
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800172",
+                       "externel_name": "柳鶯亭",
+                       "label_ids": [
+                                     67
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800157",
+                       "externel_name": "汉拿山",
+                       "label_ids": [
+                                     68
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800156",
+                       "externel_name": "秦韵",
+                       "label_ids": [
+                                     69
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800152",
+                       "externel_name": "鼎湖",
+                       "label_ids": [
+                                     70
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800144",
+                       "externel_name": "小螺号少儿艺术团培训基地",
+                       "label_ids": [
+                                     71
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800141",
+                       "externel_name": "心一斋茶膳馆",
+                       "label_ids": [
+                                     72
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800142",
+                       "externel_name": "味天拉面",
+                       "label_ids": [
+                                     73
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800139",
+                       "externel_name": "离尘院",
+                       "label_ids": [
+                                     74
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800138",
+                       "externel_name": "泰餐厅",
+                       "label_ids": [
+                                     75
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800137",
+                       "externel_name": "一景海鲜坊",
+                       "label_ids": [
+                                     76
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800136",
+                       "externel_name": "蓝殿",
+                       "label_ids": [
+                                     77
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800134",
+                       "externel_name": "陶陶烧烤吧",
+                       "label_ids": [
+                                     78
+                                     ]
+                       },
+                       {
+                       "externel_fid": "99980012",
+                       "externel_name": "木棉酒店A",
+                       "label_ids": [
+                                     79
+                                     ]
+                       },
+                       {
+                       "externel_fid": "99980011",
+                       "externel_name": "木棉酒店B",
+                       "label_ids": [
+                                     80
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800126",
+                       "externel_name": "椰林酒店",
+                       "label_ids": [
+                                     81
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800127",
+                       "externel_name": "棕榈酒店",
+                       "label_ids": [
+                                     82
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800128",
+                       "externel_name": "大王棕酒店",
+                       "label_ids": [
+                                     83,
+                                     89,
+                                     90,
+                                     91
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800130",
+                       "externel_name": "皇后棕酒店",
+                       "label_ids": [
+                                     84,
+                                     92,
+                                     93
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800118",
+                       "externel_name": "特色儿童水寨",
+                       "label_ids": [
+                                     16
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800117",
+                       "externel_name": "COFFEEBAR",
+                       "label_ids": [
+                                     96,
+                                     95
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800116",
+                       "externel_name": "广式烧腊",
+                       "label_ids": [
+                                     14
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800115",
+                       "externel_name": "成都小吃",
+                       "label_ids": [
+                                     13
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800113",
+                       "externel_name": "阿懒故事",
+                       "label_ids": [
+                                     11
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800112",
+                       "externel_name": "北方小吃",
+                       "label_ids": [
+                                     10
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800114",
+                       "externel_name": "海南/浙江/福建小吃",
+                       "label_ids": [
+                                     12
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800111",
+                       "externel_name": "海鲜&干货",
+                       "label_ids": [
+                                     9
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800110",
+                       "externel_name": "日韩烧烤",
+                       "label_ids": [
+                                     8
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800187",
+                       "externel_name": "东南亚&台湾小吃",
+                       "label_ids": [
+                                     97
+                                     ]
+                       },
+                       {
+                       "externel_fid": "99980019",
+                       "externel_name": "鲜榨果汁&点心",
+                       "label_ids": [
+                                     7
+                                     ]
+                       },
+                       {
+                       "externel_fid": "99980018",
+                       "externel_name": "裸背吧",
+                       "label_ids": [
+                                     6
+                                     ]
+                       },
+                       {
+                       "externel_fid": "99980016",
+                       "externel_name": "桑巴烧烤",
+                       "label_ids": [
+                                     4
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800186",
+                       "externel_name": "清真小吃",
+                       "label_ids": [
+                                     99
+                                     ]
+                       },
+                       {
+                       "externel_fid": "99980017",
+                       "externel_name": "疍家烧烤",
+                       "label_ids": [
+                                     5
+                                     ]
+                       },
+                       {
+                       "externel_fid": "99980015",
+                       "externel_name": "啤酒&炸鸡",
+                       "label_ids": [
+                                     3
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800185",
+                       "externel_name": "办卡/饮料",
+                       "label_ids": [
+                                     94
+                                     ]
+                       },
+                       {
+                       "externel_fid": "999800188",
+                       "externel_name": "办卡/饮料",
+                       "label_ids": [
+                                     98
+                                     ]
+                       }
+                       ]
+}

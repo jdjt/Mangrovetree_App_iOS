@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="NumberLineView">
+            <rect key="frame" x="0.0" y="0.0" width="206" height="200"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IDx-4t-IV0">
+                    <rect key="frame" x="0.0" y="0.0" width="206" height="200"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zYn-Nk-gh1">
+                            <rect key="frame" x="0.0" y="8" width="92" height="2"/>
+                            <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="2" id="4uZ-SR-Jxg"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UZt-U1-Ab5">
+                            <rect key="frame" x="108" y="8" width="98" height="2"/>
+                            <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="2" id="KDk-25-w58"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E0M-nT-mTK">
+                            <rect key="frame" x="92" y="10" width="20" height="190"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            <inset key="titleEdgeInsets" minX="0.0" minY="5" maxX="0.0" maxY="0.0"/>
+                            <state key="normal">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="numPointBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="dTG-OE-0XC"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nSB-FD-asc">
+                            <rect key="frame" x="92" y="0.0" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="20" id="5wi-WM-kxh"/>
+                                <constraint firstAttribute="height" constant="20" id="eom-xU-zFw"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="10"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="nSB-FD-asc" firstAttribute="leading" secondItem="zYn-Nk-gh1" secondAttribute="trailing" id="2lN-8n-lq5"/>
+                        <constraint firstItem="zYn-Nk-gh1" firstAttribute="top" secondItem="IDx-4t-IV0" secondAttribute="top" constant="8" id="3WV-cV-iiQ"/>
+                        <constraint firstItem="nSB-FD-asc" firstAttribute="centerX" secondItem="IDx-4t-IV0" secondAttribute="centerX" constant="-1" id="3rf-is-mxF"/>
+                        <constraint firstItem="nSB-FD-asc" firstAttribute="top" secondItem="IDx-4t-IV0" secondAttribute="top" id="9oD-BC-GIx"/>
+                        <constraint firstAttribute="trailing" secondItem="UZt-U1-Ab5" secondAttribute="trailing" id="AIB-0D-tot"/>
+                        <constraint firstItem="UZt-U1-Ab5" firstAttribute="top" secondItem="IDx-4t-IV0" secondAttribute="top" constant="8" id="H5J-NR-Y8T"/>
+                        <constraint firstAttribute="bottom" secondItem="E0M-nT-mTK" secondAttribute="bottom" id="NF1-ZI-8ri"/>
+                        <constraint firstItem="E0M-nT-mTK" firstAttribute="centerX" secondItem="IDx-4t-IV0" secondAttribute="centerX" constant="-1" id="Vxi-Y6-Y0h"/>
+                        <constraint firstItem="UZt-U1-Ab5" firstAttribute="leading" secondItem="nSB-FD-asc" secondAttribute="trailing" constant="-4" id="XnK-pe-4vy"/>
+                        <constraint firstItem="E0M-nT-mTK" firstAttribute="width" secondItem="nSB-FD-asc" secondAttribute="width" id="gTk-ie-Xeu"/>
+                        <constraint firstItem="E0M-nT-mTK" firstAttribute="top" secondItem="IDx-4t-IV0" secondAttribute="top" constant="10" id="jQW-H4-mgG"/>
+                        <constraint firstItem="zYn-Nk-gh1" firstAttribute="leading" secondItem="IDx-4t-IV0" secondAttribute="leading" id="q6f-6v-OUQ"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="IDx-4t-IV0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="0tq-4e-t79"/>
+                <constraint firstAttribute="bottom" secondItem="IDx-4t-IV0" secondAttribute="bottom" id="4ze-kH-iCY"/>
+                <constraint firstAttribute="trailing" secondItem="IDx-4t-IV0" secondAttribute="trailing" id="5PA-fo-QRU"/>
+                <constraint firstItem="IDx-4t-IV0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="5e6-Tx-clr"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="leftView" destination="zYn-Nk-gh1" id="tjm-Cx-oj6"/>
+                <outlet property="numLabel" destination="nSB-FD-asc" id="guz-iD-qhj"/>
+                <outlet property="numPointBtn" destination="E0M-nT-mTK" id="pgO-Jj-VLM"/>
+                <outlet property="rightView" destination="UZt-U1-Ab5" id="Ocm-Pb-fjS"/>
+            </connections>
+            <point key="canvasLocation" x="91" y="219"/>
+        </view>
+    </objects>
+</document>

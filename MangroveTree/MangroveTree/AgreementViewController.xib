@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AgreementViewController">
+            <connections>
+                <outlet property="agreement1" destination="mdi-1L-ijk" id="KDk-Uq-dDG"/>
+                <outlet property="agreement2" destination="1Z1-aQ-yUQ" id="SPt-9W-m5n"/>
+                <outlet property="agreement3" destination="ENa-Ky-EZn" id="zSO-4I-brX"/>
+                <outlet property="agreement4" destination="pKK-bI-gTX" id="5ca-fL-tFF"/>
+                <outlet property="view" destination="KMp-Hd-6iD" id="Bee-0N-Cib"/>
+            </connections>
+        </placeholder>
+        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" id="KMp-Hd-6iD">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="399"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="544" y="-365.5"/>
+        </scrollView>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view autoresizesSubviews="NO" contentMode="scaleAspectFill" id="mdi-1L-ijk">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="2916"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QIQ-OY-pSZ">
+                    <frame key="frameInset" minX="15" minY="51" width="290" height="2829"/>
+                    <string key="text">一、总则 
+1.1　用户应当同意本协议的条款并按照页面上的提示完成全部的注册程序。用户在进行注册程序过程中点击"同意"按钮即表示用户与红树林管家达成协议，完全接受本协议项下的全部条款。
+1.2　用户注册成功后，红树林管家将给予每个用户一个用户帐号及相应的密码，该用户帐号和密码由用户负责保管；用户应当对以其用户帐号进行的所有活动和事件负法律责任。
+在使用红树林管家的各项服务之前，应仔细阅读本服务协议。如您不同意本服务协议及/或随时对其的修改，您可以主动取消红树林管家所提供的服务；您一旦使用红树林管家的各项服务功能，即视为您已了解并完全同意本服务协议各项内容，并成为红树林管家用户。
+ 二、注册信息和隐私保护 
+2.1　红树林管家帐号（即红树林管家用户ID）的所有权归红树林管家所有，用户完成注册申请手续后，获得红树林管家帐号的使用权。用户应提供及时、详尽及准确的个人资料，并随自己情况的变化不断更新注册资料，符合及时、详尽准确的要求。所有原始键入的资料将引用为注册资料。如果因注册信息不真实而引起的问题，并对问题发生所带来的后果，红树林管家不负任何责任。
+2.2　用户不应将其帐号、密码转让或出借予他人使用。如用户发现其帐号遭他人非法使用，应立即通知红树林管家。因黑客行为或用户的保管疏忽导致帐号、密码遭他人非法使用，红树林管家不承担任何责任。
+2.3　红树林管家不对外公开或向第三方提供单个用户的注册资料，除非：
+　（1）事先获得用户的明确授权；
+　（2）只有透露你的个人资料，才能提供你所要求的产品和服务；
+　（3）根据有关的法律法规要求；
+　（4）按照相关政府主管部门的要求；
+2.4 在用户参加促销和有奖游戏时，红树林管家会收集你的个人身份识别资料，并会将这些资料用于改进为你提供的服务及网页内容、发送用户获得的奖品等。
+ 三、使用规则
+ 3.1 用户在使用红树林管家服务时，必须遵守中华人民共和国相关法律法规的规定，用户应同意将不会利用本服务进行任何违法或不正当的活动，包括但不限于下列行为∶
+ （1）上载、展示、张贴、传播或以其它方式传送含有下列内容之一的信息：
+　1） 反对宪法所确定的基本原则的；
+　2） 危害国家安全，泄露国家秘密，颠覆国家政权，破坏国家统一的；
+　3） 损害国家荣誉和利益的；
+　4） 煽动民族仇恨、民族歧视、破坏民族团结的；
+　5） 破坏国家宗教政策，宣扬邪教和封建迷信的；
+　6） 散布谣言，扰乱社会秩序，破坏社会稳定的；
+　7） 散布淫秽、色情、赌博、暴力、凶杀、恐怖或者教唆犯罪的；
+　8） 侮辱或者诽谤他人，侵害他人合法权利的；
+　9） 含有虚假、有害、胁迫、侵害他人隐私、骚扰、侵害、中伤、粗俗、猥亵、或其它道德上令人反感的内容；
+　10） 含有中国法律、法规、规章、条例以及任何具有法律效力之规范所限制或禁止的其它内容的；
+ （2）不得为任何非法目的而使用网络服务系统；
+ （3）不利用红树林服务从事以下活动：
+　　1) 未经允许，进入计算机信息网络或者使用计算机信息网络资源的；
+　　2) 未经允许，对计算机信息网络功能进行删除、修改或者增加的；
+　　3) 未经允许，对进入计算机信息网络中存储、处理或者传输的数据和应用程序进行删除、修改或者增加的；
+　　4) 故意制作、传播计算机病毒等破坏性程序的；
+　　5) 其他危害计算机信息网络安全的行为。
+ 3.2　用户违反本协议或相关的服务条款的规定，导致或产生的任何第三方主张的任何索赔、要求或损失，包括合理的律师费等。对此，红树林管家有权视用户的行为性质，采取包括但不限于删除用户发布信息内容、暂停使用许可、终止服务、限制使用、回收帐号、追究法律责任等措施。对恶意红树林管家帐号或利用红树林管家帐号进行违法活动、捣乱、骚扰、欺骗、其他用户以及其他违反本协议的行为，红树林管家有权回收其帐号。
+3.3　用户不得对本服务任何部分或本服务之使用或获得，进行复制、拷贝、出售、转售或用于任何其它商业目的。
+3.4　用户须对自己在使用红树林管家的过程中的行为承担法律责任。
+ 四、服务内容
+ 4.1　除非本服务协议另有其它明示规定，红树林管家所推出的新产品、新功能、新服务，均受到本服务协议之规范。
+4.2　为使用本服务，您必须能够自行经有法律资格对您提供互联网接入服务的第三方，进入国际互联网，并应自行支付相关服务费用。此外，您必须自行配备及负责与国际联网连线所需之一切必要装备，包括计算机、数据机或其它存取装置。
+4.3　鉴于网络服务的特殊性，用户同意红树林管家有权不经事先通知，随时变更、中断或终止部分或全部的网络服务（包括收费网络服务）。红树林度假网不担保网络服务不会中断，对网络服务的及时性、安全性、准确性也都不作担保。
+4.4　红树林管家需要定期或不定期地对提供网络服务的平台或相关的设备进行检修或者维护，如因此类情况而造成网络服务（包括收费网络服务）在合理时间内的中断，红树林度假网无需为此承担任何责任。红树林管家保留不经事先通知为维修保养、升级或其它目的暂停本服务任何部分的权利。
+4.5　本服务或第三人可提供与其它国际互联网上之网站或资源之链接。由于红树林管家无法控制这些网站及资源，您应当了解并同意，此类网站或资源是否可供利用，红树林管家不予负责，存在或源于此类网站或资源之任何内容、广告、产品或其它资料，红树林管家亦不予保证或负责。因使用或依赖任何此类网站或资源发布的或经由此类网站或资源获得的任何内容、商品或服务所产生的任何损害或损失，红树林度假网不承担任何责任。
+4.6　六个月未登陆的帐号，红树林管家保留关闭的权利。
+ 五、其他
+ 5.1　本协议的订立、执行和解释及争议的解决均应适用中华人民共和国法律。
+5.2　如双方就本协议内容或其执行发生任何争议，双方应尽量友好协商解决；协商不成时，任何一方均可向红树林管家所在地的人民法院提起诉讼。
+</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <nil key="highlightedColor"/>
+                    <string key="userLabel">一、总则 1．1用户应当同意本协议的条款并按照页面上的提示完成全部的注册程序。用户在进行注册程序过程中点击"同意"按钮即表示用户与红树林管家达成协议，完全接受本协议项下的全部条款。 1．2用户注册成功后，红树林管家将给予每个用户一个用户帐号及相应的密码，该用户帐号和密码由用户负责保管；用户应当对以其用户帐号进行的所有活动和事件负法律责任。 在使用红树林管家的各项服务之前，应仔细阅读本服务协议。如您不同意本服务协议及/或随时对其的修改，您可以主动取消红树林管家所提供的服务；您一旦使用红树林管家的各项服务功能，即视为您已了解并完全同意本服务协议各项内容，并成为红树林管家用户。 二、注册信息和隐私保护 2．1红树林管家帐号（即红树林管家用户ID）的所有权归红树林管家所有，用户完成注册申请手续后，获得红树林管家帐号的使用权。用户应提供及时、详尽及准确的个人资料，并随自己情况的变化不断更新注册资料，符合及时、详尽准确的要求。所有原始键入的资料将引用为注册资料。如果因注册信息不真实而引起的问题，并对问题发生所带来的后果，红树林管家不负任何责任。 2．2用户不应将其帐号、密码转让或出借予他人使用。如用户发现其帐号遭他人非法使用，应立即通知红树林管家。因黑客行为或用户的保管疏忽导致帐号、密码遭他人非法使用，红树林管家不承担任何责任。 2．3红树林管家不对外公开或向第三方提供单个用户的注册资料，除非：  （1）事先获得用户的明确授权；  （2）只有透露你的个人资料，才能提供你所要求的产品和服务；  （3）根据有关的法律法规要求；  （4）按照相关政府主管部门的要求； 2．4 在用户参加促销和有奖游戏时，红树林管家会收集你的个人身份识别资料，并会将这些资料用于改进为你提供的服务及网页内容、发送用户获得的奖品等。 三、使用规则 3．1 用户在使用红树林管家服务时，必须遵守中华人民共和国相关法律法规的规定，用户应同意将不会利用本服务进行任何违法或不正当的活动，包括但不限于下列行为∶ （1）上载、展示、张贴、传播或以其它方式传送含有下列内容之一的信息：  1） 反对宪法所确定的基本原则的；  2） 危害国家安全，泄露国家秘密，颠覆国家政权，破坏国家统一的；  3） 损害国家荣誉和利益的；  4） 煽动民族仇恨、民族歧视、破坏民族团结的；  5） 破坏国家宗教政策，宣扬邪教和封建迷信的；  6） 散布谣言，扰乱社会秩序，破坏社会稳定的；  7） 散布淫秽、色情、赌博、暴力、凶杀、恐怖或者教唆犯罪的；  8） 侮辱或者诽谤他人，侵害他人合法权利的；  9） 含有虚假、有害、胁迫、侵害他人隐私、骚扰、侵害、中伤、粗俗、猥亵、或其它道德上令人反感的内容；  10） 含有中国法律、法规、规章、条例以及任何具有法律效力之规范所限制或禁止的其它内容的； （2）不得为任何非法目的而使用网络服务系统； （3）不利用红树林服务从事以下活动：   1) 未经允许，进入计算机信息网络或者使用计算机信息网络资源的；   2) 未经允许，对计算机信息网络功能进行删除、修改或者增加的；   3) 未经允许，对进入计算机信息网络中存储、处理或者传输的数据和应用程序进行删除、修改或者增加的；   4) 故意制作、传播计算机病毒等破坏性程序的；   5) 其他危害计算机信息网络安全的行为。 3．2 用户违反本协议或相关的服务条款的规定，导致或产生的任何第三方主张的任何索赔、要求或损失，包括合理的律师费等。对此，红树林管家有权视用户的行为性质，采取包括但不限于删除用户发布信息内容、暂停使用许可、终止服务、限制使用、回收帐号、追究法律责任等措施。对恶意红树林管家帐号或利用红树林管家帐号进行违法活动、捣乱、骚扰、欺骗、其他用户以及其他违反本协议的行为，红树林管家有权回收其帐号。 3．3 用户不得对本服务任何部分或本服务之使用或获得，进行复制、拷贝、出售、转售或用于任何其它商业目的。 3．4 用户须对自己在使用红树林管家的过程中的行为承担法律责任。 四、服务内容 4．1 除非本服务协议另有其它明示规定，红树林管家所推出的新产品、新功能、新服务，均受到本服务协议之规范。 4．2 为使用本服务，您必须能够自行经有法律资格对您提供互联网接入服务的第三方，进入国际互联网，并应自行支付相关服务费用。此外，您必须自行配备及负责与国际联网连线所需之一切必要装备，包括计算机、数据机或其它存取装置。 4．3 鉴于网络服务的特殊性，用户同意红树林管家有权不经事先通知，随时变更、中断或终止部分或全部的网络服务（包括收费网络服务）。红树林度假网不担保网络服务不会中断，对网络服务的及时性、安全性、准确性也都不作担保。 4．4 红树林管家需要定期或不定期地对提供网络服务的平台或相关的设备进行检修或者维护，如因此类情况而造成网络服务（包括收费网络服务）在合理时间内的中断，红树林度假网无需为此承担任何责任。红树林管家保留不经事先通知为维修保养、升级或其它目的暂停本服务任何部分的权利。 4．5 本服务或第三人可提供与其它国际互联网上之网站或资源之链接。由于红树林管家无法控制这些网站及资源，您应当了解并同意，此类网站或资源是否可供利用，红树林管家不予负责，存在或源于此类网站或资源之任何内容、广告、产品或其它资料，红树林管家亦不予保证或负责。因使用或依赖任何此类网站或资源发布的或经由此类网站或资源获得的任何内容、商品或服务所产生的任何损害或损失，红树林度假网不承担任何责任。 4．6 六个月未登陆的帐号，红树林管家保留关闭的权利。 五、其他 5．1 本协议的订立、执行和解释及争议的解决均应适用中华人民共和国法律。 5．2 如双方就本协议内容或其执行发生任何争议，双方应尽量友好协商解决；协商不成时，任何一方均可向红树林管家所在地的人民法院提起诉讼。</string>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="用户注册须知" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WTi-3t-e9T">
+                    <frame key="frameInset" minX="109" minY="15" width="102" height="21"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                    <color key="textColor" red="0.28235294119999998" green="0.30196078430000001" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <rect key="contentStretch" x="0.0" y="1" width="1" height="1"/>
+            <constraints>
+                <constraint firstAttribute="centerX" secondItem="WTi-3t-e9T" secondAttribute="centerX" id="2AB-SK-een"/>
+                <constraint firstItem="QIQ-OY-pSZ" firstAttribute="top" secondItem="WTi-3t-e9T" secondAttribute="bottom" constant="15" id="Ewc-TX-Bz5"/>
+                <constraint firstItem="WTi-3t-e9T" firstAttribute="top" secondItem="mdi-1L-ijk" secondAttribute="top" constant="15" id="Gpr-5T-I1V"/>
+                <constraint firstAttribute="trailing" secondItem="QIQ-OY-pSZ" secondAttribute="trailing" constant="15" id="MKk-Z9-GGn"/>
+                <constraint firstItem="QIQ-OY-pSZ" firstAttribute="leading" secondItem="mdi-1L-ijk" secondAttribute="leading" constant="15" id="uHN-Ku-akB"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
+            <point key="canvasLocation" x="143" y="893"/>
+        </view>
+        <view autoresizesSubviews="NO" contentMode="scaleToFill" id="1Z1-aQ-yUQ">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="609"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pdG-eP-1E8">
+                    <string key="text">【如何得知预订成功】
+当您完成预订之后，您将会收到红树林管家向您的入住人手机发送的预订号短信息及电子邮件。
+ 【关于房价】
+红树林管家内的房价均包含服务费，但不包含酒店其它税费（如：政府税、城建税等）。 如您因行程变化取消了酒店订单，但之后再次需要预订时，价格将有可能会变更，请以最新价格为准。
+ 【入住登记】
+请正确填写实际入住人姓名及相关信息，您可凭姓名、我方短信、有效证件、手机号码登记入住。
+ 【入住时间及离店时间】
+通常情况下，酒店的最早入住时间为14:00，最晚离店时间为正午12:00。如提前入住或推迟离店，酒店一般会加收一定的费用。
+ 【点餐购物车与订单的温馨提示】：
+手机点餐服务限入住客人，您需要将手机绑与客房绑定。
+酒店订餐需另加收15%服务费。
+成功提交订单后，客服人员将致电您确认送餐信息。
+</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="pdG-eP-1E8" secondAttribute="trailing" constant="15" id="AJu-Pn-Cvf"/>
+                <constraint firstItem="pdG-eP-1E8" firstAttribute="top" secondItem="1Z1-aQ-yUQ" secondAttribute="top" constant="15" id="gLN-6x-qwY"/>
+                <constraint firstItem="pdG-eP-1E8" firstAttribute="leading" secondItem="1Z1-aQ-yUQ" secondAttribute="leading" constant="15" id="rzV-cT-8Cy"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
+            <point key="canvasLocation" x="544" y="189.5"/>
+        </view>
+        <view autoresizesSubviews="NO" contentMode="scaleToFill" id="ENa-Ky-EZn">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="448"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crv-Kg-D2R">
+                    <string key="text">1. 入住日前30天以上取消预订，扣除已支付客房使用指数5%的手续费 
+2. 入住日前16-30天（含30天）取消预订，扣除已支付客房使用指数10%的手续费 
+3. 入住日前8-15天（含15天）取消预订，扣除已支付客房使用指数20%的手续费 
+4. 入住日前3-7天（含7天）取消预订，扣除已支付客房使用指数30%的手续费 
+5. 入住日前2天（含2天）取消预订，扣除已支付客房使用指数50%的手续费 
+6. 入住日前1天（含1天）不得取消预订 
+7. 国家法定节假日的预订在入住日前30天（含30天）取消预订，扣除已支付客房使用指数30%的手续费；入住日前15天-30天（含15天）取消预订，扣除已支付客房使用指数50%的手续费；入住日前15天不得取消预订 </string>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="crv-Kg-D2R" firstAttribute="top" secondItem="ENa-Ky-EZn" secondAttribute="top" constant="15" id="BH5-id-MNB"/>
+                <constraint firstAttribute="trailing" secondItem="crv-Kg-D2R" secondAttribute="trailing" constant="15" id="Ju2-X6-V5W"/>
+                <constraint firstItem="crv-Kg-D2R" firstAttribute="leading" secondItem="ENa-Ky-EZn" secondAttribute="leading" constant="15" id="m7g-iD-ACh"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
+            <point key="canvasLocation" x="544" y="769"/>
+        </view>
+        <view autoresizesSubviews="NO" contentMode="scaleToFill" id="pKK-bI-gTX">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="243"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wdT-MN-bGV">
+                    <string key="text">尊敬的客人，若订单入住时间包含下列日期,该日期和该日期之前的均不可退订（即不退还已支付费用或可用客房指数）。
+ 元　旦   2015年12月31日 - 2016年01月02日
+春　节   2016年02月06日 - 2016年02月12日
+清明节   2016年04月01日 - 2016年04月03日
+劳动节   2016年04月29日 - 2016年05月01日
+端午节   2016年06月08日 - 2016年06月10日
+中秋节   2016年09月14日 - 2016年09月16日
+国庆节   2016年09月30日 - 2016年10月06日
+</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="wdT-MN-bGV" firstAttribute="top" secondItem="pKK-bI-gTX" secondAttribute="top" constant="15" id="Ach-HZ-6RE"/>
+                <constraint firstAttribute="trailing" secondItem="wdT-MN-bGV" secondAttribute="trailing" constant="15" id="Z9f-S1-Lp7"/>
+                <constraint firstItem="wdT-MN-bGV" firstAttribute="leading" secondItem="pKK-bI-gTX" secondAttribute="leading" constant="15" id="b4h-9r-Kuh"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="544" y="1184.5"/>
+        </view>
+    </objects>
+</document>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HeadView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y5u-gl-y3f">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0VB-Ly-ncp">
+                            <rect key="frame" x="187" y="0.0" width="187" height="50"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <inset key="imageEdgeInsets" minX="-6" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="地图选点" image="iconfont-ditudianxuan">
+                                <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="selectedPositionBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="Zp5-KT-urf"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CPK-Ed-Njj">
+                            <rect key="frame" x="0.0" y="0.0" width="187" height="50"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <inset key="imageEdgeInsets" minX="-6" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="我的位置" image="position_icon_loca">
+                                <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="myPositionBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="uOS-06-m8A"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hPM-fD-N68">
+                            <rect key="frame" x="187" y="12.5" width="1" height="25"/>
+                            <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="25" id="Nzu-58-f29"/>
+                                <constraint firstAttribute="width" constant="1" id="hZx-TA-7Tx"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="0VB-Ly-ncp" firstAttribute="width" secondItem="CPK-Ed-Njj" secondAttribute="width" priority="999" id="GBe-gy-V36"/>
+                        <constraint firstItem="hPM-fD-N68" firstAttribute="leading" secondItem="CPK-Ed-Njj" secondAttribute="trailing" id="GNn-7G-hsy"/>
+                        <constraint firstAttribute="bottom" secondItem="0VB-Ly-ncp" secondAttribute="bottom" id="KcI-l4-pLQ"/>
+                        <constraint firstItem="hPM-fD-N68" firstAttribute="centerX" secondItem="Y5u-gl-y3f" secondAttribute="centerX" id="Knz-uk-lGZ"/>
+                        <constraint firstItem="CPK-Ed-Njj" firstAttribute="leading" secondItem="Y5u-gl-y3f" secondAttribute="leading" id="QI3-OE-pHx"/>
+                        <constraint firstItem="0VB-Ly-ncp" firstAttribute="leading" secondItem="CPK-Ed-Njj" secondAttribute="trailing" priority="998" constant="1" id="U6q-Xd-VDs"/>
+                        <constraint firstAttribute="trailing" secondItem="0VB-Ly-ncp" secondAttribute="trailing" constant="1" id="ZAd-my-6wd"/>
+                        <constraint firstItem="CPK-Ed-Njj" firstAttribute="top" secondItem="Y5u-gl-y3f" secondAttribute="top" id="eM9-MJ-O83"/>
+                        <constraint firstAttribute="bottom" secondItem="CPK-Ed-Njj" secondAttribute="bottom" id="fW4-F9-lLB"/>
+                        <constraint firstItem="0VB-Ly-ncp" firstAttribute="top" secondItem="Y5u-gl-y3f" secondAttribute="top" id="kgP-eh-d8M"/>
+                        <constraint firstItem="0VB-Ly-ncp" firstAttribute="width" secondItem="Y5u-gl-y3f" secondAttribute="width" multiplier="0.5" id="zwb-tc-dQh"/>
+                        <constraint firstItem="hPM-fD-N68" firstAttribute="centerY" secondItem="Y5u-gl-y3f" secondAttribute="centerY" id="zyX-5O-FpP"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Y5u-gl-y3f" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Ozt-bk-116"/>
+                <constraint firstItem="Y5u-gl-y3f" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="UoJ-6l-VM1"/>
+                <constraint firstAttribute="trailing" secondItem="Y5u-gl-y3f" secondAttribute="trailing" id="WQz-eA-Mzt"/>
+                <constraint firstAttribute="bottom" secondItem="Y5u-gl-y3f" secondAttribute="bottom" id="bls-kv-SjV"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="myPositionBtn" destination="CPK-Ed-Njj" id="AzI-Qx-UG9"/>
+                <outlet property="selectedPositionBtn" destination="0VB-Ly-ncp" id="Fzs-b1-uue"/>
+            </connections>
+            <point key="canvasLocation" x="335.5" y="20"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="iconfont-ditudianxuan" width="22" height="18"/>
+        <image name="position_icon_loca" width="11" height="16"/>
+    </resources>
+</document>

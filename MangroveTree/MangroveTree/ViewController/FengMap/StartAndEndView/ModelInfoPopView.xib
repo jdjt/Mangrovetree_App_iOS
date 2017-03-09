@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ModelInfoPopView">
+            <rect key="frame" x="0.0" y="0.0" width="373" height="94"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dyH-IK-pnz">
+                    <rect key="frame" x="0.0" y="0.0" width="373" height="47"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="纳米日本料理" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJd-Hg-IEs">
+                            <rect key="frame" x="8" y="8" width="102" height="31"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ukn-k5-BoU">
+                            <rect key="frame" x="303" y="12" width="62" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <inset key="imageEdgeInsets" minX="45" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="详情" image="icon_jiantou">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="detailBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="hif-Eb-D0p"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="餐厅 · 大王棕酒店二层" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kn-dK-FNs">
+                            <rect key="frame" x="112" y="13" width="148" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <color key="textColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.31764705882352939" green="0.63137254901960782" blue="0.44313725490196076" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DfJ-ZE-st2">
+                    <rect key="frame" x="0.0" y="47" width="373" height="47"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h5K-7w-hgJ">
+                            <rect key="frame" x="193" y="14" width="172" height="20"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <inset key="imageEdgeInsets" minX="-10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="进入室内" image="enter">
+                                <color key="titleColor" red="0.31764705882352939" green="0.63137254901960782" blue="0.44313725490196076" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="enterIndoorBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="kWu-IQ-Ac5"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zfv-We-jRG">
+                            <rect key="frame" x="186" y="0.0" width="1" height="48"/>
+                            <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="1" id="gMw-UV-Ydi"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rgv-A2-tZP">
+                            <rect key="frame" x="13" y="14" width="172" height="20"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <inset key="imageEdgeInsets" minX="-10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="到这去" image="nav">
+                                <color key="titleColor" red="0.31764705882352939" green="0.63137254901960782" blue="0.44313725490196076" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="goHereBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="8pL-AS-jhO"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="zfv-We-jRG" firstAttribute="top" secondItem="DfJ-ZE-st2" secondAttribute="top" id="83g-UY-mQp"/>
+                        <constraint firstItem="Rgv-A2-tZP" firstAttribute="leading" secondItem="DfJ-ZE-st2" secondAttribute="leading" constant="13" id="BHn-MI-KmY"/>
+                        <constraint firstAttribute="trailing" secondItem="h5K-7w-hgJ" secondAttribute="trailing" constant="8" id="Sdn-Ob-EN9"/>
+                        <constraint firstItem="zfv-We-jRG" firstAttribute="centerY" secondItem="DfJ-ZE-st2" secondAttribute="centerY" id="ULW-kV-vNp"/>
+                        <constraint firstItem="h5K-7w-hgJ" firstAttribute="width" secondItem="Rgv-A2-tZP" secondAttribute="width" id="Um2-QB-dCr"/>
+                        <constraint firstItem="zfv-We-jRG" firstAttribute="centerX" secondItem="DfJ-ZE-st2" secondAttribute="centerX" id="eIE-Hd-0Ch"/>
+                        <constraint firstItem="Rgv-A2-tZP" firstAttribute="centerY" secondItem="DfJ-ZE-st2" secondAttribute="centerY" id="fkl-7M-uXN"/>
+                        <constraint firstItem="h5K-7w-hgJ" firstAttribute="centerY" secondItem="DfJ-ZE-st2" secondAttribute="centerY" id="nz2-tm-79N"/>
+                        <constraint firstItem="Rgv-A2-tZP" firstAttribute="top" secondItem="DfJ-ZE-st2" secondAttribute="top" constant="13.5" id="rr5-ir-1tL"/>
+                        <constraint firstAttribute="bottom" secondItem="Rgv-A2-tZP" secondAttribute="bottom" constant="13.5" id="uDH-Fj-m3Q"/>
+                        <constraint firstItem="h5K-7w-hgJ" firstAttribute="leading" secondItem="Rgv-A2-tZP" secondAttribute="trailing" constant="8" id="zgu-re-nGX"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="fkl-7M-uXN"/>
+                        </mask>
+                    </variation>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="dyH-IK-pnz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="11q-Ph-1ZE"/>
+                <constraint firstAttribute="trailing" secondItem="dyH-IK-pnz" secondAttribute="trailing" id="Fn8-L6-60w"/>
+                <constraint firstAttribute="trailing" secondItem="DfJ-ZE-st2" secondAttribute="trailing" id="Lal-iM-7hy"/>
+                <constraint firstItem="DfJ-ZE-st2" firstAttribute="height" secondItem="dyH-IK-pnz" secondAttribute="height" id="aaR-Wk-ik1"/>
+                <constraint firstAttribute="bottom" secondItem="DfJ-ZE-st2" secondAttribute="bottom" id="bHn-VU-Gbr"/>
+                <constraint firstItem="DfJ-ZE-st2" firstAttribute="top" secondItem="dyH-IK-pnz" secondAttribute="bottom" id="e10-Uz-nPF"/>
+                <constraint firstItem="dyH-IK-pnz" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="hPu-Xh-Dse"/>
+                <constraint firstItem="DfJ-ZE-st2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="i1l-Tp-bMe"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="backGroudView" destination="DfJ-ZE-st2" id="29z-gn-zm4"/>
+                <outlet property="detailBtn" destination="ukn-k5-BoU" id="JKe-gj-61Z"/>
+                <outlet property="enterIndoorBtn" destination="h5K-7w-hgJ" id="dLk-Cr-JdY"/>
+                <outlet property="goHereBtn" destination="Rgv-A2-tZP" id="RT0-sv-mY7"/>
+                <outlet property="modelName" destination="gJd-Hg-IEs" id="Y4x-Ep-pQX"/>
+                <outlet property="modelPositionLabel" destination="5kn-dK-FNs" id="0kL-rn-CqA"/>
+                <outlet property="separateView" destination="zfv-We-jRG" id="yiB-Zv-Jzw"/>
+                <outlet property="topBackgroudView" destination="dyH-IK-pnz" id="fwn-el-JYm"/>
+            </connections>
+            <point key="canvasLocation" x="213.5" y="6"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="enter" width="14" height="15"/>
+        <image name="icon_jiantou" width="7" height="12"/>
+        <image name="nav" width="13" height="13"/>
+    </resources>
+</document>

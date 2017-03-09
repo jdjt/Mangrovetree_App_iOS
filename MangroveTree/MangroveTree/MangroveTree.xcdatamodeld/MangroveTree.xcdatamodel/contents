@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16B2555" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="DBCallTask" representedClassName="DBCallTask" syncable="YES">
+        <attribute name="acceptStatus" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cancelTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="confirmState" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deviceToken" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="diviceId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="drOrderNo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="guestUserID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="locationArea" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="locationDesc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="messageInfo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="orderTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="patternInfo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="priority" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="remark" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="score" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sendTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="taskCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timelimit" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="waiterAppKey" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="waiterUserID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="workAcceptTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="workDeviceId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="workDeviceToken" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="workFinishTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="workLocation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="workNum" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="DBParameter" representedClassName="DBParameter" syncable="YES">
+        <attribute name="blueKey" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deviceToken" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="diviceId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="retOk" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="DBUserLogin" representedClassName="DBUserLogin" syncable="YES">
+        <attribute name="account" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="idNo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="idType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isLogIn" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isShowUnPay" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="membername" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mobile" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="msgs" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="openBalabce" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="realName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sex" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="stste" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ticker" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="DBUserLogin" positionX="-27" positionY="-108" width="128" height="285"/>
+        <element name="DBCallTask" positionX="-27" positionY="9" width="128" height="480"/>
+        <element name="DBParameter" positionX="-18" positionY="54" width="128" height="105"/>
+    </elements>
+</model>

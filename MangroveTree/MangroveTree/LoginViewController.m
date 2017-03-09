@@ -1,0 +1,250 @@
+//
+//  LoginViewController.m
+//  mgmanager
+//
+//  Created by 苏智 on 15/4/23.
+//  Copyright (c) 2015年 Beijing Century Union. All rights reserved.
+//
+
+#import "LoginViewController.h"
+#import "ForgetpawViewController.h"
+#import "RegistViewController.h"
+
+@interface LoginViewController ()<UITextFieldDelegate,MTRequestNetWorkDelegate>
+
+@property (weak, nonatomic) IBOutlet UIButton *logInButton;
+@property (weak, nonatomic) IBOutlet UITextField *accountTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *stopButton;
+
+@property (strong, nonatomic) NSURLSessionTask *loginTask;
+@property (strong, nonatomic) NSURLSessionTask *getMemberInfor;
+
+@end
+
+@implementation LoginViewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    _accountTextField.delegate = self;
+    _passwordTextField.delegate = self;
+    
+    self.phoneUUIDDictionary = [NSMutableDictionary dictionary];
+    self.registUUIDDictionary = [NSMutableDictionary dictionary];
+    //设置按钮样式
+    [_logInButton loginStyle];
+    [_logInButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    _passwordTextField.delegate = self;
+    
+    //收起键盘
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
+    [self.view addGestureRecognizer:tap];
+
+    // 调用登录窗体前设置为注册模式，则自动触发导航到注册窗口
+    if (self.toRegist == YES)
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+        UIViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"sceneRegist"];
+        [self.navigationController pushViewController:vc animated:NO];
+    }
+    
+    // 如果是强制登录，则不显示取消按钮
+    if (self.showStop == NO)
+        self.navigationItem.leftBarButtonItem = nil;
+    else
+        self.stopButton.style = UIBarButtonSystemItemStop;
+}
+// 网络请求注册代理
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[MTRequestNetwork defaultManager]registerDelegate:self];
+}
+
+// 网络请求注销代理
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[MTRequestNetwork defaultManager] removeDelegate:self];
+}
+- (void)dealloc
+{
+    [[MTRequestNetwork defaultManager] cancleAllRequest];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - 用户操作
+
+- (IBAction)selectSegment:(id)sender
+{
+    UISegmentedControl *sc = (UISegmentedControl *)sender;
+    if (sc.selectedSegmentIndex != 0)
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+        RegistViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"sceneRegist"];
+        vc.loginController = self;
+        [self.navigationController pushViewController:vc animated:NO];
+        sc.selectedSegmentIndex = 0;
+    }
+}
+
+// 退出当前模态视图
+- (IBAction)cancelLogin:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+// 点击当前视图收起键盘
+- (void)tapAction
+{
+    [self.view endEditing:YES];
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1)
+        cell.backgroundColor = [UIColor clearColor];
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSCharacterSet *cs;
+    cs = [[NSCharacterSet characterSetWithCharactersInString:myNumbers] invertedSet];
+    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    BOOL basicTest = [string isEqualToString:filtered];
+    if (!basicTest) {
+        [MyAlertView showAlert:@"输入内容不能包含特殊字符"];
+        return NO;
+    }
+    return YES;
+}
+
+#pragma mark - 网络请求
+
+// 登录请求
+- (IBAction)loginButtonAction:(id)sender
+{
+    //手机号或者邮箱
+    if (![Util isMobileNumber:_accountTextField.text]&&![Util isValidateEmail:_accountTextField.text]) {
+        
+        [MyAlertView showAlert:@"请输入正确的手机号或邮箱"];
+        return;
+    }
+    
+    //密码
+    if (_passwordTextField.text.length < 6 ||_passwordTextField.text.length >18) {
+        
+        [MyAlertView showAlert:@"请输入6-18位的密码"];
+        return;
+    }
+    
+    NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithCapacity:2];
+    [params setObject:_accountTextField.text forKey:@"account"];
+    [params setObject:_passwordTextField.text forKey:@"password"];
+    self.loginTask = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
+                                                                 webURL:@URI_LOGIN
+                                                                 params:params
+                                                             withByUser:YES
+                                                       andOldInterfaces:YES];
+    
+     
+}
+// 请求会员信息
+- (void)requestMemberInfo
+{
+    NSMutableDictionary* temp = [[NSMutableDictionary alloc]init];
+    [temp setObject:@"" forKey:@"proceedsPhone"];
+    self.getMemberInfor = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
+                                                                      webURL:@MEMBER_INFO
+                                                                      params:temp
+                                                                  withByUser:YES
+                                                            andOldInterfaces:YES];
+    
+}
+
+#pragma mark - 网络请求返还结果代理
+- (void)startRequest:(NSURLSessionTask *)task
+{
+}
+
+- (void)pushResponseResultsSucceed:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg andData:(NSMutableArray *)datas
+{
+    //登录成功的接口
+    if (task == self.loginTask)
+    {
+        //存储用户登录数据
+        DBUserLogin *userLogin = [[DataManager defaultInstance] findUserLogInByCode:@"1"];
+        userLogin.account = _accountTextField.text;
+        userLogin.mobile = _accountTextField.text;
+        userLogin.password = _passwordTextField.text;
+//        [[DataManager defaultInstance] saveContext];
+        
+        [self requestMemberInfo];
+    }
+    else if (task == self.getMemberInfor)
+    {
+        [self dismissViewControllerAnimated:YES completion:^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotiLoadFMMap object:nil];
+            //[[NSNotificationCenter defaultCenter] postNotificationName:NotiHaveNewNoti object:nil];
+        }];
+    }
+}
+
+- (void)pushResponseResultsFailing:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg
+{
+    if (task == self.loginTask)
+    {
+        [[DataManager defaultInstance] cleanCoreDatabyEntityName:@"DBUserLogin"];
+        [MyAlertView showAlert:msg];
+    }
+    
+}
+
+#pragma mark - Private functions
+
+// 点击next将下一个textField处于编辑状态
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if ([textField isEqual:_accountTextField]) {
+        [_accountTextField resignFirstResponder];
+        [_passwordTextField becomeFirstResponder];
+    }
+    return YES;
+}
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    return UIInterfaceOrientationPortrait;
+}
+
+- (BOOL)shouldAutorotate
+{
+    return NO;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"refind"])
+    {
+        ForgetpawViewController * viewController = (ForgetpawViewController *)[segue destinationViewController];
+        viewController.loginController = self;
+    }
+}
+
+@end
