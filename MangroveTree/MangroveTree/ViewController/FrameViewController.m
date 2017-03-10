@@ -70,6 +70,8 @@ NSString* const FMModelSelected = @"FMModelSelected";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPoiNames:)  name:FMModelSelected object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideCallView:) name:NotiHideCallView object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startLoadFMMap:) name:NotiLoadFMMap object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backToMain:) name:NotiBackToMain object:nil];
+
     
     // 检查是否登录
     BOOL login = [[DataManager defaultInstance] findLocationUserPersonalInformation];
@@ -93,22 +95,22 @@ NSString* const FMModelSelected = @"FMModelSelected";
     [MBProgressHUD hideAllHUDsForView:[AppDelegate sharedDelegate].window animated:YES];
     if ([Util locationServicesEnabled] == NO)
     {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提醒" message:@"使用酒店地图定位以及导航功能需要应用允许访问您当前的位置，是否前往设置打开GPS定位" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *action = [UIAlertAction actionWithTitle:@"前往" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
-                                 {
-                                     [[UIApplication sharedApplication]openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-                                 }];
-        
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
-                                       {
-                                           
-                                       }];
-        
-        [alert addAction:cancelAction];
-        [alert addAction:action];
-        [self  presentViewController:alert animated:YES completion:^{
-            
-        }];
+//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提醒" message:@"使用酒店地图定位以及导航功能需要应用允许访问您当前的位置，是否前往设置打开GPS定位" preferredStyle:UIAlertControllerStyleAlert];
+//        UIAlertAction *action = [UIAlertAction actionWithTitle:@"前往" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+//                                 {
+//                                     [[UIApplication sharedApplication]openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+//                                 }];
+//        
+//        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+//                                       {
+//                                           
+//                                       }];
+//        
+//        [alert addAction:cancelAction];
+//        [alert addAction:action];
+//        [self  presentViewController:alert animated:YES completion:^{
+//            
+//        }];
     }
     
     [self startCountDown];
@@ -254,7 +256,43 @@ NSString* const FMModelSelected = @"FMModelSelected";
 
 - (void)startLoadFMMap:(NSNotification *)noti
 {
-    [self loadFMMap];
+//    [self loadFMMap];
+}
+
+- (void)backToMain:(NSNotification *)notification
+{
+    NSObject* obj = [notification object];
+    if (obj != nil && [obj isKindOfClass:[NSIndexPath class]])
+    {
+        UIStoryboard *userStoryBoard = [UIStoryboard storyboardWithName:@"User" bundle:nil];
+        UIViewController *vc = nil;
+        NSIndexPath *indexPath = (NSIndexPath *)obj;
+        if (indexPath.section == 0)
+        {
+            switch (indexPath.row)
+            {
+                case 0:
+                    //用户中心
+                    vc = [userStoryBoard instantiateViewControllerWithIdentifier:@"sceneUser"];
+                    [self.navigationController pushViewController:vc animated:YES];
+                    break;
+                    
+                default:
+                    break;
+            }
+            return;
+        }
+        switch (indexPath.section)
+        {
+            case 1:
+                // 设置
+                vc = [userStoryBoard instantiateViewControllerWithIdentifier:@"sceneSettings"];
+                [self.navigationController pushViewController:vc animated:YES];
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 - (void)showFMActionSheetViewByNames:(NSArray *)poiNames modelName:(NSString *)modelName
