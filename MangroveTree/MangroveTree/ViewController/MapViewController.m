@@ -45,7 +45,14 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
+    // 检查是否登录
+    BOOL login = [[DataManager defaultInstance] findLocationUserPersonalInformation];
+    // 在这里开始发送网络请求
+    if (login == YES)
+    {
+        [self loadMap];
+    }
+
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"inDoorMap"];
 }
 - (void)viewDidDisappear:(BOOL)animated

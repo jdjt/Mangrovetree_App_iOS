@@ -10,9 +10,19 @@
 #import "Const.h"
 #import "FMKLocationService.h"
 #import "FMKGeometry.h"
+#import "FMKExternalModel.h"
+#import "ParserJsondata.h"
+#import "IndoorMapInfo.h"
+#import "QueryDBModel.h"
+#import "DBSearchTool.h"
+#import "UILabel+AddtionString.h"
+
 @interface NaviPopView()
 {
-	
+    NSArray * _indoorMapInfos;
+    NSString * _modelFid;
+    NSString * _indoorMapID;
+    FMKExternalModel * _model;
 }
 @end
 
@@ -22,6 +32,7 @@
 {
 	 NaviPopView * view = [[NSBundle mainBundle] loadNibNamed:@"NaviPopView" owner:nil  options:nil][0];
 	view.alpha = 0.0f;
+    view.startNavW.constant = kScreenWidth/2;
 	return view;
 }
 
@@ -86,6 +97,107 @@
         [self.delegate switchStartAndEnd];
     }
 
+}
+- (IBAction)enterIndoorBtnClick:(id)sender
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(enterIndoorMapBtnClick:)])
+    {
+        [self.delegate enterIndoorMapBtnClick:_indoorMapID];
+    }
+}
+- (void)setupInfoByModel:(FMKExternalModel *)model
+{
+    BOOL enableEnterIndoor = NO;
+    _model = model;
+    //	if ([model.name isEqualToString:@""]) {
+    //		self.modelName.text = @"暂无名称";
+    //	}
+    //	else
+    //	{
+    //		self.modelName.text = model.name;
+    //	}
+    
+    
+    if (!_indoorMapInfos) {
+        _indoorMapInfos = [ParserJsondata  parserIndoorMap];
+    }
+    _modelFid = model.fid;
+    //找到对应的室内地图ID
+    for (IndoorMapInfo * info in _indoorMapInfos) {
+        if ([model.fid isEqualToString:info.model_fid]) {
+            enableEnterIndoor = YES;
+            _indoorMapID = info.map_mid;
+        }
+    }
+    
+    //判断是否能够进入室内
+    if (!enableEnterIndoor) {
+        [self.enterIndoorBtn setImage:[UIImage imageNamed:@"noEnter"] forState:UIControlStateNormal];
+        self.enterIndoorBtn.enabled = NO;
+    }
+    else
+    {
+        [self.enterIndoorBtn setImage:[UIImage imageNamed:@"enter"] forState:UIControlStateNormal];
+        self.enterIndoorBtn.enabled = YES;
+    }
+    
+    //设置能否进入室内的布局
+    [self setupBottomView:enableEnterIndoor];
+    
+    QueryDBModel * dbModel = [[DBSearchTool shareDBSearchTool] queryModelByFid:model.fid];
+    //设置模型信息弹框
+    [self setupModelInfoByNodel:dbModel externalModel:model];
+    
+}
+- (void)setupModelInfoByNodel:(QueryDBModel *)model externalModel:(FMKExternalModel *)eModel;
+{
+    NSString *name = @"暂无名称";
+
+    if ([eModel.name isEqualToString:@""])
+    {
+       name = @"暂无名称";
+    }
+    else
+    {
+        
+        name = eModel.name;
+    }
+    
+    
+    
+    
+    
+    if (!model.address) {
+//        self.modelPositionLabel.text = @"";
+    
+    }
+    else
+    {
+        
+//        self.modelPositionLabel.text = [NSString stringWithFormat:@"%@ · %@",model.typeName,model.address];
+//        CGRect positionRect = self.modelPositionLabel.frame;
+//        self.modelPositionLabel.frame = CGRectMake(self.modelName.frame.origin.x+nameWidth+5, positionRect.origin.y, positionRect.size.width, positionRect.size.height);
+    }
+    [self.endPointBtn setTitle:name forState:UIControlStateNormal];
+
+}
+
+- (void)setupBottomView:(BOOL)enableEnterIndoor
+{
+    if (!enableEnterIndoor)
+    {
+        self.enterIndoorBtn.hidden = YES;
+        self.startNavW.constant = kScreenWidth;
+//        self.startNavBtn.frame = CGRectMake(0, self.startNavBtn.frame.origin.y, kScreenWidth, self.startNavBtn.frame.size.height);
+        
+    }
+    else
+    {
+        self.enterIndoorBtn.hidden = NO;
+        self.startNavW.constant = kScreenWidth/2;
+//        self.startNavBtn.frame = CGRectMake(0, self.startNavBtn.frame.origin.y, kScreenWidth/2, self.startNavBtn.frame.size.height);
+        
+    }
 }
 
 

@@ -13,6 +13,7 @@ typedef void(^SwitchStartAndEnd)();
 
 @protocol NaviPopViewDelegate <NSObject>
 
+- (void)enterIndoorMapBtnClick:(NSString *)modelFid;
 - (void)startNavi;
 - (void)switchStartAndEnd;
 
@@ -28,10 +29,16 @@ typedef void(^SwitchStartAndEnd)();
 @property (strong, nonatomic) IBOutlet UILabel *lengthLabel;
 @property (nonatomic, copy) StartNavi startNaviBlock;
 @property (nonatomic, copy) SwitchStartAndEnd switchStartAndEndBlock;
+@property (weak, nonatomic) IBOutlet UIButton *enterIndoorBtn;
+@property (weak, nonatomic) IBOutlet UIButton *startNavBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *startNavW;
+
 
 + (instancetype)naviPopView;
 
 - (void)setTimeByLength:(double)length;
+
+- (void)setupInfoByModel:(FMKExternalModel *)model;
 
 - (void)hide;
 - (void)show;
