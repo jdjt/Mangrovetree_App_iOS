@@ -102,6 +102,19 @@ int const kCallingServiceCount = 5;
     [super viewWillAppear:animated];
     [self hideMavBar:[FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi];
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@([FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi)];
+    
+    // 双层导航栏的问题需要隐藏两个层
+    for (UIViewController *VC in self.navigationController.viewControllers)
+    {
+        if ([VC isKindOfClass:[MapViewController class]])
+        {
+            MapViewController *mapVC = (MapViewController *)VC;
+            if ([mapVC.centerVC.navigationItem.leftBarButtonItem.title isEqualToString:@"取消"])
+            {
+                [mapVC.centerVC showCallResult:YES];
+            }
+        }
+    }
 }
 
 - (void)viewDidLoad
@@ -329,13 +342,17 @@ int const kCallingServiceCount = 5;
 
 - (void)didUpdatePosition:(FMKMapCoord)mapCoord success:(BOOL)success
 {
-    _locationMarker.hidden = [FMLocationManager shareLocationManager].isCallingService;
-    _enableLocateBtn.hidden = ![FMLocationManager shareLocationManager].isCallingService;
+    
     if (mapCoord.coord.storey != _displayGroupID.intValue)
         _locationMarker.hidden = YES;
     else
         _locationMarker.hidden = NO;
-    
+    _enableLocateBtn.hidden = ![FMLocationManager shareLocationManager].isCallingService;
+    if ([FMLocationManager shareLocationManager].isCallingService == YES) {
+        NSLog(@"开启了双点模式");
+        _locationMarker.hidden = YES;
+    }
+
     if(!success) return;
     self.currentMapCoord = mapCoord;
 	_locateGroupID = @(mapCoord.coord.storey).stringValue;
@@ -874,7 +891,9 @@ int const kCallingServiceCount = 5;
 {
 	if ([FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi)
 		return;
-    
+    if ([FMLocationManager shareLocationManager].isCallingService == YES)
+        return;
+
 	FMKModel * model;
 	if ([node isKindOfClass:[FMKModel class]]) {
 		model = (FMKModel *)node;
@@ -898,6 +917,8 @@ int const kCallingServiceCount = 5;
 - (void)mapView:(FMKMapView *)mapView didSingleTapWithPoint:(CGPoint)point
 {
     if ([FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi == YES) return;
+    if ([FMLocationManager shareLocationManager].isCallingService == YES)
+        return;
     
     [self.modelInfoPopView hide];
 //    [self.routeDisplayView hide];
@@ -996,7 +1017,8 @@ int const kCallingServiceCount = 5;
 	//开始导航
 	self.naviPopView.startNaviBlock = ^{
 		[wSelf stopNavi];//先停止导航
-		
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(YES)];
+
 		//开始导航标志位
 		[FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi = YES;
         [wSelf hideMavBar:YES];
@@ -1006,7 +1028,8 @@ int const kCallingServiceCount = 5;
 		
 		BOOL naviResult = [tool naviAnalyseByStartMapCoord:startMapCoord endMapCoord:tool.endMapCoord];
 		if (!naviResult) return;
-		
+        [wSelf getNaviResult];
+        [wSelf drawLineOnMapByGroupID:wSelf.displayGroupID];
 		//切换地图
 		if (startMapCoord.mapID == kOutdoorMapID)
 		{
@@ -1185,7 +1208,7 @@ int const kCallingServiceCount = 5;
         _resultDistance = resultDistance;
         if (_resultDistance == YES)
         {
-            UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@"距离小于十米" message:@"我只是测试一下" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@"距离提醒" message:@"服务员距离您十米之内啦" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *sureAcion = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                 
             }] ;
@@ -1198,7 +1221,6 @@ int const kCallingServiceCount = 5;
 }
 - (void)updateLocPosition:(FMKMapCoord)mapCoord macAddress:(NSString * )macAddress
 {
-    
     if (_callingServiceMapID != mapCoord.mapID)
     {
         _callingServiceCount = 0;
@@ -1212,13 +1234,30 @@ int const kCallingServiceCount = 5;
     
     if (_callingServiceCount != kCallingServiceCount)
         return;
-    NSLog(@"_________________%d____________________%d",mapCoord.mapID, [FMKLocationServiceManager shareLocationServiceManager].currentMapCoord.mapID);
+    NSLog(@"_________________%@____________________%d",NSStringFromFMKMapCoord(mapCoord), [FMKLocationServiceManager shareLocationServiceManager].currentMapCoord.mapID);
+    _locationMarker.hidden = YES;
     
-    if (![macAddress  isEqualToString:[[DataManager defaultInstance] getParameter].diviceId] && self.mapID.intValue != mapCoord.mapID)
+    if ([macAddress isEqualToString:[[DataManager defaultInstance] getParameter].diviceId])
     {
-        self.showChangeMap = YES;
         self.currentMapCoord = mapCoord;
+        [self enableLocationInOutdoor];
+
+//        if (self.mapID.intValue != mapCoord.mapID)
+//        {
+//            self.showChangeMap = YES;
+//        }else
+//        {
+//            if (_displayGroupID.intValue != mapCoord.coord.storey)
+//            {
+//                self.displayGroupID = @(mapCoord.coord.storey).stringValue;
+//                self.mapView.displayGids = @[@(mapCoord.coord.storey).stringValue];
+//            }
+//        }
     }
+//    if (![macAddress  isEqualToString:[[DataManager defaultInstance] getParameter].diviceId] && self.mapID.intValue != mapCoord.mapID)
+//    {
+//        
+//    }
 }
 
 //判断要设置的楼层ID和已经显示的楼层是否相同

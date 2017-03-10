@@ -99,7 +99,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xpc-JH-pRS" userLabel="MapView">
-                                <rect key="frame" x="-1" y="0.0" width="376" height="667"/>
+                                <rect key="frame" x="-0.5" y="0.0" width="375" height="667"/>
                                 <connections>
                                     <segue destination="I7M-cL-o8d" kind="embed" identifier="showMap" id="gcf-au-cLb"/>
                                 </connections>
@@ -186,11 +186,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="kJm-WY-6lc">
-                        <barButtonItem key="leftBarButtonItem" image="BtnUser" id="Pja-qJ-f4H">
-                            <connections>
-                                <action selector="showSettings:" destination="FrP-vm-8Ek" id="DXs-8s-lwq"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" image="BtnUser" id="Pja-qJ-f4H"/>
                     </navigationItem>
                     <connections>
                         <outlet property="bottomContraint" destination="bKO-ER-bZT" id="jxk-2c-7Mb"/>
@@ -215,7 +211,7 @@
                         <viewControllerLayoutGuide type="bottom" id="sXV-Uc-EK2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="QJ9-LJ-y5t">
-                        <rect key="frame" x="0.0" y="0.0" width="376" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -433,7 +429,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BtnLocale" translatesAutoresizingMaskIntoConstraints="NO" id="Sep-Y1-rka">
-                                            <rect key="frame" x="8" y="-1" width="44" height="45"/>
+                                            <rect key="frame" x="8" y="-0.5" width="44" height="44"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="44" id="Bsk-lY-LQj"/>
                                                 <constraint firstAttribute="height" constant="44" id="K9z-Fv-arg"/>

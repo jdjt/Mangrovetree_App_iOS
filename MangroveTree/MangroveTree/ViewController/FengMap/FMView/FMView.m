@@ -127,9 +127,7 @@ extern NSString* FMModelSelected;
 	self.type = ButtonType_NOTFOUND;
 	
 	_categoryTag = NSNotFound;
-	
     self.resultDistance = NO;
-    self.showChangMap = NO;
 	[self getMacAndStartLocationService];//获取MAC地址并且开启定位服务
 	_isEnableMove = YES;
     _showChangMap = NO;
@@ -355,11 +353,9 @@ extern NSString* FMModelSelected;
     indoorMapVC.displayGroupID = @(self.currentMapCoord.coord.storey).stringValue;
     indoorMapVC.isNeedLocate = YES;
     [FMKLocationServiceManager shareLocationServiceManager].delegate = nil;
-    MBProgressHUD *HUD =[MBProgressHUD showHUDAddedTo:[AppDelegate sharedDelegate].window animated:YES];
-    HUD.labelText = @"正在加载地图，请稍等";
-    [HUD show:YES];
     _showChangMap = NO;
     [[self getCurrentController].navigationController pushViewController:indoorMapVC animated:YES];
+    _showChangMap = YES;
 }
 - (void)didUpdateHeading:(double)heading
 {
@@ -721,6 +717,9 @@ extern NSString* FMModelSelected;
 //模型的拾取
 - (void)onMapClickNode:(FMKNode *)node inLayer:(FMKLayer *)layer
 {
+    if ([FMLocationManager shareLocationManager].isCallingService == YES)
+        return;
+    if ([FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi == YES) return;
 	//导航模式下模型拾取关闭
 	[self modelLayerDelegateIgnore];
     [self stopNavi];
@@ -799,7 +798,8 @@ extern NSString* FMModelSelected;
 - (void)mapView:(FMKMapView *)mapView didSingleTapWithPoint:(CGPoint)point
 {
     if ([FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi == YES) return;
-    
+    if ([FMLocationManager shareLocationManager].isCallingService == YES)
+        return;
 	[self.modelInfoPopView hide];
 	[self.routeDisplayView hide];
     [self.naviPopView hide];
@@ -808,11 +808,7 @@ extern NSString* FMModelSelected;
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(NO)];
     
 }
-- (void)mapViewDidFinishLoadingMap:(FMKMapView *)mapView
-{
-    [MBProgressHUD hideAllHUDsForView:[AppDelegate sharedDelegate].window animated:YES];
 
-}
 - (void)setModelSelected:(FMKExternalModel *)model inLayer:(FMKExternalModelLayer *)externalModelLayer
 {
 	NSArray * arr = [self getPoisByModel:model];
@@ -1200,7 +1196,10 @@ extern NSString* FMModelSelected;
 }
 
 #pragma mark - FMLocationManagerDelegate
-
+- (void)mapViewDidFinishLoadingMap:(FMKMapView *)mapView
+{
+   
+}
 - (void)testDistanceWithResult:(BOOL)result distance:(double)distance
 {
     NSLog(@"+++++++++++++++++++++++++++++++++++++++++++++++++");
@@ -1208,17 +1207,21 @@ extern NSString* FMModelSelected;
 }
 - (void)updateLocPosition:(FMKMapCoord)mapCoord macAddress:(NSString * )macAddress
 {
-    if (macAddress != [[DataManager defaultInstance] getParameter].diviceId && mapCoord.mapID != kOutdoorMapID)
+     NSLog(@"_________________%d____________________%d",mapCoord.mapID, [FMKLocationServiceManager shareLocationServiceManager].currentMapCoord.mapID);
+    _locationMarker.hidden = YES;
+    if ([macAddress isEqualToString: [[DataManager defaultInstance] getParameter].diviceId] && mapCoord.mapID != kOutdoorMapID)
     {
 		if ([self testIndoorMapIsxistByMapCoord:mapCoord.mapID])
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                _locationMarker.hidden = YES;
                 self.currentMapCoord = mapCoord;
                 self.waiterMapCoord = mapCoord;
                 if ([FMKLocationServiceManager shareLocationServiceManager].currentMapCoord.mapID != kOutdoorMapID)
                 {
-                    self.showChangMap = YES;
+                    if (_showChangMap == NO)
+                    {
+                        self.showChangMap = YES;
+                    }
                 }
             });
 		}
@@ -1232,7 +1235,7 @@ extern NSString* FMModelSelected;
         _resultDistance = resultDistance;
         if (_resultDistance == YES)
         {
-            UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@"距离小于十米" message:@"我只是测试一下" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@"距离提醒" message:@"服务员距离您十米之内啦" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *sureAcion = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                 
             }] ;
@@ -1300,6 +1303,7 @@ extern NSString* FMModelSelected;
 	[self.naviPopView hide];
 	[self.naviTopView show];
 	[self.modelInfoPopView hide];
+    [self hideNaviBar:YES];
 	_isFirstLocate = YES;
 	[self setEnableLocationBtnFrameByView:nil];
 	FMNaviAnalyserTool * tool = [FMNaviAnalyserTool shareNaviAnalyserTool];
