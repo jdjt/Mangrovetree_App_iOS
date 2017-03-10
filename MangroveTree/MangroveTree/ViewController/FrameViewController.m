@@ -26,7 +26,12 @@ NSString* const FMModelSelected = @"FMModelSelected";
 @property (strong, nonatomic) FMLocationBuilderInfo *mySelfLocation;
 @property (weak, nonatomic) IBOutlet UIView *callView;
 @property (weak, nonatomic) IBOutlet UIView *messageView;
-@property (weak, nonatomic) IBOutlet UIButton *callButton;
+@property (weak, nonatomic) IBOutlet UIView *bottomBarView;
+// 底部栏
+@property (weak, nonatomic) IBOutlet UIView *toSearchView;
+@property (weak, nonatomic) IBOutlet UIView *toWorldPlatform;
+@property (weak, nonatomic) IBOutlet UIView *toCallService;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomContraint;
 
@@ -63,8 +68,13 @@ NSString* const FMModelSelected = @"FMModelSelected";
     self.bottomContraint.constant = 64- kScreenHeight;
 
     //    self.segmentCallOrNavigation.selectedSegmentIndex = 0;
-    self.title = @"三亚湾红树林度假世界";
+    self.title = @"红树林导航";
     self.callLocationlabel.text = [self getCurrentZoneName];
+    
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction:)];
+    [self.toSearchView addGestureRecognizer:tap];
+    [self.toWorldPlatform addGestureRecognizer:tap];
+    [self.toCallService addGestureRecognizer:tap];
     
     //监听点击地图，获取模型内的poi
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPoiNames:)  name:FMModelSelected object:nil];
@@ -318,7 +328,26 @@ NSString* const FMModelSelected = @"FMModelSelected";
     self.lastSelectedIndex = segment.selectedSegmentIndex;
 }
 
-- (IBAction)sengCallTaskAction:(id)sender
+- (void)tapAction:(UITapGestureRecognizer *)tap
+{
+    if (tap.view == self.toSearchView)
+    {
+        //去哪跳转
+    }
+    else if (tap.view == self.toWorldPlatform)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"" message:@"全球度假平台暂未开放使用，敬请期待！" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
+        [alert addAction:action];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    else if (tap.view == self.toCallService)
+    {
+        [self tapCallService];
+    }
+}
+
+- (void)tapCallService
 {
 //    if ([FMKLocationServiceManager shareLocationServiceManager].currentMapCoord.mapID == 0)
 //    {

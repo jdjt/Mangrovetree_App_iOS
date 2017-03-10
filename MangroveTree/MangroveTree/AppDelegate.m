@@ -26,7 +26,7 @@
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:84/255.0 green:76/255.0 blue:78/255.0 alpha:1]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setShadowImage:[[UIImage alloc]init]];
-    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,nil]];
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,[UIFont systemFontOfSize:23],NSFontAttributeName,nil]];
     
     // 通过调用数据管理器的单例来实现数据初始化
     [DataManager defaultInstance];

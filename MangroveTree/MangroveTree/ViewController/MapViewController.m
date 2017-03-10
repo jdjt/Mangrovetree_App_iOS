@@ -35,7 +35,7 @@
 		[FMKLocationServiceManager shareLocationServiceManager].delegate = self.fmView;
 	}
      [self.fmView hideNaviBar:[FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi];
-    self.centerVC.title = @"三亚湾红树林度假世界";
+    self.centerVC.title = @"红树林导航";
     if (self.dbModel)
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@([FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi)];
