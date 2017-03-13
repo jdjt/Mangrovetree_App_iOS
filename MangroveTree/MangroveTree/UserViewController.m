@@ -88,13 +88,13 @@
     if (indexPath.section == 0 && indexPath.row == 0)
     {
         UserInfoCell *infoCell = [tableView dequeueReusableCellWithIdentifier:@"infoCell" forIndexPath:indexPath];
-        infoCell.userAvator.image = [UIImage imageNamed:@"BtnUser"];
+        infoCell.userAvator.image = [UIImage imageNamed:@"toUser"];
         if ([self.user.mobile isEqualToString:@""])
             infoCell.userName.text = self.user.email;
         else
             infoCell.userName.text = self.user.mobile;
         infoCell.userLevel.text = @"红树林会员";
-        [infoCell.userAvator setImage:[UIImage imageNamed:@"UserImage"]];
+        [infoCell.userAvator setImage:[UIImage imageNamed:@"toUser"]];
         cell = infoCell;
     }
     else if (indexPath.section == 1)
