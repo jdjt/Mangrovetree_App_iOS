@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *UserView;
 @property (weak, nonatomic) IBOutlet UIView *MapView;
+@property (weak, nonatomic) IBOutlet UIView *shadowView;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *UserContants;
 

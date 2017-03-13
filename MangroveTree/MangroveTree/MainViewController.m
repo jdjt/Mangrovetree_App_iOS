@@ -10,7 +10,6 @@
 
 @interface MainViewController ()
 
-@property (weak, nonatomic) IBOutlet UIView *shadowView;
 
 @property (nonatomic, assign) CGPoint lastPoint;
 
@@ -28,8 +27,13 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSettings:) name:NotiShowSettings object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backToMain:) name:NotiBackToMain object:nil];
-}
 
+}
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    
+}
 // 处理在显示Settings层时，前景视图上的滑动手势
 - (void)handleGesture:(UIGestureRecognizer *)sender
 {
@@ -127,6 +131,5 @@
         self.frameViewController = (FrameViewController *)[navi topViewController];
     }
 }
-
 
 @end

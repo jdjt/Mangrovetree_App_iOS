@@ -7,7 +7,7 @@
 //
 
 #import "ModifypawdViewController.h"
-
+#import "LoginViewController.h"
 @interface ModifypawdViewController ()<UITextFieldDelegate,MTRequestNetWorkDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *oldPawdTextField;
 @property (weak, nonatomic) IBOutlet UITextField *pawdTextField;
@@ -133,7 +133,16 @@
     [MyAlertView showAlert:@"修改登录密码成功"];
     DBUserLogin *logIn = [[DataManager defaultInstance] findUserLogInByCode:@"1"];
     logIn.password = _againPawdTextField.text;
+    
+    [[DataManager defaultInstance] cleanCoreDatabyEntityName:@"DBUserLogin"];
+    
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+    UINavigationController *navi = (UINavigationController *) [storyBoard instantiateViewControllerWithIdentifier:@"loginNavi"];
+    LoginViewController* loginVC = (LoginViewController*)[navi topViewController];
+    loginVC.showStop = NO;
+    [self presentViewController:navi animated:YES completion:nil];
     [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.tableView reloadData];
 }
 
 - (void)pushResponseResultsFailing:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg

@@ -34,6 +34,7 @@
 {
     [super viewWillDisappear:animated];
     [[MTRequestNetwork defaultManager] removeDelegate:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotiShowSettings object:nil];
 }
 
 - (void)dealloc

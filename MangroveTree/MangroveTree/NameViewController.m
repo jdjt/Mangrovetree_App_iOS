@@ -98,7 +98,6 @@
                                                   otherButtonTitles:@"确定", nil];
         [alertView show];
         user.nickname = _nameTextField.text;
-        NSLog(@"%@",user.nickname);
     }
 }
 

@@ -658,7 +658,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
     }
     
     NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithCapacity:2];
-    [params setObject:(user.account == nil || [user.account isEqualToString:@""]) ? user.email : user.account forKey:@"account"];
+    [params setObject:user.account forKey:@"account"];
     [params setObject:user.password forKey:@"password"];
     self.loginTask = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
                                                                  webURL:@URI_LOGIN

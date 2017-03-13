@@ -14,7 +14,6 @@
 #import "UIButton+Bootstrap.h"
 
 @interface UserViewController ()
-
 @end
 
 @implementation UserViewController
@@ -22,12 +21,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
     [self viewDidLoad];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
