@@ -11,6 +11,7 @@
 @interface SetTableViewController ()<MTRequestNetWorkDelegate>
 @property (strong, nonatomic) NSURLSessionTask *logoutTask;
 @property (weak, nonatomic) IBOutlet UIButton *logoutButton;
+@property (assign, nonatomic) BOOL logOutBack;
 
 @end
 
@@ -20,6 +21,7 @@
     [super viewDidLoad];
     //设置按钮样式
     [self.logoutButton loginStyle];
+    self.logOutBack = NO;
     
 }
 
@@ -34,7 +36,8 @@
 {
     [super viewWillDisappear:animated];
     [[MTRequestNetwork defaultManager] removeDelegate:self];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotiShowSettings object:nil];
+    if (self.logOutBack == NO)
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotiShowSettings object:nil];
 }
 
 - (void)dealloc
@@ -70,30 +73,11 @@
         {
             // 清楚缓存
             NSLog(@"您点击了清除缓存");
-            if (indexPath.section == 0) {
-                UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"是否清除缓存" preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-                UIAlertAction * defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    dispatch_async(
-                                   dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-                                   , ^{
-                                       NSString *cachPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-                                       NSLog(@"%@", cachPath);
-                                       
-                                       NSArray *files = [[NSFileManager defaultManager] subpathsAtPath:cachPath];
-                                       NSLog(@"files :%lu",(unsigned long)[files count]);
-                                       for (NSString *p in files) {
-                                           NSError *error;
-                                           NSString *path = [cachPath stringByAppendingPathComponent:p];
-                                           if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
-                                               [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
-                                           }
-                                       }
-                                       [self performSelectorOnMainThread:@selector(clearCacheSuccess) withObject:nil waitUntilDone:YES];});
-                }];
-                [alert addAction:cancelAction];
-                [alert addAction:defaultAction];
-                [self presentViewController:alert animated:YES completion:nil];
+            if (indexPath.section == 0)
+            {
+                UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否清除缓存" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+                view.tag = 1002;
+                [view show];
             }
         }
         if (indexPath.row == 1)
@@ -107,10 +91,7 @@
 
 - (void)clearCacheSuccess
 {
-    UIAlertController * alert = [UIAlertController alertControllerWithTitle:nil message:@"清除缓存成功" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction * defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
-    [alert addAction:defaultAction];
-    [self presentViewController:alert animated:YES completion:nil];
+    [MyAlertView showAlert:@"清除缓存成功"];
 }
 
 - (IBAction)CompleteButton:(id)sender
@@ -120,6 +101,7 @@
                                                    delegate:self
                                           cancelButtonTitle:@"否"
                                           otherButtonTitles:@"是", nil];
+    alent.tag = 1001;
     [alent show];
 }
 
@@ -127,7 +109,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 1)
+    if (buttonIndex == 1 && alertView.tag == 1001)
     {
         NSMutableDictionary* params = [[NSMutableDictionary alloc]init];
         self.logoutTask = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
@@ -135,6 +117,24 @@
                                                                       params:params
                                                                   withByUser:YES
                                                             andOldInterfaces:YES];
+    }else if (buttonIndex == 1 && alertView.tag == 1002)
+    {
+        dispatch_async(
+          dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+          , ^{
+              NSString *cachPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+              NSLog(@"%@", cachPath);
+
+              NSArray *files = [[NSFileManager defaultManager] subpathsAtPath:cachPath];
+              NSLog(@"files :%lu",(unsigned long)[files count]);
+              for (NSString *p in files) {
+                  NSError *error;
+                  NSString *path = [cachPath stringByAppendingPathComponent:p];
+                  if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+                      [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+                  }
+              }
+              [self performSelectorOnMainThread:@selector(clearCacheSuccess) withObject:nil waitUntilDone:YES];});
     }
 }
 
@@ -146,6 +146,7 @@
 {
     if (task == self.logoutTask)
     {
+        self.logOutBack = YES;
         //注销登录
         [[DataManager defaultInstance] cleanCoreDatabyEntityName:@"DBUserLogin"];
         [self.navigationController popViewControllerAnimated:YES];

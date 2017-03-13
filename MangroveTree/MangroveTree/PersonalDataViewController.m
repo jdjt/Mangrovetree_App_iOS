@@ -7,14 +7,12 @@
 //
 
 #import "PersonalDataViewController.h"
-#import "MainViewController.h"
-@interface PersonalDataViewController ()
-{
-    BOOL isBack;
-}
+#import "FrameViewController.h"
+
+@interface PersonalDataViewController ()<UINavigationControllerDelegate>
+
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *phoneNumberLabel;
-@property (nonatomic,strong)MainViewController * mainVC;
 
 @end
 
@@ -22,36 +20,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIBarButtonItem * left = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(abcd:)];
-    self.navigationItem.leftBarButtonItem = left;
+    self.navigationController.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    isBack = YES;
 
     DBUserLogin *user = [[DataManager defaultInstance] findUserLogInByCode:@"1"];
     self.nameLabel.text = user.nickname;
     //判断是否开通手机
     if (![user.mobile isEqualToString:@""])
         _phoneNumberLabel.text = user.mobile;
-}
-- (void)abcd:(UIButton *)btn
-{
-    NSLog(@"哈哈哈");
-    [self.navigationController popViewControllerAnimated:YES];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotiShowSettings object:nil];
-
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-//    if (isBack == YES)
-//    {
-//        [[NSNotificationCenter defaultCenter] postNotificationName:NotiShowSettings object:nil];
-//    }
 }
 
 #pragma mark - Table view data source
@@ -75,7 +55,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    isBack = NO;
     if (indexPath.section == 0)
     {
         if (indexPath.row == 0)
@@ -93,6 +72,14 @@
             //修改登录密码
             [self performSegueWithIdentifier:@"Changepawd" sender:nil];
         }
+    }
+}
+
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if ([viewController isKindOfClass:[FrameViewController class]])
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotiShowSettings object:nil];
     }
 }
 

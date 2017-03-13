@@ -89,7 +89,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startLoadFMMap:) name:NotiLoadFMMap object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backToMain:) name:NotiBackToMain object:nil];
 
-    
+    [[MTRequestNetwork defaultManager] registerDelegate:self];
     // 检查是否登录
     BOOL login = [[DataManager defaultInstance] findLocationUserPersonalInformation];
     // 在这里开始发送网络请求
@@ -97,6 +97,8 @@ NSString* const FMModelSelected = @"FMModelSelected";
     {
         [self updateFromNetwork];
     }
+    
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -153,6 +155,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
     [[FMLocationManager shareLocationManager] setMapView:nil];
     
     [[MTRequestNetwork defaultManager] registerDelegate:self];
+    
     
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"OPENMAP"];
     

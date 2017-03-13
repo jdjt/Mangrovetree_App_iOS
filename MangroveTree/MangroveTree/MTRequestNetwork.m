@@ -301,6 +301,7 @@
         }
     }
 }
+
 - (void)startHUD
 {
     if (!self.hud)
@@ -308,20 +309,21 @@
         self.hud = [[MBProgressHUD alloc] initWithWindow:[AppDelegate sharedDelegate].window];
         [[AppDelegate sharedDelegate].window addSubview:self.hud];
         self.hud.labelText = @"正在加载";
-        [self.hud hide:NO];
-        [self.hud show:YES];
+    }else
+    {
+        self.hud.hidden = NO;
     }
 }
+
 - (void)removeHUD
 {
     
     if (self.hud)
     {
-        [self.hud hide:YES];
-        [self.hud removeFromSuperview];
-        self.hud = nil;
+        self.hud.hidden = YES;
     }
 }
+
 #pragma mark - 自动登录
 
 - (void)logIn
