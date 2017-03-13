@@ -41,7 +41,7 @@ NSString * const treeTypes = @"100000";
 
 int const kCallingServiceCount = 5;
 
-@interface FMIndoorMapVC () <FMKMapViewDelegate,ChooseFloorScrollViewDelegate,FMKLocationServiceDelegate,FMKLayerDelegate,FMKNaviAnalyserDelegate,FMKLocationServiceManagerDelegate,FMLocationManagerDelegate,SwitchMapInfoBtnDelegate>
+@interface FMIndoorMapVC () <FMKMapViewDelegate,ChooseFloorScrollViewDelegate,FMKLocationServiceDelegate,FMKLayerDelegate,FMKNaviAnalyserDelegate,FMKLocationServiceManagerDelegate,FMLocationManagerDelegate,SwitchMapInfoBtnDelegate,NaviPopViewDelegate>
 {
 	ChooseFloorScrollView * _chooseFloorScrollView;//选择楼层视图
 
@@ -103,7 +103,6 @@ int const kCallingServiceCount = 5;
     [self hideMavBar:[FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi];
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@([FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi)];
     
-    // 双层导航栏的问题需要隐藏两个层
     for (UIViewController *VC in self.navigationController.viewControllers)
     {
         if ([VC isKindOfClass:[MapViewController class]])
@@ -113,6 +112,7 @@ int const kCallingServiceCount = 5;
             {
                 [mapVC.centerVC showCallResult:YES];
             }
+            [mapVC.centerVC changNavViewStyleByLayerMode:NAVIVARTYPE_IN];
         }
     }
 }
@@ -136,8 +136,10 @@ int const kCallingServiceCount = 5;
 //        [self addEnable3DBtn];//定位开关
 		[self addLocationMarker];//定位图标
 		[self addNaviPopView];
+        self.naviPopView.delegate = self;
 		[self addNaviTopView];
-		[self addModelInfoPopView];
+//		[self addModelInfoPopView];
+        [self addInforView];
 		[self createChooseScrollView];//楼层选择视图
 		[self addlocateBtn];//添加定位开关
 		[self addSwitchMapInfoView];
@@ -234,9 +236,24 @@ int const kCallingServiceCount = 5;
     }
 //    if (self.isNeedLocate == YES)
 	[FMKLocationServiceManager shareLocationServiceManager].delegate = nil;
-    [self.modelInfoPopView hide];
+//    [self.modelInfoPopView hide];
 //    [self.routeDisplayView hide];
     [self.naviPopView hide];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    for (UIViewController *VC in self.navigationController.viewControllers)
+    {
+        if ([VC isKindOfClass:[MapViewController class]])
+        {
+            MapViewController *mapVC = (MapViewController *)VC;
+            if ([mapVC.centerVC.navigationItem.leftBarButtonItem.title isEqualToString:@"取消"])
+            {
+                [mapVC.centerVC showCallResult:YES];
+            }
+            [mapVC.centerVC changNavViewStyleByLayerMode:NAVIVARTYPE_OUT];
+        }
+    }
 }
 
 - (void)adddelegateToMap
@@ -920,22 +937,24 @@ int const kCallingServiceCount = 5;
     if ([FMLocationManager shareLocationManager].isCallingService == YES)
         return;
     
-    [self.modelInfoPopView hide];
+//    [self.modelInfoPopView hide];
 //    [self.routeDisplayView hide];
     [self.naviPopView hide];
+    [self.inforView hide];
     [self.mapView showAllOnMap];
     [self stopNavi];
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(NO)];
 }
 - (void)setupModelInfoPopViewByModel:(FMKModel *)model
 {	
-	[self.modelInfoPopView show];
-	[self setEnableLocationBtnFrameByView:self.modelInfoPopView];
+//	[self.modelInfoPopView show];
+//	[self setEnableLocationBtnFrameByView:self.modelInfoPopView];
 	
 	QueryDBModel * queryModel = [[DBSearchTool shareDBSearchTool] queryModelByFid:model.fid];
-	[self.modelInfoPopView setupModelInfoByNodel:queryModel];//设置模型弹框信息
+//	[self.naviPopView setupModelInfoByNodel:queryModel];//设置模型弹框信息
 	
-	[self.naviPopView hide];
+	[self.naviPopView show];
+    [self.inforView show];
 	[self.naviTopView hide];
     
 	FMKMapCoord startMapCoord = [FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;
@@ -946,21 +965,34 @@ int const kCallingServiceCount = 5;
 	[self setupNaviPopViewInfoByEndName:model.title];
 	
 	__weak typeof(self)wSelf = self;
-	//到这去
-	self.modelInfoPopView.goHereBlock = ^{
-		BOOL naviSuccess = [naviTool naviAnalyseByStartMapCoord:startMapCoord endMapCoord:endMapCoord];
-		
-		if (naviSuccess)
-		{
-			[wSelf startNaviAct];//路径规划
-		}
-		else
-		{
-			[wSelf showProgressWithText:@"路径规划失败"];
-		}
-	};
-	
-	
+    
+    BOOL naviSuccess = [naviTool naviAnalyseByStartMapCoord:startMapCoord endMapCoord:endMapCoord];
+    
+    if (naviSuccess)
+    {
+        [wSelf startNaviAct];//路径规划
+    }
+    else
+    {
+        [wSelf showProgressWithText:@"路径规划失败"];
+    }
+
+//    [self ];
+//	//到这去
+//	self.naviPopView.goHereBlock = ^{
+//		BOOL naviSuccess = [naviTool naviAnalyseByStartMapCoord:startMapCoord endMapCoord:endMapCoord];
+//		
+//		if (naviSuccess)
+//		{
+//			[wSelf startNaviAct];//路径规划
+//		}
+//		else
+//		{
+//			[wSelf showProgressWithText:@"路径规划失败"];
+//		}
+//	};
+//	
+//	
 	
 	[self setupNaviPopView];
 }
@@ -982,8 +1014,9 @@ int const kCallingServiceCount = 5;
 	
 	[self setupNaviPopView];
 	[self drawLineOnMapByGroupID:_displayGroupID];
-	[self.modelInfoPopView hide];
+//	[self.modelInfoPopView hide];
 	[self.naviPopView show];
+    [self.inforView show];
 	[self setEnableLocationBtnFrameByView:self.naviPopView];
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(YES)];
 }
@@ -1055,6 +1088,7 @@ int const kCallingServiceCount = 5;
 		
 		wSelf.isNeedLocate = YES;
 		[wSelf.naviPopView hide];
+        [wSelf.inforView hide];
 		[wSelf.naviTopView show];
 		[wSelf setEnableLocationBtnFrameByView:nil];//设置定位按钮的位置
 		

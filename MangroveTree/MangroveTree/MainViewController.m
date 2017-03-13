@@ -62,8 +62,13 @@
             case UIGestureRecognizerStateChanged:
             {
                 CGPoint point = [pan translationInView:self.view];
+                CGFloat offset = point.x - self.lastPoint.x;
                 self.lastPoint = point;
-                self.UserContants.constant = self.UserView.frame.size.width + point.x;
+                CGRect frame = self.UserView.frame;
+                frame.origin.x += offset;
+                frame.origin.x = fabs(frame.origin.x) > frame.size.width ? frame.size.width : frame.origin.x;
+                frame.origin.x = fabs(frame.origin.x) < 0 ? 0 : frame.origin.x;
+                self.UserView.frame = frame;
             }
                 break;
                 
@@ -71,7 +76,7 @@
             case UIGestureRecognizerStateCancelled:
             {
                 CGRect frame = self.UserView.frame;
-                if (fabs(self.lastPoint.x) > frame.size.width / 2 )
+                if (fabs(self.lastPoint.x) > frame.size.width / 2)
                     [[NSNotificationCenter defaultCenter] postNotificationName:NotiBackToMain object:self];
                 else
                     [[NSNotificationCenter defaultCenter] postNotificationName:NotiShowSettings object:nil];

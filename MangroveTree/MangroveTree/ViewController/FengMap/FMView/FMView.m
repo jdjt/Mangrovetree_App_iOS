@@ -55,7 +55,7 @@ int const KZonglv     = 70146;
 
 extern NSString* FMModelSelected;
 
-@interface FMView()<FMKMapViewDelegate,FMKLayerDelegate,FMKNaviAnalyserDelegate,FMKAnimatorDelegate,FMKPathAnimatorDelegate,FMKSearchAnalyserDelegate,ModelInfoPopViewDelegate,FMLocationManagerDelegate,SwitchMapInfoBtnDelegate>
+@interface FMView()<FMKMapViewDelegate,FMKLayerDelegate,FMKNaviAnalyserDelegate,FMKAnimatorDelegate,FMKPathAnimatorDelegate,FMKSearchAnalyserDelegate,ModelInfoPopViewDelegate,FMLocationManagerDelegate,SwitchMapInfoBtnDelegate,NaviPopViewDelegate>
 {
 	NSTimer * _locationMarkerTimer;
 	
@@ -403,11 +403,13 @@ extern NSString* FMModelSelected;
         _textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, 160) textContainer:nil];
 //        [self.fengMapView addSubview:_textView];
 //        [self.fengMapView setCompassOrigin:CGPointMake(200, 200)];
-		[self addModelInfoPopView];//模型信息弹框
-		self.modelInfoPopView.delegate = self;
+		//[self addModelInfoPopView];//模型信息弹框
+//		self.modelInfoPopView.delegate = self;
 		[self addlocateBtn];//定位按钮
 //		[self addRouteView];//路线信息弹框
 		[self addNaviPopView];//导航信息弹框
+        self.naviPopView.delegate = self;
+        [self addInforView];
 		[self addNaviTopView];//顶部导航信息框
 		[self addSwitchMapInfoView];
 		self.switchMapInfoView.delegate = self;
@@ -723,7 +725,7 @@ extern NSString* FMModelSelected;
 	//导航模式下模型拾取关闭
 	[self modelLayerDelegateIgnore];
     [self stopNavi];
-	[self.modelInfoPopView hide];//隐藏信息弹框
+//	[self.modelInfoPopView hide];//隐藏信息弹框
 	if ([layer isKindOfClass:[FMKExternalModelLayer class]]) {
 		FMKExternalModel * model = (FMKExternalModel *)node;
 
@@ -732,7 +734,7 @@ extern NSString* FMModelSelected;
 			[model.type isEqualToString:treeType])
 		{
             [self.fengMapView showAllOnMap];
-			[self.modelInfoPopView hide];
+//			[self.modelInfoPopView hide];
 			[self setEnableLocationBtnFrameByView:nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(NO)];
 			return;
@@ -743,14 +745,15 @@ extern NSString* FMModelSelected;
 
 - (void)didSelectedEnd:(FMKExternalModel *)model
 {
-	[self.naviPopView hide];
+	[self.naviPopView show];
+    [self.inforView show];
 	[self.naviPopView.endPointBtn setTitle:model.name forState:UIControlStateNormal];
-	[self.modelInfoPopView show];
+//	[self.modelInfoPopView show];
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(YES)];
 
-	[self setEnableLocationBtnFrameByView:self.modelInfoPopView];
-	[self.modelInfoPopView setupInfoByModel:model];
-	
+//	[self setEnableLocationBtnFrameByView:self.modelInfoPopView];
+	[self.naviPopView setupInfoByModel:model];
+    [self goHere:model.mapCoord];
 	if (_categoryTag != -1) {
 		if (!model.maskMode) {
 			if (_highlightModel) {
@@ -800,9 +803,10 @@ extern NSString* FMModelSelected;
     if ([FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi == YES) return;
     if ([FMLocationManager shareLocationManager].isCallingService == YES)
         return;
-	[self.modelInfoPopView hide];
+//	[self.modelInfoPopView hide];
 	[self.routeDisplayView hide];
     [self.naviPopView hide];
+    [self.inforView hide];
     [self stopNavi];
     [self.fengMapView showAllOnMap];
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(NO)];
@@ -1035,13 +1039,14 @@ extern NSString* FMModelSelected;
 	FMKMapCoord endMapCoord = FMKMapCoordMake(kOutdoorMapID, coord);
 	//路径规划
 	BOOL naviSuccess = [tool naviAnalyseByStartMapCoord:startMapCoord endMapCoord:endMapCoord];
-	tool.planNavi = YES;
+//	tool.planNavi = YES;
 	[self.naviPopView setTimeByLength:tool.naviLength];
 	if (naviSuccess)
 	{
 		_isFirstLocate = YES;
 		[self.naviPopView show];
-		[self.modelInfoPopView hide];
+        [self.inforView show];
+//		[self.modelInfoPopView hide];
 		NSArray * naviResults = tool.naviResult[@(kOutdoorMapID).stringValue];
 		[self drawSingleLineByNaviResult:naviResults containStartAndEnd:YES];
 	}
@@ -1100,7 +1105,8 @@ extern NSString* FMModelSelected;
 	[self.naviTopView updateLength:totalLength];
 	
 	[self.naviPopView hide];//隐藏模型信息弹框
-	[self.modelInfoPopView hide];
+    [self.inforView hide];
+//	[self.modelInfoPopView hide];
 	[self.naviTopView show];
 	[self setEnableLocationBtnFrameByView:nil];
 	//计划导航状态下画线
@@ -1292,17 +1298,19 @@ extern NSString* FMModelSelected;
 }
 - (void)hideNavView
 {
-    [self.modelInfoPopView hide];
+//    [self.modelInfoPopView hide];
     [self.routeDisplayView hide];
     [self.naviPopView hide];
+    [self.inforView hide];
 }
 //地图进入导航模式
 - (void)mapEnterNaviMode
 {
     [self.fengMapView inclineWithAngle:90.0];
 	[self.naviPopView hide];
+    [self.inforView hide];
 	[self.naviTopView show];
-	[self.modelInfoPopView hide];
+//	[self.modelInfoPopView hide];
     [self hideNaviBar:YES];
 	_isFirstLocate = YES;
 	[self setEnableLocationBtnFrameByView:nil];

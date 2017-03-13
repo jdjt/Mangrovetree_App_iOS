@@ -31,6 +31,9 @@ NSString* const FMModelSelected = @"FMModelSelected";
 @property (weak, nonatomic) IBOutlet UIView *toSearchView;
 @property (weak, nonatomic) IBOutlet UIView *toWorldPlatform;
 @property (weak, nonatomic) IBOutlet UIView *toCallService;
+@property (weak, nonatomic) IBOutlet UIImageView *toSearchImage;
+@property (weak, nonatomic) IBOutlet UIImageView *toWorldPlatformImage;
+@property (weak, nonatomic) IBOutlet UIImageView *toCallServiceImage;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomContraint;
@@ -55,6 +58,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
 {
     [super viewDidLoad];
     
+//    self.bottomBarView.hidden = YES;
 	[UIApplication sharedApplication].idleTimerDisabled = YES;//不自动锁屏
     
     self.callView.hidden = NO;
@@ -70,10 +74,12 @@ NSString* const FMModelSelected = @"FMModelSelected";
     self.title = @"红树林导航";
     self.callLocationlabel.text = [self getCurrentZoneName];
     
-    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction:)];
-    [self.toSearchView addGestureRecognizer:tap];
-    [self.toWorldPlatform addGestureRecognizer:tap];
-    [self.toCallService addGestureRecognizer:tap];
+    UITapGestureRecognizer * tap1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction:)];
+    [self.toSearchView addGestureRecognizer:tap1];
+    UITapGestureRecognizer * tap2 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction:)];
+    [self.toWorldPlatform addGestureRecognizer:tap2];
+    UITapGestureRecognizer * tap3 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction:)];
+    [self.toCallService addGestureRecognizer:tap3];
     
     self.navigationItem.leftBarButtonItem = self.userBarBtn;
     self.navigationItem.rightBarButtonItem = self.searchBarButton;
@@ -211,7 +217,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
 {
     if (_userBarBtn == nil)
     {
-        _userBarBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"BtnUser"] style:UIBarButtonItemStylePlain target:self action:@selector(showSettings:)];
+        _userBarBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"toUser"] style:UIBarButtonItemStylePlain target:self action:@selector(showSettings:)];
     }
     return _userBarBtn;
 }
@@ -331,11 +337,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
 {
 	if (![FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi)
 	{
-		BOOL inDoorMap = [[NSUserDefaults standardUserDefaults] boolForKey:@"inDoorMap"];
-		if (inDoorMap == YES)
-			[self.mapVC.navigationController popViewControllerAnimated:YES];
-		else
-			[self.navigationController popViewControllerAnimated:YES];
+        [self.mapVC.navigationController popViewControllerAnimated:YES];
 	}
 }
 
@@ -361,17 +363,28 @@ NSString* const FMModelSelected = @"FMModelSelected";
 {
     if (tap.view == self.toSearchView)
     {
+        self.toSearchImage.image = [UIImage imageNamed:@"toSearch_act"];
+        self.toWorldPlatformImage.image = [UIImage imageNamed:@"toWorld_default"];
+        self.toCallServiceImage.image = [UIImage imageNamed:@"toCallService_default"];
         //去哪跳转
     }
     else if (tap.view == self.toWorldPlatform)
     {
+        self.toSearchImage.image = [UIImage imageNamed:@"toSearch_default"];
+        self.toWorldPlatformImage.image = [UIImage imageNamed:@"toWorld_act"];
+        self.toCallServiceImage.image = [UIImage imageNamed:@"toCallService_default"];
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"" message:@"全球度假平台暂未开放使用，敬请期待！" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            self.toWorldPlatformImage.image = [UIImage imageNamed:@"toWorld_default"];
+        }];
         [alert addAction:action];
         [self presentViewController:alert animated:YES completion:nil];
     }
     else if (tap.view == self.toCallService)
     {
+        self.toSearchImage.image = [UIImage imageNamed:@"toSearch_default"];
+        self.toWorldPlatformImage.image = [UIImage imageNamed:@"toWorld_default"];
+        self.toCallServiceImage.image = [UIImage imageNamed:@"toCallService_act"];
         [self tapCallService];
     }
 }
@@ -469,6 +482,15 @@ NSString* const FMModelSelected = @"FMModelSelected";
         self.navigationItem.leftBarButtonItem = self.cancelBarButton;
         self.navigationItem.rightBarButtonItem = self.reloadBarButton;
         self.title = @"呼叫任务";
+    }else if (type == NAVIVARTYPE_IN)
+    {
+        self.navigationItem.rightBarButtonItem = self.searchBarButton;
+        //        self.navigationItem.titleView = self.segmentCallOrNavigation;
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(backHomeAction:)];
+    }else if (type == NAVIVARTYPE_OUT)
+    {
+        self.navigationItem.rightBarButtonItem = self.searchBarButton;
+        self.navigationItem.leftBarButtonItem = self.userBarBtn;
     }
 }
 

@@ -15,6 +15,8 @@
 		9C47374A1E7283C200A30C91 /* NewPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C4737491E7283C200A30C91 /* NewPhoneViewController.m */; };
 		9C47374D1E728E0700A30C91 /* NameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C47374C1E728E0700A30C91 /* NameViewController.m */; };
 		9C4737501E7292A500A30C91 /* ModifypawdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C47374F1E7292A500A30C91 /* ModifypawdViewController.m */; };
+		A8E4136F1E7692C40096EA62 /* InforView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E4136E1E7692C40096EA62 /* InforView.m */; };
+		A8E413711E7692D70096EA62 /* InforView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8E413701E7692D70096EA62 /* InforView.xib */; };
 		C44B16701E70F0E900EE8257 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C44B166F1E70F0E800EE8257 /* MainViewController.m */; };
 		C44B167B1E70F24C00EE8257 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C44B16721E70F24C00EE8257 /* UserViewController.m */; };
 		C46A63F41E711E06008A8A29 /* MainGround.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C46A63F31E711E06008A8A29 /* MainGround.storyboard */; };
@@ -443,6 +445,9 @@
 		9C47374C1E728E0700A30C91 /* NameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameViewController.m; sourceTree = "<group>"; };
 		9C47374E1E7292A500A30C91 /* ModifypawdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifypawdViewController.h; sourceTree = "<group>"; };
 		9C47374F1E7292A500A30C91 /* ModifypawdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifypawdViewController.m; sourceTree = "<group>"; };
+		A8E4136D1E7692C40096EA62 /* InforView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InforView.h; sourceTree = "<group>"; };
+		A8E4136E1E7692C40096EA62 /* InforView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InforView.m; sourceTree = "<group>"; };
+		A8E413701E7692D70096EA62 /* InforView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InforView.xib; sourceTree = "<group>"; };
 		C44B166E1E70F0E800EE8257 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		C44B166F1E70F0E800EE8257 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		C44B16711E70F24C00EE8257 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
@@ -1721,6 +1726,9 @@
 				C4C722B31E6FCC2E003523A2 /* SwitchMapInfoView.h */,
 				C4C722B41E6FCC2E003523A2 /* SwitchMapInfoView.m */,
 				C4C722B51E6FCC2E003523A2 /* SwitchMapInfoView.xib */,
+				A8E4136D1E7692C40096EA62 /* InforView.h */,
+				A8E4136E1E7692C40096EA62 /* InforView.m */,
+				A8E413701E7692D70096EA62 /* InforView.xib */,
 			);
 			path = StartAndEndView;
 			sourceTree = "<group>";
@@ -2334,6 +2342,7 @@
 				C4C723331E6FCC2F003523A2 /* daliangcang.fmi in Resources */,
 				FCDD64691E6FA5260057A9C3 /* WXOUIModuleResources.bundle in Resources */,
 				C4C723C11E6FCC2F003523A2 /* CategoryView.xib in Resources */,
+				A8E413711E7692D70096EA62 /* InforView.xib in Resources */,
 				C4C7231C1E6FCC2F003523A2 /* 180002.fmi in Resources */,
 				C4C722CC1E6FCC2E003523A2 /* 120006.fmi in Resources */,
 				C4C723821E6FCC2F003523A2 /* 79981.fmap in Resources */,
@@ -2583,6 +2592,7 @@
 				C4C723B61E6FCC2F003523A2 /* BaseCollectionViewCell.m in Sources */,
 				FC5B1AA31E6E47BF0038BCA7 /* UIButton+WebCache.m in Sources */,
 				FC5B1AEB1E6E51510038BCA7 /* MyAlertView.m in Sources */,
+				A8E4136F1E7692C40096EA62 /* InforView.m in Sources */,
 				C4C723951E6FCC2F003523A2 /* FMDatabasePool.m in Sources */,
 				FC07553F1E6EB74B00EAB144 /* DBUserLogin+CoreDataClass.m in Sources */,
 				C4C723EB1E6FD34E003523A2 /* StatusFinished.m in Sources */,

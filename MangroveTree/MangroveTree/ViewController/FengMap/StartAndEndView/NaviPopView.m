@@ -46,11 +46,11 @@
 
 - (void)show
 {
-	self.alpha = 1.0f;
+	self.alpha = 0.9f;
 	__weak typeof(self)wSelf = self;
 	[UIView animateWithDuration:0.4f animations:^{
 		CGRect rect = self.frame;
-		wSelf.frame = CGRectMake(0, kScreenHeight-rect.size.height, kScreenWidth, rect.size.height);
+		wSelf.frame = CGRectMake(0, kScreenHeight-rect.size.height-44, kScreenWidth, rect.size.height);
 	}];
 }
 - (IBAction)switchStartAndEndBtnClick:(id)sender {
@@ -63,8 +63,11 @@
 	self.switchStartAndEndBlock();
 	
 }
-- (IBAction)startNaviBtnClick:(id)sender {
-	self.startNaviBlock();
+- (IBAction)startNaviBtnClick:(id)sender
+{
+    if (_startNaviBlock)
+        self.startNaviBlock();
+	
 }
 
 - (void)setTimeByLength:(double)length
@@ -132,12 +135,12 @@
     
     //判断是否能够进入室内
     if (!enableEnterIndoor) {
-        [self.enterIndoorBtn setImage:[UIImage imageNamed:@"noEnter"] forState:UIControlStateNormal];
+//        [self.enterIndoorBtn setImage:[UIImage imageNamed:@"noEnter"] forState:UIControlStateNormal];
         self.enterIndoorBtn.enabled = NO;
     }
     else
     {
-        [self.enterIndoorBtn setImage:[UIImage imageNamed:@"enter"] forState:UIControlStateNormal];
+//        [self.enterIndoorBtn setImage:[UIImage imageNamed:@"enter"] forState:UIControlStateNormal];
         self.enterIndoorBtn.enabled = YES;
     }
     
@@ -149,6 +152,7 @@
     [self setupModelInfoByNodel:dbModel externalModel:model];
     
 }
+
 - (void)setupModelInfoByNodel:(QueryDBModel *)model externalModel:(FMKExternalModel *)eModel;
 {
     NSString *name = @"暂无名称";

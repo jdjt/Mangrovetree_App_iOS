@@ -11,12 +11,22 @@
 
 @implementation FMIndoorMapVC (Navi)
 
+- (void)addInforView
+{
+    if (!self.inforView)
+    {
+        self.inforView = [InforView inforView];
+        self.inforView.frame = CGRectMake(0, kScreenHeight-kNaviPopViewHeight-44 -88, kScreenWidth, 88);
+        [self.view addSubview:self.inforView];
+    }
+}
+
 //添加导航页面
 - (void)addNaviPopView
 {
 	if (!self.naviPopView) {
 		self.naviPopView = [NaviPopView naviPopView];
-		self.naviPopView.frame = CGRectMake(0, kScreenHeight-kNaviPopViewHeight, kScreenWidth, kNaviPopViewHeight);
+		self.naviPopView.frame = CGRectMake(0, kScreenHeight-kNaviPopViewHeight-44, kScreenWidth, kNaviPopViewHeight);
 		self.naviPopView.alpha = 0.0f;
 		[self.view addSubview:self.naviPopView];
 		[self addGestureOnView:self.naviPopView];
@@ -32,15 +42,15 @@
 	}
 }
 
-- (void)addModelInfoPopView
-{
-	if (!self.modelInfoPopView) {
-		self.modelInfoPopView = [IndoorMapModelInfoPopView indoorMapModelInfoPopView];
-		self.modelInfoPopView.frame = CGRectMake(0, kScreenHeight-kModelInfoPopViewHeight, kScreenWidth, kModelInfoPopViewHeight);
-		[self.view addSubview:self.modelInfoPopView];
-		[self addGestureOnView:self.modelInfoPopView];
-	}
-}
+//- (void)addModelInfoPopView
+//{
+//	if (!self.modelInfoPopView) {
+//		self.modelInfoPopView = [IndoorMapModelInfoPopView indoorMapModelInfoPopView];
+//		self.modelInfoPopView.frame = CGRectMake(0, kScreenHeight-kModelInfoPopViewHeight, kScreenWidth, kModelInfoPopViewHeight);
+//		[self.view addSubview:self.modelInfoPopView];
+//		[self addGestureOnView:self.modelInfoPopView];
+//	}
+//}
 
 - (void)addSwitchMapInfoView
 {
@@ -74,7 +84,7 @@
 {
 	if ([view isKindOfClass:[IndoorMapModelInfoPopView class]]) {
 		[UIView animateWithDuration:0.3f animations:^{
-			self.enableLocateBtn.frame = CGRectMake(kLocationSpace, self.modelInfoPopView.frame.origin.y-kLocationSpace-kLocBtnHeight, kLocBtnWidth, kLocBtnHeight);
+//			self.enableLocateBtn.frame = CGRectMake(kLocationSpace, self.modelInfoPopView.frame.origin.y-kLocationSpace-kLocBtnHeight, kLocBtnWidth, kLocBtnHeight);
 		}];
 	}
 	else if ([view isKindOfClass:[NaviPopView class]])

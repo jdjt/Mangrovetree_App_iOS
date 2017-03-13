@@ -11,6 +11,8 @@
 #import "IndoorMapModelInfoPopView.h"
 #import "NaviPopView.h"
 #import "NaviTopView.h"
+#import "InforView.h"
+
 @class SwitchMapInfoView;
 
 #import "Const.h"
@@ -26,7 +28,8 @@
 @property (nonatomic, strong) QueryDBModel * dbModel;//数据库模型，数据
 
 //信息弹框
-@property (nonatomic, strong) IndoorMapModelInfoPopView * modelInfoPopView;
+//@property (nonatomic, strong) IndoorMapModelInfoPopView * modelInfoPopView;
+@property (nonatomic, strong) InforView *inforView;
 @property (nonatomic, strong) NaviPopView * naviPopView;
 @property (nonatomic, strong) NaviTopView * naviTopView;
 @property (nonatomic, strong) SwitchMapInfoView * switchMapInfoView;
