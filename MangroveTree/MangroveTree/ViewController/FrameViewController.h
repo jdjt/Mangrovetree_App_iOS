@@ -16,6 +16,8 @@ typedef NS_ENUM(NSInteger,NaviBarType)
 {
     NAVIVARTYPE_MAP           = 0,
     NAVIVARTYPE_CALL          = 1,
+    NAVIVARTYPE_IN            = 2,
+    NAVIVARTYPE_OUT           = 3,
 };
 
 @interface FrameViewController : UIViewController
@@ -42,6 +44,5 @@ typedef NS_ENUM(NSInteger,NaviBarType)
 - (void)showMsgView:(BOOL)show;
 
 - (NSString *)getCurrentZoneName;
-
 
 @end

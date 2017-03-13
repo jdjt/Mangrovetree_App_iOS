@@ -63,8 +63,11 @@
 	self.switchStartAndEndBlock();
 	
 }
-- (IBAction)startNaviBtnClick:(id)sender {
-	self.startNaviBlock();
+- (IBAction)startNaviBtnClick:(id)sender
+{
+    if (_startNaviBlock)
+        self.startNaviBlock();
+	
 }
 
 - (void)setTimeByLength:(double)length
@@ -149,6 +152,7 @@
     [self setupModelInfoByNodel:dbModel externalModel:model];
     
 }
+
 - (void)setupModelInfoByNodel:(QueryDBModel *)model externalModel:(FMKExternalModel *)eModel;
 {
     NSString *name = @"暂无名称";

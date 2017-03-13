@@ -290,7 +290,7 @@ const int kDisplayCount = 4;
 				FMKMapCoord endMapCoord = FMKMapCoordMake(model.mid.intValue, FMKGeoCoordMake(model.gid, FMKMapPointMake(model.x, model.y)));
 				BOOL result = [naviTool naviAnalyseByStartMapCoord:startMapCoord endMapCoord:endMapCoord];
                 if (!result) return;
-				naviTool.planNavi = YES;
+//				naviTool.planNavi = YES;
 				naviTool.endName = model.name;
 				
 				if ([model.mid isEqualToString:@(kOutdoorMapID).stringValue])

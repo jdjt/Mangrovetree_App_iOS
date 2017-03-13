@@ -24,15 +24,15 @@ const int kTopSpace = 10;
 
 @implementation FMView (AddView)
 
-- (void)addModelInfoPopView
-{
-	if (!self.modelInfoPopView) {
-		self.modelInfoPopView = [ModelInfoPopView modelInfoPopView];
-		self.modelInfoPopView.frame = CGRectMake(0,self.frame.size.height- kModelInfoPopViewHeight, self.frame.size.width, kModelInfoPopViewHeight);
-		[self addGestureOnView:self.modelInfoPopView];
-		[self addSubview:self.modelInfoPopView];
-	}
-}
+//- (void)addModelInfoPopView
+//{
+//	if (!self.modelInfoPopView) {
+//		self.modelInfoPopView = [ModelInfoPopView modelInfoPopView];
+//		self.modelInfoPopView.frame = CGRectMake(0,self.frame.size.height- kModelInfoPopViewHeight, self.frame.size.width, kModelInfoPopViewHeight);
+//		[self addGestureOnView:self.modelInfoPopView];
+//		[self addSubview:self.modelInfoPopView];
+//	}
+//}
 - (void)addCategoryView
 {
 	if (!self.categoryView) {
@@ -79,7 +79,7 @@ const int kTopSpace = 10;
 {
 	if ([view isKindOfClass:[ModelInfoPopView class]]) {
 		[UIView animateWithDuration:0.3f animations:^{
-			self.enableLocateBtn.frame = CGRectMake(kLocationSpace, self.modelInfoPopView.frame.origin.y-kLocationSpace-kLocBtnHeight, kLocBtnWidth, kLocBtnHeight);
+//			self.enableLocateBtn.frame = CGRectMake(kLocationSpace, self.modelInfoPopView.frame.origin.y-kLocationSpace-kLocBtnHeight, kLocBtnWidth, kLocBtnHeight);
 		}];
 	}
 	else if ([view isKindOfClass:[NaviPopView class]])
