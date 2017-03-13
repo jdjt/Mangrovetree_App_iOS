@@ -69,8 +69,20 @@
 // 用户登陆
 #define URI_LOGIN                           "/uum/mem/sso/login.json"
 
+// 用户登出
+#define URI_LOGOUT                          "/uum/mem/sso/logout.json"
+
 // 会员信息
 #define MEMBER_INFO                         "/uum/mem/account/member_info.json"
+
+// 手机号绑定
+#define URI_REBIND                          "/uum/mem/account/binding.json"
+
+// 修改密码
+#define URI_MODIFY_PWD                      "/uum/mem/account/modify_password.json"
+
+// 修改个人资料
+#define URI_MODIFY_MEMINFO                  "/uum/mem/account/modify_member.json"
 
 //用户注册
 #define URI_REGIST                          "/uum/mem/account/register.json"

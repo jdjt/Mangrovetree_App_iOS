@@ -8,19 +8,40 @@
 
 #import "NameViewController.h"
 
-@interface NameViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *nameLabel;
+@interface NameViewController ()<MTRequestNetWorkDelegate>
+{
+    DBUserLogin *user;
+}
+@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UIButton *nameButton;
-
+@property (strong, nonatomic) NSURLSessionTask *modiftInforTask;
 @end
 
 @implementation NameViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    //设置按钮样式
+    [_nameButton loginStyle];
+    user = [[DataManager defaultInstance] findUserLogInByCode:@"1"];
+}
+// 网络请求注册代理
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[MTRequestNetwork defaultManager]registerDelegate:self];
 }
 
+// 网络请求注销代理
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[MTRequestNetwork defaultManager] removeDelegate:self];
+}
+- (void)dealloc
+{
+    [[MTRequestNetwork defaultManager] cancleAllRequest];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -39,61 +60,55 @@
 }
 - (IBAction)nameButtonAction:(id)sender
 {
-    NSLog(@"保存姓名");
+    [self modifymember];
 }
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
+#pragma mark - 网络请求
+
+// 修改姓名
+- (void)modifymember
+{
+    if (_nameTextField.text.length <2)
+    {
+        [MyAlertView showAlert:@"填写的姓名格式不正确，请重新填写"];
+        return;
+    }
+    NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithCapacity:2];
+    [params setObject:_nameTextField.text?_nameTextField.text:@"" forKey:@"nickname"];
+    self.modiftInforTask = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
+                                                                       webURL:@URI_MODIFY_MEMINFO
+                                                                       params:params
+                                                                   withByUser:YES
+                                                             andOldInterfaces:YES];
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+#pragma mark - 网络请求返回结果代理
+- (void)startRequest:(NSURLSessionTask *)task
+{
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (void)pushResponseResultsSucceed:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg andData:(NSMutableArray *)datas
+{
+    if (task == self.modiftInforTask) {//修改个人资料
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"修改姓名成功"
+                                                            message:nil
+                                                           delegate:self
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"确定", nil];
+        [alertView show];
+        user.nickname = _nameTextField.text;
+        NSLog(@"%@",user.nickname);
+    }
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+- (void)pushResponseResultsFailing:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg
+{
+    [MyAlertView showAlert:msg];
 }
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end

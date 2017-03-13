@@ -32,15 +32,15 @@
 	}
 }
 
-- (void)addModelInfoPopView
-{
-	if (!self.modelInfoPopView) {
-		self.modelInfoPopView = [IndoorMapModelInfoPopView indoorMapModelInfoPopView];
-		self.modelInfoPopView.frame = CGRectMake(0, kScreenHeight-kModelInfoPopViewHeight, kScreenWidth, kModelInfoPopViewHeight);
-		[self.view addSubview:self.modelInfoPopView];
-		[self addGestureOnView:self.modelInfoPopView];
-	}
-}
+//- (void)addModelInfoPopView
+//{
+//	if (!self.modelInfoPopView) {
+//		self.modelInfoPopView = [IndoorMapModelInfoPopView indoorMapModelInfoPopView];
+//		self.modelInfoPopView.frame = CGRectMake(0, kScreenHeight-kModelInfoPopViewHeight, kScreenWidth, kModelInfoPopViewHeight);
+//		[self.view addSubview:self.modelInfoPopView];
+//		[self addGestureOnView:self.modelInfoPopView];
+//	}
+//}
 
 - (void)addSwitchMapInfoView
 {
@@ -74,7 +74,7 @@
 {
 	if ([view isKindOfClass:[IndoorMapModelInfoPopView class]]) {
 		[UIView animateWithDuration:0.3f animations:^{
-			self.enableLocateBtn.frame = CGRectMake(kLocationSpace, self.modelInfoPopView.frame.origin.y-kLocationSpace-kLocBtnHeight, kLocBtnWidth, kLocBtnHeight);
+//			self.enableLocateBtn.frame = CGRectMake(kLocationSpace, self.modelInfoPopView.frame.origin.y-kLocationSpace-kLocBtnHeight, kLocBtnWidth, kLocBtnHeight);
 		}];
 	}
 	else if ([view isKindOfClass:[NaviPopView class]])

@@ -35,7 +35,7 @@ typedef NS_ENUM(NSInteger,ButtonType)
 @interface FMView : FMBaseView<FMKLocationServiceManagerDelegate>
 ///地图视图
 @property (nonatomic, strong) FMMangroveMapView * fengMapView;
-@property (nonatomic, strong) ModelInfoPopView * modelInfoPopView;
+//@property (nonatomic, strong) ModelInfoPopView * modelInfoPopView;
 @property (nonatomic, strong) RouteDisplayView * routeDisplayView;
 @property (nonatomic, strong) CategoryView * categoryView;
 @property (nonatomic, strong) NaviPopView * naviPopView;

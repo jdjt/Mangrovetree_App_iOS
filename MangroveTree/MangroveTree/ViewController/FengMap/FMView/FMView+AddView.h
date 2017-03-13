@@ -11,7 +11,7 @@
 @class MapViewController;
 
 @interface FMView (AddView)
-- (void)addModelInfoPopView;
+//- (void)addModelInfoPopView;
 - (void)addNaviTopView;
 - (void)addNaviPopView;
 - (void)addCategoryView;

@@ -58,6 +58,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
 {
     [super viewDidLoad];
     
+    self.bottomBarView.hidden = YES;
 	[UIApplication sharedApplication].idleTimerDisabled = YES;//不自动锁屏
     
     self.callView.hidden = NO;
@@ -336,11 +337,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
 {
 	if (![FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi)
 	{
-		BOOL inDoorMap = [[NSUserDefaults standardUserDefaults] boolForKey:@"inDoorMap"];
-		if (inDoorMap == YES)
-			[self.mapVC.navigationController popViewControllerAnimated:YES];
-		else
-			[self.navigationController popViewControllerAnimated:YES];
+        [self.mapVC.navigationController popViewControllerAnimated:YES];
 	}
 }
 
@@ -485,6 +482,15 @@ NSString* const FMModelSelected = @"FMModelSelected";
         self.navigationItem.leftBarButtonItem = self.cancelBarButton;
         self.navigationItem.rightBarButtonItem = self.reloadBarButton;
         self.title = @"呼叫任务";
+    }else if (type == NAVIVARTYPE_IN)
+    {
+        self.navigationItem.rightBarButtonItem = self.searchBarButton;
+        //        self.navigationItem.titleView = self.segmentCallOrNavigation;
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(backHomeAction:)];
+    }else if (type == NAVIVARTYPE_OUT)
+    {
+        self.navigationItem.rightBarButtonItem = self.searchBarButton;
+        self.navigationItem.leftBarButtonItem = self.userBarBtn;
     }
 }
 
@@ -659,7 +665,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
     HUD.labelText = @"正在加载地图，请稍等";
     [HUD show:YES];
     sleep(5);
-    [self.mapVC loadMap];
+//    [self.mapVC loadMap];
 }
 
 // 更新登录

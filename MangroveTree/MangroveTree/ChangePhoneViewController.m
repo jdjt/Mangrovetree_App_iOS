@@ -7,12 +7,22 @@
 //
 
 #import "ChangePhoneViewController.h"
+#import "NewPhoneViewController.h"
 
-@interface ChangePhoneViewController ()
+@interface ChangePhoneViewController ()<MTRequestNetWorkDelegate>
+{
+    NSString *uuidString;
+    int _ukDelay;//倒计时
+    NSTimer *_connectionTimer;
+    DBUserLogin *user;
+}
 @property (weak, nonatomic) IBOutlet UILabel *acctountLabel;
 @property (weak, nonatomic) IBOutlet UIButton *validationButton;
 @property (weak, nonatomic) IBOutlet UITextField *validationTextField;
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
+
+@property (nonatomic, strong) NSURLSessionTask *sengCodeTask;
+@property (nonatomic, strong) NSURLSessionTask *checkCodeTask;
 
 @end
 
@@ -24,11 +34,31 @@
     //设置按钮样式
     [_validationButton ukeyStyle];
     [_validationButton setTitleColor:[UIColor colorWithRed:122/255.0f green:177/255.0f blue:147/255.0f alpha:1] forState:UIControlStateNormal];
+    [_nextButton loginStyle];
+    user = [[DataManager defaultInstance] findUserLogInByCode:@"1"];
+    if ([user.mobile isEqualToString:@""])
+        [self performSegueWithIdentifier:@"newPhone" sender:nil];
+    else
+        _acctountLabel.text = user.mobile;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+// 网络请求注册代理
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[MTRequestNetwork defaultManager]registerDelegate:self];
+}
+
+// 网络请求注销代理
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[MTRequestNetwork defaultManager] removeDelegate:self];
+}
+
+- (void)dealloc
+{
+    [[MTRequestNetwork defaultManager] cancleAllRequest];
 }
 
 #pragma mark - Table view data source
@@ -53,65 +83,132 @@
 - (IBAction)validationButtonAction:(id)sender
 {
     NSLog(@"发送验证码");
+    NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithCapacity:2];
+    
+    [params setObject:_acctountLabel.text forKey:@"account"];
+    
+    [params setObject:@"3" forKey:@"logicFlag"];
+    NSString* uuid = [self getUUID];
+    
+    [params setObject:uuid forKey:@"uuid"];
+    self.sengCodeTask = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
+                                                                    webURL:@URI_GETUKEY
+                                                                    params:params
+                                                                withByUser:YES
+                                                          andOldInterfaces:YES];
 }
 
+//验证 验证码
 - (IBAction)nextButtonAction:(id)sender
 {
-    [self performSegueWithIdentifier:@"newPhone" sender:nil];
-}
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    if ([_validationTextField.text isEqualToString:@""]||_validationTextField.text.length !=6)
+    {
+        [MyAlertView showAlert:@"请输入正确的验证码"];
+        return;
+    }
     
-    // Configure the cell...
+    NSString* uuid = [self getUUID];
+    NSMutableDictionary* params = [[NSMutableDictionary alloc]init];
     
-    return cell;
+    [params setObject:_validationTextField.text forKey:@"code"];
+    [params setObject: uuid forKey:@"uuid"];
+    
+    self.checkCodeTask =  [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL webURL:@URI_CHECKUKEY params:params withByUser:YES andOldInterfaces:YES];
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+#pragma mark - 网络请求返回结果代理
+- (void)startRequest:(NSURLSessionTask *)task
+{
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (void)pushResponseResultsSucceed:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg andData:(NSMutableArray *)datas
+{
+    //发送验证码
+    if (task == self.sengCodeTask)
+    {
+        //开始倒计时
+        [self startTimer];
+    }
+    //验证成功
+    else if (task == self.checkCodeTask)
+    {
+        NSString* result = [datas objectAtIndex:0];
+        if ([result isEqualToString:@"0"])
+        {
+            [self performSegueWithIdentifier:@"newPhone" sender:nil];
+        }
+        else
+        {
+            [MyAlertView showAlert:@"验证码错误"];
+        }
+    }
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+- (void)pushResponseResultsFailing:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg
+{
+    [MyAlertView showAlert:msg];
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+#pragma mark - Private functions
+
+// 倒计时开始
+-(void)startTimer
+{
+    _ukDelay = 60;
+    _connectionTimer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop]addTimer:_connectionTimer forMode:NSDefaultRunLoopMode];
 }
-*/
 
-/*
+// 是否隐藏验证码显示倒计时
+- (void)timerFired
+{
+    if(_ukDelay>0)
+    {
+        _ukDelay--;
+        _validationButton.enabled = NO;
+        NSString* label = [[NSString stringWithFormat:@"%d",_ukDelay]stringByAppendingString:@"秒"];
+        [_validationButton setTitle:label forState:UIControlStateNormal];
+        
+    }
+    else
+    {
+        [_connectionTimer invalidate];
+        _validationButton.enabled = YES;
+        _connectionTimer = nil;
+        [_validationButton setTitle:@"验证码" forState:UIControlStateNormal];
+    }
+    
+}
+
+// 获取UUID
+-(NSString*)getUUID
+{
+    if (uuidString)
+    {
+        return uuidString;
+    }
+    CFUUIDRef uuid = CFUUIDCreate(nil);
+    uuidString = (NSString*)CFBridgingRelease(CFUUIDCreateString(nil, uuid));
+    CFRelease(uuid);
+    return uuidString;
+}
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NewPhoneViewController *newPhoneController = (NewPhoneViewController *)segue.destinationViewController;
+    newPhoneController.uuid = uuidString;
+    newPhoneController.code = _validationTextField.text;
+    newPhoneController.account = _acctountLabel.text;
+    if ([segue.identifier isEqualToString:@"newPhone"])//修改新手机
+    {
+        newPhoneController.newAccount = YES;
+    }
 }
-*/
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 @end
