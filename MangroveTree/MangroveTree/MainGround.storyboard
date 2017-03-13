@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QXi-Tb-bQc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QXi-Tb-bQc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -231,6 +231,7 @@
                                     <constraint firstItem="DjH-NZ-Zdh" firstAttribute="leading" secondItem="6zt-yn-Zw3" secondAttribute="trailing" id="20K-7U-A1h"/>
                                     <constraint firstItem="6zt-yn-Zw3" firstAttribute="top" secondItem="6n8-jj-txz" secondAttribute="top" id="6VK-4Y-vSw"/>
                                     <constraint firstAttribute="bottom" secondItem="6zt-yn-Zw3" secondAttribute="bottom" id="CeT-A8-8Y4"/>
+                                    <constraint firstAttribute="height" constant="44" id="Dvy-OS-Dam"/>
                                     <constraint firstItem="ezM-aN-UuJ" firstAttribute="top" secondItem="6n8-jj-txz" secondAttribute="top" id="VJr-Dx-khn"/>
                                     <constraint firstItem="ezM-aN-UuJ" firstAttribute="width" secondItem="6n8-jj-txz" secondAttribute="width" multiplier="1:3" id="Yvp-AI-9S2"/>
                                     <constraint firstAttribute="trailing" secondItem="DjH-NZ-Zdh" secondAttribute="trailing" id="hiP-ud-jxv"/>
@@ -249,7 +250,6 @@
                             <constraint firstItem="57a-av-jS8" firstAttribute="width" secondItem="BKf-ij-IEq" secondAttribute="width" id="B3X-kx-Zws"/>
                             <constraint firstAttribute="trailing" secondItem="6n8-jj-txz" secondAttribute="trailing" id="BzM-k0-TO7"/>
                             <constraint firstItem="Xpc-JH-pRS" firstAttribute="centerY" secondItem="BKf-ij-IEq" secondAttribute="centerY" id="CkG-kt-Hsd"/>
-                            <constraint firstItem="6n8-jj-txz" firstAttribute="height" secondItem="BKf-ij-IEq" secondAttribute="height" multiplier="44:667" id="Ebt-eA-c6M"/>
                             <constraint firstItem="57a-av-jS8" firstAttribute="centerX" secondItem="BKf-ij-IEq" secondAttribute="centerX" id="GZn-If-Y5I"/>
                             <constraint firstItem="Dve-cn-46b" firstAttribute="top" secondItem="Ek0-io-xXx" secondAttribute="bottom" constant="44" id="JCy-05-5BO"/>
                             <constraint firstItem="Xpc-JH-pRS" firstAttribute="width" secondItem="BKf-ij-IEq" secondAttribute="width" id="XdX-5q-QJB"/>
