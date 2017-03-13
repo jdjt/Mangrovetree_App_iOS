@@ -8,26 +8,80 @@
 
 #import "NewPhoneViewController.h"
 
-@interface NewPhoneViewController ()
+@interface NewPhoneViewController ()<UITextFieldDelegate,MTRequestNetWorkDelegate>
+{
+    NSString *uuidString;
+    int _ukDelay;//倒计时
+    NSTimer *_connectionTimer;
+}
 @property (weak, nonatomic) IBOutlet UITextField *PhoneTextField;
 @property (weak, nonatomic) IBOutlet UIButton *validationButton;
 @property (weak, nonatomic) IBOutlet UITextField *validationTextField;
 @property (weak, nonatomic) IBOutlet UIButton *sumbitButtonAction;
+@property (strong, nonatomic) NSURLSessionTask *sendCodeTask;
+@property (strong, nonatomic) NSURLSessionTask *changeAccountlTask;
+
 @end
 
 @implementation NewPhoneViewController
 
+@synthesize uuid;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _PhoneTextField.delegate = self;
+    _validationTextField.delegate = self;
     
     //设置按钮样式
     [_validationButton ukeyStyle];
     [_validationButton setTitleColor:[UIColor colorWithRed:122/255.0f green:177/255.0f blue:147/255.0f alpha:1] forState:UIControlStateNormal];
+    [_sumbitButtonAction loginStyle];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+// 网络请求注册代理
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[MTRequestNetwork defaultManager]registerDelegate:self];
+}
+
+// 网络请求注销代理
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[MTRequestNetwork defaultManager] removeDelegate:self];
+}
+- (void)dealloc
+{
+    [[MTRequestNetwork defaultManager] cancleAllRequest];
+}
+
+#pragma mark - 用户操作
+
+// 开始倒计时
+-(void)startTimer
+{
+    _ukDelay = 60;
+    _connectionTimer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
+}
+
+// 显示验证按钮 or 显示倒计时
+- (void)timerFired
+{
+    if(_ukDelay>0){
+        _ukDelay--;
+        _validationButton.enabled = NO;
+        NSString* label = [[NSString stringWithFormat:@"%d",_ukDelay]stringByAppendingString:@"秒"];
+        [_validationButton setTitle:label forState:UIControlStateNormal];
+        
+    }else{
+        [_connectionTimer invalidate];
+        _validationButton.enabled = YES;
+        _connectionTimer = nil;
+        [_validationButton setTitle:@"验证码" forState:UIControlStateNormal];
+    }
+    
 }
 
 #pragma mark - Table view data source
@@ -44,16 +98,126 @@
     }
 }
 
+#pragma mark - 网络请求
+
+// 绑定新的手机
+- (void)bindingNewAccount
+{
+    if (_validationTextField.text.length != 6)
+    {
+        [MyAlertView showAlert:@"请输入正确验证码"];
+        return;
+    }
+    NSMutableDictionary* params = [[NSMutableDictionary alloc]init];
+    if (![Util isMobileNumber:_PhoneTextField.text])
+    {
+        [MyAlertView showAlert:@"请输入正确的手机号"];
+        return;
+    }
+    [params setObject:@"1" forKey:@"bindingType"];
+    NSDictionary *newBinding = @{@"targ":_PhoneTextField.text,
+                                 @"code":_validationTextField.text,
+                                 @"uuid":[self getUUID]};
+    if (self.newAccount == YES)//修改帐号，需要原来的账号信息
+    {
+        NSDictionary *oldBinding = @{@"targ":self.account,
+                                     @"code":self.code,
+                                     @"uuid":self.uuid};
+        [params setObject:newBinding forKey:@"newBindingInfo"];
+        [params setObject:oldBinding forKey:@"oldBindingInfo"];
+    }
+    else if (self.newAccount == NO)
+    {
+        [params setObject:newBinding forKey:@"newBindingInfo"];
+    }
+    self.changeAccountlTask = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL webURL:@URI_REBIND params:params withByUser:YES andOldInterfaces:YES];
+}
+
 // 发送验证码
 - (IBAction)validationButtonAction:(id)sender
 {
-    NSLog(@"发送验证码");
+    if ([self.isPhoneOrEmail isEqualToString:@"0"])//手机
+    {
+        if (![Util isMobileNumber:_PhoneTextField.text])
+        {
+            [MyAlertView showAlert:@"请输入正确的手机号"];
+            return;
+        }
+    }
+    NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithCapacity:2];
+    [params setObject:_PhoneTextField.text forKey:@"account"];
+    [params setObject:@"3" forKey:@"logicFlag"];
+    [params setObject:[self getUUID] forKey:@"uuid"];
+    self.sendCodeTask = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
+                                                                    webURL:@URI_GETUKEY
+                                                                    params:params
+                                                                withByUser:YES
+                                                          andOldInterfaces:YES];
+}
+
+#pragma mark - 网络请求返回结果代理
+- (void)startRequest:(NSURLSessionTask *)task
+{
+}
+
+- (void)pushResponseResultsSucceed:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg andData:(NSMutableArray *)datas
+{
+    //发送验证码
+    if (task == self.sendCodeTask) {
+        //开始倒计时
+        [self startTimer];
+    }else if (task == self.changeAccountlTask)
+    {//修改成功
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+}
+
+- (void)pushResponseResultsFailing:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg
+{
+    [MyAlertView showAlert:msg];
 }
 
 // 保存
 - (IBAction)sumbitButtonAction:(id)sender
 {
     NSLog(@"保存");
+    [self bindingNewAccount];
+}
+
+#pragma mark - Private functions
+
+// 点击next将下一个textField处于编辑状态
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if ([textField isEqual:_PhoneTextField]){
+        [_PhoneTextField resignFirstResponder];
+        [_validationTextField becomeFirstResponder];
+    }
+    return YES;
+}
+
+// 获取UUID
+- (NSString *)getUUID
+{
+    if (uuid)
+    {
+        return uuid;
+    }
+    else
+    {
+        CFUUIDRef uuid_ref = CFUUIDCreate(NULL);
+        CFStringRef uuid_string_ref= CFUUIDCreateString(NULL, uuid_ref);
+        
+        CFRelease(uuid_ref);
+        uuid = [NSString stringWithString:(NSString*)CFBridgingRelease(uuid_string_ref)];
+        
+        return uuid;
+    }
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -649,7 +649,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
     HUD.labelText = @"正在加载地图，请稍等";
     [HUD show:YES];
     sleep(5);
-    [self.mapVC loadMap];
+//    [self.mapVC loadMap];
 }
 
 // 更新登录

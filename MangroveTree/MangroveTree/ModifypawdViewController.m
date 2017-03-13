@@ -8,23 +8,42 @@
 
 #import "ModifypawdViewController.h"
 
-@interface ModifypawdViewController ()
+@interface ModifypawdViewController ()<UITextFieldDelegate,MTRequestNetWorkDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *oldPawdTextField;
 @property (weak, nonatomic) IBOutlet UITextField *pawdTextField;
 @property (weak, nonatomic) IBOutlet UITextField *againPawdTextField;
 @property (weak, nonatomic) IBOutlet UIButton *submitButton;
+@property (strong, nonatomic) NSURLSessionTask *modifyPassTask;
 @end
 
 @implementation ModifypawdViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _oldPawdTextField.delegate = self;
+    _pawdTextField.delegate = self;
+    _againPawdTextField.delegate = self;
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    //设置按钮样式
+    [_submitButton loginStyle];
+}
+
+// 网络请求注册代理
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[MTRequestNetwork defaultManager]registerDelegate:self];
+}
+
+// 网络请求注销代理
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[MTRequestNetwork defaultManager] removeDelegate:self];
+}
+- (void)dealloc
+{
+    [[MTRequestNetwork defaultManager] cancleAllRequest];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,63 +71,90 @@
     }
 }
 
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSCharacterSet *cs;
+    cs = [[NSCharacterSet characterSetWithCharactersInString:myNumbers] invertedSet];
+    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    BOOL basicTest = [string isEqualToString:filtered];
+    if (!basicTest) {
+        [MyAlertView showAlert:@"输入内容不能包含特殊字符"];
+        return NO;
+    }
+    return YES;
+}
+
+#pragma mark - 网络请求
+
 //修改密码
 - (IBAction)submitButtonAction:(id)sender
 {
-    NSLog(@"修改密码");
-}
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    if (_oldPawdTextField.text.length<6||_oldPawdTextField.text.length>18||_againPawdTextField.text.length <6||_againPawdTextField.text.length >18||_pawdTextField.text.length <6 ||_pawdTextField.text.length >18 ) {
+        
+        [MyAlertView showAlert:@"密码格式不正确，请输入6-18位密码"];
+        return;
+    }
     
-    // Configure the cell...
+    if (![_pawdTextField.text isEqualToString:_againPawdTextField.text]) {//两次输入的密码是否相同
+        
+        [MyAlertView showAlert:@"新密码输入不相同"];
+        
+        return;
+    }
     
-    return cell;
+    if ([_againPawdTextField.text isEqualToString:_oldPawdTextField.text]) {//新旧密码相同
+        
+        [MyAlertView showAlert:@"新密码和原密码相同"];
+        
+        return;
+    }
+    
+    NSMutableDictionary* params = [[NSMutableDictionary alloc]init];
+    
+    [params setObject:_pawdTextField.text forKey:@"newPassword"];
+    [params setObject:_oldPawdTextField.text forKey:@"password"];
+    self.modifyPassTask = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
+                                                                      webURL:@URI_MODIFY_PWD
+                                                                      params:params
+                                                                  withByUser:YES
+                                                            andOldInterfaces:YES];
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
+#pragma mark - 网络请求返回结果代理
+
+- (void)startRequest:(NSURLSessionTask *)task
+{
+}
+
+- (void)pushResponseResultsSucceed:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg andData:(NSMutableArray *)datas
+{
+    [MyAlertView showAlert:@"修改登录密码成功"];
+    DBUserLogin *logIn = [[DataManager defaultInstance] findUserLogInByCode:@"1"];
+    logIn.password = _againPawdTextField.text;
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (void)pushResponseResultsFailing:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg
+{
+    [MyAlertView showAlert:msg];
+}
+
+#pragma mark - Private functions
+
+// 点击next将下一个textField处于编辑状态
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if ([textField isEqual:_oldPawdTextField]) {
+        [_oldPawdTextField resignFirstResponder];
+        [_pawdTextField becomeFirstResponder];
+    }
+    else if ([textField isEqual:_pawdTextField]){
+        [_pawdTextField resignFirstResponder];
+        [_againPawdTextField becomeFirstResponder];
+    }
     return YES;
 }
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

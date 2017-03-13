@@ -50,7 +50,7 @@
     // 在这里开始发送网络请求
     if (login == YES)
     {
-        [self loadMap];
+//        [self loadMap];
     }
 
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"inDoorMap"];
