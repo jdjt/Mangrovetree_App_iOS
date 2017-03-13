@@ -8,7 +8,9 @@
 
 #import "SetTableViewController.h"
 
-@interface SetTableViewController ()
+@interface SetTableViewController ()<MTRequestNetWorkDelegate>
+@property (strong, nonatomic) NSURLSessionTask *logoutTask;
+@property (weak, nonatomic) IBOutlet UIButton *logoutButton;
 
 @end
 
@@ -16,16 +18,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    //设置按钮样式
+    [self.logoutButton loginStyle];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[MTRequestNetwork defaultManager]registerDelegate:self];
+}
+
+// 网络请求注销代理
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[MTRequestNetwork defaultManager] removeDelegate:self];
+}
+
+- (void)dealloc
+{
+    [[MTRequestNetwork defaultManager] cancleAllRequest];
 }
 
 #pragma mark - Table view data source
@@ -47,63 +60,107 @@
             break;
     }
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0)
+    {
+        if (indexPath.row == 0)
+        {
+            // 清楚缓存
+            NSLog(@"您点击了清除缓存");
+            if (indexPath.section == 0) {
+                UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"是否清除缓存" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+                UIAlertAction * defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    dispatch_async(
+                                   dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+                                   , ^{
+                                       NSString *cachPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                                       NSLog(@"%@", cachPath);
+                                       
+                                       NSArray *files = [[NSFileManager defaultManager] subpathsAtPath:cachPath];
+                                       NSLog(@"files :%lu",(unsigned long)[files count]);
+                                       for (NSString *p in files) {
+                                           NSError *error;
+                                           NSString *path = [cachPath stringByAppendingPathComponent:p];
+                                           if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+                                               [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+                                           }
+                                       }
+                                       [self performSelectorOnMainThread:@selector(clearCacheSuccess) withObject:nil waitUntilDone:YES];});
+                }];
+                [alert addAction:cancelAction];
+                [alert addAction:defaultAction];
+                [self presentViewController:alert animated:YES completion:nil];
+            }
+        }
+        if (indexPath.row == 1)
+        {
+            // 关于红树林导航
+            NSLog(@"您点击了关于红树林导航");
+        }
+    }
+    
+}
+
+- (void)clearCacheSuccess
+{
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:nil message:@"清除缓存成功" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 - (IBAction)CompleteButton:(id)sender
 {
-    NSLog(@"退出登录按钮");
+    UIAlertView *alent = [[UIAlertView alloc] initWithTitle:@"退出登录提示"
+                                                    message:@"是否退出登录？"
+                                                   delegate:self
+                                          cancelButtonTitle:@"否"
+                                          otherButtonTitles:@"是", nil];
+    [alent show];
 }
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
+#pragma mark - 网络请求
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        NSMutableDictionary* params = [[NSMutableDictionary alloc]init];
+        self.logoutTask = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
+                                                                      webURL:@URI_LOGOUT
+                                                                      params:params
+                                                                  withByUser:YES
+                                                            andOldInterfaces:YES];
+    }
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (void)startRequest:(NSURLSessionTask *)task
+{
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+- (void)pushResponseResultsSucceed:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg andData:(NSMutableArray *)datas
+{
+    if (task == self.logoutTask)
+    {
+        //注销登录
+        [[DataManager defaultInstance] cleanCoreDatabyEntityName:@"DBUserLogin"];
+        [self.navigationController popViewControllerAnimated:YES];
+        //刷新视图
+        [self.tableView reloadData];
+    }
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+- (void)pushResponseResultsFailing:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg
+{
+    [MyAlertView showAlert:msg];
 }
-*/
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
-*/
 
 @end
