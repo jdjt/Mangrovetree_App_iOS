@@ -11,12 +11,22 @@
 
 @implementation FMIndoorMapVC (Navi)
 
+- (void)addInforView
+{
+    if (!self.inforView)
+    {
+        self.inforView = [InforView inforView];
+        self.inforView.frame = CGRectMake(0, kScreenHeight-kNaviPopViewHeight-44 -88, kScreenWidth, 88);
+        [self.view addSubview:self.inforView];
+    }
+}
+
 //添加导航页面
 - (void)addNaviPopView
 {
 	if (!self.naviPopView) {
 		self.naviPopView = [NaviPopView naviPopView];
-		self.naviPopView.frame = CGRectMake(0, kScreenHeight-kNaviPopViewHeight, kScreenWidth, kNaviPopViewHeight);
+		self.naviPopView.frame = CGRectMake(0, kScreenHeight-kNaviPopViewHeight-44, kScreenWidth, kNaviPopViewHeight);
 		self.naviPopView.alpha = 0.0f;
 		[self.view addSubview:self.naviPopView];
 		[self addGestureOnView:self.naviPopView];

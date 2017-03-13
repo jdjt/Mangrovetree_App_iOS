@@ -9,7 +9,7 @@
 #import "FMIndoorMapVC.h"
 
 @interface FMIndoorMapVC (Navi)
-
+- (void)addInforView;
 - (void)addNaviPopView;
 - (void)addNaviTopView;
 - (void)addModelInfoPopView;

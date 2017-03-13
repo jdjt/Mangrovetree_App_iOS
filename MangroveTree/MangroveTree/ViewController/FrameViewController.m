@@ -58,7 +58,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
 {
     [super viewDidLoad];
     
-    self.bottomBarView.hidden = YES;
+//    self.bottomBarView.hidden = YES;
 	[UIApplication sharedApplication].idleTimerDisabled = YES;//不自动锁屏
     
     self.callView.hidden = NO;

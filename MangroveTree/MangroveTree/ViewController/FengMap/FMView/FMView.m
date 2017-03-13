@@ -409,6 +409,7 @@ extern NSString* FMModelSelected;
 //		[self addRouteView];//路线信息弹框
 		[self addNaviPopView];//导航信息弹框
         self.naviPopView.delegate = self;
+        [self addInforView];
 		[self addNaviTopView];//顶部导航信息框
 		[self addSwitchMapInfoView];
 		self.switchMapInfoView.delegate = self;
@@ -745,6 +746,7 @@ extern NSString* FMModelSelected;
 - (void)didSelectedEnd:(FMKExternalModel *)model
 {
 	[self.naviPopView show];
+    [self.inforView show];
 	[self.naviPopView.endPointBtn setTitle:model.name forState:UIControlStateNormal];
 //	[self.modelInfoPopView show];
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(YES)];
@@ -804,6 +806,7 @@ extern NSString* FMModelSelected;
 //	[self.modelInfoPopView hide];
 	[self.routeDisplayView hide];
     [self.naviPopView hide];
+    [self.inforView hide];
     [self stopNavi];
     [self.fengMapView showAllOnMap];
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(NO)];
@@ -1042,6 +1045,7 @@ extern NSString* FMModelSelected;
 	{
 		_isFirstLocate = YES;
 		[self.naviPopView show];
+        [self.inforView show];
 //		[self.modelInfoPopView hide];
 		NSArray * naviResults = tool.naviResult[@(kOutdoorMapID).stringValue];
 		[self drawSingleLineByNaviResult:naviResults containStartAndEnd:YES];
@@ -1101,6 +1105,7 @@ extern NSString* FMModelSelected;
 	[self.naviTopView updateLength:totalLength];
 	
 	[self.naviPopView hide];//隐藏模型信息弹框
+    [self.inforView hide];
 //	[self.modelInfoPopView hide];
 	[self.naviTopView show];
 	[self setEnableLocationBtnFrameByView:nil];
@@ -1296,12 +1301,14 @@ extern NSString* FMModelSelected;
 //    [self.modelInfoPopView hide];
     [self.routeDisplayView hide];
     [self.naviPopView hide];
+    [self.inforView hide];
 }
 //地图进入导航模式
 - (void)mapEnterNaviMode
 {
     [self.fengMapView inclineWithAngle:90.0];
 	[self.naviPopView hide];
+    [self.inforView hide];
 	[self.naviTopView show];
 //	[self.modelInfoPopView hide];
     [self hideNaviBar:YES];

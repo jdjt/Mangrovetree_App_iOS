@@ -139,6 +139,7 @@ int const kCallingServiceCount = 5;
         self.naviPopView.delegate = self;
 		[self addNaviTopView];
 //		[self addModelInfoPopView];
+        [self addInforView];
 		[self createChooseScrollView];//楼层选择视图
 		[self addlocateBtn];//添加定位开关
 		[self addSwitchMapInfoView];
@@ -939,6 +940,7 @@ int const kCallingServiceCount = 5;
 //    [self.modelInfoPopView hide];
 //    [self.routeDisplayView hide];
     [self.naviPopView hide];
+    [self.inforView hide];
     [self.mapView showAllOnMap];
     [self stopNavi];
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(NO)];
@@ -952,6 +954,7 @@ int const kCallingServiceCount = 5;
 //	[self.naviPopView setupModelInfoByNodel:queryModel];//设置模型弹框信息
 	
 	[self.naviPopView show];
+    [self.inforView show];
 	[self.naviTopView hide];
     
 	FMKMapCoord startMapCoord = [FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;
@@ -1013,6 +1016,7 @@ int const kCallingServiceCount = 5;
 	[self drawLineOnMapByGroupID:_displayGroupID];
 //	[self.modelInfoPopView hide];
 	[self.naviPopView show];
+    [self.inforView show];
 	[self setEnableLocationBtnFrameByView:self.naviPopView];
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(YES)];
 }
@@ -1084,6 +1088,7 @@ int const kCallingServiceCount = 5;
 		
 		wSelf.isNeedLocate = YES;
 		[wSelf.naviPopView hide];
+        [wSelf.inforView hide];
 		[wSelf.naviTopView show];
 		[wSelf setEnableLocationBtnFrameByView:nil];//设置定位按钮的位置
 		

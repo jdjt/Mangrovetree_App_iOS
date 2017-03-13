@@ -33,6 +33,15 @@ const int kTopSpace = 10;
 //		[self addSubview:self.modelInfoPopView];
 //	}
 //}
+- (void)addInforView
+{
+    if (!self.inforView)
+    {
+        self.inforView = [InforView inforView];
+        self.inforView.frame = CGRectMake(0, kScreenHeight-kNaviPopViewHeight-44 -88, kScreenWidth, 88);
+        [self addSubview:self.inforView];
+    }
+}
 - (void)addCategoryView
 {
 	if (!self.categoryView) {
@@ -48,7 +57,7 @@ const int kTopSpace = 10;
 {
 	if (!self.naviPopView) {
 		self.naviPopView = [NaviPopView naviPopView];
-		self.naviPopView.frame = CGRectMake(0, kScreenHeight-kNaviPopViewHeight, kScreenWidth, kNaviPopViewHeight);
+		self.naviPopView.frame = CGRectMake(0, kScreenHeight-kNaviPopViewHeight-44, kScreenWidth, kNaviPopViewHeight);
 		self.naviPopView.alpha = 0.0f;
 		[self addGestureOnView:self.naviPopView];//添加手势事件
 		[self addSubview:self.naviPopView];

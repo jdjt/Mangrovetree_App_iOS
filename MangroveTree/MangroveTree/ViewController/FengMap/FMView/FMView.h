@@ -7,6 +7,7 @@
 //
 #import "FMBaseView.h"
 #import "QueryDBModel.h"
+#import "InforView.h"
 
 @class CategoryView,ModelInfoPopView;
 
@@ -41,6 +42,7 @@ typedef NS_ENUM(NSInteger,ButtonType)
 @property (nonatomic, strong) NaviPopView * naviPopView;
 @property (nonatomic, strong) NaviTopView * naviTopView;
 @property (nonatomic, strong) SwitchMapInfoView * switchMapInfoView;//倒计时
+@property (nonatomic, strong) InforView *inforView;
 @property (nonatomic, strong) NavigationBarView * navigationBarView;
 @property (nonatomic, strong) UIButton * enableLocateBtn;
 @property (nonatomic, assign) BOOL moveMapToCenter;

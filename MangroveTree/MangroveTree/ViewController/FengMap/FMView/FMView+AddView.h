@@ -12,6 +12,7 @@
 
 @interface FMView (AddView)
 //- (void)addModelInfoPopView;
+- (void)addInforView;
 - (void)addNaviTopView;
 - (void)addNaviPopView;
 - (void)addCategoryView;
