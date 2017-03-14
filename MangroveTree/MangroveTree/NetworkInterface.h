@@ -13,8 +13,17 @@
 #define IOS7            [[[UIDevice currentDevice] systemVersion]floatValue]>=7
 
 // 获取屏幕的尺寸
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+
 #define kScreenHeight   ([UIScreen mainScreen].bounds.size.height)
 #define kScreenWidth    ([UIScreen mainScreen].bounds.size.width)
+#define SCREEN_MAX_LENGTH (MAX(kScreenWidth, kScreenHeight))
+#define SCREEN_MIN_LENGTH (MIN(kScreenWidth, kScreenHeight))
+
+#define IS_IPHONE_4_OR_LESS (IS_IPHONE && SCREEN_MAX_LENGTH < 568.0)
+#define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)
+#define IS_IPHONE_6_7 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
+#define IS_IPHONE_6P_7P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
 
 #define SCREENBOUNDS [UIScreen mainScreen].bounds
 

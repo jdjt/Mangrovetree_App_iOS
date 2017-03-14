@@ -21,6 +21,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.UserView.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.UserView.layer.shadowOffset = CGSizeMake(5, 0);
+    
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
     [self.shadowView addGestureRecognizer:tapGesture];
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
