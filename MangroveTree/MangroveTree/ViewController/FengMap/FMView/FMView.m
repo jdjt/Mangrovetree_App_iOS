@@ -386,7 +386,7 @@ extern NSString* FMModelSelected;
 	if (!self.fengMapView)
     {
 		_mapPath = [[NSBundle mainBundle] pathForResource:@(kOutdoorMapID).stringValue ofType:@"fmap"];
-		CGRect rect = CGRectMake(0, 64, self.frame.size.width, kScreenHeight-64);
+		CGRect rect = CGRectMake(0, 0, self.frame.size.width, kScreenHeight);
 		self.fengMapView = [[FMMangroveMapView alloc] initWithFrame:rect path:_mapPath delegate:self];
 		[self addSubview:self.fengMapView];
 		[self.fengMapView zoomWithScale:2.6];

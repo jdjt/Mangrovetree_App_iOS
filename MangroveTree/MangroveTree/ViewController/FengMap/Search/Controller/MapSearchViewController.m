@@ -28,7 +28,7 @@
 NSString * const recordKey = @"searchRecordKey";
 const int kDisplayCount = 4;
 
-@interface MapSearchViewController () <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate,UINavigationControllerDelegate, BaseCollectionViewDelegate>
+@interface MapSearchViewController () <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, BaseCollectionViewDelegate>
 {
 	NSMutableArray * _historyRecord;//搜索历史纪录
 	NSMutableArray * _searchResult;//搜索结果
@@ -52,9 +52,8 @@ const int kDisplayCount = 4;
     [super viewDidLoad];
 		
     self.view.backgroundColor = [UIColor whiteColor];
-//	[self.navigationController setNavigationBarHidden:YES animated:YES];
-    self.navigationController.delegate = self;
-   
+    self.navigationController.navigationBar.hidden = NO;
+
 	[self initDataSourceArr];
 	[self getSearchHistory];
     [self setupNav];
@@ -654,34 +653,45 @@ const int kDisplayCount = 4;
 	[self updateDataSource];
 	[[FMLocationManager shareLocationManager] setMapView:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(YES)];
+    for (UIViewController *viewController in self.navigationController.viewControllers)
+    {
+        if ([viewController isKindOfClass:[MapViewController class]])
+        {
+            MapViewController *map = (MapViewController *)viewController;
+            [map.centerVC.navigationController setNavigationBarHidden:YES animated:YES];
+            map.centerVC.hotelNameButton.hidden = YES;
+            [self.navigationController setNavigationBarHidden:NO animated:YES];
+        }
+    }
 }
 - (void)viewWillDisappear:(BOOL)animated {
 //	[self.navigationController setNavigationBarHidden:YES animated:NO];
 	[super viewWillDisappear:animated];
 	[self resignFirstResponder];
 }
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
-{
-    BOOL hideNav = NO;
-    if ([viewController isKindOfClass:[self class]])
-    {
-        hideNav = YES;
-    }
-    else
-    {
-        hideNav = NO;
-    }
-    
-    for (UIViewController *viewController in navigationController.viewControllers)
-    {
-        if ([viewController isKindOfClass:[MapViewController class]])
-        {
-            MapViewController *map = (MapViewController *)viewController;
-            [map.centerVC.navigationController setNavigationBarHidden:hideNav animated:YES];
-            [self.navigationController setNavigationBarHidden:NO animated:YES];
-        }
-    }
-}
+//- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+//{
+//    BOOL hideNav = NO;
+//    if ([viewController isKindOfClass:[self class]])
+//    {
+//        hideNav = YES;
+//    }
+//    else
+//    {
+//        hideNav = NO;
+//    }
+//    
+//    for (UIViewController *viewController in navigationController.viewControllers)
+//    {
+//        if ([viewController isKindOfClass:[MapViewController class]])
+//        {
+//            MapViewController *map = (MapViewController *)viewController;
+//            [map.centerVC.navigationController setNavigationBarHidden:hideNav animated:YES];
+//            map.centerVC.hotelNameButton.hidden = hideNav;
+//            [self.navigationController setNavigationBarHidden:NO animated:YES];
+//        }
+//    }
+//}
 
 - (void)dealloc
 {
