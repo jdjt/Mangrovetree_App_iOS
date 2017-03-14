@@ -54,6 +54,7 @@
     return 2;
 }
 
+//头间距高度
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == 0)
@@ -64,6 +65,7 @@
     return 22.0f;
 }
 
+//脚间距高度
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     // 最后一个section留底，以免被导航条挡住
@@ -72,6 +74,7 @@
     return 0.01f;
 }
 
+//每个分区有几行
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     switch (section)
@@ -109,7 +112,7 @@
 }
 
 #pragma mark - Table view delegate
-
+//头内容高度
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0 && indexPath.row == 0)
