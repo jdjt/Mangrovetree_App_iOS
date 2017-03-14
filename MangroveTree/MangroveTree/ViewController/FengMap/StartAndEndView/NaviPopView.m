@@ -25,6 +25,9 @@
     NSString * _indoorMapID;
     FMKExternalModel * _model;
 }
+@property (nonatomic, assign) BOOL enableEnterIndoor;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *buttonH;
+
 @end
 
 @implementation NaviPopView
@@ -49,10 +52,12 @@
 	self.alpha = 0.9f;
     self.hidden = NO;
 	__weak typeof(self)wSelf = self;
-	[UIView animateWithDuration:0.4f animations:^{
-		CGRect rect = self.frame;
-		wSelf.frame = CGRectMake(0, kScreenHeight-rect.size.height-49, kScreenWidth, rect.size.height);
-	}];
+    [UIView animateWithDuration:0.4f animations:^{
+        CGRect rect = self.frame;
+        wSelf.frame = CGRectMake(0, kScreenHeight-rect.size.height-49, kScreenWidth, rect.size.height);
+    } completion:^(BOOL finished) {
+        [wSelf setupBottomView];
+    }];
 }
 - (IBAction)switchStartAndEndBtnClick:(id)sender {
 	if ([self.delegate respondsToSelector:@selector(switchStartAndEnd)]) {
@@ -111,7 +116,7 @@
 }
 - (void)setupInfoByModel:(FMKExternalModel *)model
 {
-    BOOL enableEnterIndoor = NO;
+    self.enableEnterIndoor = NO;
     _model = model;
     //	if ([model.name isEqualToString:@""]) {
     //		self.modelName.text = @"暂无名称";
@@ -129,13 +134,13 @@
     //找到对应的室内地图ID
     for (IndoorMapInfo * info in _indoorMapInfos) {
         if ([model.fid isEqualToString:info.model_fid]) {
-            enableEnterIndoor = YES;
+            self.enableEnterIndoor = YES;
             _indoorMapID = info.map_mid;
         }
     }
     
     //判断是否能够进入室内
-    if (!enableEnterIndoor) {
+    if (!self.enableEnterIndoor) {
 //        [self.enterIndoorBtn setImage:[UIImage imageNamed:@"noEnter"] forState:UIControlStateNormal];
         self.enterIndoorBtn.enabled = NO;
     }
@@ -144,9 +149,8 @@
 //        [self.enterIndoorBtn setImage:[UIImage imageNamed:@"enter"] forState:UIControlStateNormal];
         self.enterIndoorBtn.enabled = YES;
     }
-    
     //设置能否进入室内的布局
-    [self setupBottomView:enableEnterIndoor];
+    [self setupBottomView];
     
     QueryDBModel * dbModel = [[DBSearchTool shareDBSearchTool] queryModelByFid:model.fid];
     //设置模型信息弹框
@@ -188,14 +192,18 @@
 }
 - (void)setupModelInfoByNodel:(QueryDBModel *)model
 {
-    [self setupBottomView:NO];
+    self.enableEnterIndoor = NO;
+    [self setupBottomView];
 }
 
-- (void)setupBottomView:(BOOL)enableEnterIndoor
+- (void)setupBottomView
 {
-    self.enterIndoorBtn.hidden = !enableEnterIndoor;
-    self.startNavBtn.frame = CGRectMake(kScreenWidth - self.startNavBtn.width -8, 6,  self.startNavBtn.width, enableEnterIndoor == YES ? 34 : 88 - 6*2);
-    self.enterIndoorBtn.frame = CGRectMake(kScreenWidth - self.enterIndoorBtn.width -8, self.startNavBtn.bottom +6, self.enterIndoorBtn.width, self.enterIndoorBtn.height);
+    self.enterIndoorBtn.hidden = !self.enableEnterIndoor;
+    [UIView animateWithDuration:0.4 animations:^{
+        self.startNavBtn.frame = CGRectMake(kScreenWidth - self.startNavBtn.width -8, 6,  self.startNavBtn.width, self.enableEnterIndoor == YES ? 34 : 88 - 6*2);
+        self.enterIndoorBtn.frame = CGRectMake(kScreenWidth - self.enterIndoorBtn.width -8, self.startNavBtn.bottom +6, self.enterIndoorBtn.width, self.enterIndoorBtn.height);
+    }];
+    
 }
 
 - (void)dealloc

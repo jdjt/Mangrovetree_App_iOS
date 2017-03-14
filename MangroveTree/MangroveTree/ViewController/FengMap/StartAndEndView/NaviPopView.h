@@ -40,6 +40,7 @@ typedef void(^SwitchStartAndEnd)();
 
 - (void)setupInfoByModel:(FMKExternalModel *)model;
 - (void)setupModelInfoByNodel:(QueryDBModel *)model;
+- (void)setupBottomView;
 
 - (void)hide;
 - (void)show;

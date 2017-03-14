@@ -121,9 +121,11 @@ const int kTopSpace = 10;
     self.naviPopView.hidden = NO;
     [UIView animateWithDuration:0.4 animations:^{
         self.inforView.frame = CGRectMake(0, show == YES ? kScreenHeight -49 - 88:kScreenHeight-kNaviPopViewHeight-49 -88, self.inforView.frame.size.width, self.inforView.frame.size.height);
-        self.naviPopView.frame = CGRectMake(0, show == YES ? kScreenHeight - 49 : kScreenHeight-kNaviPopViewHeight-49, self.naviPopView.frame.size.width, kNaviPopViewHeight);
-    } completion:^(BOOL finished) {
+        self.naviPopView.frame = CGRectMake(0, show == YES ? kScreenHeight - 49 : kScreenHeight-kNaviPopViewHeight-49, self.naviPopView.frame.size.width, self.naviPopView.frame.size.height);
+    } completion:^(BOOL finished)
+    {
         self.naviPopView.hidden = show;
+        [self.naviPopView setupBottomView];
     }];
     
 }
