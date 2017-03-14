@@ -59,7 +59,7 @@
     if (section == 0)
         return 0.01f;
     else if (section == [self numberOfSectionsInTableView:tableView] - 1)
-        return 33.0f;
+        return kScreenHeight - 64 - 80 - 60 - 44;
 
     return 22.0f;
 }
