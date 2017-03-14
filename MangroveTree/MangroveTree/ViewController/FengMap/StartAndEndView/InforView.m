@@ -8,12 +8,19 @@
 
 #import "InforView.h"
 
+@interface InforView ()
+
+@property (nonatomic, assign) BOOL hideView;
+
+@end
+
 @implementation InforView
 
 + (instancetype)inforView
 {
     InforView * view = [[NSBundle mainBundle] loadNibNamed:@"InforView" owner:nil  options:nil][0];
     view.alpha = 0.0f;
+    view.hideView = NO;
     return view;
 }
 - (void)hide
@@ -21,6 +28,7 @@
     __weak typeof(self)wSelf = self;
     [UIView animateWithDuration:0.4f animations:^{
         wSelf.alpha = 0.0f;
+        wSelf.hideView = NO;
     }];
 }
 
@@ -30,8 +38,16 @@
     __weak typeof(self)wSelf = self;
     [UIView animateWithDuration:0.4f animations:^{
         CGRect rect = self.frame;
-        wSelf.frame = CGRectMake(0, kScreenHeight-120-44 -88, kScreenWidth, rect.size.height);
+        wSelf.frame = CGRectMake(0, kScreenHeight-120-49 -88, kScreenWidth, rect.size.height);
+        wSelf.hideView = NO;
     }];
+}
+
+- (IBAction)tapViewAction:(id)sender
+{
+    self.hideView = !self.hideView;
+    if (_hideBlock)
+        _hideBlock(self.hideView);
 }
 
 /*

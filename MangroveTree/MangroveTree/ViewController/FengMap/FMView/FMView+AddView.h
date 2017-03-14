@@ -20,5 +20,5 @@
 - (void)setEnableLocationBtnFrameByView:(UIView *)view;
 - (void)showProgressWithText:(NSString *)text;
 - (MapViewController *)getCurrentController;
-
+- (void)setNaviPopVIewFrameByShow:(BOOL)show;
 @end

@@ -16,6 +16,7 @@
 #import "QueryDBModel.h"
 #import "DBSearchTool.h"
 #import "UILabel+AddtionString.h"
+#import "UIViewExt.h"
 
 @interface NaviPopView()
 {
@@ -32,7 +33,6 @@
 {
 	 NaviPopView * view = [[NSBundle mainBundle] loadNibNamed:@"NaviPopView" owner:nil  options:nil][0];
 	view.alpha = 0.0f;
-    view.startNavW.constant = kScreenWidth/2;
 	return view;
 }
 
@@ -50,7 +50,7 @@
 	__weak typeof(self)wSelf = self;
 	[UIView animateWithDuration:0.4f animations:^{
 		CGRect rect = self.frame;
-		wSelf.frame = CGRectMake(0, kScreenHeight-rect.size.height-44, kScreenWidth, rect.size.height);
+		wSelf.frame = CGRectMake(0, kScreenHeight-rect.size.height-49, kScreenWidth, rect.size.height);
 	}];
 }
 - (IBAction)switchStartAndEndBtnClick:(id)sender {
@@ -185,25 +185,17 @@
     [self.endPointBtn setTitle:name forState:UIControlStateNormal];
 
 }
+- (void)setupModelInfoByNodel:(QueryDBModel *)model
+{
+    [self setupBottomView:NO];
+}
 
 - (void)setupBottomView:(BOOL)enableEnterIndoor
 {
-    if (!enableEnterIndoor)
-    {
-        self.enterIndoorBtn.hidden = YES;
-        self.startNavW.constant = kScreenWidth;
-//        self.startNavBtn.frame = CGRectMake(0, self.startNavBtn.frame.origin.y, kScreenWidth, self.startNavBtn.frame.size.height);
-        
-    }
-    else
-    {
-        self.enterIndoorBtn.hidden = NO;
-        self.startNavW.constant = kScreenWidth/2;
-//        self.startNavBtn.frame = CGRectMake(0, self.startNavBtn.frame.origin.y, kScreenWidth/2, self.startNavBtn.frame.size.height);
-        
-    }
+    self.enterIndoorBtn.hidden = !enableEnterIndoor;
+    self.startNavBtn.frame = CGRectMake(kScreenWidth - self.startNavBtn.width -8, 6,  self.startNavBtn.width, enableEnterIndoor == YES ? 34 : 88 - 6*2);
+    self.enterIndoorBtn.frame = CGRectMake(kScreenWidth - self.enterIndoorBtn.width -8, self.startNavBtn.bottom +6, self.enterIndoorBtn.width, self.enterIndoorBtn.height);
 }
-
 
 - (void)dealloc
 {

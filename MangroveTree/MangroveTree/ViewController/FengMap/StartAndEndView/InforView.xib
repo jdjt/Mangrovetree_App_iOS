@@ -43,6 +43,7 @@
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="M6K-H6-pkw" firstAttribute="top" secondItem="bYd-RC-LV7" secondAttribute="top" id="3pb-FK-XHR"/>
                 <constraint firstAttribute="trailing" secondItem="Y3K-Aa-ZNe" secondAttribute="trailing" constant="8" id="5Gj-hE-QBs"/>
@@ -57,8 +58,16 @@
                 <constraint firstItem="lwh-ic-S4U" firstAttribute="top" secondItem="M6K-H6-pkw" secondAttribute="bottom" constant="8" id="wL9-at-NMe"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="PYm-KT-BfE" appends="YES" id="kau-2P-Aft"/>
+            </connections>
             <point key="canvasLocation" x="29.5" y="-121.5"/>
         </view>
+        <tapGestureRecognizer id="PYm-KT-BfE">
+            <connections>
+                <action selector="tapViewAction:" destination="iN0-l3-epB" id="hHb-nk-XNg"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="SetImage" width="64" height="64"/>

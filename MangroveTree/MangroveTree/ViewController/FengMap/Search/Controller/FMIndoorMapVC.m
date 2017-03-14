@@ -951,7 +951,7 @@ int const kCallingServiceCount = 5;
 //	[self setEnableLocationBtnFrameByView:self.modelInfoPopView];
 	
 	QueryDBModel * queryModel = [[DBSearchTool shareDBSearchTool] queryModelByFid:model.fid];
-//	[self.naviPopView setupModelInfoByNodel:queryModel];//设置模型弹框信息
+	[self.naviPopView setupModelInfoByNodel:queryModel];//设置模型弹框信息
 	
 	[self.naviPopView show];
     [self.inforView show];

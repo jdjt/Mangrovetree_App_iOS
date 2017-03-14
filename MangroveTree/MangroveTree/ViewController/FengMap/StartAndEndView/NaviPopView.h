@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QueryDBModel.h"
 
 typedef void(^StartNavi)();
 typedef void(^SwitchStartAndEnd)();
@@ -31,7 +32,6 @@ typedef void(^SwitchStartAndEnd)();
 @property (nonatomic, copy) SwitchStartAndEnd switchStartAndEndBlock;
 @property (weak, nonatomic) IBOutlet UIButton *enterIndoorBtn;
 @property (weak, nonatomic) IBOutlet UIButton *startNavBtn;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *startNavW;
 
 
 + (instancetype)naviPopView;
@@ -39,6 +39,7 @@ typedef void(^SwitchStartAndEnd)();
 - (void)setTimeByLength:(double)length;
 
 - (void)setupInfoByModel:(FMKExternalModel *)model;
+- (void)setupModelInfoByNodel:(QueryDBModel *)model;
 
 - (void)hide;
 - (void)show;
