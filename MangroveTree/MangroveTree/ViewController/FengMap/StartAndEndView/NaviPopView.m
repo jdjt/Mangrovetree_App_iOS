@@ -47,6 +47,7 @@
 - (void)show
 {
 	self.alpha = 0.9f;
+    self.hidden = NO;
 	__weak typeof(self)wSelf = self;
 	[UIView animateWithDuration:0.4f animations:^{
 		CGRect rect = self.frame;
