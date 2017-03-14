@@ -57,8 +57,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-//    self.bottomBarView.hidden = YES;
+    //self.bottomBarView.hidden = YES;
 	[UIApplication sharedApplication].idleTimerDisabled = YES;//不自动锁屏
     
     self.callView.hidden = NO;
@@ -352,14 +351,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
 //搜索页面跳转消息
 - (void)naviSearch:(UIBarButtonItem *)bar
 {
-	if (![FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi)
-	{
-		MapSearchViewController *seaVC = [[MapSearchViewController alloc] init];
-		seaVC.mapID = @(kOutdoorMapID).stringValue;
-        [self.mapVC.fmView stopNavi];
-		[[FMLocationManager shareLocationManager] setMapView:nil];
-		[self.mapVC.navigationController pushViewController:seaVC animated:NO];
-	}
+    [self toSearchAction];
 }
 
 - (void)tapAction:(UITapGestureRecognizer *)tap
@@ -370,6 +362,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
         self.toWorldPlatformImage.image = [UIImage imageNamed:@"toWorld_default"];
         self.toCallServiceImage.image = [UIImage imageNamed:@"toCallService_default"];
         //去哪跳转
+        [self toSearchAction];
     }
     else if (tap.view == self.toWorldPlatform)
     {
@@ -391,7 +384,18 @@ NSString* const FMModelSelected = @"FMModelSelected";
         [self tapCallService];
     }
 }
+- (void)toSearchAction
+{
+    if (![FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi)
+    {
+        MapSearchViewController *seaVC = [[MapSearchViewController alloc] init];
+        seaVC.mapID = @(kOutdoorMapID).stringValue;
+        [self.mapVC.fmView stopNavi];
+        [[FMLocationManager shareLocationManager] setMapView:nil];
+        [self.mapVC.navigationController pushViewController:seaVC animated:NO];
+    }
 
+}
 - (void)tapCallService
 {
 //    if ([FMKLocationServiceManager shareLocationServiceManager].currentMapCoord.mapID == 0)
@@ -668,7 +672,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
     HUD.labelText = @"正在加载地图，请稍等";
     [HUD show:YES];
     sleep(5);
-//    [self.mapVC loadMap];
+    [self.mapVC loadMap];
 }
 
 // 更新登录
