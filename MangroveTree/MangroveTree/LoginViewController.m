@@ -136,21 +136,19 @@
     {
         return 42;
     }
-    else
+    else if (section == 2)
     {
         return 60;
+    }
+    else
+    {
+        return 0.01f;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 0.01f;
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.section == 1)
-        cell.backgroundColor = [UIColor clearColor];
 }
 
 #pragma mark - UITextFieldDelegate
