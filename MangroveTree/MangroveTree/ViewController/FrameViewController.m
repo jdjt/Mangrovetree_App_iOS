@@ -174,7 +174,6 @@ NSString* const FMModelSelected = @"FMModelSelected";
         if (infor == NO)
             [self showLogin];
     }
-
 }
 
 - (void)viewDidLayoutSubviews
