@@ -299,7 +299,11 @@ extern NSString* FMModelSelected;
 	else
 	{
 		_locationMarker.hidden = NO;
-		[_locationMarker locateWithGeoCoord:mapCoord.coord];
+//        [_locationMarker locateWithGeoCoord:mapsCoord.coord];
+#warning 这里需要区分是否有定位信息
+        [_locationMarker locateWithGeoCoord:[self getDefaultMapCoord].coord];
+        // 现场使用的方法
+//		[_locationMarker locateWithGeoCoord:mapCoord.coord];
         if (self.moveMapToCenter == YES && mapCoord.mapID == kOutdoorMapID)
         {
             NSLog(@"%@", NSStringFromFMKMapCoord(mapCoord));
@@ -386,7 +390,7 @@ extern NSString* FMModelSelected;
 	if (!self.fengMapView)
     {
 		_mapPath = [[NSBundle mainBundle] pathForResource:@(kOutdoorMapID).stringValue ofType:@"fmap"];
-		CGRect rect = CGRectMake(0, 64, self.frame.size.width, kScreenHeight-64);
+		CGRect rect = CGRectMake(0, 0, self.frame.size.width, kScreenHeight);
 		self.fengMapView = [[FMMangroveMapView alloc] initWithFrame:rect path:_mapPath delegate:self];
 		[self addSubview:self.fengMapView];
 		[self.fengMapView zoomWithScale:2.6];
@@ -1035,7 +1039,8 @@ extern NSString* FMModelSelected;
 	[self setEnableLocationBtnFrameByView:self.naviPopView];
 	
 	FMNaviAnalyserTool * tool = [FMNaviAnalyserTool shareNaviAnalyserTool];
-	FMKMapCoord startMapCoord = [FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;
+#warning 这里需要处理区分是否有定位点信息
+    FMKMapCoord startMapCoord = [self getDefaultMapCoord];//[FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;
 	FMKMapCoord endMapCoord = FMKMapCoordMake(kOutdoorMapID, coord);
 	//路径规划
 	BOOL naviSuccess = [tool naviAnalyseByStartMapCoord:startMapCoord endMapCoord:endMapCoord];
@@ -1091,7 +1096,8 @@ extern NSString* FMModelSelected;
 {
 	[self stopNavi];
 	FMNaviAnalyserTool * tool = [FMNaviAnalyserTool shareNaviAnalyserTool];
-	FMKMapCoord currentMapCoord = [FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;
+#warning 这里需要区分是否可以拿到定位信息
+    FMKMapCoord currentMapCoord = [self getDefaultMapCoord];//[FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;
 	
 	BOOL naviResult = [tool naviAnalyseByStartMapCoord:currentMapCoord endMapCoord:tool.endMapCoord];
 	if (!naviResult) return;
@@ -1397,6 +1403,15 @@ extern NSString* FMModelSelected;
 		NSDictionary * dic = @{@"mapid":@(currentMapCoord.mapID).stringValue, @"groupID":@(currentMapCoord.coord.storey).stringValue,@"isNeedLocate":@(![FMLocationManager shareLocationManager].isCallingService)};
 		[self enterIndoorByIndoorInfo:dic];
 	}
+}
+
+- (FMKMapCoord)getDefaultMapCoord
+{
+    FMKMapStorey mapStorey = 1;
+    FMKMapPoint mapPoint = FMKMapPointMake(1.21884255544187E7, 2071275.90186538);
+    FMKGeoCoord geoCoord = FMKGeoCoordMake(mapStorey, mapPoint);
+    FMKMapCoord mapsCoord = FMKMapCoordMake(79980, geoCoord);
+    return mapsCoord;
 }
 
 @end

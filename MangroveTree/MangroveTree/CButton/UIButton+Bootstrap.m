@@ -35,9 +35,9 @@
 
 -(void)ukeyStyle{
     [self bootstrapStyle];
-    self.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1];
-    self.layer.borderColor = [[UIColor colorWithRed:122/255.0 green:177/255.0 blue:147/255.0 alpha:1] CGColor];
-    [self setBackgroundImage:[self buttonImageFromColor:[UIColor colorWithRed:122/255.0 green:177/255.0 blue:147/255.0 alpha:1]] forState:UIControlStateHighlighted];
+    self.backgroundColor = [UIColor colorWithRed:237/255.0 green:130/255.0 blue:86/255.0 alpha:1];
+    self.layer.borderColor = [[UIColor colorWithRed:237/255.0 green:130/255.0 blue:86/255.0 alpha:1] CGColor];
+    [self setBackgroundImage:[self buttonImageFromColor:[UIColor colorWithRed:237/255.0 green:130/255.0 blue:86/255.0 alpha:1]] forState:UIControlStateHighlighted];
     [self.titleLabel setFont:[UIFont systemFontOfSize:14.0]];
 }
 
@@ -71,9 +71,9 @@
 -(void)loginStyle
 {
     [self bootstrapStyle];
-    self.backgroundColor = [UIColor colorWithRed:122/255.0 green:177/255.0 blue:147/255.0 alpha:1];
-    self.layer.borderColor = [[UIColor colorWithRed:122/255.0 green:177/255.0 blue:147/255.0 alpha:1] CGColor];
-    [self setBackgroundImage:[self buttonImageFromColor:[UIColor colorWithRed:132/255.0 green:118/255.0 blue:120/255.0 alpha:1]] forState:UIControlStateHighlighted];
+    self.backgroundColor = [UIColor colorWithRed:237/255.0 green:130/255.0 blue:86/255.0 alpha:1];
+    self.layer.borderColor = [[UIColor colorWithRed:237/255.0 green:130/255.0 blue:86/255.0 alpha:1] CGColor];
+    [self setBackgroundImage:[self buttonImageFromColor:[UIColor colorWithRed:237/255.0 green:130/255.0 blue:86/255.0 alpha:1]] forState:UIControlStateHighlighted];
 }
 
 -(void)primaryStyle

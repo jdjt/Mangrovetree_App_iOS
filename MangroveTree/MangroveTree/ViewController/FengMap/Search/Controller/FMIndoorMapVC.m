@@ -113,6 +113,9 @@ int const kCallingServiceCount = 5;
                 [mapVC.centerVC showCallResult:YES];
             }
             [mapVC.centerVC changNavViewStyleByLayerMode:NAVIVARTYPE_IN];
+            mapVC.centerVC.navigationController.navigationBar.hidden = NO;
+            mapVC.centerVC.hotelNameButton.hidden = YES;
+            self.navigationController.navigationBar.hidden = YES;
         }
     }
 }
@@ -254,6 +257,7 @@ int const kCallingServiceCount = 5;
             [mapVC.centerVC changNavViewStyleByLayerMode:NAVIVARTYPE_OUT];
         }
     }
+    self.navigationController.navigationBar.hidden = NO;
 }
 
 - (void)adddelegateToMap
@@ -956,8 +960,8 @@ int const kCallingServiceCount = 5;
 	[self.naviPopView show];
     [self.inforView show];
 	[self.naviTopView hide];
-    
-	FMKMapCoord startMapCoord = [FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;
+#warning 这里需要区分是否能拿到定位服务
+    FMKMapCoord startMapCoord = [self getDefaultMapCoord]; //[FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;
 	
 	FMKMapCoord endMapCoord = FMKMapCoordMake(queryModel.mid.intValue, FMKGeoCoordMake(queryModel.gid, FMKMapPointMake(queryModel.x, queryModel.y)));
 	
@@ -1055,7 +1059,8 @@ int const kCallingServiceCount = 5;
 		//开始导航标志位
 		[FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi = YES;
         [wSelf hideMavBar:YES];
-		FMKMapCoord startMapCoord = [FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;
+#warning 这里需要区分是否可以拿到定位信息
+        FMKMapCoord startMapCoord = [wSelf getDefaultMapCoord]; //[FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;
 		
 		FMNaviAnalyserTool * tool = [FMNaviAnalyserTool shareNaviAnalyserTool];
 		
@@ -1405,7 +1410,13 @@ int const kCallingServiceCount = 5;
 	return mapName;
 }
 
-
-
+- (FMKMapCoord)getDefaultMapCoord
+{
+    FMKMapStorey mapStorey = 1;
+    FMKMapPoint mapPoint = FMKMapPointMake(1.21884255544187E7, 2071275.90186538);
+    FMKGeoCoord geoCoord = FMKGeoCoordMake(mapStorey, mapPoint);
+    FMKMapCoord mapsCoord = FMKMapCoordMake(79980, geoCoord);
+    return mapsCoord;
+}
 
 @end
