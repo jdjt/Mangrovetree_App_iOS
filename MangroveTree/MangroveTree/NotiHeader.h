@@ -32,4 +32,9 @@
  */
 #define NotiLoadFMMap           @"NotiLoadFMMap"
 
+/**
+ *  @abstract 改变状态栏
+ */
+#define NotiChangeStatusBar          @"NotiChangeStatusBar"
+
 #endif /* NotiHeader_h */

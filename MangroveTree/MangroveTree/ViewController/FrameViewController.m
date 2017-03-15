@@ -87,6 +87,8 @@ NSString* const FMModelSelected = @"FMModelSelected";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideCallView:) name:NotiHideCallView object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startLoadFMMap:) name:NotiLoadFMMap object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backToMain:) name:NotiBackToMain object:nil];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotiChangeStatusBar object:@"1"];
 
     [[MTRequestNetwork defaultManager] registerDelegate:self];
     // 检查是否登录

@@ -22,7 +22,9 @@
     
     self.UserView.layer.shadowColor = [UIColor blackColor].CGColor;
     self.UserView.layer.shadowOffset = CGSizeMake(5, 0);
-    
+//    self.UserView.layer.masksToBounds = NO;
+    self.UserView.layer.shadowRadius = 3.0f;
+    self.UserView.layer.shadowOpacity = 0.5;
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
     [self.shadowView addGestureRecognizer:tapGesture];
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
@@ -30,6 +32,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSettings:) name:NotiShowSettings object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backToMain:) name:NotiBackToMain object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeStatusBar:) name: NotiChangeStatusBar object:nil];
 
 }
 - (void)viewWillLayoutSubviews
@@ -79,7 +82,7 @@
             case UIGestureRecognizerStateCancelled:
             {
                 CGRect frame = self.UserView.frame;
-                if (fabs(self.lastPoint.x) > frame.size.width / 2)
+                if (fabs(self.lastPoint.x) > (frame.size.width + 5) / 2)
                     [[NSNotificationCenter defaultCenter] postNotificationName:NotiBackToMain object:self];
                 else
                     [[NSNotificationCenter defaultCenter] postNotificationName:NotiShowSettings object:nil];
@@ -95,6 +98,9 @@
 // 显示个人中心
 - (void)showSettings:(NSNotification *)notification
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotiChangeStatusBar object:@"0"];
+    self.userViewController.user = [[DataManager defaultInstance] findUserLogInByCode:@"1"];
+    [self.userViewController.tableView reloadRowsAtIndexPaths: @[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
     self.shadowView.hidden = NO;
     CGRect rect = self.UserView.frame;
     rect.origin.x = 0;
@@ -107,14 +113,27 @@
 // 返回home
 - (void)backToMain:(NSNotification *)notification
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotiChangeStatusBar object:@"1"];
     CGRect rect = self.UserView.frame;
-    rect.origin.x = -kScreenWidth * 3 / 4;
+    rect.origin.x = -kScreenWidth * 4 / 5 - 5;
     [UIView animateWithDuration:0.2 animations:^{
         self.UserView.frame = rect;
         self.shadowView.alpha = 0;
     } completion:^(BOOL finished) {
         [self.shadowView setHidden:YES];  // 隐藏阴影
     }];
+}
+
+- (void)changeStatusBar:(NSNotification *)noti
+{
+    if ([noti.object isEqualToString:@"0"])
+    {
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    }
+    else
+    {
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
