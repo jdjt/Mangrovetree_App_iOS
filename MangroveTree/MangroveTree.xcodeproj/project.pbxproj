@@ -20,7 +20,6 @@
 		C44B16701E70F0E900EE8257 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C44B166F1E70F0E800EE8257 /* MainViewController.m */; };
 		C44B167B1E70F24C00EE8257 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C44B16721E70F24C00EE8257 /* UserViewController.m */; };
 		C46A63F41E711E06008A8A29 /* MainGround.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C46A63F31E711E06008A8A29 /* MainGround.storyboard */; };
-		C46A63FB1E712837008A8A29 /* ButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C46A63F61E712837008A8A29 /* ButtonCell.m */; };
 		C46A63FC1E712837008A8A29 /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C46A63F81E712837008A8A29 /* UserCell.m */; };
 		C46A63FD1E712837008A8A29 /* UserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C46A63FA1E712837008A8A29 /* UserInfoCell.m */; };
 		C4C720F51E6FCB79003523A2 /* libFMMapKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C720F11E6FCB09003523A2 /* libFMMapKit.a */; };
@@ -453,8 +452,6 @@
 		C44B16711E70F24C00EE8257 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
 		C44B16721E70F24C00EE8257 /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
 		C46A63F31E711E06008A8A29 /* MainGround.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainGround.storyboard; sourceTree = "<group>"; };
-		C46A63F51E712837008A8A29 /* ButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonCell.h; sourceTree = "<group>"; };
-		C46A63F61E712837008A8A29 /* ButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonCell.m; sourceTree = "<group>"; };
 		C46A63F71E712837008A8A29 /* UserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCell.h; sourceTree = "<group>"; };
 		C46A63F81E712837008A8A29 /* UserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCell.m; sourceTree = "<group>"; };
 		C46A63F91E712837008A8A29 /* UserInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoCell.h; sourceTree = "<group>"; };
@@ -1185,8 +1182,6 @@
 		C44B16811E70F26D00EE8257 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				C46A63F51E712837008A8A29 /* ButtonCell.h */,
-				C46A63F61E712837008A8A29 /* ButtonCell.m */,
 				C46A63F71E712837008A8A29 /* UserCell.h */,
 				C46A63F81E712837008A8A29 /* UserCell.m */,
 				C46A63F91E712837008A8A29 /* UserInfoCell.h */,
@@ -2565,7 +2560,6 @@
 				FC5B1A751E6E47A70038BCA7 /* UIScrollView+MJExtension.m in Sources */,
 				FC5B1ACF1E6E4EDC0038BCA7 /* NewPassWordViewController.m in Sources */,
 				C4C723CE1E6FCC2F003523A2 /* RouteDisplayView.m in Sources */,
-				C46A63FB1E712837008A8A29 /* ButtonCell.m in Sources */,
 				FC5B1ACE1E6E4EDC0038BCA7 /* ForgetpawViewController.m in Sources */,
 				FC5B1A701E6E47A70038BCA7 /* MJRefreshGifFooter.m in Sources */,
 				FC5B1AA61E6E47BF0038BCA7 /* UIImage+WebP.m in Sources */,

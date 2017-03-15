@@ -75,24 +75,34 @@
 {
 
     // Return the number of sections.
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    // Return the number of rows in the section.
-    switch (section) {
-        case 0:
-            return 2;
-            break;
-        case 1:
-            return 1;
-            break;
-        default:
-            break;
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 0)
+    {
+        return 66;
     }
-    return 0;
+    else if (section == 1)
+    {
+        return 42;
+    }
+    else
+    {
+        return 60;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.01f;
 }
 
 #pragma mark - UITextFieldDelegate

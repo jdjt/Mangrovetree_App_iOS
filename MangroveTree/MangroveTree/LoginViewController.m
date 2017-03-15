@@ -15,10 +15,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *logInButton;
 @property (weak, nonatomic) IBOutlet UITextField *accountTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *stopButton;
+@property (weak, nonatomic) IBOutlet UIImageView *visibleImage;
 
 @property (strong, nonatomic) NSURLSessionTask *loginTask;
 @property (strong, nonatomic) NSURLSessionTask *getMemberInfor;
+
+@property (nonatomic, assign) BOOL isVisible;
 
 @end
 
@@ -31,11 +33,21 @@
     _accountTextField.delegate = self;
     _passwordTextField.delegate = self;
     
+    self.isVisible = NO;
+    
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    [self.navigationController.navigationBar setBackgroundImage:[Util createImageWithColor:[UIColor colorWithRed:237 / 255.0f green:130 / 255.0f blue:86 / 255.0f alpha:1]] forBarMetrics:UIBarMetricsDefault];
+    
     self.phoneUUIDDictionary = [NSMutableDictionary dictionary];
     self.registUUIDDictionary = [NSMutableDictionary dictionary];
+    
+    UITapGestureRecognizer * tap1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapChoose:)];
+    [self.visibleImage addGestureRecognizer:tap1];
+    
     //设置按钮样式
     [_logInButton loginStyle];
-    [_logInButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     _passwordTextField.delegate = self;
     
@@ -50,12 +62,6 @@
         UIViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"sceneRegist"];
         [self.navigationController pushViewController:vc animated:NO];
     }
-    
-    // 如果是强制登录，则不显示取消按钮
-    if (self.showStop == NO)
-        self.navigationItem.leftBarButtonItem = nil;
-    else
-        self.stopButton.style = UIBarButtonSystemItemStop;
 }
 // 网络请求注册代理
 - (void)viewWillAppear:(BOOL)animated
@@ -96,19 +102,50 @@
     }
 }
 
-// 退出当前模态视图
-- (IBAction)cancelLogin:(id)sender
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 // 点击当前视图收起键盘
 - (void)tapAction
 {
     [self.view endEditing:YES];
 }
 
+- (void)tapChoose:(UITapGestureRecognizer *)tap
+{
+    if (self.isVisible == YES)
+    {
+        self.isVisible = NO;
+        self.visibleImage.image = [UIImage imageNamed:@"invisibleImage"];
+        self.passwordTextField.secureTextEntry = YES;
+    }
+    else
+    {
+        self.isVisible = YES;
+        self.visibleImage.image = [UIImage imageNamed:@"visibleImage"];
+        self.passwordTextField.secureTextEntry = NO;
+    }
+}
+
 #pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 0)
+    {
+        return 66;
+    }
+    else if (section == 1)
+    {
+        return 42;
+    }
+    else
+    {
+        return 60;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.01f;
+}
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {

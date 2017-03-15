@@ -113,6 +113,9 @@ int const kCallingServiceCount = 5;
                 [mapVC.centerVC showCallResult:YES];
             }
             [mapVC.centerVC changNavViewStyleByLayerMode:NAVIVARTYPE_IN];
+            mapVC.centerVC.navigationController.navigationBar.hidden = NO;
+            mapVC.centerVC.hotelNameButton.hidden = YES;
+            self.navigationController.navigationBar.hidden = YES;
         }
     }
 }
@@ -254,6 +257,7 @@ int const kCallingServiceCount = 5;
             [mapVC.centerVC changNavViewStyleByLayerMode:NAVIVARTYPE_OUT];
         }
     }
+    self.navigationController.navigationBar.hidden = NO;
 }
 
 - (void)adddelegateToMap
