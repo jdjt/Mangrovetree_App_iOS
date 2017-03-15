@@ -8,9 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^HideViewBlock)(BOOL show);
+
 @interface InforView : UIView
 
 + (instancetype)inforView;
+
+@property (nonatomic, copy) HideViewBlock hideBlock;
+
 - (void)show;
 - (void)hide;
+
 @end

@@ -353,14 +353,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
 //搜索页面跳转消息
 - (void)naviSearch:(UIBarButtonItem *)bar
 {
-	if (![FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi)
-	{
-		MapSearchViewController *seaVC = [[MapSearchViewController alloc] init];
-		seaVC.mapID = @(kOutdoorMapID).stringValue;
-        [self.mapVC.fmView stopNavi];
-		[[FMLocationManager shareLocationManager] setMapView:nil];
-		[self.mapVC.navigationController pushViewController:seaVC animated:NO];
-	}
+    [self toSearchAction];
 }
 
 - (void)tapAction:(UITapGestureRecognizer *)tap
@@ -371,6 +364,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
         self.toWorldPlatformImage.image = [UIImage imageNamed:@"toWorld_default"];
         self.toCallServiceImage.image = [UIImage imageNamed:@"toCallService_default"];
         //去哪跳转
+        [self toSearchAction];
     }
     else if (tap.view == self.toWorldPlatform)
     {
@@ -392,7 +386,18 @@ NSString* const FMModelSelected = @"FMModelSelected";
         [self tapCallService];
     }
 }
+- (void)toSearchAction
+{
+    if (![FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi)
+    {
+        MapSearchViewController *seaVC = [[MapSearchViewController alloc] init];
+        seaVC.mapID = @(kOutdoorMapID).stringValue;
+        [self.mapVC.fmView stopNavi];
+        [[FMLocationManager shareLocationManager] setMapView:nil];
+        [self.mapVC.navigationController pushViewController:seaVC animated:NO];
+    }
 
+}
 - (void)tapCallService
 {
 //    if ([FMKLocationServiceManager shareLocationServiceManager].currentMapCoord.mapID == 0)
