@@ -258,6 +258,7 @@ int const kCallingServiceCount = 5;
         }
     }
     self.navigationController.navigationBar.hidden = NO;
+    [super viewWillDisappear:animated];
 }
 
 - (void)adddelegateToMap

@@ -369,8 +369,10 @@ const int kDisplayCount = 4;
     else
         isNeedLocate = NO;
     
-	for (UIViewController * viewController in wSelf.navigationController.viewControllers) {
-		if ([viewController isKindOfClass:[FMIndoorMapVC class]]) {
+	for (UIViewController * viewController in wSelf.navigationController.viewControllers)
+    {
+		if ([viewController isKindOfClass:[FMIndoorMapVC class]])
+        {
 			FMIndoorMapVC * VC = (FMIndoorMapVC *)viewController;
 			VC.dbModel = model;
             VC.isNeedLocate = isNeedLocate;
