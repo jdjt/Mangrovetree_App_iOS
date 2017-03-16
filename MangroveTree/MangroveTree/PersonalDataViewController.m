@@ -81,7 +81,7 @@
 {
     if ([viewController isKindOfClass:[FrameViewController class]])
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotiShowSettings object:nil];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:NotiShowSettings object:nil];
         [self.navigationController.navigationBar setBackgroundImage:[Util createImageWithColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.9]] forBarMetrics:UIBarMetricsDefault];
         
         [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
