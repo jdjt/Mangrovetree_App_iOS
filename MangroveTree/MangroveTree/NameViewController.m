@@ -58,6 +58,16 @@
 {
     return 1;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 1)
+    {
+        return 120;
+    }
+    return 80;
+}
+
 - (IBAction)nameButtonAction:(id)sender
 {
     [self modifymember];

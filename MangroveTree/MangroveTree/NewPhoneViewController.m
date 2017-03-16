@@ -35,7 +35,8 @@
     
     //设置按钮样式
     [_validationButton ukeyStyle];
-    [_validationButton setTitleColor:[UIColor colorWithRed:122/255.0f green:177/255.0f blue:147/255.0f alpha:1] forState:UIControlStateNormal];
+//    [_validationButton setTitleColor:[UIColor colorWithRed:122/255.0f green:177/255.0f blue:147/255.0f alpha:1] forState:UIControlStateNormal];
+    [_validationButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_sumbitButtonAction loginStyle];
 }
 
@@ -97,6 +98,7 @@
         return 1;
     }
 }
+
 
 #pragma mark - 网络请求
 

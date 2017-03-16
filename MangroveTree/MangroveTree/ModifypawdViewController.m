@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *againPawdTextField;
 @property (weak, nonatomic) IBOutlet UIButton *submitButton;
 @property (strong, nonatomic) NSURLSessionTask *modifyPassTask;
+
 @end
 
 @implementation ModifypawdViewController
@@ -70,6 +71,7 @@
             break;
     }
 }
+
 
 #pragma mark - UITextFieldDelegate
 
