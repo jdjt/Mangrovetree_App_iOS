@@ -295,6 +295,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
                     //用户中心
                     vc = [userStoryBoard instantiateViewControllerWithIdentifier:@"sceneUser"];
                     [self.navigationController pushViewController:vc animated:YES];
+                    
                     break;
                     
                 default:
