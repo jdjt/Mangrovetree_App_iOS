@@ -890,6 +890,9 @@ extern NSString* FMModelSelected;
 //	_enableLocateBtn.hidden = NO;
 	FMKExternalModelLayer * modelLayer = [self.fengMapView.map getExternalModelLayerWithGroupID:@"1"];
 	modelLayer.delegate = self;
+    [self getCurrentController].centerVC.hotelNameButton.hidden = NO;
+    [[self getCurrentController].centerVC changNavViewStyleByLayerMode:NAVIVARTYPE_OUT];
+
 }
 
 //获取随机坐标点
@@ -1178,7 +1181,9 @@ extern NSString* FMModelSelected;
 //接收停止导航消息
 - (void)receiveStopNavi:(NSNotification *)noti
 {
-	[self stopNavi];
+    BOOL outDoor = noti.object;
+    if (outDoor == NO)
+        [self stopNavi];
 }
 
 - (void)showAlertView

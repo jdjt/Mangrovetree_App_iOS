@@ -86,6 +86,12 @@
             NSLog(@"您点击了关于红树林导航");
         }
     }
+    else
+    {
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+//        cell.selected = NO;
+    }
     
 }
 
@@ -96,7 +102,7 @@
 
 - (IBAction)CompleteButton:(id)sender
 {
-    UIAlertView *alent = [[UIAlertView alloc] initWithTitle:@"退出登录提示"
+    UIAlertView *alent = [[UIAlertView alloc] initWithTitle:@"提示"
                                                     message:@"是否退出登录？"
                                                    delegate:self
                                           cancelButtonTitle:@"否"

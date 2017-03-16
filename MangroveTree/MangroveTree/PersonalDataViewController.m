@@ -8,11 +8,12 @@
 
 #import "PersonalDataViewController.h"
 #import "FrameViewController.h"
-
+#import "BaseNavigationController.h"
 @interface PersonalDataViewController ()<UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *phoneNumberLabel;
+@property (nonatomic,strong)BaseNavigationController * baseNC;
 
 @end
 
@@ -21,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.delegate = self;
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -79,9 +81,30 @@
 {
     if ([viewController isKindOfClass:[FrameViewController class]])
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotiShowSettings object:nil];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:NotiShowSettings object:nil];
+        [self.navigationController.navigationBar setBackgroundImage:[Util createImageWithColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.9]] forBarMetrics:UIBarMetricsDefault];
+        
+        [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
+        [self.navigationController.navigationBar setTitleTextAttributes:
+         @{NSFontAttributeName:[UIFont systemFontOfSize:17],
+           NSForegroundColorAttributeName:[UIColor blackColor]}];
+
+    }else
+    {
+        [self.navigationController.navigationBar setBackgroundImage:[Util createImageWithColor:[UIColor colorWithRed:237 / 255.0f green:130 / 255.0f blue:86 / 255.0f alpha:1]] forBarMetrics:UIBarMetricsDefault];
+        
+        [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+        [self.navigationController.navigationBar setTitleTextAttributes:
+         @{NSFontAttributeName:[UIFont systemFontOfSize:17],
+           NSForegroundColorAttributeName:[UIColor whiteColor]}];
     }
 }
+
+//- (void)back:(UIButton *)btn
+//{
+//    [[NSNotificationCenter defaultCenter] postNotificationName:NotiShowSettings object:nil];
+//    [self.baseNC.navigationController popViewControllerAnimated:YES];
+//}
 
 #pragma mark - Navigation
 
