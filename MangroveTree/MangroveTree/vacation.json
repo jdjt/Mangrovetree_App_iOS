@@ -1,0 +1,43 @@
+[
+  {
+  "title_code": "0",
+  "title_name": "",
+  "items":
+  "服务台,ATM,卫生间,电梯"
+  },
+ {
+ "title_code": "1",
+    "title_name": "酒店",
+    "items": "酒店"
+  },
+  {
+    "title_code": "2",
+    "title_name": "美食",
+    "items": "中餐厅,西餐厅,主题餐厅,酒吧,烧烤,日韩料理,其他"
+  },
+  {
+    "title_code": "3",
+    "title_name": "休闲娱乐",
+    "items": "亲子,游泳,健身,水疗,美容美发,休闲"
+  },
+  {
+    "title_code": "4",
+    "title_name": "购物",
+    "items": "超市、特产,工艺品,服饰,名品,运动休闲,母婴（儿童）,箱包,礼品"
+  },
+  {
+    "title_code": "5",
+    "title_name": "电影",
+    "items": "电影"
+  },
+  {
+    "title_code": "6",
+    "title_name": "艺术",
+    "items": "艺廊,图书"
+  },
+  {
+    "title_code": "7",
+    "title_name": "其他",
+    "items": "会议,婚庆,会议/演艺"
+  }
+]

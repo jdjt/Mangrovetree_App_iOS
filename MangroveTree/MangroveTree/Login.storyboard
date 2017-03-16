@@ -805,7 +805,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="23"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="glR-23-bal">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="read_Y" translatesAutoresizingMaskIntoConstraints="NO" id="glR-23-bal">
                                                     <rect key="frame" x="36" y="6.5" width="10" height="10"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="10" id="0zt-LH-wHV"/>
@@ -916,6 +916,7 @@
         <image name="nextBtn_orange" width="299" height="45"/>
         <image name="passwordBtn" width="49" height="49"/>
         <image name="phoneBtn" width="49" height="49"/>
+        <image name="read_Y" width="10" height="10"/>
         <image name="registerBtn" width="290" height="45"/>
         <image name="saveBtn" width="299" height="45"/>
         <image name="sendVCode" width="64" height="20"/>

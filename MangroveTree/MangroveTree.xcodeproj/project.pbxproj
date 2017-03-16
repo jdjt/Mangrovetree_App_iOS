@@ -19,6 +19,11 @@
 		A8E413711E7692D70096EA62 /* InforView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8E413701E7692D70096EA62 /* InforView.xib */; };
 		C44B16701E70F0E900EE8257 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C44B166F1E70F0E800EE8257 /* MainViewController.m */; };
 		C44B167B1E70F24C00EE8257 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C44B16721E70F24C00EE8257 /* UserViewController.m */; };
+		C45B62001E7A257600F70D3F /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45B61FF1E7A257600F70D3F /* SearchViewController.m */; };
+		C45B62031E7A35DD00F70D3F /* SearchTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C45B62021E7A35DD00F70D3F /* SearchTypeCell.m */; };
+		C45B62061E7A5A4900F70D3F /* SearchHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C45B62051E7A5A4900F70D3F /* SearchHeaderView.m */; };
+		C45B620A1E7A7C7A00F70D3F /* vacation.json in Resources */ = {isa = PBXBuildFile; fileRef = C45B62091E7A7C7A00F70D3F /* vacation.json */; };
+		C45B620D1E7A8CA300F70D3F /* SearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C45B620C1E7A8CA300F70D3F /* SearchResultCell.m */; };
 		C46A63F41E711E06008A8A29 /* MainGround.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C46A63F31E711E06008A8A29 /* MainGround.storyboard */; };
 		C46A63FC1E712837008A8A29 /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C46A63F81E712837008A8A29 /* UserCell.m */; };
 		C46A63FD1E712837008A8A29 /* UserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C46A63FA1E712837008A8A29 /* UserInfoCell.m */; };
@@ -451,6 +456,15 @@
 		C44B166F1E70F0E800EE8257 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		C44B16711E70F24C00EE8257 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
 		C44B16721E70F24C00EE8257 /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
+		C45B61FE1E7A257600F70D3F /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		C45B61FF1E7A257600F70D3F /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		C45B62011E7A35DD00F70D3F /* SearchTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTypeCell.h; sourceTree = "<group>"; };
+		C45B62021E7A35DD00F70D3F /* SearchTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTypeCell.m; sourceTree = "<group>"; };
+		C45B62041E7A5A4900F70D3F /* SearchHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchHeaderView.h; sourceTree = "<group>"; };
+		C45B62051E7A5A4900F70D3F /* SearchHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchHeaderView.m; sourceTree = "<group>"; };
+		C45B62091E7A7C7A00F70D3F /* vacation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = vacation.json; sourceTree = "<group>"; };
+		C45B620B1E7A8CA300F70D3F /* SearchResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultCell.h; sourceTree = "<group>"; };
+		C45B620C1E7A8CA300F70D3F /* SearchResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultCell.m; sourceTree = "<group>"; };
 		C46A63F31E711E06008A8A29 /* MainGround.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainGround.storyboard; sourceTree = "<group>"; };
 		C46A63F71E712837008A8A29 /* UserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCell.h; sourceTree = "<group>"; };
 		C46A63F81E712837008A8A29 /* UserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCell.m; sourceTree = "<group>"; };
@@ -1197,10 +1211,18 @@
 				FCDD611B1E6FA5250057A9C3 /* FrameViewController.m */,
 				FCDD62E01E6FA5260057A9C3 /* MapViewController.h */,
 				FCDD62E11E6FA5260057A9C3 /* MapViewController.m */,
+				C45B61FE1E7A257600F70D3F /* SearchViewController.h */,
+				C45B61FF1E7A257600F70D3F /* SearchViewController.m */,
 				FCDD62E21E6FA5260057A9C3 /* MsgViewController.h */,
 				FCDD62E31E6FA5260057A9C3 /* MsgViewController.m */,
 				FCDD62DD1E6FA5260057A9C3 /* GradingView.h */,
 				FCDD62DE1E6FA5260057A9C3 /* GradingView.m */,
+				C45B62011E7A35DD00F70D3F /* SearchTypeCell.h */,
+				C45B62021E7A35DD00F70D3F /* SearchTypeCell.m */,
+				C45B62041E7A5A4900F70D3F /* SearchHeaderView.h */,
+				C45B62051E7A5A4900F70D3F /* SearchHeaderView.m */,
+				C45B620B1E7A8CA300F70D3F /* SearchResultCell.h */,
+				C45B620C1E7A8CA300F70D3F /* SearchResultCell.m */,
 			);
 			name = Homepage;
 			sourceTree = "<group>";
@@ -2027,6 +2049,7 @@
 			children = (
 				FC5B1AED1E6E52B30038BCA7 /* Util.h */,
 				FC5B1AEE1E6E52B30038BCA7 /* Util.m */,
+				C45B62091E7A7C7A00F70D3F /* vacation.json */,
 				C4C723D71E6FD326003523A2 /* NSString+Addtions.h */,
 				C4C723D81E6FD326003523A2 /* NSString+Addtions.m */,
 				FC5B1AEF1E6E52B30038BCA7 /* MySingleton.h */,
@@ -2427,6 +2450,7 @@
 				C4C7237E1E6FCC2F003523A2 /* 70146.fmap in Resources */,
 				C4C723341E6FCC2F003523A2 /* dawangzongcanting.fmi in Resources */,
 				C4C723151E6FCC2F003523A2 /* 170002.fmi in Resources */,
+				C45B620A1E7A7C7A00F70D3F /* vacation.json in Resources */,
 				C4C7233C1E6FCC2F003523A2 /* fenghuanghong.fmi in Resources */,
 				FC5B1ACB1E6E4EDC0038BCA7 /* Login.storyboard in Resources */,
 				C4C723321E6FCC2F003523A2 /* CRZ.fmi in Resources */,
@@ -2557,6 +2581,7 @@
 				FC5B1A6F1E6E47A70038BCA7 /* MJRefreshFooter.m in Sources */,
 				9C47374D1E728E0700A30C91 /* NameViewController.m in Sources */,
 				C4C723EA1E6FD34E003523A2 /* StatusAcceptExpired.m in Sources */,
+				C45B620D1E7A8CA300F70D3F /* SearchResultCell.m in Sources */,
 				FC5B1A751E6E47A70038BCA7 /* UIScrollView+MJExtension.m in Sources */,
 				FC5B1ACF1E6E4EDC0038BCA7 /* NewPassWordViewController.m in Sources */,
 				C4C723CE1E6FCC2F003523A2 /* RouteDisplayView.m in Sources */,
@@ -2565,11 +2590,13 @@
 				FC5B1AA61E6E47BF0038BCA7 /* UIImage+WebP.m in Sources */,
 				FC5B1A9B1E6E47BF0038BCA7 /* NSData+ImageContentType.m in Sources */,
 				FC5B1AF21E6E52B30038BCA7 /* MySingleton.m in Sources */,
+				C45B62031E7A35DD00F70D3F /* SearchTypeCell.m in Sources */,
 				FC5B1AF61E6E55A20038BCA7 /* NetWorkHelp.m in Sources */,
 				C4C723AB1E6FCC2F003523A2 /* FMIndoorMapVC+Navi.m in Sources */,
 				FCDD644A1E6FA5260057A9C3 /* SPCallingCardBubbleViewModel.m in Sources */,
 				C4C723A71E6FCC2F003523A2 /* FMIndoorView.m in Sources */,
 				FC5B19AD1E6E465B0038BCA7 /* MangroveTree.xcdatamodeld in Sources */,
+				C45B62001E7A257600F70D3F /* SearchViewController.m in Sources */,
 				C4C723921E6FCC2F003523A2 /* DBSearchTool.m in Sources */,
 				FC5B1ABB1E6E480C0038BCA7 /* AFURLResponseSerialization.m in Sources */,
 				C4C722B61E6FCC2E003523A2 /* IndoorMapInfo.m in Sources */,
@@ -2603,6 +2630,7 @@
 				FC5B1AE51E6E50E00038BCA7 /* UIButton+Bootstrap.m in Sources */,
 				FC5B1AC01E6E48FD0038BCA7 /* Parser.m in Sources */,
 				C4C723B81E6FCC2F003523A2 /* HistoryRecordCell.m in Sources */,
+				C45B62061E7A5A4900F70D3F /* SearchHeaderView.m in Sources */,
 				FCDD64451E6FA5260057A9C3 /* MapViewController.m in Sources */,
 				C4C723A31E6FCC2F003523A2 /* UIView+TransitionAnimation.m in Sources */,
 				FCDD64621E6FA5260057A9C3 /* UIControl+BlockSupport.m in Sources */,

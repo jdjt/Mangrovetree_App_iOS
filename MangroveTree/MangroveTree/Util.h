@@ -102,4 +102,6 @@
 
 + (BOOL)locationServicesEnabled;
 
++ (id)analysisJsonByfileName:(NSString *)fileName fileType:(NSString *)type;
+
 @end

@@ -152,12 +152,12 @@
         {
             if (self.isChooseYES == YES)
             {
-                self.chooseImage.image = [UIImage imageNamed:@""];
+                self.chooseImage.image = [UIImage imageNamed:@"read_N"];
                 self.isChooseYES = NO;
             }
             else
             {
-                self.chooseImage.image = [UIImage imageNamed:@""];
+                self.chooseImage.image = [UIImage imageNamed:@"read_Y"];
                 self.isChooseYES = YES;
             }
         }

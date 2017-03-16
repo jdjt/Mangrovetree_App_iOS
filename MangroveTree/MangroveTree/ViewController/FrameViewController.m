@@ -11,6 +11,7 @@
 #import "MsgViewController.h"
 #import "MapViewController.h"
 #import "LoginViewController.h"
+#import "SearchViewController.h"
 #import "FMView.h"
 
 #import "FMZoneManager.h"
@@ -60,8 +61,6 @@ NSString* const FMModelSelected = @"FMModelSelected";
     //self.bottomBarView.hidden = YES;
 	[UIApplication sharedApplication].idleTimerDisabled = YES;//不自动锁屏
     
-    self.callView.hidden = NO;
-    self.messageView.hidden = YES;
     self.callView.hidden = NO;
     self.messageView.hidden = YES;
     self.callView.clipsToBounds = YES;
@@ -394,9 +393,14 @@ NSString* const FMModelSelected = @"FMModelSelected";
         seaVC.mapID = @(kOutdoorMapID).stringValue;
         [self.mapVC.fmView stopNavi];
         [[FMLocationManager shareLocationManager] setMapView:nil];
-        [self.mapVC.navigationController pushViewController:seaVC animated:NO];
+        
+        UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"MainGround" bundle:nil];
+        SearchViewController * search = [storyboard instantiateViewControllerWithIdentifier:@"searchView"];
+        
+        [self.mapVC.navigationController pushViewController:search animated:NO];
+        
     }
-
+    
 }
 - (void)tapCallService
 {

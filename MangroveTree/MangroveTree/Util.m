@@ -681,5 +681,17 @@ void ProviderReleaseData (void *info, const void *data, size_t size){
     }
 }
 
++ (id)analysisJsonByfileName:(NSString *)fileName fileType:(NSString *)type
+{
+    NSString *file = [[NSBundle mainBundle] pathForResource:fileName ofType:type];
+    
+    NSData *data=[NSData dataWithContentsOfFile:file];
+    NSError *error;
+    id jsonObject=[NSJSONSerialization JSONObjectWithData:data
+                                                 options:NSJSONReadingAllowFragments
+                                                   error:&error];
+    return jsonObject;
+}
+
 
 @end
