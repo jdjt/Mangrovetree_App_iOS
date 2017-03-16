@@ -86,6 +86,12 @@
             NSLog(@"您点击了关于红树林导航");
         }
     }
+    else
+    {
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+//        cell.selected = NO;
+    }
     
 }
 
