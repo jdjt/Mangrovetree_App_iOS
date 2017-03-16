@@ -8,10 +8,10 @@
 
 #import "InforView.h"
 
-@interface InforView ()
+@interface InforView ()<MTRequestNetWorkDelegate>
 
 @property (nonatomic, assign) BOOL hideView;
-
+@property (nonatomic, strong) MTRequestNetwork *requesNetWork;
 @end
 
 @implementation InforView
@@ -21,8 +21,10 @@
     InforView * view = [[NSBundle mainBundle] loadNibNamed:@"InforView" owner:nil  options:nil][0];
     view.alpha = 0.0f;
     view.hideView = NO;
+    [view.requesNetWork registerDelegate:view];
     return view;
 }
+
 - (void)hide
 {
     __weak typeof(self)wSelf = self;
@@ -49,7 +51,26 @@
     if (_hideBlock)
         _hideBlock(self.hideView);
 }
-
+- (void)requsrtActivityInforByActivityCode:(NSString *)activityCode
+{
+    
+}
+- (void)startRequest:(NSURLSessionTask *)task
+{
+    
+}
+- (void)pushResponseResultsSucceed:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg andData:(NSMutableArray *)datas
+{
+    
+}
+- (void)pushResponseResultsFailing:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg
+{
+    
+}
+- (void)dealloc
+{
+    [self.requesNetWork removeDelegate:self];
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

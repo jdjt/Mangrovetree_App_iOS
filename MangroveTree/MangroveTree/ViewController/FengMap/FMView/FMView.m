@@ -1181,7 +1181,9 @@ extern NSString* FMModelSelected;
 //接收停止导航消息
 - (void)receiveStopNavi:(NSNotification *)noti
 {
-	[self stopNavi];
+    BOOL outDoor = noti.object;
+    if (outDoor == NO)
+        [self stopNavi];
 }
 
 - (void)showAlertView

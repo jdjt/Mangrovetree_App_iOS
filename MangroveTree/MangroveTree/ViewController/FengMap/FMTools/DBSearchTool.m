@@ -57,10 +57,15 @@ static DBSearchTool * mDbSearcTool = nil;
 		if (![typeName isEqualToString:typename]) {
 			continue;
 		}
+        [result addObject:[self fillDataToModelByResult:rs]];
+        /*
 		NSString * address = [rs stringForColumn:@"address"];
 		NSString * fid = [rs stringForColumn:@"fid"];
 		NSString * name = [rs stringForColumn:@"name"];
 		NSString * ename = [rs stringForColumn:@"ename"];
+        NSString * subTypeName = [rs stringForColumn:@"subtypename"];
+        NSString * activityCode = [rs stringForColumn:@"activitycode"];
+        
 		NSString * mid = [rs stringForColumn:@"mid"];
 		double x = [rs doubleForColumn:@"x"];
 		double y = [rs doubleForColumn:@"y"];
@@ -73,6 +78,8 @@ static DBSearchTool * mDbSearcTool = nil;
 		QueryDBModel * model = [[QueryDBModel alloc] init];
 		model.typeName = typename;
 		model.address = address;
+        model.subTypeName = subTypeName;
+        model.activityCode = activityCode;
 		model.fid = fid;
 		model.x = x;
 		model.y = y;
@@ -86,9 +93,72 @@ static DBSearchTool * mDbSearcTool = nil;
 		model.rowid = rowid;
 		
 		[result addObject:model];
+        */
 	}
 	[mDbSearcTool.db close];
 	return result;
+}
+- (NSArray *)queryBySubTypeName:(NSString *)subTypeName
+{
+    NSMutableArray * result = [NSMutableArray array];
+    if (![mDbSearcTool.db open]) {
+        NSLog(@"数据库打开失败");
+    }
+    else
+    {
+        NSLog(@"数据库打开成功");
+    }
+
+    NSString * sql = [NSString stringWithFormat:
+                      @"SELECT rowid, * FROM 'stores'"];
+    FMResultSet * rs = [mDbSearcTool.db executeQuery:sql];
+    while ([rs next])
+    {
+        NSString * sqlsubtypename = [rs stringForColumn:@"subtypename"];
+        if (![sqlsubtypename isEqualToString:subTypeName])
+            continue;
+        
+        [result addObject:[self fillDataToModelByResult:rs]];
+        /*
+        NSString * address = [rs stringForColumn:@"address"];
+        NSString * fid = [rs stringForColumn:@"fid"];
+        NSString * name = [rs stringForColumn:@"name"];
+        NSString * typeName = [rs stringForColumn:@"typename"];
+        NSString * ename = [rs stringForColumn:@"ename"];
+        NSString * subTypeName = [rs stringForColumn:@"subtypename"];
+        NSString * activityCode = [rs stringForColumn:@"activitycode"];
+        
+        NSString * mid = [rs stringForColumn:@"mid"];
+        double x = [rs doubleForColumn:@"x"];
+        double y = [rs doubleForColumn:@"y"];
+        int gid = [rs intForColumn:@"gid"];
+        int ftype = [rs intForColumn:@"ftype"];
+        float z = [rs doubleForColumn:@"z"];
+        int type = [rs intForColumn:@"type"];
+        int rowid = [rs intForColumn:@"id"];
+        
+        QueryDBModel * model = [[QueryDBModel alloc] init];
+        model.typeName = typeName;
+        model.address = address;
+        model.subTypeName = subTypeName;
+        model.activityCode = activityCode;
+        model.fid = fid;
+        model.x = x;
+        model.y = y;
+        model.gid = gid;
+        model.ftype = ftype;
+        model.type = type;
+        model.z = z;
+        model.name = name;
+        model.ename = ename;
+        model.mid = mid;
+        model.rowid = rowid;
+        
+        [result addObject:model];
+        */
+    }
+    [mDbSearcTool.db close];
+    return result;
 }
 
 //模糊查询
@@ -110,10 +180,15 @@ static DBSearchTool * mDbSearcTool = nil;
 		NSString * name = [rs stringForColumn:@"name"];
 		if ([name rangeOfString:keyWord].location != NSNotFound || [name rangeOfString:keyWord.uppercaseString].location != NSNotFound || [name rangeOfString:keyWord.lowercaseString].location != NSNotFound)
 		{
+            [result addObject:[self fillDataToModelByResult:rs]];
+            /*
 			NSString * address = [rs stringForColumn:@"address"];
 			NSString * fid = [rs stringForColumn:@"fid"];
 			NSString * typeName = [rs stringForColumn:@"typename"];
 			NSString * ename = [rs stringForColumn:@"ename"];
+            NSString * subTypeName = [rs stringForColumn:@"subtypename"];
+            NSString * activityCode = [rs stringForColumn:@"activitycode"];
+
 			NSString * mid = [rs stringForColumn:@"mid"];
 			double x = [rs doubleForColumn:@"x"];
 			double y = [rs doubleForColumn:@"y"];
@@ -126,6 +201,9 @@ static DBSearchTool * mDbSearcTool = nil;
 			QueryDBModel * model = [[QueryDBModel alloc] init];
 			model.typeName = typeName;
 			model.address = address;
+            model.subTypeName = subTypeName;
+            model.activityCode = activityCode;
+
 			model.fid = fid;
 			model.x = x;
 			model.y = y;
@@ -138,6 +216,7 @@ static DBSearchTool * mDbSearcTool = nil;
 			model.mid = mid;
 			model.rowid = rowid;
 			[result addObject:model];
+            */
 		}
 	}
 	[mDbSearcTool.db close];
@@ -155,10 +234,14 @@ static DBSearchTool * mDbSearcTool = nil;
 			if (![sqlFid isEqualToString:fid]) {
 				continue;
 			}
+            /*
 			NSString * address = [rs stringForColumn:@"address"];
 			NSString * fid = [rs stringForColumn:@"fid"];
 			NSString * typeName = [rs stringForColumn:@"typename"];
 			NSString * ename = [rs stringForColumn:@"ename"];
+            NSString * subTypeName = [rs stringForColumn:@"subtypename"];
+            NSString * activityCode = [rs stringForColumn:@"activitycode"];
+            
 			NSString * mid = [rs stringForColumn:@"mid"];
 			NSString * name = [rs stringForColumn:@"name"];
 			double x = [rs doubleForColumn:@"x"];
@@ -172,6 +255,9 @@ static DBSearchTool * mDbSearcTool = nil;
 			QueryDBModel * model = [[QueryDBModel alloc] init];
 			model.typeName = typeName;
 			model.address = address;
+            model.subTypeName = subTypeName;
+            model.activityCode = activityCode;
+
 			model.fid = fid;
 			model.x = x;
 			model.y = y;
@@ -184,10 +270,10 @@ static DBSearchTool * mDbSearcTool = nil;
 			model.mid = mid;
 			model.rowid = rowid;
 			model.name = name;
-			
+            */
+            QueryDBModel *model = [self fillDataToModelByResult:rs];
 			[mDbSearcTool.db close];
 			return model;
-			
 		}
 	}
 	return nil;
@@ -306,6 +392,9 @@ static DBSearchTool * mDbSearcTool = nil;
 			
 			NSString * typeName = [rs stringForColumn:@"typename"];
 			NSString * ename = [rs stringForColumn:@"ename"];
+            NSString * subTypeName = [rs stringForColumn:@"subtypename"];
+            NSString * activityCode = [rs stringForColumn:@"activitycode"];
+            
 			NSString * mid = [rs stringForColumn:@"mid"];
 			double x = [rs doubleForColumn:@"x"];
 			double y = [rs doubleForColumn:@"y"];
@@ -318,6 +407,9 @@ static DBSearchTool * mDbSearcTool = nil;
 			QueryDBModel * model = [[QueryDBModel alloc] init];
 			model.typeName = typeName;
 			model.address = address;
+            model.subTypeName = subTypeName;
+            model.activityCode = activityCode;
+
 			model.fid = fid;
 			model.x = x;
 			model.y = y;
@@ -396,7 +488,46 @@ static DBSearchTool * mDbSearcTool = nil;
 	}
 	return NO;
 }
-
+- (QueryDBModel *)fillDataToModelByResult:(FMResultSet *)rs
+{
+    NSString * address = [rs stringForColumn:@"address"];
+    NSString * fid = [rs stringForColumn:@"fid"];
+    NSString * typeName = [rs stringForColumn:@"typename"];
+    NSString * ename = [rs stringForColumn:@"ename"];
+    NSString * subTypeName = [rs stringForColumn:@"subtypename"];
+    NSString * activityCode = [rs stringForColumn:@"activitycode"];
+    
+    NSString * mid = [rs stringForColumn:@"mid"];
+    NSString * name = [rs stringForColumn:@"name"];
+    double x = [rs doubleForColumn:@"x"];
+    double y = [rs doubleForColumn:@"y"];
+    int gid = [rs intForColumn:@"gid"];
+    int ftype = [rs intForColumn:@"ftype"];
+    float z = [rs doubleForColumn:@"z"];
+    int type = [rs intForColumn:@"type"];
+    int rowid = [rs intForColumn:@"rowid"];
+    
+    QueryDBModel * model = [[QueryDBModel alloc] init];
+    model.typeName = typeName;
+    model.address = address;
+    model.subTypeName = subTypeName;
+    model.activityCode = activityCode;
+    
+    model.fid = fid;
+    model.x = x;
+    model.y = y;
+    model.gid = gid;
+    model.ftype = ftype;
+    model.type = type;
+    model.z = z;
+    model.fid = fid;
+    model.ename = ename;
+    model.mid = mid;
+    model.rowid = rowid;
+    model.name = name;
+    
+    return model;
+}
 - (void)dealloc
 {
 	[mDbSearcTool.historyRecordDB close];

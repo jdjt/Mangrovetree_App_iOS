@@ -954,8 +954,9 @@ int const kCallingServiceCount = 5;
 {	
 //	[self.modelInfoPopView show];
 //	[self setEnableLocationBtnFrameByView:self.modelInfoPopView];
-	
+	NSLog(@"%f %f",model.centerPoint.x,model.centerPoint.y);
 	QueryDBModel * queryModel = [[DBSearchTool shareDBSearchTool] queryModelByFid:model.fid];
+    
 	[self.naviPopView setupModelInfoByNodel:queryModel];//设置模型弹框信息
 	
 	[self.naviPopView show];
@@ -963,9 +964,11 @@ int const kCallingServiceCount = 5;
 	[self.naviTopView hide];
 #warning 这里需要区分是否能拿到定位服务
     FMKMapCoord startMapCoord = [self getDefaultMapCoord]; //[FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;
-	
+    NSLog(@"%@",NSStringFromFMKMapCoord(startMapCoord));
+
 	FMKMapCoord endMapCoord = FMKMapCoordMake(queryModel.mid.intValue, FMKGeoCoordMake(queryModel.gid, FMKMapPointMake(queryModel.x, queryModel.y)));
-	
+    NSLog(@"%@",NSStringFromFMKMapCoord(endMapCoord));
+
 	FMNaviAnalyserTool * naviTool = [FMNaviAnalyserTool shareNaviAnalyserTool];
 	[self setupNaviPopViewInfoByEndName:model.title];
 	
@@ -998,8 +1001,11 @@ int const kCallingServiceCount = 5;
 //	};
 //	
 //	
+    if (naviSuccess)
+    {
+        [self setupNaviPopView];
+    }
 	
-	[self setupNaviPopView];
 }
 
 //设置导航信息弹框信息
@@ -1051,6 +1057,15 @@ int const kCallingServiceCount = 5;
 
 - (void)setupNaviPopView
 {
+#warning 这里需要区分是否可以拿到定位信息
+    FMKMapCoord startMapCoord = [self getDefaultMapCoord]; //[FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;
+    
+    FMNaviAnalyserTool * tool = [FMNaviAnalyserTool shareNaviAnalyserTool];
+    
+    BOOL naviResult = [tool naviAnalyseByStartMapCoord:startMapCoord endMapCoord:tool.endMapCoord];
+    if (naviResult == NO)
+        return;
+    
 	__weak typeof(self)wSelf = self;
 	//开始导航
 	self.naviPopView.startNaviBlock = ^{
@@ -1060,12 +1075,7 @@ int const kCallingServiceCount = 5;
 		//开始导航标志位
 		[FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi = YES;
         [wSelf hideMavBar:YES];
-#warning 这里需要区分是否可以拿到定位信息
-        FMKMapCoord startMapCoord = [wSelf getDefaultMapCoord]; //[FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;
-		
-		FMNaviAnalyserTool * tool = [FMNaviAnalyserTool shareNaviAnalyserTool];
-		
-		BOOL naviResult = [tool naviAnalyseByStartMapCoord:startMapCoord endMapCoord:tool.endMapCoord];
+
 		if (!naviResult) return;
         [wSelf getNaviResult];
         [wSelf drawLineOnMapByGroupID:wSelf.displayGroupID];
@@ -1105,7 +1115,7 @@ int const kCallingServiceCount = 5;
 	if (self.dbModel) {
 		endMapCoord = FMKMapCoordMake(self.dbModel.mid.intValue, FMKGeoCoordMake(self.dbModel.gid, FMKMapPointMake(self.dbModel.x, self.dbModel.y)));
 	}
-	FMKMapCoord startMapCoord = [FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;
+//	FMKMapCoord startMapCoord = [FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;
 	
 	self.naviPopView.switchStartAndEndBlock = ^{
 		[wSelf stopNavi];
@@ -1134,7 +1144,7 @@ int const kCallingServiceCount = 5;
 	_isFirstLocate = YES;
 	_lastMapPoint = FMKMapPointZero();
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(NO)];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"FMStopNavi" object:nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"FMStopNavi" object:@(YES)];
 }
 
 //根据路径规划结果画线
