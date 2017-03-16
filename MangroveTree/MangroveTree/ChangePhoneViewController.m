@@ -24,6 +24,7 @@
 @property (nonatomic, strong) NSURLSessionTask *sengCodeTask;
 @property (nonatomic, strong) NSURLSessionTask *checkCodeTask;
 
+
 @end
 
 @implementation ChangePhoneViewController
@@ -33,7 +34,8 @@
     
     //设置按钮样式
     [_validationButton ukeyStyle];
-    [_validationButton setTitleColor:[UIColor colorWithRed:122/255.0f green:177/255.0f blue:147/255.0f alpha:1] forState:UIControlStateNormal];
+//    [_validationButton setTitleColor:[UIColor colorWithRed:122/255.0f green:177/255.0f blue:147/255.0f alpha:1] forState:UIControlStateNormal];
+    [_validationButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_nextButton loginStyle];
     user = [[DataManager defaultInstance] findUserLogInByCode:@"1"];
     if ([user.mobile isEqualToString:@""])
