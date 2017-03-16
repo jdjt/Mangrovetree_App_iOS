@@ -17,6 +17,8 @@
 @property (nonatomic, copy) NSString * ename;
 @property (nonatomic, copy) NSString * typeName;
 @property (nonatomic, copy) NSString * address;
+@property (nonatomic, copy) NSString * subTypeName;
+@property (nonatomic, copy) NSString * activityCode;
 
 @property (nonatomic, assign) int rowid;
 @property (nonatomic, assign) int gid;

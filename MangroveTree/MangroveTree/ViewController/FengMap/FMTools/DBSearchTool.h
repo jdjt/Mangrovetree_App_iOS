@@ -23,6 +23,14 @@
 - (NSArray *)queryByTypeName:(NSString *)typeName;
 
 /**
+ *  根据subtypename查找
+ *
+ *  @param subTypeName subTypeName
+ *
+ *  @return 查找结果 类型为QueryDBModel
+ */
+- (NSArray *)queryBySubTypeName:(NSString *)subTypeName;
+/**
  *  模糊查询
  *
  *  @param keyWord 关键字
