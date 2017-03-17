@@ -64,6 +64,10 @@
     [self.leftLabel addGestureRecognizer: tap1];
     [self.rightLabel addGestureRecognizer:tap2];
     
+    UITapGestureRecognizer * tap3 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction:)];
+    UITapGestureRecognizer * tap4 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction:)];
+    [self.leftCollectionView addGestureRecognizer:tap3];
+    [self.rightCollectionView addGestureRecognizer:tap4];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -141,6 +145,7 @@
     }
     else
     {
+        self.searchResultButton.hidden = YES;
         [self toSearchByText:self.searchTextFlied.text];
     }
 }
@@ -151,9 +156,29 @@
     {
         [self changeSegmentBackgroundTextColor:YES];
     }
-    else
+    else if (tap.view == self.rightLabel)
     {
         [self changeSegmentBackgroundTextColor:NO];
+    }
+    else if (tap.view == self.leftCollectionView)
+    {
+        CGPoint point = [tap locationInView:self.leftCollectionView];
+        NSIndexPath * indexPath = [self.leftCollectionView indexPathForItemAtPoint:point];
+        if (indexPath != nil)
+        {
+            [self collectionView:self.leftCollectionView didSelectItemAtIndexPath:indexPath];
+        }
+        [self.view endEditing:YES];
+    }
+    else
+    {
+        CGPoint point = [tap locationInView:self.rightCollectionView];
+        NSIndexPath * indexPath = [self.rightCollectionView indexPathForItemAtPoint:point];
+        if (indexPath != nil)
+        {
+            [self collectionView:self.rightCollectionView didSelectItemAtIndexPath:indexPath];
+        }
+        [self.view endEditing:YES];
     }
 }
 
@@ -334,10 +359,7 @@
         text = self.rightArray[indexPath.row];
     }
     [self toSearchByText:text];
-    [self.searchResultButton setTitle:text forState:UIControlStateNormal];
-    self.searchResultButton.hidden = NO;
-    self.searchTextFlied.placeholder = @"";
-    self.searchTextFlied.text = @"";
+    [self showSearchResultButtonBytapCollectionItemWithTitle:text];
 }
 
 #pragma textflied delegate
@@ -392,6 +414,7 @@
     if (show)
     {
         rect.size.height = kScreenHeight - 76 - 49;
+        self.searchTableView.frame = rect;
         [UIView animateWithDuration:0.4 animations:^{
             self.searchTableView.frame = rect;
         }];
@@ -403,6 +426,20 @@
             self.searchTableView.frame = rect;
         }];
     }
+    self.tableViewShow = show;
+}
+
+- (void)showSearchResultButtonBytapCollectionItemWithTitle:(NSString *)text
+{
+    [self.searchResultButton setTitle:text forState:UIControlStateNormal];
+    self.searchResultButton.hidden = NO;
+    self.searchTextFlied.placeholder = @"";
+    self.searchTextFlied.text = @"";
+    CGRect rect = self.searchResultButton.frame;
+    rect.size.width = [text sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:11]}].width + 6 + 16;
+    self.searchResultButton.frame = rect;
+    self.searchResultButton.titleEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 16);
+    self.searchResultButton.imageEdgeInsets = UIEdgeInsetsMake(0, rect.size.width - 16, 0, 6);
 }
 //根据搜索框内容搜索
 - (void)queryModelByText:(NSString *)text

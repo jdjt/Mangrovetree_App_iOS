@@ -7,11 +7,10 @@
 //
 
 #import "SetTableViewController.h"
-
-@interface SetTableViewController ()<MTRequestNetWorkDelegate>
+#import "FrameViewController.h"
+@interface SetTableViewController ()<MTRequestNetWorkDelegate,UINavigationControllerDelegate>
 @property (strong, nonatomic) NSURLSessionTask *logoutTask;
 @property (weak, nonatomic) IBOutlet UIButton *logoutButton;
-@property (assign, nonatomic) BOOL logOutBack;
 
 @end
 
@@ -19,9 +18,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.delegate = self;
     //设置按钮样式
     [self.logoutButton loginStyle];
-    self.logOutBack = NO;
     
 }
 
@@ -36,8 +35,6 @@
 {
     [super viewWillDisappear:animated];
     [[MTRequestNetwork defaultManager] removeDelegate:self];
-    if (self.logOutBack == NO)
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotiShowSettings object:nil];
 }
 
 - (void)dealloc
@@ -152,12 +149,35 @@
 {
     if (task == self.logoutTask)
     {
-        self.logOutBack = YES;
         //注销登录
         [[DataManager defaultInstance] cleanCoreDatabyEntityName:@"DBUserLogin"];
         [self.navigationController popViewControllerAnimated:YES];
         //刷新视图
         [self.tableView reloadData];
+    }
+}
+
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if ([viewController isKindOfClass:[FrameViewController class]])
+    {
+        //进入到主页面时
+        [self.navigationController.navigationBar setBackgroundImage:[Util createImageWithColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.9]] forBarMetrics:UIBarMetricsDefault];
+        
+        [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
+        [self.navigationController.navigationBar setTitleTextAttributes:
+         @{NSFontAttributeName:[UIFont systemFontOfSize:17],
+           NSForegroundColorAttributeName:[UIColor blackColor]}];
+    }
+    else
+    {
+        //进入到本页面时
+        [self.navigationController.navigationBar setBackgroundImage:[Util createImageWithColor:[UIColor colorWithRed:237 / 255.0f green:130 / 255.0f blue:86 / 255.0f alpha:1]] forBarMetrics:UIBarMetricsDefault];
+        
+        [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+        [self.navigationController.navigationBar setTitleTextAttributes:
+         @{NSFontAttributeName:[UIFont systemFontOfSize:17],
+           NSForegroundColorAttributeName:[UIColor whiteColor]}];
     }
 }
 
