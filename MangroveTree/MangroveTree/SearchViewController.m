@@ -12,6 +12,7 @@
 #import "SearchTypeCell.h"
 #import "SearchHeaderView.h"
 #import "SearchResultCell.h"
+#import "DBSearchTool.h"
 
 @interface SearchViewController () <UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -35,6 +36,8 @@
 @property (nonatomic, strong) NSMutableArray * titleArray;
 @property (nonatomic, strong) NSMutableArray * subTitleArray;
 @property (nonatomic, strong) NSMutableArray * rightArray;
+@property (nonatomic, strong) NSMutableArray * searchResult;
+@property (nonatomic, strong) NSMutableArray * displayResult;
 
 @end
 
@@ -46,7 +49,8 @@
     
     self.segmentSelect = YES;
     self.tableViewShow = NO;
-    
+    self.searchResult = [NSMutableArray array];
+    self.displayResult = [NSMutableArray array];
     [self.searchTextFlied setValue:[UIColor colorWithRed:247 / 255.0f green:247 / 255.0f blue:247 / 255.0f alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
     [self.searchTextFlied setValue:[UIFont boldSystemFontOfSize:14.5] forKeyPath:@"_placeholderLabel.font"];
     
@@ -352,7 +356,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return _displayResult.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -399,6 +403,63 @@
             self.searchTableView.frame = rect;
         }];
     }
+}
+//根据搜索框内容搜索
+- (void)queryModelByText:(NSString *)text
+{
+    NSArray * arr = [[DBSearchTool shareDBSearchTool] queryByKeyWord:text];
+    [_searchResult removeAllObjects];
+    arr = [self sortBySerachResult:arr];
+    [_displayResult addObjectsFromArray:arr];
+    
+//    if (_searchResult.count>kDisplayCount) {
+//        for (int i = 0; i<kDisplayCount; i++) {
+//            [_displayResult addObject:_searchResult[i]];
+//        }
+//    }
+//    else
+//    {
+//        [_displayResult addObjectsFromArray:arr];
+//    }
+    [self.searchTableView reloadData];
+}
+//根据typeName搜索
+- (void)queryByTypeName:(NSString *)typeName
+{
+    NSArray * results = [[DBSearchTool shareDBSearchTool] queryByTypeName:typeName];
+    [_searchResult removeAllObjects];
+    results = [self sortBySerachResult:results];
+    [_searchResult addObjectsFromArray:results];
+//    if (_searchResult.count>kDisplayCount) {
+//        [_displayResult removeAllObjects];
+//        for (int i = 0; i<kDisplayCount; i++) {
+//            [_displayResult addObject:_searchResult[i]];
+//        }
+//    }
+//    else
+//    {
+//        [_displayResult addObjectsFromArray:results];
+//    }
+    [self.searchResultButton setTitle:typeName forState:UIControlStateNormal];
+    
+    [self.searchTableView reloadData];
+}
+
+//对搜索结果按照mid进行排序
+- (NSArray *)sortBySerachResult:(NSArray *)result
+{
+    int mapID = [FMKLocationServiceManager shareLocationServiceManager].currentMapCoord.mapID;
+    NSArray * sortArr = [result sortedArrayUsingComparator:^NSComparisonResult(QueryDBModel * model1, QueryDBModel * model2) {
+        int differentValue1 = model1.mid.intValue - mapID;
+        int differentValue2 = model2.mid.intValue - mapID;
+        if (differentValue1>differentValue2) {
+            return NSOrderedDescending;
+        }
+        else
+            return NSOrderedAscending;
+    }];
+    
+    return sortArr;
 }
 
 @end
