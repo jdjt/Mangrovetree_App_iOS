@@ -40,7 +40,10 @@
     if ([user.mobile isEqualToString:@""])
         [self performSegueWithIdentifier:@"newPhone" sender:nil];
     else
-        _acctountLabel.text = user.mobile;
+    {
+        NSString *string=[user.mobile stringByReplacingOccurrencesOfString:[user.mobile substringWithRange:NSMakeRange(3,4)]withString:@"****"];
+        _acctountLabel.text = string;
+    }
 }
 
 // 网络请求注册代理
