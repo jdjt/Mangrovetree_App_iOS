@@ -11,11 +11,11 @@
 
 -(void)bootstrapStyle{
     self.layer.borderWidth = 1;
-    self.layer.cornerRadius = 4.0;
+    self.layer.cornerRadius = 8.0;
     self.layer.masksToBounds = YES;
     [self setAdjustsImageWhenHighlighted:NO];
     [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.titleLabel setFont:[UIFont systemFontOfSize:14.0]];
+//    [self.titleLabel setFont:[UIFont systemFontOfSize:14.0]];
 }
 
 -(void)setLabelFont:(UIFont*)font
@@ -38,7 +38,7 @@
     self.backgroundColor = [UIColor colorWithRed:237/255.0 green:130/255.0 blue:86/255.0 alpha:1];
     self.layer.borderColor = [[UIColor colorWithRed:237/255.0 green:130/255.0 blue:86/255.0 alpha:1] CGColor];
     [self setBackgroundImage:[self buttonImageFromColor:[UIColor colorWithRed:237/255.0 green:130/255.0 blue:86/255.0 alpha:1]] forState:UIControlStateHighlighted];
-    [self.titleLabel setFont:[UIFont systemFontOfSize:14.0]];
+//    [self.titleLabel setFont:[UIFont systemFontOfSize:14.0]];
 }
 
 -(void)whiteBorderStyle
