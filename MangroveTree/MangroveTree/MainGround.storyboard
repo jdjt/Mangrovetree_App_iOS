@@ -373,7 +373,7 @@
                                             </button>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入您要去的地方" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="lIs-Zg-Ezq">
                                                 <rect key="frame" x="77" y="19" width="228" height="19"/>
-                                                <color key="tintColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="tintColor" red="0.67843137249999996" green="0.6705882353" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14.5"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="next"/>
@@ -407,21 +407,15 @@
                                                     <action selector="tapSearch:" destination="aH1-1m-eUi" eventType="touchUpInside" id="mUC-EF-LH9"/>
                                                 </connections>
                                             </button>
-                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p19-W3-xlk">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p19-W3-xlk">
                                                 <rect key="frame" x="55" y="18" width="61" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20.5" id="RTn-rl-Yn4"/>
                                                     <constraint firstAttribute="width" constant="61" id="oBC-zU-3yN"/>
                                                 </constraints>
-                                                <state key="normal" image="deleteBtn" backgroundImage="searchBtn_cancel">
-                                                    <attributedString key="attributedTitle">
-                                                        <fragment content="餐厅">
-                                                            <attributes>
-                                                                <color key="NSColor" red="1" green="0.50196078431372548" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <font key="NSFont" metaFont="smallSystem"/>
-                                                            </attributes>
-                                                        </fragment>
-                                                    </attributedString>
+                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                <state key="normal" title="餐厅" image="deleteBtn" backgroundImage="searchBtn_cancel">
+                                                    <color key="titleColor" red="1" green="0.50196078431372548" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="cancelSearchStatus:" destination="aH1-1m-eUi" eventType="touchUpInside" id="m3z-Jr-mTH"/>
@@ -522,14 +516,14 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="searchType" id="wgE-e9-8ZQ" customClass="SearchTypeCell">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="center" reuseIdentifier="searchType" id="wgE-e9-8ZQ" customClass="SearchTypeCell">
                                                         <rect key="frame" x="0.0" y="17" width="61" height="20.5"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                             <rect key="frame" x="0.0" y="0.0" width="61" height="20.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ppc-K1-aFX">
+                                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ppc-K1-aFX">
                                                                     <rect key="frame" x="0.0" y="0.0" width="61" height="21"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                                     <state key="normal" title="西餐厅" backgroundImage="searchBtn_white">
@@ -716,7 +710,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="主题餐厅·三亚湾红树林度假世界" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uPO-M4-Ugd">
-                                                    <rect key="frame" x="56" y="39" width="175.5" height="12"/>
+                                                    <rect key="frame" x="56" y="39" width="176" height="12"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="12" id="zki-uV-sIt"/>
                                                     </constraints>
@@ -725,7 +719,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9cS-u3-uiX">
-                                                    <rect key="frame" x="59" y="58.5" width="296" height="1"/>
+                                                    <rect key="frame" x="59" y="59" width="296" height="1"/>
                                                     <color key="backgroundColor" red="0.81568627450980391" green="0.81568627450980391" blue="0.81568627450980391" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="mSA-Oy-wob"/>
