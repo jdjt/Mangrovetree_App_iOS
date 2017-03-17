@@ -72,7 +72,7 @@
         <scene sceneID="jqW-Jt-GHL">
             <objects>
                 <navigationController storyboardIdentifier="centerNav" id="l7G-pg-Sib" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Akx-Pb-2hN">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Akx-Pb-2hN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -97,7 +97,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xpc-JH-pRS" userLabel="MapView">
-                                <rect key="frame" x="-0.5" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="-1" y="0.0" width="376" height="667"/>
                                 <connections>
                                     <segue destination="I7M-cL-o8d" kind="embed" identifier="showMap" id="gcf-au-cLb"/>
                                 </connections>
@@ -314,7 +314,7 @@
                         <viewControllerLayoutGuide type="bottom" id="sXV-Uc-EK2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="QJ9-LJ-y5t">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="376" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -328,7 +328,7 @@
         <scene sceneID="rQf-b2-029">
             <objects>
                 <navigationController id="I7M-cL-o8d" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="AA1-gP-46G">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AA1-gP-46G">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -376,7 +376,7 @@
                                                 <color key="tintColor" red="0.67843137249999996" green="0.6705882353" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14.5"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="next"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="aH1-1m-eUi" id="f02-yH-Zkm"/>
                                                 </connections>
@@ -393,7 +393,6 @@
                                                 <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="Di7-Lc-hyd"/>
-                                                    <constraint firstAttribute="width" constant="250" id="dDN-vQ-e8G"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6i7-DE-QOH">
@@ -434,6 +433,7 @@
                                             <constraint firstItem="rFl-i2-E4V" firstAttribute="leading" secondItem="Acw-yh-hLQ" secondAttribute="leading" constant="7" id="ZAq-T8-Jj8"/>
                                             <constraint firstItem="PDY-qt-dbv" firstAttribute="centerY" secondItem="Acw-yh-hLQ" secondAttribute="centerY" id="dEk-KM-3Ok"/>
                                             <constraint firstItem="lIs-Zg-Ezq" firstAttribute="leading" secondItem="PDY-qt-dbv" secondAttribute="trailing" constant="4" id="eI4-Wb-lJy"/>
+                                            <constraint firstItem="6i7-DE-QOH" firstAttribute="leading" secondItem="Sga-7i-AB1" secondAttribute="trailing" constant="4" id="tKg-Tr-TSU"/>
                                             <constraint firstItem="rFl-i2-E4V" firstAttribute="centerY" secondItem="Acw-yh-hLQ" secondAttribute="centerY" id="tQk-wx-ALF"/>
                                             <constraint firstItem="Sga-7i-AB1" firstAttribute="leading" secondItem="rFl-i2-E4V" secondAttribute="trailing" constant="20" id="xKQ-NA-UU3"/>
                                         </constraints>
@@ -610,14 +610,14 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="searchType" id="gaV-KG-asr" customClass="SearchTypeCell">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="center" reuseIdentifier="searchType" id="gaV-KG-asr" customClass="SearchTypeCell">
                                                         <rect key="frame" x="0.0" y="50" width="61" height="20.5"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                             <rect key="frame" x="0.0" y="0.0" width="61" height="20.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="POV-EL-1sh">
+                                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="POV-EL-1sh">
                                                                     <rect key="frame" x="0.0" y="0.0" width="61" height="21"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                                     <state key="normal" title="西餐厅" backgroundImage="searchBtn_white">
@@ -895,7 +895,7 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Gzy-HC-XED">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Gzy-HC-XED">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

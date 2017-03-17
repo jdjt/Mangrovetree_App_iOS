@@ -37,6 +37,9 @@
 #import "MySingleton.h"
 #import "UIButton+Bootstrap.h"
 #import "FMMapKit.h"
+#import "MJRefresh.h"
+#import "InforModel.h"
+#import "UIImageView+WebCache.h"
 
 #endif
 

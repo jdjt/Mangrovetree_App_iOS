@@ -11,7 +11,11 @@
 @interface InforView ()<MTRequestNetWorkDelegate>
 
 @property (nonatomic, assign) BOOL hideView;
-@property (nonatomic, strong) MTRequestNetwork *requesNetWork;
+@property (nonatomic, strong) NSURLSessionTask *requesNetWork;
+@property (weak, nonatomic) IBOutlet UIImageView *image;
+@property (weak, nonatomic) IBOutlet UILabel *name;
+@property (weak, nonatomic) IBOutlet UILabel *text;
+
 @end
 
 @implementation InforView
@@ -21,7 +25,7 @@
     InforView * view = [[NSBundle mainBundle] loadNibNamed:@"InforView" owner:nil  options:nil][0];
     view.alpha = 0.0f;
     view.hideView = NO;
-    [view.requesNetWork registerDelegate:view];
+    [[MTRequestNetwork defaultManager] registerDelegate:view];
     return view;
 }
 
@@ -53,23 +57,35 @@
 }
 - (void)requsrtActivityInforByActivityCode:(NSString *)activityCode
 {
-    
+    //获取详细列表
+    NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithCapacity:2];
+    params = [NSMutableDictionary dictionaryWithDictionary:@{@"id":[Util getUUID],@"send":@{@"code":activityCode}}];
+    self.requesNetWork = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
+                                                                          webURL:URL_ACTIVITY_DETAIL
+                                                                          params:params
+                                                                      withByUser:YES andOldInterfaces:NO];
 }
+
 - (void)startRequest:(NSURLSessionTask *)task
 {
     
 }
+
 - (void)pushResponseResultsSucceed:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg andData:(NSMutableArray *)datas
 {
-    
+    InforModel *model = datas[0];
+    [self.image sd_setImageWithURL:[NSURL URLWithString:model.imgurl] placeholderImage:[UIImage new]];
+    self.name.text = model.name;
+    self.text.text = model.abstracts;
 }
+
 - (void)pushResponseResultsFailing:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg
 {
     
 }
 - (void)dealloc
 {
-    [self.requesNetWork removeDelegate:self];
+    [[MTRequestNetwork defaultManager] removeDelegate:self];
 }
 /*
 // Only override drawRect: if you perform custom drawing.

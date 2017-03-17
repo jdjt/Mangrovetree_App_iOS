@@ -111,4 +111,7 @@
 // 确认任务接口
 #define URL_TASK_CONFIRM                    @"/hotelservice/checkin/service/confirm_task"
 
+// 新接口获取业态详情
+#define URL_ACTIVITY_DETAIL                 @"/syw_projectmanager/activitydetail/getActivitydetail"
+
 #endif /* NetworkInterface_h */

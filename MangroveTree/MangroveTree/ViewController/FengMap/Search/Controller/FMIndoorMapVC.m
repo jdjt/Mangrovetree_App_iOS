@@ -960,7 +960,12 @@ int const kCallingServiceCount = 5;
 	[self.naviPopView setupModelInfoByNodel:queryModel];//设置模型弹框信息
 	
 	[self.naviPopView show];
-    [self.inforView show];
+    if (queryModel.activityCode != nil && ![queryModel.activityCode isEqualToString:@""])
+    {
+        [self.inforView show];
+        [self.inforView requsrtActivityInforByActivityCode:queryModel.activityCode];
+    }
+    
 	[self.naviTopView hide];
 #warning 这里需要区分是否能拿到定位服务
     FMKMapCoord startMapCoord = [self getDefaultMapCoord]; //[FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;
@@ -1027,7 +1032,6 @@ int const kCallingServiceCount = 5;
 	[self drawLineOnMapByGroupID:_displayGroupID];
 //	[self.modelInfoPopView hide];
 	[self.naviPopView show];
-    [self.inforView show];
 	[self setEnableLocationBtnFrameByView:self.naviPopView];
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(YES)];
 }
