@@ -41,7 +41,6 @@
     //设置按钮样式
     [_verificationButton ukeyStyle];
     [_nextButton loginStyle];
-    [_verificationButton setTitleColor:[UIColor colorWithRed:122/255.0f green:177/255.0f blue:147/255.0f alpha:1] forState:UIControlStateNormal];
     
     _accounttextfield.delegate = self;
     
@@ -263,7 +262,7 @@
         _verificationButton.enabled = YES;
         [_connectionTimer invalidate];
         _connectionTimer = nil;
-        [_verificationButton setTitle:@"验证码" forState:UIControlStateNormal];
+        [_verificationButton setTitle:@"发送验证码" forState:UIControlStateNormal];
     }
     
 }

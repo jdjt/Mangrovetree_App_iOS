@@ -378,7 +378,7 @@
         [_connectionTimer invalidate];
         _validationButton.enabled = YES;
         _connectionTimer = nil;
-        [_validationButton setTitle:@"验证码" forState:UIControlStateNormal];
+        [_validationButton setTitle:@"发送验证码" forState:UIControlStateNormal];
     }
     
 }
