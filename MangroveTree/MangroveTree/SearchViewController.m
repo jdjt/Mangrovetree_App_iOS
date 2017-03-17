@@ -13,6 +13,7 @@
 #import "SearchHeaderView.h"
 #import "SearchResultCell.h"
 #import "DBSearchTool.h"
+#import "FMIndoorMapVC.h"
 
 @interface SearchViewController () <UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -38,6 +39,7 @@
 @property (nonatomic, strong) NSMutableArray * rightArray;
 @property (nonatomic, strong) NSMutableArray * searchResult;
 @property (nonatomic, strong) NSMutableArray * displayResult;
+
 
 @end
 
@@ -68,6 +70,12 @@
     UITapGestureRecognizer * tap4 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction:)];
     [self.leftCollectionView addGestureRecognizer:tap3];
     [self.rightCollectionView addGestureRecognizer:tap4];
+    
+    __weak typeof(self)wSelf = self;
+
+    [self.searchTableView addLegendFooterWithRefreshingBlock:^{
+        [wSelf updateData];
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -146,6 +154,7 @@
     else
     {
         self.searchResultButton.hidden = YES;
+        [self.searchTextFlied resignFirstResponder];
         [self toSearchByText:self.searchTextFlied.text];
     }
 }
@@ -204,17 +213,24 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    CGRect rect = self.segmentBackground.frame;
-    rect.origin.x = (scrollView.contentOffset.x / kScreenWidth) * rect.size.width;
-    self.leftLabel.textColor = [UIColor colorWithRed:(255 - (172 * (scrollView.contentOffset.x / kScreenWidth))) / 255.0f green:(255 - (172 * (scrollView.contentOffset.x / kScreenWidth))) / 255.0f blue:(255 - (172 * (scrollView.contentOffset.x / kScreenWidth))) / 255.0f alpha:1];
-    self.rightLabel.textColor = [UIColor colorWithRed:(83 + (172 * (scrollView.contentOffset.x / kScreenWidth))) / 255.0f green:(83 + (172 * (scrollView.contentOffset.x / kScreenWidth))) / 255.0f blue:(83 + (172 * (scrollView.contentOffset.x / kScreenWidth))) / 255.0f alpha:1];
-    self.segmentBackground.frame = rect;
+    if (scrollView == self.bottomScroll)
+    {
+        CGRect rect = self.segmentBackground.frame;
+        rect.origin.x = (scrollView.contentOffset.x / kScreenWidth) * rect.size.width;
+        self.leftLabel.textColor = [UIColor colorWithRed:(255 - (172 * (scrollView.contentOffset.x / kScreenWidth))) / 255.0f green:(255 - (172 * (scrollView.contentOffset.x / kScreenWidth))) / 255.0f blue:(255 - (172 * (scrollView.contentOffset.x / kScreenWidth))) / 255.0f alpha:1];
+        self.rightLabel.textColor = [UIColor colorWithRed:(83 + (172 * (scrollView.contentOffset.x / kScreenWidth))) / 255.0f green:(83 + (172 * (scrollView.contentOffset.x / kScreenWidth))) / 255.0f blue:(83 + (172 * (scrollView.contentOffset.x / kScreenWidth))) / 255.0f alpha:1];
+        self.segmentBackground.frame = rect;
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    [scrollView setContentOffset:CGPointMake((int)(scrollView.contentOffset.x / kScreenWidth) * kScreenWidth,0)];
-    [self changeSegmentBackgroundTextColor:(int)(scrollView.contentOffset.x / kScreenWidth) > 0 ? NO : YES];
+    if (scrollView == self.bottomScroll)
+    {
+        [scrollView setContentOffset:CGPointMake((int)(scrollView.contentOffset.x / kScreenWidth) * kScreenWidth,0)];
+        [self changeSegmentBackgroundTextColor:(int)(scrollView.contentOffset.x / kScreenWidth) > 0 ? NO : YES];
+    }
+    
 }
 
 #pragma mark - collectionDelegate
@@ -358,18 +374,44 @@
     {
         text = self.rightArray[indexPath.row];
     }
+    
     [self toSearchByText:text];
     [self showSearchResultButtonBytapCollectionItemWithTitle:text];
 }
 
-#pragma textflied delegate
+#pragma  mark - textflied delegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     return [textField resignFirstResponder];
 }
 
-#pragma tableView Delegate
+- (BOOL)textFieldShouldClear:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    textField.text = @"";
+    [self searchTableShow:NO];
+    [_searchResult removeAllObjects];
+    [_displayResult removeAllObjects];
+    return NO;
+}
+- (void)textFieldTextDidChange:(NSNotification *)noti
+{
+    UITextField * textField = (UITextField *)noti.object;
+    if (textField.text.length>0) {
+        [self queryModelByText:textField.text];
+    }
+    else
+    {
+        [_searchResult removeAllObjects];
+        [_displayResult removeAllObjects];
+        [self.searchTableView reloadData];
+        [self searchTableShow:NO];
+        [textField resignFirstResponder];
+    }
+}
+
+#pragma  mark - tableView Delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -381,12 +423,24 @@
     return _displayResult.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SearchResultCell * cell = [tableView dequeueReusableCellWithIdentifier:@"searchResult"];
-    
-    
+    QueryDBModel * model = _displayResult[indexPath.row];
+    cell.subTitleLabel.text = model.name;
+    cell.detailLocationLabel.text = [NSString stringWithFormat:@"%@·%@",model.typeName,model.address];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    QueryDBModel * model = _displayResult[indexPath.row];
+    [self didSelectedCellToMapViewByModel:model];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -394,14 +448,81 @@
     [self.view endEditing:YES];
 }
 
+#pragma mark - Fun
+
+//加载更多
+- (void)updateData
+{
+    [_displayResult removeAllObjects];
+    [_displayResult addObjectsFromArray:_searchResult];
+    [self.searchTableView.legendFooter noticeNoMoreData];
+    [self.searchTableView reloadData];
+}
+
+- (void)didSelectedCellToMapViewByModel:(QueryDBModel *)model;
+{
+    __weak typeof(self)wSelf = self;
+    if ([model.mid isEqualToString:@(kOutdoorMapID).stringValue]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"postSelectedPoi" object:model];
+        for (UIViewController * outdoorVC in wSelf.navigationController.viewControllers) {
+            if ([outdoorVC isKindOfClass:[MapViewController class]])
+            {
+                [self.navigationController popToViewController:outdoorVC animated:YES];
+                break;
+            }
+        }
+    }
+    else
+    {
+        [wSelf testIndoorIsExistByDBModel:model];
+    }
+}
+
+//判断室内地图是否存在  跳转室内地图 插标
+- (void)testIndoorIsExistByDBModel:(QueryDBModel *)model
+{
+    __weak typeof(self)wSelf = self;
+    BOOL indoorMapVCExist = NO;
+    BOOL isNeedLocate  = NO;
+    if ([FMKLocationServiceManager shareLocationServiceManager].currentMapCoord.mapID == model.mid.intValue)
+        isNeedLocate = YES;
+    else
+        isNeedLocate = NO;
+    
+    for (UIViewController * viewController in wSelf.navigationController.viewControllers)
+    {
+        if ([viewController isKindOfClass:[FMIndoorMapVC class]])
+        {
+            FMIndoorMapVC * VC = (FMIndoorMapVC *)viewController;
+            VC.dbModel = model;
+            VC.isNeedLocate = isNeedLocate;
+            indoorMapVCExist = YES;
+            MBProgressHUD *HUD =[MBProgressHUD showHUDAddedTo:[AppDelegate sharedDelegate].window animated:YES];
+            HUD.labelText = @"正在加载地图，请稍等";
+            [HUD show:YES];
+            [wSelf.navigationController popToViewController:VC animated:YES];
+        }
+    }
+    if (!indoorMapVCExist) {
+        FMIndoorMapVC * vc = [[FMIndoorMapVC alloc] initWithMapID:model.mid];
+        vc.dbModel = model;
+        vc.isNeedLocate = isNeedLocate;
+        MBProgressHUD *HUD =[MBProgressHUD showHUDAddedTo:[AppDelegate sharedDelegate].window animated:YES];
+        HUD.labelText = @"正在加载地图，请稍等";
+        [HUD show:YES];
+        [wSelf.navigationController pushViewController:vc animated:YES];
+    }
+}
+
 - (void)toSearchByText:(NSString *)text
 {
-#warning 根据text搜索本地数据 待补充
+    [self queryBySubTypeName:text];
     [self searchTableShow:YES];
 }
 
 - (IBAction)cancelSearchStatus:(id)sender
 {
+    [self.searchTextFlied resignFirstResponder];
     [self searchTableShow:NO];
 }
 
@@ -414,16 +535,17 @@
     if (show)
     {
         rect.size.height = kScreenHeight - 76 - 49;
-        self.searchTableView.frame = rect;
-        [UIView animateWithDuration:0.4 animations:^{
+        [UIView animateWithDuration:0.2 animations:^{
             self.searchTableView.frame = rect;
+            self.tableViewHeight.constant = rect.size.height;
         }];
     }
     else
     {
         rect.size.height = 0;
-        [UIView animateWithDuration:0.4 animations:^{
+        [UIView animateWithDuration:0.2 animations:^{
             self.searchTableView.frame = rect;
+            self.tableViewHeight.constant = rect.size.height;
         }];
     }
     self.tableViewShow = show;
@@ -446,18 +568,22 @@
 {
     NSArray * arr = [[DBSearchTool shareDBSearchTool] queryByKeyWord:text];
     [_searchResult removeAllObjects];
+    [_displayResult removeAllObjects];
     arr = [self sortBySerachResult:arr];
     [_displayResult addObjectsFromArray:arr];
-    
-//    if (_searchResult.count>kDisplayCount) {
-//        for (int i = 0; i<kDisplayCount; i++) {
-//            [_displayResult addObject:_searchResult[i]];
-//        }
-//    }
-//    else
-//    {
-//        [_displayResult addObjectsFromArray:arr];
-//    }
+    if (_searchResult.count > 10) {
+        for (int i = 0; i < 10; i++) {
+            [_displayResult addObject:_searchResult[i]];
+        }
+    }
+    else
+    {
+        [_displayResult addObjectsFromArray:arr];
+    }
+    if (_searchResult.count <= 10)
+        [self.searchTableView.legendFooter noticeNoMoreData];
+    else
+        [self.searchTableView.legendFooter resetNoMoreData];
     [self.searchTableView reloadData];
 }
 //根据typeName搜索
@@ -465,23 +591,48 @@
 {
     NSArray * results = [[DBSearchTool shareDBSearchTool] queryByTypeName:typeName];
     [_searchResult removeAllObjects];
+    [_displayResult removeAllObjects];
+
     results = [self sortBySerachResult:results];
     [_searchResult addObjectsFromArray:results];
-//    if (_searchResult.count>kDisplayCount) {
-//        [_displayResult removeAllObjects];
-//        for (int i = 0; i<kDisplayCount; i++) {
-//            [_displayResult addObject:_searchResult[i]];
-//        }
-//    }
-//    else
-//    {
-//        [_displayResult addObjectsFromArray:results];
-//    }
-    [self.searchResultButton setTitle:typeName forState:UIControlStateNormal];
-    
+    if (_searchResult.count > 10) {
+        for (int i = 0; i < 10; i++) {
+            [_displayResult addObject:_searchResult[i]];
+        }
+    }
+    else
+    {
+        [_displayResult addObjectsFromArray:results];
+    }
+    if (_searchResult.count <= 10)
+        [self.searchTableView.legendFooter noticeNoMoreData];
+    else
+        [self.searchTableView.legendFooter resetNoMoreData];
     [self.searchTableView reloadData];
 }
+- (void)queryBySubTypeName:(NSString *)subTypeName
+{
+    NSArray * results = [[DBSearchTool shareDBSearchTool] queryBySubTypeName:subTypeName];
+    [_searchResult removeAllObjects];
+    [_displayResult removeAllObjects];
+    results = [self sortBySerachResult:results];
+    [_searchResult addObjectsFromArray:results];
+    if (_searchResult.count > 10) {
+        for (int i = 0; i < 10; i++) {
+            [_displayResult addObject:_searchResult[i]];
+        }
+    }
+    else
+    {
+        [_displayResult addObjectsFromArray:results];
+    }
+    if (_searchResult.count <= 10)
+        [self.searchTableView.legendFooter noticeNoMoreData];
+    else
+        [self.searchTableView.legendFooter resetNoMoreData];
+    [self.searchTableView reloadData];
 
+}
 //对搜索结果按照mid进行排序
 - (NSArray *)sortBySerachResult:(NSArray *)result
 {
@@ -497,6 +648,10 @@
     }];
     
     return sortArr;
+}
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

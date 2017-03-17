@@ -18,5 +18,6 @@ typedef void(^HideViewBlock)(BOOL show);
 
 - (void)show;
 - (void)hide;
+- (void)requsrtActivityInforByActivityCode:(NSString *)activityCode;
 
 @end

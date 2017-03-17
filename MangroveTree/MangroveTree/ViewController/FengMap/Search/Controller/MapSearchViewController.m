@@ -48,7 +48,8 @@ const int kDisplayCount = 4;
 
 @implementation MapSearchViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 		
     self.view.backgroundColor = [UIColor whiteColor];
@@ -83,7 +84,8 @@ const int kDisplayCount = 4;
 	}
 }
 
-- (void)setupNav {
+- (void)setupNav
+{
     // 添加搜索框
     CGFloat seaViewH = 35;
     UIView *seaView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, seaViewH)];
@@ -111,7 +113,8 @@ const int kDisplayCount = 4;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextDidEndEditing:) name:UITextFieldTextDidEndEditingNotification object:tf];
 }
 
-- (void)createTableView {
+- (void)createTableView
+{
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kTableViewHeight) style:UITableViewStylePlain];
     [self.view addSubview:tableView];
 	
@@ -166,13 +169,15 @@ const int kDisplayCount = 4;
 }
 
 #pragma mark - UITextFieldDelegate
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
     [textField resignFirstResponder];
 	
     return YES;
 }
 
-- (void)textFieldTextDidChange:(NSNotification *)noti {
+- (void)textFieldTextDidChange:(NSNotification *)noti
+{
 	UITextField * textField = (UITextField *)noti.object;
 	if (textField.text.length>0) {
 		[self queryModelByText:textField.text];
@@ -231,7 +236,8 @@ const int kDisplayCount = 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (tableView == self.tableView) {
+    if (tableView == self.tableView)
+    {
         NSString *ID = @"MapSearchViewTableViewCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
         if (!cell) {
