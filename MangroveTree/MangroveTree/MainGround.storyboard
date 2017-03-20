@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QXi-Tb-bQc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QXi-Tb-bQc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -97,7 +97,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xpc-JH-pRS" userLabel="MapView">
-                                <rect key="frame" x="-1" y="0.0" width="376" height="667"/>
+                                <rect key="frame" x="-0.5" y="0.0" width="375" height="667"/>
                                 <connections>
                                     <segue destination="I7M-cL-o8d" kind="embed" identifier="showMap" id="gcf-au-cLb"/>
                                 </connections>
@@ -108,53 +108,6 @@
                                     <segue destination="yPX-vf-5QQ" kind="embed" identifier="showMsg" id="suw-zj-rJz"/>
                                 </connections>
                             </containerView>
-                            <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ek0-io-xXx">
-                                <rect key="frame" x="0.0" y="555" width="375" height="63"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YhY-W0-yEP">
-                                        <rect key="frame" x="25" y="62" width="324" height="1"/>
-                                        <color key="backgroundColor" red="0.67843137254901964" green="0.6705882352941176" blue="0.66274509803921566" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="EwM-UM-Pi3"/>
-                                        </constraints>
-                                    </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的位置" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W1C-nc-Mdw">
-                                        <rect key="frame" x="28" y="13" width="319" height="13"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="13" id="jgb-y6-RdY"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
-                                        <color key="textColor" red="0.1764705882352941" green="0.1764705882352941" blue="0.1764705882352941" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(未获取到您的当前位置)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RYD-hU-3FT">
-                                        <rect key="frame" x="28" y="36" width="319" height="11"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="10.5" id="8s7-sC-HF3"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="10.5"/>
-                                        <color key="textColor" red="0.33725490196078434" green="0.33725490196078434" blue="0.33725490196078434" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstItem="W1C-nc-Mdw" firstAttribute="top" secondItem="Ek0-io-xXx" secondAttribute="top" constant="13" id="3ZE-rd-Gvb"/>
-                                    <constraint firstItem="YhY-W0-yEP" firstAttribute="width" secondItem="Ek0-io-xXx" secondAttribute="width" multiplier="1074/1242" id="5pL-SJ-Ts9"/>
-                                    <constraint firstAttribute="height" constant="63" id="BZE-CS-vhc"/>
-                                    <constraint firstItem="RYD-hU-3FT" firstAttribute="top" secondItem="W1C-nc-Mdw" secondAttribute="bottom" constant="10" id="CiT-Lc-XWi"/>
-                                    <constraint firstAttribute="trailing" secondItem="W1C-nc-Mdw" secondAttribute="trailing" constant="28" id="DEG-3b-Ecu"/>
-                                    <constraint firstItem="YhY-W0-yEP" firstAttribute="centerX" secondItem="Ek0-io-xXx" secondAttribute="centerX" id="fXz-FI-VtU"/>
-                                    <constraint firstItem="W1C-nc-Mdw" firstAttribute="leading" secondItem="Ek0-io-xXx" secondAttribute="leading" constant="28" id="iof-1C-gsH"/>
-                                    <constraint firstAttribute="bottom" secondItem="YhY-W0-yEP" secondAttribute="bottom" id="mKh-Qp-bQV"/>
-                                    <constraint firstItem="RYD-hU-3FT" firstAttribute="leading" secondItem="Ek0-io-xXx" secondAttribute="leading" constant="28" id="tH2-OD-VJJ"/>
-                                    <constraint firstAttribute="trailing" secondItem="RYD-hU-3FT" secondAttribute="trailing" constant="28" id="uGM-BO-Wzw"/>
-                                </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="ga7-P4-tqf" appends="YES" id="JQw-2Q-fp4"/>
-                                </connections>
-                            </view>
                             <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6n8-jj-txz">
                                 <rect key="frame" x="0.0" y="618" width="375" height="49"/>
                                 <subviews>
@@ -264,8 +217,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Qm7-y1-NDh" firstAttribute="centerX" secondItem="BKf-ij-IEq" secondAttribute="centerX" id="3iZ-MR-vf6"/>
-                            <constraint firstItem="Ek0-io-xXx" firstAttribute="leading" secondItem="BKf-ij-IEq" secondAttribute="leading" id="5jP-9s-8yl"/>
-                            <constraint firstItem="6n8-jj-txz" firstAttribute="top" secondItem="Ek0-io-xXx" secondAttribute="bottom" id="6cX-I4-PQE"/>
                             <constraint firstItem="57a-av-jS8" firstAttribute="width" secondItem="BKf-ij-IEq" secondAttribute="width" id="B3X-kx-Zws"/>
                             <constraint firstAttribute="trailing" secondItem="6n8-jj-txz" secondAttribute="trailing" id="BzM-k0-TO7"/>
                             <constraint firstItem="Xpc-JH-pRS" firstAttribute="centerY" secondItem="BKf-ij-IEq" secondAttribute="centerY" id="CkG-kt-Hsd"/>
@@ -276,7 +227,6 @@
                             <constraint firstItem="Xpc-JH-pRS" firstAttribute="centerX" secondItem="BKf-ij-IEq" secondAttribute="centerX" id="hFr-Eu-PSP"/>
                             <constraint firstItem="Xpc-JH-pRS" firstAttribute="height" secondItem="BKf-ij-IEq" secondAttribute="height" id="iHw-RJ-x7c"/>
                             <constraint firstItem="6n8-jj-txz" firstAttribute="leading" secondItem="BKf-ij-IEq" secondAttribute="leading" id="nhm-v0-8DJ"/>
-                            <constraint firstAttribute="trailing" secondItem="Ek0-io-xXx" secondAttribute="trailing" id="qt9-13-Lge"/>
                             <constraint firstAttribute="bottom" secondItem="6n8-jj-txz" secondAttribute="bottom" id="xCv-Zw-GKd"/>
                             <constraint firstItem="Qm7-y1-NDh" firstAttribute="top" secondItem="2rG-TZ-lR7" secondAttribute="bottom" constant="10" id="zOX-K2-aRu"/>
                         </constraints>
@@ -287,8 +237,6 @@
                     <connections>
                         <outlet property="bottomBarView" destination="6n8-jj-txz" id="jWp-Xy-Xaa"/>
                         <outlet property="bottomContraint" destination="bKO-ER-bZT" id="jxk-2c-7Mb"/>
-                        <outlet property="callLocationlabel" destination="RYD-hU-3FT" id="0wJ-Ip-BEu"/>
-                        <outlet property="callView" destination="Ek0-io-xXx" id="P0E-Ce-k76"/>
                         <outlet property="hotelNameButton" destination="Qm7-y1-NDh" id="Djo-lx-ssH"/>
                         <outlet property="messageView" destination="57a-av-jS8" id="FNp-5w-vSF"/>
                         <outlet property="toCallService" destination="DjH-NZ-Zdh" id="myc-fg-fXE"/>
@@ -314,7 +262,7 @@
                         <viewControllerLayoutGuide type="bottom" id="sXV-Uc-EK2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="QJ9-LJ-y5t">
-                        <rect key="frame" x="0.0" y="0.0" width="376" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -328,7 +276,7 @@
         <scene sceneID="rQf-b2-029">
             <objects>
                 <navigationController id="I7M-cL-o8d" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AA1-gP-46G">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="AA1-gP-46G">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

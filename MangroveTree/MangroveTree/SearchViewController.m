@@ -71,6 +71,8 @@
     [self.leftCollectionView addGestureRecognizer:tap3];
     [self.rightCollectionView addGestureRecognizer:tap4];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
+    
     __weak typeof(self)wSelf = self;
 
     [self.searchTableView addLegendFooterWithRefreshingBlock:^{
@@ -375,7 +377,8 @@
         text = self.rightArray[indexPath.row];
     }
     
-    [self toSearchByText:text];
+    [self queryBySubTypeName:text];
+    [self searchTableShow:YES];
     [self showSearchResultButtonBytapCollectionItemWithTitle:text];
 }
 
@@ -398,8 +401,10 @@
 - (void)textFieldTextDidChange:(NSNotification *)noti
 {
     UITextField * textField = (UITextField *)noti.object;
-    if (textField.text.length>0) {
+    if (textField.text.length>0)
+    {
         [self queryModelByText:textField.text];
+        [self searchTableShow:YES];
     }
     else
     {
@@ -516,7 +521,7 @@
 
 - (void)toSearchByText:(NSString *)text
 {
-    [self queryBySubTypeName:text];
+    [self queryModelByText:text];
     [self searchTableShow:YES];
 }
 

@@ -81,7 +81,11 @@
 
 - (void)pushResponseResultsFailing:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg
 {
-    
+    if (task == self.requesNetWork)
+    {
+        [self hide];
+    }
+    NSLog(@"000000000000000000000");
 }
 - (void)dealloc
 {

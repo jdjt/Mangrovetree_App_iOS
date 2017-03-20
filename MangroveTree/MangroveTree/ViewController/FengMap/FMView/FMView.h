@@ -48,6 +48,7 @@ typedef NS_ENUM(NSInteger,ButtonType)
 @property (nonatomic, assign) BOOL moveMapToCenter;
 @property (nonatomic, assign) BOOL showChangMap;
 @property (nonatomic, assign) BOOL isFirstLocate;//判断在导航时是否是第一次定位
+@property (nonatomic, strong) QueryDBModel *queryModel;
 //@property (nonatomic, assign) BOOL inDoorMap;
 //@property (nonatomic, weak) MapViewController *mapVC;
 ///d地图数据路径

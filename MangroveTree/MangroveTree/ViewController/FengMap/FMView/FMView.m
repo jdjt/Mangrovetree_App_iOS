@@ -167,7 +167,7 @@ extern NSString* FMModelSelected;
 - (void)didUpdatePosition:(FMKMapCoord)mapCoord success:(BOOL)success
 {
     _locationMarker.hidden = [FMLocationManager shareLocationManager].isCallingService;
-    _enableLocateBtn.hidden = ![FMLocationManager shareLocationManager].isCallingService;
+//    _enableLocateBtn.hidden = ![FMLocationManager shareLocationManager].isCallingService;
 
     if ([FMLocationManager shareLocationManager].isCallingService == YES) return;
     NSLog(@"室外定位回调%@", NSStringFromFMKMapCoord(mapCoord));
@@ -662,7 +662,6 @@ extern NSString* FMModelSelected;
 	[_enableLocateBtn setBackgroundImage:[UIImage imageNamed:@"location_icon_nomarl"] forState:UIControlStateNormal];
 	[_enableLocateBtn setBackgroundImage:[UIImage imageNamed:@"location_icon_sele"] forState:UIControlStateSelected];
 	[_enableLocateBtn setBackgroundImage:[UIImage imageNamed:@"location_icon_sele"] forState:UIControlStateHighlighted];
-	
 	[self addSubview:_enableLocateBtn];
 	[_enableLocateBtn addTarget:self action:@selector(inDoorMapView:) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -750,11 +749,19 @@ extern NSString* FMModelSelected;
 - (void)didSelectedEnd:(FMKExternalModel *)model
 {
 	[self.naviPopView show];
-    QueryDBModel *queryModel = [[DBSearchTool shareDBSearchTool] queryModelByFid:model.fid];
-    if (queryModel.activityCode != nil && ![queryModel.activityCode isEqualToString:@""])
+    NSLog(@"%@",model.fid);
+    NSString *name = @"";
+    if (self.queryModel.name == nil||[self.queryModel.name isEqualToString:@""])
+        name = model.name;
+    else
+        name = self.queryModel.name;
+    self.queryModel = nil;
+    QueryDBModel *models = [[DBSearchTool shareDBSearchTool] queryModelByFid:model.fid andName:name];
+    
+    if (models.activityCode != NULL && ![models.activityCode isEqualToString:@""])
     {
         [self.inforView show];
-        [self.inforView requsrtActivityInforByActivityCode:queryModel.activityCode];
+        [self.inforView requsrtActivityInforByActivityCode:models.activityCode];
     }
     
 	[self.naviPopView.endPointBtn setTitle:model.name forState:UIControlStateNormal];
@@ -893,7 +900,7 @@ extern NSString* FMModelSelected;
 	[FMNaviAnalyserTool shareNaviAnalyserTool].naviResult = nil;
 	[self.naviTopView hide];
 	[self exit2DMode];//退出2D模式
-//	_enableLocateBtn.hidden = NO;
+	_enableLocateBtn.hidden = NO;
 	FMKExternalModelLayer * modelLayer = [self.fengMapView.map getExternalModelLayerWithGroupID:@"1"];
 	modelLayer.delegate = self;
     [self getCurrentController].centerVC.hotelNameButton.hidden = NO;
@@ -1130,7 +1137,7 @@ extern NSString* FMModelSelected;
     [self hideNaviBar:YES];
 	[self locateMyPosition];//回到我的位置
 	[self.switchMapInfoView hide];
-	//_enableLocateBtn.hidden = YES;
+//	_enableLocateBtn.hidden = YES;
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(YES)];
 }
 
@@ -1177,6 +1184,7 @@ extern NSString* FMModelSelected;
 //将搜索页面得到的模型居中并弹框
 - (void)moveToViewCenterWithDBModel:(QueryDBModel *)model
 {
+    self.queryModel = model;
 	FMKGeoCoord coord = FMKGeoCoordMake(model.gid, FMKMapPointMake(model.x, model.y));
 	[self.fengMapView moveToViewCenterByMapCoord:coord];
 	FMKExternalModelLayer * modelLayer = [self.fengMapView.map getExternalModelLayerWithGroupID:@(model.gid).stringValue];
@@ -1209,7 +1217,7 @@ extern NSString* FMModelSelected;
 
 - (void)mapViewDidUpdate:(FMKMapView *)mapView
 {
-//	_enableLocateBtn.selected = NO;
+	_enableLocateBtn.selected = NO;
 	
 	__weak typeof (self) wSelf = self;
 	self.naviTopView.stopNaviBlock = ^{

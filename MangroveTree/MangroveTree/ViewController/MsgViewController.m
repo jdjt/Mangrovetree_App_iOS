@@ -489,7 +489,11 @@
 
 - (void)pushResponseResultsFailing:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg
 {
-    [MyAlertView showAlert:msg];
+    if (task == self.confirmTask ||task == self.getLastTask||task == self.cancelTask||task == self.sengCallTask||task == self.getUserId)
+    {
+        [MyAlertView showAlert:msg];
+    }
+    
 }
 
 // 取消任务后的操作

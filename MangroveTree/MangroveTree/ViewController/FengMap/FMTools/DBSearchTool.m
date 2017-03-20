@@ -278,6 +278,16 @@ static DBSearchTool * mDbSearcTool = nil;
 	}
 	return nil;
 }
+- (QueryDBModel *)queryModelByFid:(NSString *)fid andName:(NSString *)name
+{
+    NSArray *result = [self queryByKeyWord:name];
+    for (QueryDBModel *ml in result)
+    {
+        if ([ml.fid isEqualToString:fid])
+            return ml;
+    }
+    return nil;
+}
 
 //创建历史纪录数据库
 - (BOOL)createOrOpenSearchHistoryRecordDB

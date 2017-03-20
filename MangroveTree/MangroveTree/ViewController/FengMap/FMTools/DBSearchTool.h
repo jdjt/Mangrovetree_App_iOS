@@ -47,6 +47,7 @@
  *  @return 模型信息
  */
 - (QueryDBModel *)queryModelByFid:(NSString *)fid;
+- (QueryDBModel *)queryModelByFid:(NSString *)fid andName:(NSString *)name;
 
 /**
  *  创建或打开搜索历史纪录数据库

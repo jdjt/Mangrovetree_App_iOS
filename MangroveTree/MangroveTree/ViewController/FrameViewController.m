@@ -25,7 +25,6 @@ NSString* const FMModelSelected = @"FMModelSelected";
 
 @property (strong, nonatomic) FMLocationBuilderInfo *waiterLocation;
 @property (strong, nonatomic) FMLocationBuilderInfo *mySelfLocation;
-@property (weak, nonatomic) IBOutlet UIView *callView;
 @property (weak, nonatomic) IBOutlet UIView *messageView;
 @property (weak, nonatomic) IBOutlet UIView *bottomBarView;
 // 底部栏
@@ -39,7 +38,6 @@ NSString* const FMModelSelected = @"FMModelSelected";
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomContraint;
 
-@property (strong, nonatomic) IBOutlet UILabel *callLocationlabel;
 @property (strong, nonatomic) MsgViewController *msgViewController;
 
 // 导航栏 按钮
@@ -61,16 +59,12 @@ NSString* const FMModelSelected = @"FMModelSelected";
     //self.bottomBarView.hidden = YES;
 	[UIApplication sharedApplication].idleTimerDisabled = YES;//不自动锁屏
     
-    self.callView.hidden = NO;
     self.messageView.hidden = YES;
-    self.callView.clipsToBounds = YES;
-    self.callView.userInteractionEnabled = YES;
     self.topConstraint.constant = kScreenHeight- 64;
     self.bottomContraint.constant = 64- kScreenHeight;
 
     //    self.segmentCallOrNavigation.selectedSegmentIndex = 0;
     self.title = @"红树林导航";
-    self.callLocationlabel.text = [self getCurrentZoneName];
     
     UITapGestureRecognizer * tap1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction:)];
     [self.toSearchView addGestureRecognizer:tap1];
@@ -83,7 +77,6 @@ NSString* const FMModelSelected = @"FMModelSelected";
     self.navigationItem.rightBarButtonItem = self.searchBarButton;
     //监听点击地图，获取模型内的poi
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPoiNames:)  name:FMModelSelected object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideCallView:) name:NotiHideCallView object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startLoadFMMap:) name:NotiLoadFMMap object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backToMain:) name:NotiBackToMain object:nil];
     
@@ -131,8 +124,6 @@ NSString* const FMModelSelected = @"FMModelSelected";
 //            
 //        }];
     }
-    
-    [self startCountDown];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -423,22 +414,17 @@ NSString* const FMModelSelected = @"FMModelSelected";
     {
         name = [self getCurrentZoneName];
     }
-    self.callLocationlabel.text = name;
     [self changeSegment:_lastSelectedIndex];
 }
 
 // 显示callview
 - (void)showCallView:(BOOL)show
 {
-    self.callView.hidden = !show;
-    self.messageView.hidden = YES;
-    self.callView.userInteractionEnabled = YES;
 }
 
 // 显示发送呼叫的结果
 - (void)showCallResult:(BOOL)show
 {
-    self.callView.hidden = show;
     self.messageView.hidden = !show;
     
     CGRect showRect = CGRectMake(0, kScreenHeight - 60, kScreenWidth, kScreenHeight-64);
@@ -470,13 +456,11 @@ NSString* const FMModelSelected = @"FMModelSelected";
     // 地图模式
     if (selectedIndex == 0)
     {
-        self.callView.hidden = YES;
         self.messageView.hidden = YES;
     }
     // 呼叫模式
     else if (selectedIndex == 1)
     {
-        self.callView.hidden = NO;
         self.messageView.hidden = YES;
     }
 }
@@ -570,33 +554,6 @@ NSString* const FMModelSelected = @"FMModelSelected";
 {
     BOOL inDoorMap = [[NSUserDefaults standardUserDefaults] boolForKey:@"inDoorMap"];
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiCurrentLocation object:@(inDoorMap)];
-}
-
-// 定时器
-- (void)startCountDown
-{
-    // 每秒刷新一次
-    if (self.countDownTimer == nil)
-    {
-        self.countDownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f
-                                                               target:self
-                                                             selector:@selector(timerFired)
-                                                             userInfo:nil
-                                                              repeats:YES];
-    }
-}
-
-- (void)timerFired
-{
-    if ([self getCurrentZoneName] == nil || [[self getCurrentZoneName] isEqualToString:@""])
-        self.callLocationlabel.text = @"暂未获取到您当前位置";
-    else
-        self.callLocationlabel.text = [NSString stringWithFormat:@"您当前位于%@",[self getCurrentZoneName]];
-}
-
-- (void)hideCallView:(NSNotification *)noti
-{
-    self.callView.hidden = [noti.object boolValue];
 }
 
 #pragma mark - Navigation
