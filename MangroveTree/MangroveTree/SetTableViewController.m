@@ -21,7 +21,6 @@
     self.navigationController.delegate = self;
     //设置按钮样式
     [self.logoutButton loginStyle];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -64,6 +63,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //点cell的时候，点击时有效果，点击后效果消失
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     if (indexPath.section == 0)
     {
         if (indexPath.row == 0)
@@ -82,12 +84,6 @@
             // 关于红树林导航
             NSLog(@"您点击了关于红树林导航");
         }
-    }
-    else
-    {
-        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-//        cell.selected = NO;
     }
     
 }

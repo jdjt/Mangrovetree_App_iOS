@@ -33,7 +33,10 @@
     self.nameLabel.text = user.nickname;
     //判断是否开通手机
     if (![user.mobile isEqualToString:@""])
-        _phoneNumberLabel.text = user.mobile;
+    {
+        NSString *string=[user.mobile stringByReplacingOccurrencesOfString:[user.mobile substringWithRange:NSMakeRange(3,4)]withString:@"****"];
+        _phoneNumberLabel.text = string;
+    }
 }
 
 #pragma mark - Table view data source

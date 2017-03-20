@@ -24,6 +24,9 @@
     else if ([ident isEqualToString:@MEMBER_INFO])//请求会员信息
     {
         datas = [self parserMembers:dict];
+    }else if ([ident isEqualToString:URL_ACTIVITY_DETAIL])
+    {
+       datas = [self parserInfor:dict];
     }
     //存储数据
     [[DataManager defaultInstance] saveContext];
@@ -70,6 +73,18 @@
     userLogin.email = [mdict objectForKey:@"email"];
     userLogin.openBalabce = [mdict objectForKey:@"openBalance"];
     [array addObject:userLogin];
+    return array;
+}
+
+- (NSMutableArray *)parserInfor:(NSData *)dict
+{
+    NSMutableArray *array = [NSMutableArray array];
+    NSMutableDictionary * mdict = (NSMutableDictionary*)dict;
+    InforModel *model = [[InforModel alloc] init];
+    model.name = mdict[@"receive"][@"base_info"][@"name"];
+    model.abstracts = mdict[@"receive"][@"base_info"][@"abstracts"];
+    model.imgurl = mdict[@"receive"][@"base_info"][@"first_image"][@"url"];
+    [array addObject:model];
     return array;
 }
 

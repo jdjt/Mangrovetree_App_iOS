@@ -750,7 +750,13 @@ extern NSString* FMModelSelected;
 - (void)didSelectedEnd:(FMKExternalModel *)model
 {
 	[self.naviPopView show];
-    [self.inforView show];
+    QueryDBModel *queryModel = [[DBSearchTool shareDBSearchTool] queryModelByFid:model.fid];
+    if (queryModel.activityCode != nil && ![queryModel.activityCode isEqualToString:@""])
+    {
+        [self.inforView show];
+        [self.inforView requsrtActivityInforByActivityCode:queryModel.activityCode];
+    }
+    
 	[self.naviPopView.endPointBtn setTitle:model.name forState:UIControlStateNormal];
 //	[self.modelInfoPopView show];
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(YES)];
@@ -1053,7 +1059,7 @@ extern NSString* FMModelSelected;
 	{
 		_isFirstLocate = YES;
 		[self.naviPopView show];
-        [self.inforView show];
+//        [self.inforView show];
 //		[self.modelInfoPopView hide];
 		NSArray * naviResults = tool.naviResult[@(kOutdoorMapID).stringValue];
 		[self drawSingleLineByNaviResult:naviResults containStartAndEnd:YES];
