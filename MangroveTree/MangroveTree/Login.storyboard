@@ -288,12 +288,15 @@
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="next"/>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nkd-fM-YP7">
-                                                    <rect key="frame" x="263" y="14.5" width="64" height="20"/>
+                                                    <rect key="frame" x="263" y="14.5" width="64" height="20.5"/>
+                                                    <color key="backgroundColor" red="0.92941176469999998" green="0.50980392159999999" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="64" id="GbD-wd-tvp"/>
+                                                        <constraint firstAttribute="height" constant="20.5" id="L4R-0V-9pz"/>
                                                     </constraints>
-                                                    <state key="normal" backgroundImage="sendVCode">
-                                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <state key="normal" title="发送验证码">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="verificationButton:" destination="ngS-w0-LrB" eventType="touchUpInside" id="Z7z-kR-zNi"/>
@@ -642,11 +645,16 @@
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="next"/>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LcX-Qu-Ood">
-                                                    <rect key="frame" x="271" y="14" width="64" height="20"/>
+                                                    <rect key="frame" x="271" y="14" width="64" height="20.5"/>
+                                                    <color key="backgroundColor" red="0.92941176469999998" green="0.50980392159999999" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="height" constant="20.5" id="Kez-fx-afn"/>
                                                         <constraint firstAttribute="width" constant="64" id="ODR-Jv-Khn"/>
                                                     </constraints>
-                                                    <state key="normal" backgroundImage="sendVCode"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <state key="normal" title="发送验证码">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
                                                     <connections>
                                                         <action selector="validationButtonAction:" destination="MTx-9V-E3O" eventType="touchUpInside" id="ITU-rk-phI"/>
                                                     </connections>
@@ -919,6 +927,5 @@
         <image name="read_Y" width="10" height="10"/>
         <image name="registerBtn" width="290" height="45"/>
         <image name="saveBtn" width="299" height="45"/>
-        <image name="sendVCode" width="64" height="20"/>
     </resources>
 </document>
