@@ -309,18 +309,18 @@
         self.hud = [[MBProgressHUD alloc] initWithWindow:[AppDelegate sharedDelegate].window];
         [[AppDelegate sharedDelegate].window addSubview:self.hud];
         self.hud.labelText = @"正在加载";
-    }else
-    {
-        self.hud.hidden = NO;
+        [self.hud hide:NO];
+        [self.hud show:YES];
     }
 }
-
 - (void)removeHUD
 {
     
     if (self.hud)
     {
-        self.hud.hidden = YES;
+        [self.hud hide:YES];
+        [self.hud removeFromSuperview];
+        self.hud = nil;
     }
 }
 
