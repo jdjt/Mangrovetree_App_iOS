@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MangroveTree/MyAlertView.m"
-            timestampString = "511666355.500336"
+            filePath = "MangroveTree/LoginViewController.m"
+            timestampString = "511756897.005548"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "+showAlert:"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
+            landmarkName = "-pushResponseResultsSucceed:responseCode:withMessage:andData:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

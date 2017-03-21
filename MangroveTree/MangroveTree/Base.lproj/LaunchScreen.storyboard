@@ -1,7 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,12 +20,57 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcome4" translatesAutoresizingMaskIntoConstraints="NO" id="95A-L5-Ihf">
+                                <rect key="frame" x="120" y="140" width="136" height="106"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="106" id="4mx-Ni-m2f"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcome3" translatesAutoresizingMaskIntoConstraints="NO" id="dhI-jF-MwH">
+                                <rect key="frame" x="108" y="266" width="159" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="8zW-GC-jgo"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcome2" translatesAutoresizingMaskIntoConstraints="NO" id="sAl-e6-EOR">
+                                <rect key="frame" x="108" y="304" width="159" height="8"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="8" id="1ca-HK-Cpg"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcome1" translatesAutoresizingMaskIntoConstraints="NO" id="mL0-Fa-TBq">
+                                <rect key="frame" x="0.0" y="413" width="375" height="254"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="254" id="NjF-3o-lz7"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="dhI-jF-MwH" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="108" id="3Lo-0B-o9p"/>
+                            <constraint firstItem="mL0-Fa-TBq" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="I0V-8G-nd3"/>
+                            <constraint firstAttribute="trailing" secondItem="sAl-e6-EOR" secondAttribute="trailing" constant="108" id="IRs-if-8BV"/>
+                            <constraint firstAttribute="trailing" secondItem="dhI-jF-MwH" secondAttribute="trailing" constant="108" id="Js0-5F-Cul"/>
+                            <constraint firstItem="95A-L5-Ihf" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Tpb-Er-unh"/>
+                            <constraint firstItem="95A-L5-Ihf" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="120" id="WUf-ej-G9f"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="mL0-Fa-TBq" secondAttribute="bottom" id="nGb-ML-3sP"/>
+                            <constraint firstItem="sAl-e6-EOR" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="108" id="oND-YY-CE6"/>
+                            <constraint firstItem="dhI-jF-MwH" firstAttribute="top" secondItem="95A-L5-Ihf" secondAttribute="bottom" constant="20" id="wPl-6C-4PT"/>
+                            <constraint firstItem="mL0-Fa-TBq" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="z9x-Ar-WZG"/>
+                            <constraint firstItem="sAl-e6-EOR" firstAttribute="top" secondItem="dhI-jF-MwH" secondAttribute="bottom" constant="9" id="zW1-cH-8Pk"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="welcome1" width="375" height="253"/>
+        <image name="welcome2" width="160" height="8"/>
+        <image name="welcome3" width="159" height="29"/>
+        <image name="welcome4" width="136" height="106"/>
+    </resources>
 </document>
