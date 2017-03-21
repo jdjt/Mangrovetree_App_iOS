@@ -35,6 +35,10 @@
     
     self.isVisible = NO;
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotiChangeStatusBar object:@"0"];
+    
+//    self.navigationController.navigationBar.backIndicatorImage = [UIImage imageNamed:@"backBtn_white"];
+//    self.navigationController.navigationBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"backBtn_white"];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];
@@ -231,6 +235,7 @@
     else if (task == self.getMemberInfor)
     {
         [self dismissViewControllerAnimated:YES completion:^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotiChangeStatusBar object:@"1"];
             [[NSNotificationCenter defaultCenter] postNotificationName:NotiLoadFMMap object:nil];
             //[[NSNotificationCenter defaultCenter] postNotificationName:NotiHaveNewNoti object:nil];
         }];
