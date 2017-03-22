@@ -73,10 +73,13 @@
 
 - (void)pushResponseResultsSucceed:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg andData:(NSMutableArray *)datas
 {
-    InforModel *model = datas[0];
-    [self.image sd_setImageWithURL:[NSURL URLWithString:model.imgurl] placeholderImage:[UIImage new]];
-    self.name.text = model.name;
-    self.text.text = model.abstracts;
+    if (task == self.requesNetWork)
+    {
+        InforModel *model = datas[0];
+        [self.image sd_setImageWithURL:[NSURL URLWithString:model.imgurl] placeholderImage:[UIImage new]];
+        self.name.text = model.name;
+        self.text.text = model.abstracts;
+    }
 }
 
 - (void)pushResponseResultsFailing:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg

@@ -21,7 +21,6 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
-    [self viewDidLoad];
 }
 
 - (void)viewDidLoad

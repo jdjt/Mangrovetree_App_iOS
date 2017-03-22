@@ -36,7 +36,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="svo-kK-god">
                                 <rect key="frame" x="-305" y="0.0" width="300" height="667"/>
                                 <connections>
-                                    <segue destination="LsY-31-mV1" kind="embed" id="3nd-1X-lCY"/>
+                                    <segue destination="LsY-31-mV1" kind="embed" identifier="toUser" id="3nd-1X-lCY"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -276,7 +276,7 @@
         <scene sceneID="rQf-b2-029">
             <objects>
                 <navigationController id="I7M-cL-o8d" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="AA1-gP-46G">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AA1-gP-46G">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -526,7 +526,7 @@
                                                     </connections>
                                                 </collectionReusableView>
                                                 <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionFooter" id="vIO-lf-aES">
-                                                    <rect key="frame" x="0.0" y="38" width="200" height="9"/>
+                                                    <rect key="frame" x="0.0" y="37.5" width="200" height="9"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aTs-Ds-PhR">
@@ -594,7 +594,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </collectionReusableView>
                                                 <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Footer" id="b3D-p8-a9a">
-                                                    <rect key="frame" x="0.0" y="71" width="200" height="50"/>
+                                                    <rect key="frame" x="0.0" y="70.5" width="200" height="50"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </collectionReusableView>
                                                 <connections>
@@ -867,7 +867,7 @@
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="infoCell" rowHeight="116" id="sV7-TI-ICK" customClass="UserInfoCell">
-                                <rect key="frame" x="0.0" y="56" width="300" height="116"/>
+                                <rect key="frame" x="0.0" y="55.5" width="300" height="116"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sV7-TI-ICK" id="bpa-4I-o5s">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="116"/>
@@ -928,7 +928,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="settingCell" rowHeight="48" id="1vx-gq-0es" customClass="UserCell">
-                                <rect key="frame" x="0.0" y="172" width="300" height="48"/>
+                                <rect key="frame" x="0.0" y="171.5" width="300" height="48"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1vx-gq-0es" id="UEv-VJ-aGf">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="48"/>
