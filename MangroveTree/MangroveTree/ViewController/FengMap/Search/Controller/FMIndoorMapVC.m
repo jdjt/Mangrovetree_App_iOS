@@ -1073,6 +1073,9 @@ int const kCallingServiceCount = 5;
 	__weak typeof(self)wSelf = self;
 	//开始导航
 	self.naviPopView.startNaviBlock = ^{
+        if (naviResult == NO)
+            return ;
+        
 		[wSelf stopNavi];//先停止导航
         [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(YES)];
 
