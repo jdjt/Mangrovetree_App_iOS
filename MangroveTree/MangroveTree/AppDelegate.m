@@ -27,6 +27,8 @@
     [[UINavigationBar appearance] setShadowImage:[UIImage new]];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:102 / 255.0f green:102 / 255.0f blue:102 / 255.0f alpha:1],NSForegroundColorAttributeName,[UIFont systemFontOfSize:18],NSFontAttributeName,nil]];
     
+    // 开始网络状态监控
+    [self startNetWorkMonitoring];
     // 通过调用数据管理器的单例来实现数据初始化
     [DataManager defaultInstance];
     
@@ -169,6 +171,31 @@
     
     //for log
     [UMessage setLogEnabled:YES];
+}
+
+- (void)startNetWorkMonitoring
+{
+    AFNetworkReachabilityManager * manager = [AFNetworkReachabilityManager sharedManager];
+    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status)
+     {
+         switch (status)
+         {
+             case AFNetworkReachabilityStatusUnknown:
+                 self.networkStatus = -1;
+                 break;
+             case AFNetworkReachabilityStatusNotReachable:
+                 self.networkStatus = 0;
+                 break;
+             case AFNetworkReachabilityStatusReachableViaWWAN:
+                 self.networkStatus = 1;
+                 break;
+             case AFNetworkReachabilityStatusReachableViaWiFi:
+                 self.networkStatus = 2;
+                 break;
+             default:
+                 break;
+         }
+     }];
 }
 
 @end

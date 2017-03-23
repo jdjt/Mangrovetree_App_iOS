@@ -20,7 +20,6 @@ NSString* const FMModelSelected = @"FMModelSelected";
 
 @interface FrameViewController () <MTRequestNetWorkDelegate>
 
-
 @property (nonatomic, strong) FMZoneManager * myZoneManager;
 
 @property (strong, nonatomic) FMLocationBuilderInfo *waiterLocation;
@@ -52,6 +51,8 @@ NSString* const FMModelSelected = @"FMModelSelected";
 @property (nonatomic, retain) NSTimer *countDownTimer;
 @property (nonatomic, strong) NSURLSessionTask * loginTask;
 
+@property (nonatomic, assign) NSInteger segmentSelect;
+
 @end
 
 @implementation FrameViewController
@@ -62,10 +63,12 @@ NSString* const FMModelSelected = @"FMModelSelected";
     //self.bottomBarView.hidden = YES;
 	[UIApplication sharedApplication].idleTimerDisabled = YES;//不自动锁屏
     
+    self.segmentSelect = NSNotFound;
     self.messageView.hidden = YES;
     self.topConstraint.constant = kScreenHeight- 64;
     self.bottomContraint.constant = 64- kScreenHeight;
     self.loginAlertView.layer.cornerRadius = 7.0f;
+    self.loginAlertView.clipsToBounds = YES;
 
     //    self.segmentCallOrNavigation.selectedSegmentIndex = 0;
     self.title = @"红树林导航";
@@ -81,7 +84,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
     [self.loginAlertTapView addGestureRecognizer:alertTap];
     
     self.navigationItem.leftBarButtonItem = self.userBarBtn;
-    self.navigationItem.rightBarButtonItem = self.searchBarButton;
+    //self.navigationItem.rightBarButtonItem = self.searchBarButton;
     //监听点击地图，获取模型内的poi
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPoiNames:)  name:FMModelSelected object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startLoadFMMap:) name:NotiLoadFMMap object:nil];
@@ -284,11 +287,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
 
 - (void)closeTopAlert:(NSNotification *)noti
 {
-    [UIView animateWithDuration:0.4f animations:^{
-        self.topAlertView.backgroundColor = [UIColor clearColor];
-    } completion:^(BOOL finished) {
-        self.topAlertView.hidden = YES;
-    }];
+    self.topAlertView.hidden = YES;
 }
 
 - (void)startLoadFMMap:(NSNotification *)noti
@@ -375,31 +374,38 @@ NSString* const FMModelSelected = @"FMModelSelected";
 
 - (void)tapAction:(UITapGestureRecognizer *)tap
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotiCloseTopAlert object:nil];
+    self.loginAlertView.hidden = YES;
     if (tap.view == self.toSearchView)
     {
-        self.toSearchImage.image = [UIImage imageNamed:@"toSearch_act"];
-        self.toWorldPlatformImage.image = [UIImage imageNamed:@"toWorld_default"];
-        self.toCallServiceImage.image = [UIImage imageNamed:@"toCallService_default"];
+        if (self.segmentSelect == Segment_toWhere)
+            return;
+        [self showBottomView:Segment_toWhere];
         //去哪跳转
         [self toSearchAction];
     }
     else if (tap.view == self.toWorldPlatform)
     {
+        if (self.segmentSelect == Segment_toWorld)
+            return;
+//        [self showBottomView:Segment_toWorld];
         self.toSearchImage.image = [UIImage imageNamed:@"toSearch_default"];
         self.toWorldPlatformImage.image = [UIImage imageNamed:@"toWorld_act"];
         self.toCallServiceImage.image = [UIImage imageNamed:@"toCallService_default"];
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"" message:@"全球度假平台暂未开放使用，敬请期待！" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            self.toWorldPlatformImage.image = [UIImage imageNamed:@"toWorld_default"];
+            [self showBottomView:Segment_default];
         }];
         [alert addAction:action];
         [self presentViewController:alert animated:YES completion:nil];
     }
     else if (tap.view == self.toCallService)
     {
+        if (self.segmentSelect == Segment_toService)
+            return;
         self.toSearchImage.image = [UIImage imageNamed:@"toSearch_default"];
         self.toWorldPlatformImage.image = [UIImage imageNamed:@"toWorld_default"];
-        self.toCallServiceImage.image = [UIImage imageNamed:@"toCallService_act"];
+        self.toCallServiceImage.image = [UIImage imageNamed:@"toCallService_art"];
         [self tapCallService];
     }
 }
@@ -496,7 +502,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
 {
     if (type == NAVIVARTYPE_MAP)
     {
-        self.navigationItem.rightBarButtonItem = self.searchBarButton;
+        self.navigationItem.rightBarButtonItem = nil;
 //        self.navigationItem.titleView = self.segmentCallOrNavigation;
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(backHomeAction:)];
     }
@@ -508,12 +514,12 @@ NSString* const FMModelSelected = @"FMModelSelected";
         self.title = @"呼叫任务";
     }else if (type == NAVIVARTYPE_IN)
     {
-        self.navigationItem.rightBarButtonItem = self.searchBarButton;
+        self.navigationItem.rightBarButtonItem = nil;
         //        self.navigationItem.titleView = self.segmentCallOrNavigation;
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(backHomeAction:)];
     }else if (type == NAVIVARTYPE_OUT)
     {
-        self.navigationItem.rightBarButtonItem = self.searchBarButton;
+        self.navigationItem.rightBarButtonItem = nil;
         self.navigationItem.leftBarButtonItem = self.userBarBtn;
     }
 }
@@ -646,14 +652,31 @@ NSString* const FMModelSelected = @"FMModelSelected";
 {
     if (task == self.loginTask)
     {
-//        [self loadFMMap];
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"" message:@"自动登录失败，请重新登录" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self showLogin];
+        }];
+        [alert addAction:action];
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
 - (void)updateFromNetwork
 {
 #warning  重新登录流程    现只做了登录
-    [self requestAutoLogin];
+    if ([Util isConnectionAvailable])
+    {
+        [self requestAutoLogin];
+    }
+    else
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"" message:@"没有可用的网络，请检查网络连接" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self showLogin];
+        }];
+        [alert addAction:action];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 - (void)loadFMMap
@@ -684,6 +707,60 @@ NSString* const FMModelSelected = @"FMModelSelected";
                                                                  params:params
                                                              withByUser:YES
                                                        andOldInterfaces:YES];
+}
+
+- (void)showBottomView:(SegmentSelected)select
+{
+    switch (select)
+    {
+        case Segment_none:
+        {
+            self.toSearchImage.image = [UIImage imageNamed:@"toSearch_default"];
+            self.toWorldPlatformImage.image = [UIImage imageNamed:@"toWorld_default"];
+            self.toCallServiceImage.image = [UIImage imageNamed:@"toCallService_default"];
+            self.segmentSelect = Segment_none;
+        }
+            break;
+        case Segment_default:
+        {
+            self.toSearchImage.image = self.segmentSelect == Segment_toWhere ? [UIImage imageNamed:@"toSearch_act"] : [UIImage imageNamed:@"toSearch_default"];
+            self.toWorldPlatformImage.image = self.segmentSelect == Segment_toWorld ? [UIImage imageNamed:@"toWorld_act"] : [UIImage imageNamed:@"toWorld_default"];
+            self.toCallServiceImage.image = self.segmentSelect == Segment_toService ? [UIImage imageNamed:@"toCallService_act"] : [UIImage imageNamed:@"toCallService_default"];
+        }
+            break;
+        case Segment_toWhere:
+        {
+            self.toSearchImage.image = [UIImage imageNamed:@"toSearch_act"];
+            self.toWorldPlatformImage.image = [UIImage imageNamed:@"toWorld_default"];
+            self.toCallServiceImage.image = [UIImage imageNamed:@"toCallService_default"];
+            self.segmentSelect = Segment_toWhere;
+        }
+            break;
+        case Segment_toWorld:
+        {
+            self.toSearchImage.image = [UIImage imageNamed:@"toSearch_default"];
+            self.toWorldPlatformImage.image = [UIImage imageNamed:@"toWorld_act"];
+            self.toCallServiceImage.image = [UIImage imageNamed:@"toCallService_default"];
+            self.segmentSelect = Segment_toWorld;
+        }
+            break;
+        case Segment_toService:
+        {
+            self.toSearchImage.image = [UIImage imageNamed:@"toSearch_default"];
+            self.toWorldPlatformImage.image = [UIImage imageNamed:@"toWorld_default"];
+            self.toCallServiceImage.image = [UIImage imageNamed:@"toCallService_act"];
+            self.segmentSelect = Segment_toService;
+        }
+            break;
+        default:
+        {
+            self.toSearchImage.image = [UIImage imageNamed:@"toSearch_default"];
+            self.toWorldPlatformImage.image = [UIImage imageNamed:@"toWorld_default"];
+            self.toCallServiceImage.image = [UIImage imageNamed:@"toCallService_default"];
+            self.segmentSelect = Segment_none;
+        }
+            break;
+    }
 }
 
 - (void)dealloc

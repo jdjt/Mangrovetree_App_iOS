@@ -19,5 +19,7 @@
  */
 @property (assign, nonatomic) BOOL firstInit;
 
+@property (nonatomic, assign) NSInteger networkStatus;
+
 @end
 

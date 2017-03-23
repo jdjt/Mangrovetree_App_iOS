@@ -271,31 +271,26 @@ static NSString* macadd;
     }
 }
 
-+ (BOOL) isConnectionAvailable
++ (BOOL)isConnectionAvailable
 {
-    
-    __block BOOL isExistenceNetwork = YES;
-    AFNetworkReachabilityManager * manager = [AFNetworkReachabilityManager sharedManager];
-    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status)
+    BOOL isExistenceNetwork = YES;
+    switch ([AppDelegate sharedDelegate].networkStatus)
     {
-        switch (status)
-        {
-            case AFNetworkReachabilityStatusUnknown:
-                isExistenceNetwork = NO;
-                break;
-            case AFNetworkReachabilityStatusNotReachable:
-                isExistenceNetwork = NO;
-                break;
-            case AFNetworkReachabilityStatusReachableViaWWAN:
-                isExistenceNetwork = YES;
-                break;
-            case AFNetworkReachabilityStatusReachableViaWiFi:
-                isExistenceNetwork = YES;
-                break;
-            default:
-                break;
-        }
-    }];
+        case AFNetworkReachabilityStatusUnknown:
+            isExistenceNetwork = NO;
+            break;
+        case AFNetworkReachabilityStatusNotReachable:
+            isExistenceNetwork = NO;
+            break;
+        case AFNetworkReachabilityStatusReachableViaWWAN:
+            isExistenceNetwork = YES;
+            break;
+        case AFNetworkReachabilityStatusReachableViaWiFi:
+            isExistenceNetwork = YES;
+            break;
+        default:
+            break;
+    }
     return isExistenceNetwork;
 }
 
@@ -421,29 +416,24 @@ static NSString* macadd;
 // 获取当前网络状态
 + (int)getCurrentNetworkStatus
 {
-    __block int netWorkStatus = 0;
-    AFNetworkReachabilityManager * manager = [AFNetworkReachabilityManager sharedManager];
-    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status)
+    int netWorkStatus = 0;
+     switch ([AppDelegate sharedDelegate].networkStatus)
      {
-         switch (status)
-         {
-             case AFNetworkReachabilityStatusUnknown:
-                 netWorkStatus = 0;
-                 break;
-             case AFNetworkReachabilityStatusNotReachable:
-                 netWorkStatus = 0;
-                 break;
-             case AFNetworkReachabilityStatusReachableViaWWAN:
-                 netWorkStatus = 2;
-                 break;
-             case AFNetworkReachabilityStatusReachableViaWiFi:
-                 netWorkStatus = 1;
-                 break;
-             default:
-                 break;
-         }
-     }];
-    
+         case AFNetworkReachabilityStatusUnknown:
+             netWorkStatus = 0;
+             break;
+         case AFNetworkReachabilityStatusNotReachable:
+             netWorkStatus = 0;
+             break;
+         case AFNetworkReachabilityStatusReachableViaWWAN:
+             netWorkStatus = 2;
+             break;
+         case AFNetworkReachabilityStatusReachableViaWiFi:
+             netWorkStatus = 1;
+             break;
+         default:
+             break;
+     }
     return netWorkStatus;
 }
 

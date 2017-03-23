@@ -20,6 +20,18 @@ typedef NS_ENUM(NSInteger,NaviBarType)
     NAVIVARTYPE_OUT           = 3,
 };
 
+/**
+ * @abstract 底部栏选择
+ */
+typedef NS_ENUM(NSInteger,SegmentSelected)
+{
+    Segment_none                = -2,
+    Segment_default             = -1,
+    Segment_toWhere             = 0,
+    Segment_toWorld             = 1,
+    Segment_toService           = 2,
+};
+
 @interface FrameViewController : UIViewController
 
 @property (weak, nonatomic) MapViewController *mapVC;
@@ -42,6 +54,8 @@ typedef NS_ENUM(NSInteger,NaviBarType)
 - (void)showCallResult:(BOOL)show;
 
 - (void)showMsgView:(BOOL)show;
+
+- (void)showBottomView:(SegmentSelected)select;
 
 - (NSString *)getCurrentZoneName;
 

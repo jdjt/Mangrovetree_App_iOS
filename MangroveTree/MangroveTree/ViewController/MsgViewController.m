@@ -344,7 +344,12 @@
             }else
             {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [MyAlertView showAlert:@"由于您当前未连接酒店Wi-Fi，因此无法使用酒店服务功能。"];
+                    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"" message:@"由于您当前未连接酒店Wi-Fi，因此无法使用酒店服务功能。" preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        [self.centerVC showBottomView:Segment_default];
+                    }];
+                    [alert addAction:action];
+                    [self presentViewController:alert animated:YES completion:nil];
                 });
             }
         }];

@@ -117,6 +117,7 @@ int const kCallingServiceCount = 5;
             self.navigationController.navigationBar.hidden = YES;
         }
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotiChangeStatusBar object:@"1"];
 }
 
 - (void)viewDidLoad

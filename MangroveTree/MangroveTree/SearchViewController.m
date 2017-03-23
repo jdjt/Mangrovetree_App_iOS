@@ -92,6 +92,7 @@
             [self.navigationController setNavigationBarHidden:YES animated:YES];
         }
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotiChangeStatusBar object:@"0"];
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(YES)];
 }
 
@@ -140,6 +141,14 @@
 
 - (IBAction)backToMap:(id)sender
 {
+    for (UIViewController *viewController in self.navigationController.viewControllers)
+    {
+        if ([viewController isKindOfClass:[MapViewController class]])
+        {
+            MapViewController *map = (MapViewController *)viewController;
+            [map.centerVC showBottomView:Segment_none];
+        }
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
