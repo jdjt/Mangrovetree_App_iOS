@@ -135,6 +135,11 @@
 
 - (void)pushResponseResultsFailing:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg
 {
+    if ([code isEqualToString:@"-1009"])
+    {
+        [MyAlertView showAlert:@"没有网络，操作失败!"];
+        return;
+    }
     [MyAlertView showAlert:msg];
 }
 

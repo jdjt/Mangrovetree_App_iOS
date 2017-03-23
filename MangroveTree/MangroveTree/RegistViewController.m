@@ -316,6 +316,11 @@
 
 - (void)pushResponseResultsFailing:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg
 {
+    if ([code isEqualToString:@"-1009"])
+    {
+        [MyAlertView showAlert:@"没有网络，操作失败!"];
+        return;
+    }
     if (task == self.loginTask)
     {
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示信息" message:@"自动登录失败！请用户尝试手动登录" preferredStyle:UIAlertControllerStyleAlert];
