@@ -24,7 +24,6 @@ typedef NS_ENUM(NSInteger,NaviBarType)
 
 @property (weak, nonatomic) MapViewController *mapVC;
 
-@property (weak, nonatomic) IBOutlet UIButton *hotelNameButton;
 @property (assign, nonatomic) NSInteger lastSelectedIndex;
 @property (strong, nonatomic) DBCallTask *currentTask;
 

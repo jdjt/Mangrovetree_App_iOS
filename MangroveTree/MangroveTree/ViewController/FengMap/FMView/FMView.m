@@ -909,7 +909,6 @@ extern NSString* FMModelSelected;
 	_enableLocateBtn.hidden = NO;
 	FMKExternalModelLayer * modelLayer = [self.fengMapView.map getExternalModelLayerWithGroupID:@"1"];
 	modelLayer.delegate = self;
-    [self getCurrentController].centerVC.hotelNameButton.hidden = NO;
     [[self getCurrentController].centerVC changNavViewStyleByLayerMode:NAVIVARTYPE_OUT];
 
 }

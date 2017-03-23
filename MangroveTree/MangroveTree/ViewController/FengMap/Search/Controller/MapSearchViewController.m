@@ -667,7 +667,6 @@ const int kDisplayCount = 4;
         {
             MapViewController *map = (MapViewController *)viewController;
             [map.centerVC.navigationController setNavigationBarHidden:YES animated:YES];
-            map.centerVC.hotelNameButton.hidden = YES;
             [self.navigationController setNavigationBarHidden:NO animated:YES];
         }
     }

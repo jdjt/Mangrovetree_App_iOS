@@ -42,7 +42,6 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@([FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi)];
     }
     self.centerVC.navigationController.navigationBar.hidden = NO;
-    self.centerVC.hotelNameButton.hidden = [FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi;
     self.navigationController.navigationBar.hidden = YES;
 }
 

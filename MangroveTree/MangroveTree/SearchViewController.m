@@ -89,7 +89,6 @@
         {
             MapViewController *map = (MapViewController *)viewController;
             [map.centerVC.navigationController setNavigationBarHidden:YES animated:YES];
-            map.centerVC.hotelNameButton.hidden = YES;
             [self.navigationController setNavigationBarHidden:YES animated:YES];
         }
     }

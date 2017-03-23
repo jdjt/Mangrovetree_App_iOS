@@ -208,12 +208,6 @@
                                     <constraint firstItem="6zt-yn-Zw3" firstAttribute="leading" secondItem="ezM-aN-UuJ" secondAttribute="trailing" id="zTS-4V-fiw"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qm7-y1-NDh">
-                                <rect key="frame" x="57" y="74" width="261" height="26"/>
-                                <state key="normal" title="三亚湾红树林度假世界" backgroundImage="HotelName_White">
-                                    <color key="titleColor" red="0.35294117650000001" green="0.35294117650000001" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1LS-Ka-rh3">
                                 <rect key="frame" x="25" y="205" width="325" height="214"/>
                                 <subviews>
@@ -299,7 +293,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Qm7-y1-NDh" firstAttribute="centerX" secondItem="BKf-ij-IEq" secondAttribute="centerX" id="3iZ-MR-vf6"/>
                             <constraint firstItem="57a-av-jS8" firstAttribute="width" secondItem="BKf-ij-IEq" secondAttribute="width" id="B3X-kx-Zws"/>
                             <constraint firstAttribute="trailing" secondItem="6n8-jj-txz" secondAttribute="trailing" id="BzM-k0-TO7"/>
                             <constraint firstItem="Xpc-JH-pRS" firstAttribute="centerY" secondItem="BKf-ij-IEq" secondAttribute="centerY" id="CkG-kt-Hsd"/>
@@ -317,7 +310,6 @@
                             <constraint firstItem="1LS-Ka-rh3" firstAttribute="centerY" secondItem="BKf-ij-IEq" secondAttribute="centerY" constant="-22" id="v0V-A9-ott"/>
                             <constraint firstItem="XOS-jg-trH" firstAttribute="top" secondItem="2rG-TZ-lR7" secondAttribute="bottom" id="vQB-ur-xl4"/>
                             <constraint firstAttribute="bottom" secondItem="6n8-jj-txz" secondAttribute="bottom" id="xCv-Zw-GKd"/>
-                            <constraint firstItem="Qm7-y1-NDh" firstAttribute="top" secondItem="2rG-TZ-lR7" secondAttribute="bottom" constant="10" id="zOX-K2-aRu"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="kJm-WY-6lc">
@@ -326,7 +318,6 @@
                     <connections>
                         <outlet property="bottomBarView" destination="6n8-jj-txz" id="jWp-Xy-Xaa"/>
                         <outlet property="bottomContraint" destination="bKO-ER-bZT" id="jxk-2c-7Mb"/>
-                        <outlet property="hotelNameButton" destination="Qm7-y1-NDh" id="Djo-lx-ssH"/>
                         <outlet property="loginAlertTapView" destination="knp-Di-Zdd" id="05r-Wa-rJC"/>
                         <outlet property="loginAlertView" destination="1LS-Ka-rh3" id="REQ-CI-3bH"/>
                         <outlet property="messageView" destination="57a-av-jS8" id="FNp-5w-vSF"/>
@@ -1084,7 +1075,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="HotelName_White" width="261" height="26"/>
         <image name="alertBottom_triangle" width="14" height="7"/>
         <image name="alertCenter_image" width="35" height="35"/>
         <image name="backBtn_white" width="27" height="27"/>
