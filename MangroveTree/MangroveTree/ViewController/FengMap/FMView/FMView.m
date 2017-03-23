@@ -817,6 +817,7 @@ extern NSString* FMModelSelected;
 
 - (void)mapView:(FMKMapView *)mapView didSingleTapWithPoint:(CGPoint)point
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotiCloseTopAlert object:nil];
     if ([FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi == YES) return;
     if ([FMLocationManager shareLocationManager].isCallingService == YES)
         return;
@@ -828,6 +829,11 @@ extern NSString* FMModelSelected;
     [self.fengMapView showAllOnMap];
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(NO)];
     
+}
+
+- (void)mapView:(FMKMapView *)mapView didMovedWithPoint:(CGPoint)point
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotiCloseTopAlert object:nil];
 }
 
 - (void)setModelSelected:(FMKExternalModel *)model inLayer:(FMKExternalModelLayer *)externalModelLayer
@@ -1229,7 +1235,9 @@ extern NSString* FMModelSelected;
 #pragma mark - FMLocationManagerDelegate
 - (void)mapViewDidFinishLoadingMap:(FMKMapView *)mapView
 {
-   
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [MBProgressHUD hideAllHUDsForView:[AppDelegate sharedDelegate].window animated:YES];
+    });
 }
 - (void)testDistanceWithResult:(BOOL)result distance:(double)distance
 {

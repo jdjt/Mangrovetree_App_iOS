@@ -20,6 +20,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor colorWithRed:177 / 255.0f green:177 / 255.0f blue:177 / 255.0f alpha:1];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(adddelegateToMap) name:@"AddDelegateToMap" object:nil];
     [self.navigationController.navigationBar setBackgroundImage:[Util createImageWithColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1]] forBarMetrics:UIBarMetricsDefault];
 }
@@ -53,7 +54,10 @@
     // 在这里开始发送网络请求
     if (login == YES)
     {
-        [self loadMap];
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(queue, ^{
+            [self loadMap];
+        });
     }
 
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"inDoorMap"];
@@ -99,7 +103,9 @@
             self.fmView = [[FMView alloc] initWithFrame:self.view.bounds];
     //        self.fmView.mapVC = self;
             [self.fmView addFengMapView];
-            [self.view addSubview:self.fmView];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.view addSubview:self.fmView];
+            });
         }
         // 默认回到地图 把自己的坐标位置移动到屏幕中央
         self.fmView.moveMapToCenter = YES;

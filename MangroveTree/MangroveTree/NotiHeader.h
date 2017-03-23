@@ -37,4 +37,9 @@
  */
 #define NotiChangeStatusBar          @"NotiChangeStatusBar"
 
+/**
+ *  @abstract 关闭首页地图topalert
+ */
+#define NotiCloseTopAlert         @"NotiCloseTopAlert"
+
 #endif /* NotiHeader_h */

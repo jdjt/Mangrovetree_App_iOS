@@ -27,6 +27,9 @@ NSString* const FMModelSelected = @"FMModelSelected";
 @property (strong, nonatomic) FMLocationBuilderInfo *mySelfLocation;
 @property (weak, nonatomic) IBOutlet UIView *messageView;
 @property (weak, nonatomic) IBOutlet UIView *bottomBarView;
+@property (weak, nonatomic) IBOutlet UIView *loginAlertView;
+@property (weak, nonatomic) IBOutlet UIView *loginAlertTapView;
+@property (weak, nonatomic) IBOutlet UILabel *topAlertView;
 // 底部栏
 @property (weak, nonatomic) IBOutlet UIView *toSearchView;
 @property (weak, nonatomic) IBOutlet UIView *toWorldPlatform;
@@ -62,6 +65,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
     self.messageView.hidden = YES;
     self.topConstraint.constant = kScreenHeight- 64;
     self.bottomContraint.constant = 64- kScreenHeight;
+    self.loginAlertView.layer.cornerRadius = 7.0f;
 
     //    self.segmentCallOrNavigation.selectedSegmentIndex = 0;
     self.title = @"红树林导航";
@@ -73,12 +77,16 @@ NSString* const FMModelSelected = @"FMModelSelected";
     UITapGestureRecognizer * tap3 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction:)];
     [self.toCallService addGestureRecognizer:tap3];
     
+    UITapGestureRecognizer * alertTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(alertSelect)];
+    [self.loginAlertTapView addGestureRecognizer:alertTap];
+    
     self.navigationItem.leftBarButtonItem = self.userBarBtn;
     self.navigationItem.rightBarButtonItem = self.searchBarButton;
     //监听点击地图，获取模型内的poi
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPoiNames:)  name:FMModelSelected object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startLoadFMMap:) name:NotiLoadFMMap object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backToMain:) name:NotiBackToMain object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeTopAlert:) name:NotiCloseTopAlert object:nil];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiChangeStatusBar object:@"1"];
 
@@ -90,8 +98,6 @@ NSString* const FMModelSelected = @"FMModelSelected";
     {
         [self updateFromNetwork];
     }
-    
-
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -255,6 +261,18 @@ NSString* const FMModelSelected = @"FMModelSelected";
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+- (void)alertSelect
+{
+    self.loginAlertView.hidden = YES;
+    
+    if (self.mapVC.fmView == nil)
+    {
+        MBProgressHUD *HUD =[MBProgressHUD showHUDAddedTo:[AppDelegate sharedDelegate].window animated:YES];
+        HUD.labelText = @"正在加载地图，请稍等";
+        [HUD show:YES];
+    }
+}
+
 - (void)getPoiNames:(NSNotification *)noti
 {
     NSDictionary *dic = noti.userInfo;
@@ -262,6 +280,15 @@ NSString* const FMModelSelected = @"FMModelSelected";
     NSString * modelName = dic[@"modelName"];
     [self showFMActionSheetViewByNames:poiNames modelName:modelName];
     
+}
+
+- (void)closeTopAlert:(NSNotification *)noti
+{
+    [UIView animateWithDuration:0.4f animations:^{
+        self.topAlertView.backgroundColor = [UIColor clearColor];
+    } completion:^(BOOL finished) {
+        self.topAlertView.hidden = YES;
+    }];
 }
 
 - (void)startLoadFMMap:(NSNotification *)noti
