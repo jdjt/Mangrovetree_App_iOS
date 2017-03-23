@@ -30,11 +30,11 @@
                                 </connections>
                             </containerView>
                             <view hidden="YES" alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2cr-xU-8U7">
-                                <rect key="frame" x="-5" y="0.0" width="380" height="667"/>
+                                <rect key="frame" x="-10" y="0.0" width="385" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="svo-kK-god">
-                                <rect key="frame" x="-305" y="0.0" width="300" height="667"/>
+                                <rect key="frame" x="-310" y="0.0" width="300" height="667"/>
                                 <connections>
                                     <segue destination="LsY-31-mV1" kind="embed" identifier="toUser" id="3nd-1X-lCY"/>
                                 </connections>
@@ -48,7 +48,7 @@
                             <constraint firstAttribute="trailing" secondItem="2cr-xU-8U7" secondAttribute="trailing" id="96S-3v-ylO"/>
                             <constraint firstItem="t7T-cB-PrD" firstAttribute="centerX" secondItem="GAa-xw-V3Y" secondAttribute="centerX" id="CJa-U5-lFs"/>
                             <constraint firstItem="t7T-cB-PrD" firstAttribute="centerY" secondItem="GAa-xw-V3Y" secondAttribute="centerY" id="Jpc-JK-oCb"/>
-                            <constraint firstItem="svo-kK-god" firstAttribute="trailing" secondItem="GAa-xw-V3Y" secondAttribute="leading" constant="-5" id="PYQ-AL-SDX"/>
+                            <constraint firstItem="svo-kK-god" firstAttribute="trailing" secondItem="GAa-xw-V3Y" secondAttribute="leading" constant="-10" id="PYQ-AL-SDX"/>
                             <constraint firstItem="svo-kK-god" firstAttribute="height" secondItem="GAa-xw-V3Y" secondAttribute="height" id="WeP-du-fku"/>
                             <constraint firstItem="t7T-cB-PrD" firstAttribute="width" secondItem="GAa-xw-V3Y" secondAttribute="width" id="euy-Fc-fHa"/>
                             <constraint firstItem="svo-kK-god" firstAttribute="centerY" secondItem="GAa-xw-V3Y" secondAttribute="centerY" id="iCf-l5-KJq"/>

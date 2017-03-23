@@ -115,7 +115,7 @@
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiChangeStatusBar object:@"1"];
     CGRect rect = self.UserView.frame;
-    rect.origin.x = -kScreenWidth * 4 / 5 - 5;
+    rect.origin.x = -kScreenWidth * 4 / 5 - 10;
     [UIView animateWithDuration:0.2 animations:^{
         self.UserView.frame = rect;
         self.shadowView.alpha = 0;
