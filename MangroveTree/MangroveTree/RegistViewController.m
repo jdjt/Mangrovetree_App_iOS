@@ -316,18 +316,25 @@
 
 - (void)pushResponseResultsFailing:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg
 {
-    if (task == self.loginTask)
+    if (task == self.loginTask || task == self.getMemberInfor)
     {
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示信息" message:@"自动登录失败！请用户尝试手动登录" preferredStyle:UIAlertControllerStyleAlert];
+        msg = msg.length > 30 ? @"自动登录失败！请用户尝试手动登录" : msg;
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示信息" message:msg preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             [self.navigationController popViewControllerAnimated:YES];
         }];
         [alert addAction:action];
         [self presentViewController:alert animated:YES completion:nil];
     }
-    else
+    else if (task == self.registTask)
     {
-        [MyAlertView showAlert:msg];
+        msg = msg.length > 30 ? @"注册失败，请重新尝试注册" : msg;
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示信息" message:msg preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        [alert addAction:action];
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 

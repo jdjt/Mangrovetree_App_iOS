@@ -247,9 +247,20 @@
     if (task == self.loginTask)
     {
         [[DataManager defaultInstance] cleanCoreDatabyEntityName:@"DBUserLogin"];
-        [MyAlertView showAlert:msg];
+        msg = msg.length > 30 ? @"登录失败，请尝试重新登录" : msg;
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"" message:msg preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:action];
+        [self presentViewController:alert animated:YES completion:nil];
     }
-    
+    else if (task == self.getMemberInfor)
+    {
+        msg = msg.length > 30 ? @"获取登录信息失败，请尝试重新登录" : msg;
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"" message:msg preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:action];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 #pragma mark - Private functions

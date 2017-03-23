@@ -135,7 +135,14 @@
 
 - (void)pushResponseResultsFailing:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg
 {
-    [MyAlertView showAlert:msg];
+    if (task == self.findPassTask)
+    {
+        msg = msg.length > 30 ? @"修改密码失败，请重新尝试" : msg;
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示信息" message:msg preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
+        [alert addAction:action];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 #pragma mark - UITextFieldDelegate
