@@ -276,9 +276,6 @@ static NSString* macadd;
     BOOL isExistenceNetwork = YES;
     switch ([AppDelegate sharedDelegate].networkStatus)
     {
-        case AFNetworkReachabilityStatusUnknown:
-            isExistenceNetwork = NO;
-            break;
         case AFNetworkReachabilityStatusNotReachable:
             isExistenceNetwork = NO;
             break;
@@ -419,9 +416,6 @@ static NSString* macadd;
     int netWorkStatus = 0;
      switch ([AppDelegate sharedDelegate].networkStatus)
      {
-         case AFNetworkReachabilityStatusUnknown:
-             netWorkStatus = 0;
-             break;
          case AFNetworkReachabilityStatusNotReachable:
              netWorkStatus = 0;
              break;

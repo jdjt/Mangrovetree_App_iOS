@@ -176,6 +176,7 @@
 - (void)startNetWorkMonitoring
 {
     AFNetworkReachabilityManager * manager = [AFNetworkReachabilityManager sharedManager];
+    self.networkStatus =  manager.networkReachabilityStatus;
     [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status)
      {
          switch (status)

@@ -96,6 +96,19 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(YES)];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    for (UIViewController *viewController in self.navigationController.viewControllers)
+    {
+        if ([viewController isKindOfClass:[MapViewController class]])
+        {
+            MapViewController *map = (MapViewController *)viewController;
+            [map.centerVC.navigationController setNavigationBarHidden:NO animated:YES];
+        }
+    }
+    [super viewWillDisappear:animated];
+}
+
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];

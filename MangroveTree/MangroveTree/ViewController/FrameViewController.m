@@ -270,7 +270,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
     
     if (self.mapVC.fmView == nil)
     {
-        MBProgressHUD *HUD =[MBProgressHUD showHUDAddedTo:[AppDelegate sharedDelegate].window animated:YES];
+        MBProgressHUD *HUD =[MBProgressHUD showHUDAddedTo:self.mapVC.view animated:YES];
         HUD.labelText = @"正在加载地图，请稍等";
         [HUD show:YES];
     }
@@ -375,7 +375,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
 - (void)tapAction:(UITapGestureRecognizer *)tap
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiCloseTopAlert object:nil];
-    self.loginAlertView.hidden = YES;
+    [self alertSelect];
     if (tap.view == self.toSearchView)
     {
         if (self.segmentSelect == Segment_toWhere)
@@ -405,7 +405,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
             return;
         self.toSearchImage.image = [UIImage imageNamed:@"toSearch_default"];
         self.toWorldPlatformImage.image = [UIImage imageNamed:@"toWorld_default"];
-        self.toCallServiceImage.image = [UIImage imageNamed:@"toCallService_art"];
+        self.toCallServiceImage.image = [UIImage imageNamed:@"toCallService_act"];
         [self tapCallService];
     }
 }

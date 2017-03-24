@@ -748,6 +748,7 @@ extern NSString* FMModelSelected;
 
 - (void)didSelectedEnd:(FMKExternalModel *)model
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotiCloseTopAlert object:nil];
 	[self.naviPopView show];
     NSLog(@"%@",model.fid);
     NSString *name = @"";
@@ -1235,7 +1236,7 @@ extern NSString* FMModelSelected;
 - (void)mapViewDidFinishLoadingMap:(FMKMapView *)mapView
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [MBProgressHUD hideAllHUDsForView:[AppDelegate sharedDelegate].window animated:YES];
+        [MBProgressHUD hideAllHUDsForView:self.superview animated:YES];
     });
 }
 - (void)testDistanceWithResult:(BOOL)result distance:(double)distance
