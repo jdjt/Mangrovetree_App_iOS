@@ -466,7 +466,24 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     QueryDBModel * model = _displayResult[indexPath.row];
-    [self didSelectedCellToMapViewByModel:model];
+    for (UIViewController *viewController in self.navigationController.viewControllers)
+    {
+        if ([viewController isKindOfClass:[MapViewController class]])
+        {
+            MapViewController *map = (MapViewController *)viewController;
+            if (map.loadMapComplete == YES)
+            {
+                [self didSelectedCellToMapViewByModel:model];
+            }
+            else
+            {
+                UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示信息" message:@"地图加载未完成，请等待地图加载完成后再使用地图功能" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
+                [alert addAction:action];
+                [self presentViewController:alert animated:YES completion:nil];
+            }
+        }
+    }
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

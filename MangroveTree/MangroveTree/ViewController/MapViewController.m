@@ -20,6 +20,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.loadMapComplete = NO;
     self.view.backgroundColor = [UIColor colorWithRed:177 / 255.0f green:177 / 255.0f blue:177 / 255.0f alpha:1];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(adddelegateToMap) name:@"AddDelegateToMap" object:nil];
     [self.navigationController.navigationBar setBackgroundImage:[Util createImageWithColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1]] forBarMetrics:UIBarMetricsDefault];
@@ -106,6 +108,7 @@
             [self.fmView addFengMapView];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.view addSubview:self.fmView];
+                self.loadMapComplete = YES;
             });
         }
         // 默认回到地图 把自己的坐标位置移动到屏幕中央
