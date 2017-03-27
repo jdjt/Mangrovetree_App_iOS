@@ -268,7 +268,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
 {
     self.loginAlertView.hidden = YES;
     
-    if (self.mapVC.fmView == nil)
+    if (self.mapVC.fmView.mapFinish == NO)
     {
         MBProgressHUD *HUD =[MBProgressHUD showHUDAddedTo:self.mapVC.view animated:YES];
         HUD.labelText = @"正在加载地图，请稍等";

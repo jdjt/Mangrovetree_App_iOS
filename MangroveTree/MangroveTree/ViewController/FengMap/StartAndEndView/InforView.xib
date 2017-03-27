@@ -12,30 +12,30 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view alpha="0.90000000000000002" contentMode="scaleToFill" id="iN0-l3-epB" customClass="InforView">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SetImage" translatesAutoresizingMaskIntoConstraints="NO" id="bYd-RC-LV7">
-                    <rect key="frame" x="8" y="10" width="68" height="68"/>
+                    <rect key="frame" x="27" y="10" width="64" height="64"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="68" id="tzk-IZ-yOv"/>
-                        <constraint firstAttribute="height" constant="68" id="vsF-IE-7ZC"/>
+                        <constraint firstAttribute="width" constant="64" id="f32-1Q-NID"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="行动书屋" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M6K-H6-pkw">
-                    <rect key="frame" x="86" y="10" width="281" height="20"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="行动书屋" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M6K-H6-pkw">
+                    <rect key="frame" x="101" y="10" width="266" height="20"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="书籍涵盖人文，音乐，禅茶，艺术，生活家居等诸多领域" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwh-ic-S4U">
-                    <rect key="frame" x="86" y="38" width="281" height="40"/>
+                    <rect key="frame" x="101" y="30" width="247" height="44"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y3K-Aa-ZNe">
-                    <rect key="frame" x="8" y="87" width="359" height="1"/>
+                    <rect key="frame" x="27" y="84" width="321" height="1"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="F72-Xf-F8m"/>
@@ -46,17 +46,18 @@
             <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="M6K-H6-pkw" firstAttribute="top" secondItem="bYd-RC-LV7" secondAttribute="top" id="3pb-FK-XHR"/>
-                <constraint firstAttribute="trailing" secondItem="Y3K-Aa-ZNe" secondAttribute="trailing" constant="8" id="5Gj-hE-QBs"/>
-                <constraint firstItem="Y3K-Aa-ZNe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="BFy-I3-n1K"/>
-                <constraint firstItem="bYd-RC-LV7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="Fmd-UZ-WjR"/>
-                <constraint firstAttribute="trailing" secondItem="lwh-ic-S4U" secondAttribute="trailing" constant="8" id="NAG-15-pba"/>
-                <constraint firstItem="bYd-RC-LV7" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Wek-U2-Pq1"/>
+                <constraint firstAttribute="trailing" secondItem="Y3K-Aa-ZNe" secondAttribute="trailing" constant="27" id="5Gj-hE-QBs"/>
+                <constraint firstItem="Y3K-Aa-ZNe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="27" id="BFy-I3-n1K"/>
+                <constraint firstItem="Y3K-Aa-ZNe" firstAttribute="top" secondItem="bYd-RC-LV7" secondAttribute="bottom" constant="10" id="F7H-fO-olh"/>
+                <constraint firstItem="bYd-RC-LV7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="27" id="Fmd-UZ-WjR"/>
+                <constraint firstItem="bYd-RC-LV7" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="KU0-ax-lNl"/>
+                <constraint firstAttribute="trailing" secondItem="lwh-ic-S4U" secondAttribute="trailing" constant="27" id="NAG-15-pba"/>
                 <constraint firstAttribute="trailing" secondItem="M6K-H6-pkw" secondAttribute="trailing" constant="8" id="YrZ-mT-5US"/>
                 <constraint firstAttribute="bottom" secondItem="Y3K-Aa-ZNe" secondAttribute="bottom" id="aVJ-0F-sSg"/>
                 <constraint firstItem="lwh-ic-S4U" firstAttribute="leading" secondItem="M6K-H6-pkw" secondAttribute="leading" id="dFh-eM-h1o"/>
                 <constraint firstItem="M6K-H6-pkw" firstAttribute="leading" secondItem="bYd-RC-LV7" secondAttribute="trailing" constant="10" id="iZr-Qc-ggX"/>
                 <constraint firstItem="lwh-ic-S4U" firstAttribute="bottom" secondItem="bYd-RC-LV7" secondAttribute="bottom" id="umh-Hw-pPm"/>
-                <constraint firstItem="lwh-ic-S4U" firstAttribute="top" secondItem="M6K-H6-pkw" secondAttribute="bottom" constant="8" id="wL9-at-NMe"/>
+                <constraint firstItem="lwh-ic-S4U" firstAttribute="top" secondItem="M6K-H6-pkw" secondAttribute="bottom" id="wL9-at-NMe"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

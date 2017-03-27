@@ -16,7 +16,7 @@ typedef void(^HideViewBlock)(BOOL show);
 
 @property (nonatomic, copy) HideViewBlock hideBlock;
 
-- (void)show;
+- (void)showByView:(UIView *)view;
 - (void)hide;
 - (void)requsrtActivityInforByActivityCode:(NSString *)activityCode;
 
