@@ -41,6 +41,13 @@
                         <constraint firstAttribute="height" constant="1" id="F72-Xf-F8m"/>
                     </constraints>
                 </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down" translatesAutoresizingMaskIntoConstraints="NO" id="FWO-nJ-RNE">
+                    <rect key="frame" x="300" y="-5" width="48" height="10"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="48" id="22j-Ta-CLH"/>
+                        <constraint firstAttribute="height" constant="10" id="hqA-gX-Dx3"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <gestureRecognizers/>
@@ -52,15 +59,18 @@
                 <constraint firstItem="bYd-RC-LV7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="27" id="Fmd-UZ-WjR"/>
                 <constraint firstItem="bYd-RC-LV7" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="KU0-ax-lNl"/>
                 <constraint firstAttribute="trailing" secondItem="lwh-ic-S4U" secondAttribute="trailing" constant="27" id="NAG-15-pba"/>
+                <constraint firstItem="FWO-nJ-RNE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="-5" id="NDi-EW-nsL"/>
                 <constraint firstAttribute="trailing" secondItem="M6K-H6-pkw" secondAttribute="trailing" constant="8" id="YrZ-mT-5US"/>
                 <constraint firstAttribute="bottom" secondItem="Y3K-Aa-ZNe" secondAttribute="bottom" id="aVJ-0F-sSg"/>
                 <constraint firstItem="lwh-ic-S4U" firstAttribute="leading" secondItem="M6K-H6-pkw" secondAttribute="leading" id="dFh-eM-h1o"/>
+                <constraint firstAttribute="trailing" secondItem="FWO-nJ-RNE" secondAttribute="trailing" constant="27" id="gXq-uG-PLj"/>
                 <constraint firstItem="M6K-H6-pkw" firstAttribute="leading" secondItem="bYd-RC-LV7" secondAttribute="trailing" constant="10" id="iZr-Qc-ggX"/>
                 <constraint firstItem="lwh-ic-S4U" firstAttribute="bottom" secondItem="bYd-RC-LV7" secondAttribute="bottom" id="umh-Hw-pPm"/>
                 <constraint firstItem="lwh-ic-S4U" firstAttribute="top" secondItem="M6K-H6-pkw" secondAttribute="bottom" id="wL9-at-NMe"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="arrowsImage" destination="FWO-nJ-RNE" id="MVb-xU-l6z"/>
                 <outlet property="image" destination="bYd-RC-LV7" id="AuB-Ej-at3"/>
                 <outlet property="name" destination="M6K-H6-pkw" id="rgw-Dl-F3k"/>
                 <outlet property="text" destination="lwh-ic-S4U" id="uag-oR-zLF"/>
@@ -76,5 +86,6 @@
     </objects>
     <resources>
         <image name="SetImage" width="28" height="28"/>
+        <image name="down" width="50" height="11"/>
     </resources>
 </document>

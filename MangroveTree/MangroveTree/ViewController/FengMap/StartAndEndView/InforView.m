@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *image;
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *text;
+@property (weak, nonatomic) IBOutlet UIImageView *arrowsImage;
 
 @end
 
@@ -56,6 +57,7 @@
     self.hideView = !self.hideView;
     if (_hideBlock)
         _hideBlock(self.hideView);
+    self.arrowsImage.image = [UIImage imageNamed:self.hideView == YES ?@"up":@"down"];
 }
 - (void)requsrtActivityInforByActivityCode:(NSString *)activityCode
 {

@@ -270,7 +270,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
     
     if (self.mapVC.fmView.mapFinish == NO)
     {
-        MBProgressHUD *HUD =[MBProgressHUD showHUDAddedTo:self.mapVC.view animated:YES];
+        MBProgressHUD *HUD =[MBProgressHUD showHUDAddedTo:[AppDelegate sharedDelegate].window animated:YES];
         HUD.labelText = @"正在加载地图，请稍等";
         [HUD show:YES];
     }

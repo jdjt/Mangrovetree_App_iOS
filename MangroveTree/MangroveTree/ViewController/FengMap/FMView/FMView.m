@@ -401,7 +401,7 @@ extern NSString* FMModelSelected;
 	if (!self.fengMapView)
     {
 		_mapPath = [[NSBundle mainBundle] pathForResource:@(kOutdoorMapID).stringValue ofType:@"fmap"];
-		CGRect rect = CGRectMake(0, 0, self.frame.size.width, kScreenHeight);
+		CGRect rect = CGRectMake(0, 64, self.frame.size.width, kScreenHeight - 64);
 		self.fengMapView = [[FMMangroveMapView alloc] initWithFrame:rect path:_mapPath delegate:self];
 		[self addSubview:self.fengMapView];
 		[self.fengMapView zoomWithScale:1.5];
@@ -1251,7 +1251,7 @@ extern NSString* FMModelSelected;
 - (void)mapViewDidFinishLoadingMap:(FMKMapView *)mapView
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [MBProgressHUD hideAllHUDsForView:self.superview animated:YES];
+        [MBProgressHUD hideAllHUDsForView:[AppDelegate sharedDelegate].window animated:YES];
     });
     self.mapFinish = YES;
 }

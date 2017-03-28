@@ -100,20 +100,20 @@ const int kTopSpace = 10;
 	else if ([view isKindOfClass:[NaviPopView class]])
 	{
 		[UIView animateWithDuration:0.3f animations:^{
-			self.enableLocateBtn.frame = CGRectMake(kLocationSpace, self.naviPopView.frame.origin.y-kLocationSpace-kLocBtnHeight, kLocBtnWidth, kLocBtnHeight);
+//			self.enableLocateBtn.frame = CGRectMake(kLocationSpace, self.naviPopView.frame.origin.y-kLocationSpace-kLocBtnHeight, kLocBtnWidth, kLocBtnHeight);
 		}];
 	}
 	else if([view isKindOfClass:[RouteDisplayView class]])
 	{
 		[UIView animateWithDuration:0.3f animations:^{
-			self.enableLocateBtn.frame = CGRectMake(kLocationSpace,kScreenHeight-kLocationSpace-kLocBtnHeight-kRouteViewHeight, kLocBtnWidth, kLocBtnHeight);
+//			self.enableLocateBtn.frame = CGRectMake(kLocationSpace,kScreenHeight-kLocationSpace-kLocBtnHeight-kRouteViewHeight, kLocBtnWidth, kLocBtnHeight);
 		}];
 	}
 	else
 	{
-		[UIView animateWithDuration:0.3f animations:^{
-			self.enableLocateBtn.frame = CGRectMake(kLocationSpace,kScreenHeight-kLocationSpace-kLocBtnHeight, kLocBtnWidth, kLocBtnHeight);
-		}];
+//		[UIView animateWithDuration:0.3f animations:^{
+//			self.enableLocateBtn.frame = CGRectMake(kLocationSpace,kScreenHeight-kLocationSpace-kLocBtnHeight, kLocBtnWidth, kLocBtnHeight);
+//		}];
 	}
 }
 - (void)setNaviPopVIewFrameByShow:(BOOL)show

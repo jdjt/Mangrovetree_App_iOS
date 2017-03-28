@@ -97,15 +97,15 @@
 	}
 	else if ([view isKindOfClass:[NaviPopView class]])
 	{
-		[UIView animateWithDuration:0.3f animations:^{
-			self.enableLocateBtn.frame = CGRectMake(kLocationSpace, self.naviPopView.frame.origin.y-kLocationSpace-kLocBtnHeight, kLocBtnWidth, kLocBtnHeight);
-		}];
+//		[UIView animateWithDuration:0.3f animations:^{
+//			self.enableLocateBtn.frame = CGRectMake(kLocationSpace, self.naviPopView.frame.origin.y-kLocationSpace-kLocBtnHeight, kLocBtnWidth, kLocBtnHeight);
+//		}];
 	}
 	else
 	{
-		[UIView animateWithDuration:0.3f animations:^{
-			self.enableLocateBtn.frame = CGRectMake(kLocationSpace,kScreenHeight-kLocationSpace-kLocBtnHeight, kLocBtnWidth, kLocBtnHeight);
-		}];
+//		[UIView animateWithDuration:0.3f animations:^{
+//			self.enableLocateBtn.frame = CGRectMake(kLocationSpace,kScreenHeight-kLocationSpace-kLocBtnHeight, kLocBtnWidth, kLocBtnHeight);
+//		}];
 	}
 }
 - (void)setNaviPopVIewFrameByShow:(BOOL)show
