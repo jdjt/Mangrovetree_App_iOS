@@ -102,7 +102,6 @@ int const kCallingServiceCount = 5;
 {
     [super viewWillAppear:animated];
     [self hideMavBar:[FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@([FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi)];
     
     for (UIViewController *VC in self.navigationController.viewControllers)
     {
@@ -310,7 +309,6 @@ int const kCallingServiceCount = 5;
 		FMKModel * model = [self queryModelByFid:_dbModel.fid groupID:@(_dbModel.gid).stringValue];
 		[self setupModelInfoPopViewByModel:model];
 		model.selected = YES;
-		[[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(YES)];
 		
 		NSArray * imageLayers = [_mapView.map getImageLayerWithGroupID:@(self.dbModel.gid).stringValue];
 		FMKImageLayer * imageLayer;
@@ -933,7 +931,6 @@ int const kCallingServiceCount = 5;
 //		indoorModel.selected = NO;
 //	}
     _highlightModel.selected = NO;
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(YES)];
 	model.selected = YES;
     _highlightModel = model;
 }
@@ -949,7 +946,6 @@ int const kCallingServiceCount = 5;
     [self.inforView hide];
     [self.mapView showAllOnMap];
     [self stopNavi];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(NO)];
 }
 - (void)setupModelInfoPopViewByModel:(FMKModel *)model
 {	
@@ -1037,7 +1033,6 @@ int const kCallingServiceCount = 5;
 //	[self.modelInfoPopView hide];
 	[self.naviPopView show];
 	[self setEnableLocationBtnFrameByView:self.naviPopView];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(YES)];
 }
 
 - (void)getNaviResult
@@ -1081,10 +1076,11 @@ int const kCallingServiceCount = 5;
             return ;
         
 		[wSelf stopNavi];//先停止导航
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(YES)];
-
+        NSLog(@"%@",[NSThread currentThread]);
+        NSLog(@"%@",[NSThread mainThread]);
 		//开始导航标志位
 		[FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi = YES;
+        [FMNaviAnalyserTool shareNaviAnalyserTool].planNavi = YES;
         [wSelf hideMavBar:YES];
 
 		if (!naviResult) return;
@@ -1130,7 +1126,6 @@ int const kCallingServiceCount = 5;
 	
 	self.naviPopView.switchStartAndEndBlock = ^{
 		[wSelf stopNavi];
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(YES)];
 		BOOL naviSuccess = [naviTool naviAnalyseByStartMapCoord:endMapCoord endMapCoord:startMapCoord];
 		
 		if (naviSuccess) {
@@ -1154,7 +1149,6 @@ int const kCallingServiceCount = 5;
 	self.naviResults = nil;
 	_isFirstLocate = YES;
 	_lastMapPoint = FMKMapPointZero();
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(NO)];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"FMStopNavi" object:@(YES)];
 }
 

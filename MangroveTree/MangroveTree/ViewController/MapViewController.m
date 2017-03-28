@@ -39,10 +39,6 @@
 	}
      [self.fmView hideNaviBar:[FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi];
     self.centerVC.title = @"红树林导航";
-    if (self.dbModel)
-    {
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@([FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi)];
-    }
     self.centerVC.navigationController.navigationBar.hidden = NO;
     self.navigationController.navigationBar.hidden = YES;
 }
@@ -100,34 +96,38 @@
 
 - (void)loadMap
 {
-        if (!self.fmView)
-        {
-            self.fmView = [[FMView alloc] initWithFrame:self.view.bounds];
-    //        self.fmView.mapVC = self;
-            [self.fmView addFengMapView];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.view  insertSubview:self.fmView belowSubview:self.mangroveicon];
-            });
-        }
-        // 默认回到地图 把自己的坐标位置移动到屏幕中央
-        self.fmView.moveMapToCenter = YES;
-        // 定位模式下 导航防止多次跳转室内地图
-    //    self.fmView.inDoorMap = YES;
-        //重新设置室外地图的主题
-        [self.fmView resetTheme];
-    
-        [self.fmView addLocationDelegate];
-    
+    if (!self.fmView)
+    {
+        NSLog(@"%@",[NSThread currentThread]);
+        self.fmView = [[FMView alloc] initWithFrame:self.view.bounds];
+        [self.fmView addFengMapView];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.view  insertSubview:self.fmView belowSubview:self.mangroveicon];
+            NSLog(@"%@",[NSThread currentThread]);
+        });
+    }
+    NSLog(@"%@",[NSThread currentThread]);
+    // 默认回到地图 把自己的坐标位置移动到屏幕中央
+    self.fmView.moveMapToCenter = YES;
+    // 定位模式下 导航防止多次跳转室内地图
+//    self.fmView.inDoorMap = YES;
+    //重新设置室外地图的主题
+    [self.fmView resetTheme];
+
+    [self.fmView addLocationDelegate];
+    dispatch_async(dispatch_get_main_queue(), ^{
         [self.fmView planNaviAct];
+    });
     
-    	self.fmView.isFirstLocate = YES;
-    
-    	if ([FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi)
-    	{
-    		[self.fmView mapEnterNaviMode];
-    	}
-        [[FMLocationManager shareLocationManager] setMapView:nil];
-        [[FMLocationManager shareLocationManager] setMapView:_fmView.fengMapView];
+
+    self.fmView.isFirstLocate = YES;
+
+    if ([FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi)
+    {
+        [self.fmView mapEnterNaviMode];
+    }
+    [[FMLocationManager shareLocationManager] setMapView:nil];
+    [[FMLocationManager shareLocationManager] setMapView:_fmView.fengMapView];
 }
 
 /*

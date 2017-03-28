@@ -93,7 +93,6 @@
         }
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiChangeStatusBar object:@"0"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(YES)];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -465,7 +464,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     QueryDBModel * model = _displayResult[indexPath.row];
+    for (UIViewController * outdoorVC in self.navigationController.viewControllers) {
+        if ([outdoorVC isKindOfClass:[MapViewController class]])
+        {
+            MapViewController *map = (MapViewController *)outdoorVC;
+            [map.centerVC showBottomView:Segment_none];
+            break;
+        }
+    }
+
     [self didSelectedCellToMapViewByModel:model];
 }
 

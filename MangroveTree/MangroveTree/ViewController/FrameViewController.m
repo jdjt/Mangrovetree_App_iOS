@@ -413,18 +413,27 @@ NSString* const FMModelSelected = @"FMModelSelected";
 {
     if (![FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi)
     {
-        MapSearchViewController *seaVC = [[MapSearchViewController alloc] init];
-        seaVC.mapID = @(kOutdoorMapID).stringValue;
         [self.mapVC.fmView stopNavi];
         [[FMLocationManager shareLocationManager] setMapView:nil];
         
-        UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"MainGround" bundle:nil];
-        SearchViewController * search = [storyboard instantiateViewControllerWithIdentifier:@"searchView"];
+        BOOL hasSearch = NO;
         
-        [self.mapVC.navigationController pushViewController:search animated:NO];
-        
+        for (UIViewController *view in self.mapVC.navigationController.viewControllers)
+        {
+            if ([view isKindOfClass:[SearchViewController class]])
+            {
+                hasSearch = YES;
+                [self.mapVC.navigationController popToViewController:view animated:YES];
+                break;
+            }
+        }
+        if (hasSearch == NO)
+        {
+            UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"MainGround" bundle:nil];
+            SearchViewController * search = [storyboard instantiateViewControllerWithIdentifier:@"searchView"];
+            [self.mapVC.navigationController pushViewController:search animated:NO];
+        }
     }
-    
 }
 - (void)tapCallService
 {

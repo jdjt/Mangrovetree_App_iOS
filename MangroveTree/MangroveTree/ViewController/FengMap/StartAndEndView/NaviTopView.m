@@ -37,7 +37,8 @@
     self.lengthLab.text = [NSString stringWithFormat:@"全程剩余%.2f米", length];
 }
 
-- (IBAction)stopButtonClick:(UIButton *)sender {
+- (IBAction)stopButtonClick:(UIButton *)sender
+{
 	self.stopNaviBlock();
 }
 

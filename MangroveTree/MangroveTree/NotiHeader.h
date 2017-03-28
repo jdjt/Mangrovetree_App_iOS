@@ -9,7 +9,6 @@
 #ifndef NotiHeader_h
 #define NotiHeader_h
 
-#define NotiHideCallView     @"NotiHideCallView"
 
 #define NotiCurrentLocation  @"NotiCurrentLocation"
 

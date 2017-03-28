@@ -750,7 +750,6 @@ extern NSString* FMModelSelected;
             [self.fengMapView showAllOnMap];
 //			[self.modelInfoPopView hide];
 			[self setEnableLocationBtnFrameByView:nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(NO)];
 			return;
 		}
 		[self didSelectedEnd:model];
@@ -783,7 +782,6 @@ extern NSString* FMModelSelected;
     
 //	[self.naviPopView.endPointBtn setTitle:model.name forState:UIControlStateNormal];
 //	[self.modelInfoPopView show];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(YES)];
 
 //	[self setEnableLocationBtnFrameByView:self.modelInfoPopView];
     [self goHere:model.mapCoord];
@@ -843,7 +841,6 @@ extern NSString* FMModelSelected;
     [self.inforView hide];
     [self stopNavi];
     [self.fengMapView showAllOnMap];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(NO)];
     
 }
 
@@ -915,7 +912,6 @@ extern NSString* FMModelSelected;
 - (void)stopNavi
 {
     [self hideNaviBar:NO];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(NO)];
 	[FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi = NO;
 	[FMNaviAnalyserTool shareNaviAnalyserTool].planNavi = NO;
 	[self.fengMapView.map.lineLayer removeAllLine];
@@ -1159,7 +1155,6 @@ extern NSString* FMModelSelected;
 	[self locateMyPosition];//回到我的位置
 	[self.switchMapInfoView hide];
 //	_enableLocateBtn.hidden = YES;
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(YES)];
 }
 
 - (void)hideRouteDisplayView
