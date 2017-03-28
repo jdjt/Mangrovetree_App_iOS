@@ -660,7 +660,6 @@ const int kDisplayCount = 4;
 	[super viewWillAppear:animated];
 	[self updateDataSource];
 	[[FMLocationManager shareLocationManager] setMapView:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(YES)];
     for (UIViewController *viewController in self.navigationController.viewControllers)
     {
         if ([viewController isKindOfClass:[MapViewController class]])
