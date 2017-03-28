@@ -37,6 +37,7 @@
 #import "FMIndoorMapVC.h"
 #import "MapViewController.h"
 #import "FrameViewController.h"
+#import "UIViewExt.h"
 
 CGFloat const kFMBottomViewCornerRadius = 8.0f;
 
@@ -125,10 +126,13 @@ extern NSString* FMModelSelected;
 	self.naviResults = [NSMutableArray array];
 	
 	self.type = ButtonType_NOTFOUND;
-	
+    self.mapFinish = NO;
 	_categoryTag = NSNotFound;
     self.resultDistance = NO;
-	[self getMacAndStartLocationService];//获取MAC地址并且开启定位服务
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self getMacAndStartLocationService];//获取MAC地址并且开启定位服务
+    });
+	
 	_isEnableMove = YES;
     _showChangMap = NO;
     
@@ -141,10 +145,13 @@ extern NSString* FMModelSelected;
 	__block NSString *macAddress;
 	
 	macAddress = [[DataManager defaultInstance] getParameter].diviceId;
-	
+    
+    FMKLocationServiceManager * locationManager = [FMKLocationServiceManager shareLocationServiceManager];
+    locationManager.delegate = self;
+    
     if (!macAddress || [macAddress isEqualToString:@""])
     {
-		dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+//		dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
 		[[FMDHCPNetService shareDHCPNetService] localMacAddress:^(NSString *macAddr)
         {
             if (macAddr != nil && ![macAddr isEqualToString:@""])
@@ -153,15 +160,19 @@ extern NSString* FMModelSelected;
                 [[DataManager defaultInstance] getParameter].diviceId = macAddr;
                 [[DataManager defaultInstance] saveContext];
             }
-			
-			dispatch_semaphore_signal(semaphore);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [locationManager startLocateWithMacAddress:macAddress mapPath:_mapPath];
+            });
+
+//			dispatch_semaphore_signal(semaphore);
 		}];
-		dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-	}
+//		dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    }else
+    {
+        [locationManager startLocateWithMacAddress:macAddress mapPath:_mapPath];
+    }
 	
-	FMKLocationServiceManager * locationManager = [FMKLocationServiceManager shareLocationServiceManager];
-	locationManager.delegate = self;
-	[locationManager startLocateWithMacAddress:macAddress mapPath:_mapPath];
+	
 }
 
 - (void)didUpdatePosition:(FMKMapCoord)mapCoord success:(BOOL)success
@@ -390,7 +401,7 @@ extern NSString* FMModelSelected;
 	if (!self.fengMapView)
     {
 		_mapPath = [[NSBundle mainBundle] pathForResource:@(kOutdoorMapID).stringValue ofType:@"fmap"];
-		CGRect rect = CGRectMake(0, 0, self.frame.size.width, kScreenHeight);
+		CGRect rect = CGRectMake(0, 64, self.frame.size.width, kScreenHeight - 64);
 		self.fengMapView = [[FMMangroveMapView alloc] initWithFrame:rect path:_mapPath delegate:self];
 		[self addSubview:self.fengMapView];
 		[self.fengMapView zoomWithScale:1.5];
@@ -759,18 +770,22 @@ extern NSString* FMModelSelected;
     self.queryModel = nil;
     QueryDBModel *models = [[DBSearchTool shareDBSearchTool] queryModelByFid:model.fid andName:name];
     
+    [self.naviPopView setupInfoByModel:model];
+
     if (models.activityCode != NULL && ![models.activityCode isEqualToString:@""])
     {
-        [self.inforView show];
+        [self.inforView showByView:self.naviPopView];
         [self.inforView requsrtActivityInforByActivityCode:models.activityCode];
+    }else
+    {
+        [self.inforView hide];
     }
     
-	[self.naviPopView.endPointBtn setTitle:model.name forState:UIControlStateNormal];
+//	[self.naviPopView.endPointBtn setTitle:model.name forState:UIControlStateNormal];
 //	[self.modelInfoPopView show];
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(YES)];
 
 //	[self setEnableLocationBtnFrameByView:self.modelInfoPopView];
-	[self.naviPopView setupInfoByModel:model];
     [self goHere:model.mapCoord];
 	if (_categoryTag != -1) {
 		if (!model.maskMode) {
@@ -1108,7 +1123,7 @@ extern NSString* FMModelSelected;
 	if (tool.planNavi)
 	{
 		[self stopNavi];
-		[self.naviPopView.endPointBtn setTitle:tool.endName forState:UIControlStateNormal];
+//		[self.naviPopView.endPointBtn setTitle:tool.endName forState:UIControlStateNormal];
 		
 		[self startNaviAct];
 	}
@@ -1236,8 +1251,9 @@ extern NSString* FMModelSelected;
 - (void)mapViewDidFinishLoadingMap:(FMKMapView *)mapView
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [MBProgressHUD hideAllHUDsForView:self.superview animated:YES];
+        [MBProgressHUD hideAllHUDsForView:[AppDelegate sharedDelegate].window animated:YES];
     });
+    self.mapFinish = YES;
 }
 - (void)testDistanceWithResult:(BOOL)result distance:(double)distance
 {

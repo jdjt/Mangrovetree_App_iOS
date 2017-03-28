@@ -38,7 +38,7 @@ const int kTopSpace = 10;
     if (!self.inforView)
     {
         self.inforView = [InforView inforView];
-        self.inforView.frame = CGRectMake(0, kScreenHeight-kNaviPopViewHeight-49 -88, kScreenWidth, 88);
+        self.inforView.frame = CGRectMake(0, kScreenHeight-kNaviPopViewHeight-49 -85, kScreenWidth, 85);
         [self addSubview:self.inforView];
     }
     __weak FMView * wSelf = self;
@@ -100,28 +100,28 @@ const int kTopSpace = 10;
 	else if ([view isKindOfClass:[NaviPopView class]])
 	{
 		[UIView animateWithDuration:0.3f animations:^{
-			self.enableLocateBtn.frame = CGRectMake(kLocationSpace, self.naviPopView.frame.origin.y-kLocationSpace-kLocBtnHeight, kLocBtnWidth, kLocBtnHeight);
+//			self.enableLocateBtn.frame = CGRectMake(kLocationSpace, self.naviPopView.frame.origin.y-kLocationSpace-kLocBtnHeight, kLocBtnWidth, kLocBtnHeight);
 		}];
 	}
 	else if([view isKindOfClass:[RouteDisplayView class]])
 	{
 		[UIView animateWithDuration:0.3f animations:^{
-			self.enableLocateBtn.frame = CGRectMake(kLocationSpace,kScreenHeight-kLocationSpace-kLocBtnHeight-kRouteViewHeight, kLocBtnWidth, kLocBtnHeight);
+//			self.enableLocateBtn.frame = CGRectMake(kLocationSpace,kScreenHeight-kLocationSpace-kLocBtnHeight-kRouteViewHeight, kLocBtnWidth, kLocBtnHeight);
 		}];
 	}
 	else
 	{
-		[UIView animateWithDuration:0.3f animations:^{
-			self.enableLocateBtn.frame = CGRectMake(kLocationSpace,kScreenHeight-kLocationSpace-kLocBtnHeight, kLocBtnWidth, kLocBtnHeight);
-		}];
+//		[UIView animateWithDuration:0.3f animations:^{
+//			self.enableLocateBtn.frame = CGRectMake(kLocationSpace,kScreenHeight-kLocationSpace-kLocBtnHeight, kLocBtnWidth, kLocBtnHeight);
+//		}];
 	}
 }
 - (void)setNaviPopVIewFrameByShow:(BOOL)show
 {
     self.naviPopView.hidden = NO;
     [UIView animateWithDuration:0.4 animations:^{
-        self.inforView.frame = CGRectMake(0, show == YES ? kScreenHeight -49 - 88:kScreenHeight-kNaviPopViewHeight-49 -88, self.inforView.frame.size.width, self.inforView.frame.size.height);
-        self.naviPopView.frame = CGRectMake(0, show == YES ? kScreenHeight - 49 : kScreenHeight-kNaviPopViewHeight-49, self.naviPopView.frame.size.width, self.naviPopView.frame.size.height);
+        self.inforView.frame = CGRectMake(0, show == YES ? kScreenHeight-49 -85:kScreenHeight -49 - 85 -self.naviPopView.frame.size.height, self.inforView.frame.size.width, self.inforView.frame.size.height);
+        self.naviPopView.frame = CGRectMake(0, show == YES ? kScreenHeight - 49 : kScreenHeight-self.naviPopView.frame.size.height-49, self.naviPopView.frame.size.width, self.naviPopView.frame.size.height);
     } completion:^(BOOL finished)
     {
         self.naviPopView.hidden = show;

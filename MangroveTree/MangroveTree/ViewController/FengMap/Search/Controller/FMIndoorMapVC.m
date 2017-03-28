@@ -32,6 +32,7 @@
 #import "MapViewController.h"
 #import "FrameViewController.h"
 #import "SwitchMapInfoView.h"
+#import "UIViewExt.h"
 
 #define DEBUG_ONLINE 0
 
@@ -962,8 +963,11 @@ int const kCallingServiceCount = 5;
 	[self.naviPopView show];
     if (queryModel.activityCode != nil && ![queryModel.activityCode isEqualToString:@""])
     {
-        [self.inforView show];
+        [self.inforView showByView:self.naviPopView];
         [self.inforView requsrtActivityInforByActivityCode:queryModel.activityCode];
+    }else
+    {
+        [self.inforView hide];
     }
     
 	[self.naviTopView hide];
@@ -1016,7 +1020,7 @@ int const kCallingServiceCount = 5;
 //设置导航信息弹框信息
 - (void)setupNaviPopViewInfoByEndName:(NSString *)endName
 {
-	[self.naviPopView.endPointBtn setTitle:endName forState:UIControlStateNormal];
+//	[self.naviPopView.endPointBtn setTitle:endName forState:UIControlStateNormal];
 }
 
 - (void)startNaviAct

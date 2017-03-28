@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MangroveTree/LoginViewController.m"
-            timestampString = "511756897.005548"
+            filePath = "MangroveTree/ViewController/FengMap/StartAndEndView/InforView.m"
+            timestampString = "512360332.001087"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "220"
-            endingLineNumber = "220"
-            landmarkName = "-pushResponseResultsSucceed:responseCode:withMessage:andData:"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "-dealloc"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

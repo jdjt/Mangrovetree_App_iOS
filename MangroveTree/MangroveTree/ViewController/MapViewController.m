@@ -13,6 +13,7 @@
 
 @interface MapViewController ()<FMLocationManagerDelegate>
 
+@property (weak, nonatomic) IBOutlet UIImageView *mangroveicon;
 @end
 
 @implementation MapViewController
@@ -105,7 +106,7 @@
     //        self.fmView.mapVC = self;
             [self.fmView addFengMapView];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.view addSubview:self.fmView];
+                [self.view  insertSubview:self.fmView belowSubview:self.mangroveicon];
             });
         }
         // 默认回到地图 把自己的坐标位置移动到屏幕中央

@@ -315,6 +315,9 @@
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="手机号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tQl-xR-bZk">
                                                     <rect key="frame" x="38" y="15.5" width="47.5" height="18.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="47.5" id="TP7-hI-R5R"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15.5"/>
                                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>

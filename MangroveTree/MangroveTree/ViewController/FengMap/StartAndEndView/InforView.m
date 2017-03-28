@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *image;
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *text;
+@property (weak, nonatomic) IBOutlet UIImageView *arrowsImage;
 
 @end
 
@@ -35,16 +36,18 @@
     [UIView animateWithDuration:0.4f animations:^{
         wSelf.alpha = 0.0f;
         wSelf.hideView = NO;
+        wSelf.name.text = @"";
+        wSelf.text.text = @"";
     }];
 }
 
-- (void)show
+- (void)showByView:(UIView *)view
 {
     self.alpha = 0.9f;
     __weak typeof(self)wSelf = self;
     [UIView animateWithDuration:0.4f animations:^{
         CGRect rect = self.frame;
-        wSelf.frame = CGRectMake(0, kScreenHeight-120-49 -88, kScreenWidth, rect.size.height);
+        wSelf.frame = CGRectMake(0, kScreenHeight-view.frame.size.height-49 -85, kScreenWidth, rect.size.height);
         wSelf.hideView = NO;
     }];
 }
@@ -54,6 +57,7 @@
     self.hideView = !self.hideView;
     if (_hideBlock)
         _hideBlock(self.hideView);
+    self.arrowsImage.image = [UIImage imageNamed:self.hideView == YES ?@"up":@"down"];
 }
 - (void)requsrtActivityInforByActivityCode:(NSString *)activityCode
 {
@@ -77,6 +81,8 @@
     {
         InforModel *model = datas[0];
         [self.image sd_setImageWithURL:[NSURL URLWithString:model.imgurl] placeholderImage:[UIImage new]];
+        self.name.text = @"";
+        self.text.text = @"";
         self.name.text = model.name;
         self.text.text = model.abstracts;
     }
