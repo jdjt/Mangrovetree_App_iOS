@@ -118,11 +118,7 @@
 
 - (void)pushResponseResultsFailing:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg
 {
-    if ([code isEqualToString:@"-1009"])
-    {
-        [MyAlertView showAlert:@"没有网络，操作失败!"];
-        return;
-    }
+    msg = msg.length > 30 ? @"修改姓名失败，请重新尝试" : msg;
     [MyAlertView showAlert:msg];
 }
 @end

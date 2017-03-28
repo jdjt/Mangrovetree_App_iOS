@@ -150,12 +150,16 @@
 
 - (void)pushResponseResultsFailing:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg
 {
-    if ([code isEqualToString:@"-1009"])
+    if (task == self.sengCodeTask)
     {
-        [MyAlertView showAlert:@"没有网络，操作失败!"];
-        return;
+        msg = msg.length > 30 ? @"获取验证码失败，请重新尝试" : msg;
+        [MyAlertView showAlert:msg];
     }
-    [MyAlertView showAlert:msg];
+    if (task == self.checkCodeTask)
+    {
+        msg = msg.length > 30 ? @"验证码校验失败，请重新申请验证码" : msg;
+        [MyAlertView showAlert:msg];
+    }
 }
 
 #pragma mark - Private functions
