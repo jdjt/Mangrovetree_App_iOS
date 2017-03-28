@@ -29,7 +29,7 @@
 #define kTableViewHeight 225.0f
 #define kSeaTableViewCellHeight 50.0f
 #define kRouteViewHeight 200.0f
-#define kNaviPopViewHeight 120.0f
+#define kNaviPopViewHeight 90.0f
 #define kNaviTopViewHeight 110.0f
 #define kOutdoorMapID  79980
 #define kModelInfoPopViewHeight 92.0f

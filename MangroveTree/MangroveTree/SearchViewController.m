@@ -14,6 +14,7 @@
 #import "SearchResultCell.h"
 #import "DBSearchTool.h"
 #import "FMIndoorMapVC.h"
+#import "FMView.h"
 
 @interface SearchViewController () <UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -93,7 +94,6 @@
         }
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiChangeStatusBar object:@"0"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotiHideCallView object:@(YES)];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -465,14 +465,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     QueryDBModel * model = _displayResult[indexPath.row];
     for (UIViewController *viewController in self.navigationController.viewControllers)
     {
         if ([viewController isKindOfClass:[MapViewController class]])
         {
             MapViewController *map = (MapViewController *)viewController;
-            if (map.loadMapComplete == YES)
+            if (map.fmView.mapFinish == YES)
             {
+                [map.centerVC showBottomView:Segment_none];
                 [self didSelectedCellToMapViewByModel:model];
             }
             else

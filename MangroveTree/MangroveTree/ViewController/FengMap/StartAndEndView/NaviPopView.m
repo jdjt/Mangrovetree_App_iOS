@@ -26,7 +26,6 @@
     FMKExternalModel * _model;
 }
 @property (nonatomic, assign) BOOL enableEnterIndoor;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *buttonH;
 
 @end
 
@@ -36,6 +35,8 @@
 {
 	 NaviPopView * view = [[NSBundle mainBundle] loadNibNamed:@"NaviPopView" owner:nil  options:nil][0];
 	view.alpha = 0.0f;
+    [view.startNavBtn loginStyle];
+    [view.enterIndoorBtn loginStyle];
 	return view;
 }
 
@@ -44,6 +45,8 @@
 	__weak typeof(self)wSelf = self;
 	[UIView animateWithDuration:0.4f animations:^{
 		wSelf.alpha = 0.0f;
+        wSelf.timeLabel.text = @"";
+        wSelf.lengthLabel.text = @"";
 	}];
 }
 
@@ -64,8 +67,8 @@
 		[self.delegate switchStartAndEnd];
 	}
 	
-	[self.startPointBtn setTitle:self.endPointBtn.titleLabel.text forState:UIControlStateNormal];
-	[self.endPointBtn setTitle:@"我的位置" forState:UIControlStateNormal];
+//	[self.startPointBtn setTitle:self.endPointBtn.titleLabel.text forState:UIControlStateNormal];
+//	[self.endPointBtn setTitle:@"我的位置" forState:UIControlStateNormal];
 	self.switchStartAndEndBlock();
 	
 }
@@ -187,7 +190,7 @@
 //        CGRect positionRect = self.modelPositionLabel.frame;
 //        self.modelPositionLabel.frame = CGRectMake(self.modelName.frame.origin.x+nameWidth+5, positionRect.origin.y, positionRect.size.width, positionRect.size.height);
     }
-    [self.endPointBtn setTitle:name forState:UIControlStateNormal];
+//    [self.endPointBtn setTitle:name forState:UIControlStateNormal];
 
 }
 - (void)setupModelInfoByNodel:(QueryDBModel *)model
@@ -200,10 +203,14 @@
 {
     self.enterIndoorBtn.hidden = !self.enableEnterIndoor;
     [UIView animateWithDuration:0.4 animations:^{
-        self.startNavBtn.frame = CGRectMake(kScreenWidth - self.startNavBtn.width -8, 6,  self.startNavBtn.width, self.enableEnterIndoor == YES ? 34 : 88 - 6*2);
-        self.enterIndoorBtn.frame = CGRectMake(kScreenWidth - self.enterIndoorBtn.width -8, self.startNavBtn.bottom +6, self.enterIndoorBtn.width, self.enterIndoorBtn.height);
+        CGRect frame = self.frame;
+        frame.size.height = self.enableEnterIndoor == YES ? 94: 74;
+        self.frame = frame;
+        self.startNavBtn.frame = CGRectMake(self.enableEnterIndoor == YES ? 27:kScreenWidth-27-self.startNavBtn.width, self.enableEnterIndoor == YES ? 38 : (self.height-self.startNavBtn.height)/2,  self.startNavBtn.width, self.enableEnterIndoor == YES ? 38 : 43);
+        self.powerLabel.frame = CGRectMake(self.enableEnterIndoor == YES ? kScreenWidth-27-self.powerLabel.width : 27, self.enableEnterIndoor == YES ? 6 : 6*2+self.timeLabel.height , self.powerLabel.width, self.powerLabel.height);
+        self.powerLabel.bottom = self.enableEnterIndoor == YES ? self.timeLabel.bottom: self.startNavBtn.bottom;
+        self.enterIndoorBtn.frame = CGRectMake(self.startNavBtn.right +30, 38, self.enterIndoorBtn.width, self.enterIndoorBtn.height);
     }];
-    
 }
 
 - (void)dealloc

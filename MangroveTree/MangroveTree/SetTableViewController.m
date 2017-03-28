@@ -159,7 +159,7 @@
     {
         //进入到主页面时
         [[NSNotificationCenter defaultCenter] postNotificationName:NotiChangeStatusBar object:@"1"];
-        [self.navigationController.navigationBar setBackgroundImage:[Util createImageWithColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.9]] forBarMetrics:UIBarMetricsDefault];
+        [self.navigationController.navigationBar setBackgroundImage:[Util createImageWithColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1.0]] forBarMetrics:UIBarMetricsDefault];
         
         [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
         [self.navigationController.navigationBar setTitleTextAttributes:
@@ -181,11 +181,7 @@
 
 - (void)pushResponseResultsFailing:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg
 {
-    if ([code isEqualToString:@"-1009"])
-    {
-        [MyAlertView showAlert:@"没有网络，操作失败!"];
-        return;
-    }
+    msg = msg.length > 30 ? @"退出失败，请重新尝试" : msg;
     [MyAlertView showAlert:msg];
 }
 

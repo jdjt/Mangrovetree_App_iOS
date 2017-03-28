@@ -51,6 +51,7 @@ typedef NS_ENUM(NSInteger,ButtonType)
 @property (nonatomic, strong) QueryDBModel *queryModel;
 //@property (nonatomic, assign) BOOL inDoorMap;
 //@property (nonatomic, weak) MapViewController *mapVC;
+@property (nonatomic, assign) BOOL mapFinish;
 ///d地图数据路径
 @property (nonatomic,copy) NSString * mapPath;
 ///按钮类型
@@ -64,6 +65,7 @@ typedef NS_ENUM(NSInteger,ButtonType)
 - (void)addFengMapView;
 //重设主题
 - (void)resetTheme;
+- (void)getMacAndStartLocationService;
 
 - (void)hideRouteDisplayView;
 - (void)showRouteDisplayView;

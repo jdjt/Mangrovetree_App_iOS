@@ -18,8 +18,6 @@
 @property (nonatomic,strong) FMView * fmView;
 @property (nonatomic, strong) QueryDBModel * dbModel;//数据库模型，数据
 
-@property (nonatomic, assign) BOOL loadMapComplete;
-
 // 加载地图
 - (void)loadMap;
 

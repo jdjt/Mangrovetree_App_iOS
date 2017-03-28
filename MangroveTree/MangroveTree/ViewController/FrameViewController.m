@@ -268,9 +268,9 @@ NSString* const FMModelSelected = @"FMModelSelected";
 {
     self.loginAlertView.hidden = YES;
     
-    if (self.mapVC.fmView == nil)
+    if (self.mapVC.fmView.mapFinish == NO)
     {
-        MBProgressHUD *HUD =[MBProgressHUD showHUDAddedTo:self.mapVC.view animated:YES];
+        MBProgressHUD *HUD =[MBProgressHUD showHUDAddedTo:[AppDelegate sharedDelegate].window animated:YES];
         HUD.labelText = @"正在加载地图，请稍等";
         [HUD show:YES];
     }
@@ -413,18 +413,27 @@ NSString* const FMModelSelected = @"FMModelSelected";
 {
     if (![FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi)
     {
-        MapSearchViewController *seaVC = [[MapSearchViewController alloc] init];
-        seaVC.mapID = @(kOutdoorMapID).stringValue;
         [self.mapVC.fmView stopNavi];
         [[FMLocationManager shareLocationManager] setMapView:nil];
         
-        UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"MainGround" bundle:nil];
-        SearchViewController * search = [storyboard instantiateViewControllerWithIdentifier:@"searchView"];
+        BOOL hasSearch = NO;
         
-        [self.mapVC.navigationController pushViewController:search animated:NO];
-        
+        for (UIViewController *view in self.mapVC.navigationController.viewControllers)
+        {
+            if ([view isKindOfClass:[SearchViewController class]])
+            {
+                hasSearch = YES;
+                [self.mapVC.navigationController popToViewController:view animated:YES];
+                break;
+            }
+        }
+        if (hasSearch == NO)
+        {
+            UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"MainGround" bundle:nil];
+            SearchViewController * search = [storyboard instantiateViewControllerWithIdentifier:@"searchView"];
+            [self.mapVC.navigationController pushViewController:search animated:NO];
+        }
     }
-    
 }
 - (void)tapCallService
 {

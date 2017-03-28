@@ -23,8 +23,6 @@ typedef void(^SwitchStartAndEnd)();
 @interface NaviPopView : UIView
 
 @property (nonatomic, weak) id<NaviPopViewDelegate>delegate;
-@property (strong, nonatomic) IBOutlet UIButton *endPointBtn;
-@property (strong, nonatomic) IBOutlet UIButton *startPointBtn;
 @property (strong, nonatomic) IBOutlet UIButton *powerLabel;
 @property (strong, nonatomic) IBOutlet UILabel *timeLabel;
 @property (strong, nonatomic) IBOutlet UILabel *lengthLabel;

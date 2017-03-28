@@ -109,7 +109,7 @@
                                     <segue destination="yPX-vf-5QQ" kind="embed" identifier="showMsg" id="suw-zj-rJz"/>
                                 </connections>
                             </containerView>
-                            <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6n8-jj-txz">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6n8-jj-txz">
                                 <rect key="frame" x="0.0" y="618" width="375" height="49"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ezM-aN-UuJ">
@@ -347,9 +347,25 @@
                     <view key="view" contentMode="scaleToFill" id="QJ9-LJ-y5t">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mangroveicon" translatesAutoresizingMaskIntoConstraints="NO" id="siJ-8t-jWq">
+                                <rect key="frame" x="296" y="83" width="57" height="57"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="57" id="BP3-3N-36b"/>
+                                    <constraint firstAttribute="height" constant="57" id="JrD-db-JCf"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="siJ-8t-jWq" firstAttribute="top" secondItem="flb-sz-bDU" secondAttribute="bottom" constant="19" id="BcM-mq-zbr"/>
+                            <constraint firstAttribute="trailing" secondItem="siJ-8t-jWq" secondAttribute="trailing" constant="22" id="nkM-Ze-jfV"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="8lv-dn-lr1"/>
+                    <connections>
+                        <outlet property="mangroveicon" destination="siJ-8t-jWq" id="CYa-qn-789"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t5R-fJ-YhV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1080,6 +1096,7 @@
         <image name="backBtn_white" width="27" height="27"/>
         <image name="deleteBtn" width="10" height="10"/>
         <image name="locationBtn" width="31" height="31"/>
+        <image name="mangroveicon" width="57" height="57"/>
         <image name="memberImage" width="55" height="55"/>
         <image name="nextButton_gray" width="28" height="28"/>
         <image name="nextButton_white" width="28" height="28"/>
