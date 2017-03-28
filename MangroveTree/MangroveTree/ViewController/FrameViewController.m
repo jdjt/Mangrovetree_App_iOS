@@ -357,6 +357,14 @@ NSString* const FMModelSelected = @"FMModelSelected";
 {
 	if (![FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi)
 	{
+        for (UIViewController *view in self.mapVC.navigationController.viewControllers)
+        {
+            if ([view isKindOfClass:[SearchViewController class]])
+            {
+                [self showBottomView:Segment_toWhere];
+                break;
+            }
+        }
         [self.mapVC.navigationController popViewControllerAnimated:YES];
 	}
 }
