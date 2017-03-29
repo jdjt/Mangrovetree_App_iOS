@@ -135,20 +135,14 @@
 {
     if (indexPath.section == 3)
     {
-        if (indexPath.row == 0) {
-#warning 准备用webview代替
-            AgreementViewController *agrVtrl = [[AgreementViewController alloc] initWithNibName:@"AgreementViewController" bundle:nil];
-            agrVtrl.type = @"1";
-            agrVtrl.titleLabel = @"红树林管家用户协议";
-            UINavigationController *navCtrl = [[UINavigationController alloc] initWithRootViewController:agrVtrl];
-            [self presentViewController:navCtrl animated:YES completion:^{
-                
-            }];
+        if (indexPath.row == 0)
+        {
+            BaseWebViewController * webView = [[BaseWebViewController alloc]initWithUrl:@"http://www.mymhotel.com/jhpt/app/v1/xieyi2017a.html"];
+            BaseNavigationController *navCtrl = [[BaseNavigationController alloc] initWithRootViewController:webView];
+            webView.title = @"红树林导航用户协议";
+            [self presentViewController:navCtrl animated:YES completion:nil];
         }
-    }
-    else if (indexPath.section == 3)
-    {
-        if (indexPath.row == 1)
+        else if (indexPath.row == 1)
         {
             if (self.isChooseYES == YES)
             {

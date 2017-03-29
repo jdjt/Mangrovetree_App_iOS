@@ -40,6 +40,8 @@
 #import "MJRefresh.h"
 #import "InforModel.h"
 #import "UIImageView+WebCache.h"
+#import "BaseWebViewController.h"
+#import "BaseNavigationController.h"
 
 #endif
 
