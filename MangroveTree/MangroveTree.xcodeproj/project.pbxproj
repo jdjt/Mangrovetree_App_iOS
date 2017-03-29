@@ -27,6 +27,7 @@
 		C45B62061E7A5A4900F70D3F /* SearchHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C45B62051E7A5A4900F70D3F /* SearchHeaderView.m */; };
 		C45B620A1E7A7C7A00F70D3F /* vacation.json in Resources */ = {isa = PBXBuildFile; fileRef = C45B62091E7A7C7A00F70D3F /* vacation.json */; };
 		C45B620D1E7A8CA300F70D3F /* SearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C45B620C1E7A8CA300F70D3F /* SearchResultCell.m */; };
+		C461989C1E8B60C6005590D2 /* BaseWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C461989B1E8B60C6005590D2 /* BaseWebViewController.m */; };
 		C46A63F41E711E06008A8A29 /* MainGround.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C46A63F31E711E06008A8A29 /* MainGround.storyboard */; };
 		C46A63FC1E712837008A8A29 /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C46A63F81E712837008A8A29 /* UserCell.m */; };
 		C46A63FD1E712837008A8A29 /* UserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C46A63FA1E712837008A8A29 /* UserInfoCell.m */; };
@@ -472,6 +473,8 @@
 		C45B62091E7A7C7A00F70D3F /* vacation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = vacation.json; sourceTree = "<group>"; };
 		C45B620B1E7A8CA300F70D3F /* SearchResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultCell.h; sourceTree = "<group>"; };
 		C45B620C1E7A8CA300F70D3F /* SearchResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultCell.m; sourceTree = "<group>"; };
+		C461989A1E8B60C6005590D2 /* BaseWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseWebViewController.h; sourceTree = "<group>"; };
+		C461989B1E8B60C6005590D2 /* BaseWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseWebViewController.m; sourceTree = "<group>"; };
 		C46A63F31E711E06008A8A29 /* MainGround.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainGround.storyboard; sourceTree = "<group>"; };
 		C46A63F71E712837008A8A29 /* UserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCell.h; sourceTree = "<group>"; };
 		C46A63F81E712837008A8A29 /* UserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCell.m; sourceTree = "<group>"; };
@@ -1835,6 +1838,8 @@
 				FC5B19A31E6E465B0038BCA7 /* AppDelegate.m */,
 				C44B166E1E70F0E800EE8257 /* MainViewController.h */,
 				C44B166F1E70F0E800EE8257 /* MainViewController.m */,
+				C461989A1E8B60C6005590D2 /* BaseWebViewController.h */,
+				C461989B1E8B60C6005590D2 /* BaseWebViewController.m */,
 				C46A63F31E711E06008A8A29 /* MainGround.storyboard */,
 				C46A63FE1E714DE0008A8A29 /* Homepage */,
 				C44B16801E70F25C00EE8257 /* UserCenter */,
@@ -2626,6 +2631,7 @@
 				FC5B1AEB1E6E51510038BCA7 /* MyAlertView.m in Sources */,
 				A8E4136F1E7692C40096EA62 /* InforView.m in Sources */,
 				C4C723951E6FCC2F003523A2 /* FMDatabasePool.m in Sources */,
+				C461989C1E8B60C6005590D2 /* BaseWebViewController.m in Sources */,
 				FC07553F1E6EB74B00EAB144 /* DBUserLogin+CoreDataClass.m in Sources */,
 				C4C723EB1E6FD34E003523A2 /* StatusFinished.m in Sources */,
 				FC07554B1E6EBB7400EAB144 /* AgreementViewController.m in Sources */,

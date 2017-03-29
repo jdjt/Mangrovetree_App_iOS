@@ -332,7 +332,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake((kScreenWidth - 33 * 3 - 17 * 2) / 4, 20.5);
+    return CGSizeMake((kScreenWidth - 14 * 3 - 14 * 2) / 4, 28);
 }
 
 
@@ -340,24 +340,24 @@
 {
     if (collectionView == self.leftCollectionView)
     {
-        return UIEdgeInsetsMake(7, 17, 12, 17);
+        return UIEdgeInsetsMake(7, 14, 12, 14);
     }
     else
     {
-        return UIEdgeInsetsMake(19, 17, 12, 17);
+        return UIEdgeInsetsMake(19, 14, 12, 14);
     }
 }
 
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 10.0f;
+    return 6.0f;
 }
 
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 33.0f;
+    return 14.0f;
 }
 
 
