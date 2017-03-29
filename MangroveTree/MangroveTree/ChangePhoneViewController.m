@@ -37,9 +37,7 @@
 //    [_validationButton setTitleColor:[UIColor colorWithRed:122/255.0f green:177/255.0f blue:147/255.0f alpha:1] forState:UIControlStateNormal];
     [_nextButton loginStyle];
     user = [[DataManager defaultInstance] findUserLogInByCode:@"1"];
-    if ([user.mobile isEqualToString:@""])
-        [self performSegueWithIdentifier:@"newPhone" sender:nil];
-    else
+    if (![user.mobile isEqualToString:@""])
     {
         NSString *string=[user.mobile stringByReplacingOccurrencesOfString:[user.mobile substringWithRange:NSMakeRange(3,4)]withString:@"****"];
         _acctountLabel.text = string;
