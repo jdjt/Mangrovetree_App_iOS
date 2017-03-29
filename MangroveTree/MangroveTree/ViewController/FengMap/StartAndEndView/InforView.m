@@ -43,12 +43,12 @@
 
 - (void)showByView:(UIView *)view
 {
-    self.alpha = 0.9f;
+    self.alpha = 0.0f;
     __weak typeof(self)wSelf = self;
     [UIView animateWithDuration:0.4f animations:^{
         CGRect rect = self.frame;
         wSelf.frame = CGRectMake(0, kScreenHeight-view.frame.size.height-49 -85, kScreenWidth, rect.size.height);
-        wSelf.hideView = NO;
+        self.hideView = NO;
     }];
 }
 
@@ -80,6 +80,9 @@
     if (task == self.requesNetWork)
     {
         InforModel *model = datas[0];
+        [UIView animateWithDuration:0.2 animations:^{
+            self.alpha = 0.9f;
+        }];
         [self.image sd_setImageWithURL:[NSURL URLWithString:model.imgurl] placeholderImage:[UIImage new]];
         self.name.text = @"";
         self.text.text = @"";

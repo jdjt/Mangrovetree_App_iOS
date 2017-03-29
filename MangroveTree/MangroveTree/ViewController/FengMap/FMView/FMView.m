@@ -179,7 +179,7 @@ extern NSString* FMModelSelected;
 {
     _locationMarker.hidden = [FMLocationManager shareLocationManager].isCallingService;
 //    _enableLocateBtn.hidden = ![FMLocationManager shareLocationManager].isCallingService;
-
+//    _locationMarker.hidden = !_locationMarker.hidden;
     if ([FMLocationManager shareLocationManager].isCallingService == YES) return;
     NSLog(@"室外定位回调%@", NSStringFromFMKMapCoord(mapCoord));
 	if (success)
@@ -309,18 +309,13 @@ extern NSString* FMModelSelected;
 	}
 	else
 	{
-		_locationMarker.hidden = NO;
+//		_locationMarker.hidden = NO;
 //        [_locationMarker locateWithGeoCoord:mapsCoord.coord];
 #warning 这里需要区分是否有定位信息
         [_locationMarker locateWithGeoCoord:[self getDefaultMapCoord].coord];
         // 现场使用的方法
 //		[_locationMarker locateWithGeoCoord:mapCoord.coord];
-        if (self.moveMapToCenter == YES && mapCoord.mapID == kOutdoorMapID)
-        {
-            NSLog(@"%@", NSStringFromFMKMapCoord(mapCoord));
-            self.moveMapToCenter = NO;
-        }
-        
+         
 	}
 }
 - (void)setShowChangMap:(BOOL)showChangMap
@@ -917,6 +912,7 @@ extern NSString* FMModelSelected;
 	[self.fengMapView.map.lineLayer removeAllLine];
 	[FMNaviAnalyserTool shareNaviAnalyserTool].naviResult = nil;
 	[self.naviTopView hide];
+    [[self getCurrentController] showMangroveIcon:YES];
 	[self exit2DMode];//退出2D模式
 	_enableLocateBtn.hidden = NO;
 	FMKExternalModelLayer * modelLayer = [self.fengMapView.map getExternalModelLayerWithGroupID:@"1"];
@@ -1135,7 +1131,7 @@ extern NSString* FMModelSelected;
 	BOOL naviResult = [tool naviAnalyseByStartMapCoord:currentMapCoord endMapCoord:tool.endMapCoord];
 	if (!naviResult) return;
 	
-	
+    [[self getCurrentController] showMangroveIcon:NO];
     [self.fengMapView inclineWithAngle:90.0f];
 	double totalLength = tool.naviLength;
 	tool.hasStartNavi = YES;

@@ -14,6 +14,7 @@
 @interface MapViewController ()<FMLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *mangroveicon;
+
 @end
 
 @implementation MapViewController
@@ -26,10 +27,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(adddelegateToMap) name:@"AddDelegateToMap" object:nil];
     [self.navigationController.navigationBar setBackgroundImage:[Util createImageWithColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1]] forBarMetrics:UIBarMetricsDefault];
 }
+
 - (void)adddelegateToMap
 {
     [FMKLocationServiceManager shareLocationServiceManager].delegate = self.fmView;
 }
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -109,7 +112,6 @@
     }
     NSLog(@"%@",[NSThread currentThread]);
     // 默认回到地图 把自己的坐标位置移动到屏幕中央
-    self.fmView.moveMapToCenter = YES;
     // 定位模式下 导航防止多次跳转室内地图
 //    self.fmView.inDoorMap = YES;
     //重新设置室外地图的主题
@@ -129,6 +131,15 @@
     }
     [[FMLocationManager shareLocationManager] setMapView:nil];
     [[FMLocationManager shareLocationManager] setMapView:_fmView.fengMapView];
+}
+
+- (void)showMangroveIcon:(BOOL)show
+{
+    self.mangroveicon.hidden = !show;
+    if (show == YES)
+    {
+        self.mangroveicon.frame = CGRectMake(self.mangroveicon.frame.origin.x, 64+19, 57, 57);
+    }
 }
 
 /*

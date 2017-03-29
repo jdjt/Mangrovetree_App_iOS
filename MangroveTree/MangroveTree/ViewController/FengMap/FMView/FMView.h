@@ -45,7 +45,6 @@ typedef NS_ENUM(NSInteger,ButtonType)
 @property (nonatomic, strong) InforView *inforView;
 @property (nonatomic, strong) NavigationBarView * navigationBarView;
 @property (nonatomic, strong) UIButton * enableLocateBtn;
-@property (nonatomic, assign) BOOL moveMapToCenter;
 @property (nonatomic, assign) BOOL showChangMap;
 @property (nonatomic, assign) BOOL isFirstLocate;//判断在导航时是否是第一次定位
 @property (nonatomic, strong) QueryDBModel *queryModel;

@@ -20,5 +20,5 @@
 
 // 加载地图
 - (void)loadMap;
-
+- (void)showMangroveIcon:(BOOL)show;
 @end

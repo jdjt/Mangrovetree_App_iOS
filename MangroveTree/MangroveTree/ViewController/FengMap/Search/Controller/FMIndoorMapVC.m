@@ -75,7 +75,6 @@ int const kCallingServiceCount = 5;
 @property (nonatomic, assign) BOOL alertIsExist;//弹框已经存在
 
 @property (nonatomic, assign) BOOL isFirstLocate;//第一次定位
-@property (nonatomic, assign) BOOL moveMapToCenter;
 @property (nonatomic, assign) int callingServiceCount;//双点服务下初次判断定位次数
 @property (nonatomic, strong) UITextView *textView;
 
@@ -152,7 +151,6 @@ int const kCallingServiceCount = 5;
 	
 	self.displayGroupID = _displayGroupID;
     self.resultDistance = NO;
-    self.moveMapToCenter = YES;
     _showChangeMap = NO;
     _enableLocateBtn.hidden = ![FMLocationManager shareLocationManager].isCallingService;
 	if (_dbModel) {
@@ -433,12 +431,6 @@ int const kCallingServiceCount = 5;
 //				}
 				self.locationMarker.hidden = NO;
 				[self pathConstraintAndUpdateByMapCoord:mapCoord];
-			}
-			
-			if (self.moveMapToCenter == YES && [FMKLocationServiceManager shareLocationServiceManager].currentMapCoord.mapID == self.mapID.intValue && mapCoord.coord.storey == _displayGroupID.intValue)
-			{
-				[self.mapView moveToViewCenterByMapCoord:mapCoord.coord];
-				self.moveMapToCenter = NO;
 			}
 		}
 	}
@@ -805,7 +797,6 @@ int const kCallingServiceCount = 5;
 - (void)enableLocation:(NSNotification *)noti
 {
     if ([noti.object boolValue] == NO) return;
-    self.moveMapToCenter = YES;
     [self enableLocationInOutdoor];
 }
 
