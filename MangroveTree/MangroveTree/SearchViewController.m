@@ -115,6 +115,7 @@
     self.collectionWidth.constant = kScreenWidth;
 }
 
+
 - (NSMutableArray *)titleArray
 {
     if (_titleArray == nil)
@@ -476,6 +477,7 @@
             {
                 [map.centerVC showBottomView:Segment_none];
                 [self didSelectedCellToMapViewByModel:model];
+                [self resetUI];
             }
             else
             {
@@ -521,6 +523,14 @@
     {
         [wSelf testIndoorIsExistByDBModel:model];
     }
+}
+
+- (void)resetUI
+{
+    self.searchResultButton.hidden = YES;
+    self.searchTextFlied.text = @"";
+    self.searchTextFlied.placeholder = @"请输入您要去的地方";
+    [self searchTableShow:NO];
 }
 
 //判断室内地图是否存在  跳转室内地图 插标
