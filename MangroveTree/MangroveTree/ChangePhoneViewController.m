@@ -87,7 +87,7 @@
     NSLog(@"发送验证码");
     NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithCapacity:2];
     
-    [params setObject:_acctountLabel.text forKey:@"account"];
+    [params setObject:user.mobile forKey:@"account"];
     
     [params setObject:@"3" forKey:@"logicFlag"];
     NSString* uuid = [self getUUID];
