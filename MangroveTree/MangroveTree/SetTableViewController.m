@@ -83,6 +83,7 @@
         {
             // 关于红树林导航
             NSLog(@"您点击了关于红树林导航");
+            [self performSegueWithIdentifier:@"goAbout" sender:nil];
         }
     }
     

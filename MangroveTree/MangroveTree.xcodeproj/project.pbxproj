@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C00D71F1E8CB6C600766FAA /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C00D71E1E8CB6C600766FAA /* AboutViewController.m */; };
 		9C317AED1E792293004002A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C317AEC1E792293004002A5 /* Assets.xcassets */; };
 		9C317AF01E793E69004002A5 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C317AEF1E793E69004002A5 /* BaseNavigationController.m */; };
 		9C4737361E723A3C00A30C91 /* WXOpenIMSDKFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C4737351E723A3C00A30C91 /* WXOpenIMSDKFMWK.framework */; };
@@ -438,6 +439,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9C00D71D1E8CB6C600766FAA /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		9C00D71E1E8CB6C600766FAA /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		9C317AEC1E792293004002A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9C317AEE1E793E69004002A5 /* BaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
 		9C317AEF1E793E69004002A5 /* BaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
@@ -1187,6 +1190,8 @@
 			children = (
 				9C47373F1E7259CA00A30C91 /* SetTableViewController.h */,
 				9C4737401E7259CA00A30C91 /* SetTableViewController.m */,
+				9C00D71D1E8CB6C600766FAA /* AboutViewController.h */,
+				9C00D71E1E8CB6C600766FAA /* AboutViewController.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -2650,6 +2655,7 @@
 				C45B62061E7A5A4900F70D3F /* SearchHeaderView.m in Sources */,
 				FCDD64451E6FA5260057A9C3 /* MapViewController.m in Sources */,
 				C4C723A31E6FCC2F003523A2 /* UIView+TransitionAnimation.m in Sources */,
+				9C00D71F1E8CB6C600766FAA /* AboutViewController.m in Sources */,
 				FCDD64621E6FA5260057A9C3 /* UIControl+BlockSupport.m in Sources */,
 				C4C723AA1E6FCC2F003523A2 /* FMView.m in Sources */,
 				C46A63FD1E712837008A8A29 /* UserInfoCell.m in Sources */,
