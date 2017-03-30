@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QXi-Tb-bQc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QXi-Tb-bQc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -214,13 +214,6 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="knp-Di-Zdd">
                                         <rect key="frame" x="0.0" y="153" width="325" height="61"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alertBottom_triangle" translatesAutoresizingMaskIntoConstraints="NO" id="5ad-ty-mpC">
-                                                <rect key="frame" x="155" y="0.0" width="14" height="7"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="7" id="0ge-Xg-XdZ"/>
-                                                    <constraint firstAttribute="width" constant="14" id="Hvf-GX-mFG"/>
-                                                </constraints>
-                                            </imageView>
                                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WUg-qM-UoJ">
                                                 <rect key="frame" x="118" y="19" width="89" height="27"/>
                                                 <constraints>
@@ -234,9 +227,7 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.92941176469999998" green="0.50980392159999999" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="5ad-ty-mpC" firstAttribute="top" secondItem="knp-Di-Zdd" secondAttribute="top" id="03E-7h-WAp"/>
                                             <constraint firstAttribute="bottom" secondItem="WUg-qM-UoJ" secondAttribute="bottom" constant="15" id="07B-dV-2Yj"/>
-                                            <constraint firstItem="5ad-ty-mpC" firstAttribute="centerX" secondItem="knp-Di-Zdd" secondAttribute="centerX" id="U4s-ew-L8L"/>
                                             <constraint firstItem="WUg-qM-UoJ" firstAttribute="top" secondItem="knp-Di-Zdd" secondAttribute="top" constant="19" id="dUc-hP-biT"/>
                                             <constraint firstAttribute="height" constant="61" id="fUG-do-Gi6"/>
                                             <constraint firstItem="WUg-qM-UoJ" firstAttribute="centerX" secondItem="knp-Di-Zdd" secondAttribute="centerX" id="p7T-3u-w5P"/>
@@ -625,7 +616,7 @@
                                                     </connections>
                                                 </collectionReusableView>
                                                 <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionFooter" id="vIO-lf-aES">
-                                                    <rect key="frame" x="0.0" y="37.5" width="200" height="9"/>
+                                                    <rect key="frame" x="0.0" y="38" width="200" height="9"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aTs-Ds-PhR">
@@ -691,7 +682,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </collectionReusableView>
                                                 <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Footer" id="b3D-p8-a9a">
-                                                    <rect key="frame" x="0.0" y="70.5" width="200" height="50"/>
+                                                    <rect key="frame" x="0.0" y="71" width="200" height="50"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </collectionReusableView>
                                                 <connections>
@@ -964,7 +955,7 @@
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="infoCell" rowHeight="116" id="sV7-TI-ICK" customClass="UserInfoCell">
-                                <rect key="frame" x="0.0" y="55.5" width="300" height="116"/>
+                                <rect key="frame" x="0.0" y="56" width="300" height="116"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sV7-TI-ICK" id="bpa-4I-o5s">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="116"/>
@@ -1025,7 +1016,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="settingCell" rowHeight="48" id="1vx-gq-0es" customClass="UserCell">
-                                <rect key="frame" x="0.0" y="171.5" width="300" height="48"/>
+                                <rect key="frame" x="0.0" y="172" width="300" height="48"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1vx-gq-0es" id="UEv-VJ-aGf">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="48"/>
@@ -1089,7 +1080,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="alertBottom_triangle" width="14" height="7"/>
         <image name="alertCenter_image" width="35" height="35"/>
         <image name="backBtn_white" width="27" height="27"/>
         <image name="deleteBtn" width="10" height="10"/>
