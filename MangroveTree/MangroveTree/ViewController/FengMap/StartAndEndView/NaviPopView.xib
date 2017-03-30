@@ -18,48 +18,44 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gjD-Ng-weB">
                     <rect key="frame" x="0.0" y="0.0" width="383" height="94"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6fI-Yy-poY">
+                        <button opaque="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" fixedFrame="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6fI-Yy-poY">
                             <rect key="frame" x="206.5" y="38" width="149.5" height="38"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.8901960784313725" green="0.29411764705882354" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="38" id="a8e-7c-LQF"/>
-                            </constraints>
-                            <state key="normal" title="进入室内">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <state key="normal">
+                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
                                 <action selector="enterIndoorBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="VqY-kC-Uiv"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lib-mi-B2r">
+                        <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lib-mi-B2r">
                             <rect key="frame" x="27" y="38" width="149.5" height="38"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.8901960784313725" green="0.29411764705882354" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="38" id="qCJ-wJ-Shz"/>
-                            </constraints>
-                            <state key="normal" title="开始导航">
-                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <state key="normal">
+                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
                                 <action selector="startNaviBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="gj5-3t-bLd"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="352米" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D26-hb-uSO">
-                            <rect key="frame" x="89" y="11" width="40" height="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D26-hb-uSO">
+                            <rect key="frame" x="33" y="8.5" width="0.0" height="0.0"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12分钟" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ffq-lf-BSw">
-                            <rect key="frame" x="27" y="8" width="56" height="22"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ffq-lf-BSw">
+                            <rect key="frame" x="27" y="8" width="0.0" height="0.0"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jjt-Lo-uwV">
-                            <rect key="frame" x="249" y="14" width="107" height="16"/>
+                            <rect key="frame" x="249" y="3" width="107" height="16"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
                             <state key="normal" title="燃烧33大卡能量" image="flame">
@@ -76,21 +72,15 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="6fI-Yy-poY" firstAttribute="width" secondItem="Lib-mi-B2r" secondAttribute="width" id="2EB-dt-uSu"/>
                         <constraint firstItem="D26-hb-uSO" firstAttribute="centerY" secondItem="Ffq-lf-BSw" secondAttribute="centerY" id="462-Aa-SKW"/>
                         <constraint firstItem="NP3-dw-hsa" firstAttribute="leading" secondItem="gjD-Ng-weB" secondAttribute="leading" constant="27" id="8rC-hb-oic"/>
-                        <constraint firstItem="Lib-mi-B2r" firstAttribute="leading" secondItem="gjD-Ng-weB" secondAttribute="leading" constant="27" id="BlO-oK-dbB"/>
                         <constraint firstItem="D26-hb-uSO" firstAttribute="leading" secondItem="Ffq-lf-BSw" secondAttribute="trailing" constant="6" id="Ig6-he-cqV"/>
-                        <constraint firstItem="Lib-mi-B2r" firstAttribute="top" secondItem="gjD-Ng-weB" secondAttribute="top" constant="38" id="M58-to-YgJ"/>
                         <constraint firstItem="Jjt-Lo-uwV" firstAttribute="centerY" secondItem="D26-hb-uSO" secondAttribute="centerY" constant="2.5" id="QTM-iR-OLu"/>
-                        <constraint firstAttribute="trailing" secondItem="6fI-Yy-poY" secondAttribute="trailing" constant="27" id="R0A-bk-CPN"/>
                         <constraint firstItem="Ffq-lf-BSw" firstAttribute="top" secondItem="gjD-Ng-weB" secondAttribute="top" constant="8" id="R4L-RR-wSL"/>
                         <constraint firstItem="Ffq-lf-BSw" firstAttribute="leading" secondItem="gjD-Ng-weB" secondAttribute="leading" constant="27" id="SjG-kb-xe8"/>
-                        <constraint firstItem="6fI-Yy-poY" firstAttribute="leading" secondItem="Lib-mi-B2r" secondAttribute="trailing" constant="30" id="T4e-LR-1vm"/>
                         <constraint firstAttribute="trailing" secondItem="Jjt-Lo-uwV" secondAttribute="trailing" constant="27" id="T4p-zg-zdV"/>
                         <constraint firstAttribute="trailing" secondItem="NP3-dw-hsa" secondAttribute="trailing" constant="27" id="W4O-IR-XXG"/>
                         <constraint firstAttribute="bottom" secondItem="NP3-dw-hsa" secondAttribute="bottom" id="mTl-Rz-wOb"/>
-                        <constraint firstItem="6fI-Yy-poY" firstAttribute="top" secondItem="gjD-Ng-weB" secondAttribute="top" constant="38" id="pzO-mz-jYR"/>
                     </constraints>
                 </view>
             </subviews>

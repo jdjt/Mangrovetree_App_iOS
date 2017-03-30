@@ -24,8 +24,8 @@
     NSString * _modelFid;
     NSString * _indoorMapID;
     FMKExternalModel * _model;
+    BOOL _enableEnterIndoor;
 }
-@property (nonatomic, assign) BOOL enableEnterIndoor;
 
 @end
 
@@ -37,6 +37,8 @@
 	view.alpha = 0.0f;
     [view.startNavBtn loginStyle];
     [view.enterIndoorBtn loginStyle];
+    view.startNavBtn.frame = CGRectMake( 27,38,(kScreenWidth-27*2-30)/2, 38 );
+    view.enterIndoorBtn.frame = CGRectMake(view.startNavBtn.right +30, 38, (kScreenWidth-27*2-30)/2, 38);
 	return view;
 }
 
@@ -55,6 +57,8 @@
 	self.alpha = 0.9f;
     self.hidden = NO;
 	__weak typeof(self)wSelf = self;
+    
+
     [UIView animateWithDuration:0.4f animations:^{
         CGRect rect = self.frame;
         wSelf.frame = CGRectMake(0, kScreenHeight-rect.size.height-49, kScreenWidth, rect.size.height);
@@ -119,17 +123,8 @@
 }
 - (void)setupInfoByModel:(FMKExternalModel *)model
 {
-    self.enableEnterIndoor = NO;
+    _enableEnterIndoor = NO;
     _model = model;
-    //	if ([model.name isEqualToString:@""]) {
-    //		self.modelName.text = @"暂无名称";
-    //	}
-    //	else
-    //	{
-    //		self.modelName.text = model.name;
-    //	}
-    
-    
     if (!_indoorMapInfos) {
         _indoorMapInfos = [ParserJsondata  parserIndoorMap];
     }
@@ -137,21 +132,11 @@
     //找到对应的室内地图ID
     for (IndoorMapInfo * info in _indoorMapInfos) {
         if ([model.fid isEqualToString:info.model_fid]) {
-            self.enableEnterIndoor = YES;
+            _enableEnterIndoor = YES;
             _indoorMapID = info.map_mid;
         }
     }
     
-    //判断是否能够进入室内
-    if (!self.enableEnterIndoor) {
-//        [self.enterIndoorBtn setImage:[UIImage imageNamed:@"noEnter"] forState:UIControlStateNormal];
-        self.enterIndoorBtn.enabled = NO;
-    }
-    else
-    {
-//        [self.enterIndoorBtn setImage:[UIImage imageNamed:@"enter"] forState:UIControlStateNormal];
-        self.enterIndoorBtn.enabled = YES;
-    }
     //设置能否进入室内的布局
     [self setupBottomView];
     
@@ -171,45 +156,37 @@
     }
     else
     {
-        
         name = eModel.name;
     }
     
-    
-    
-    
-    
-    if (!model.address) {
-//        self.modelPositionLabel.text = @"";
-    
+    if (!model.address)
+    {
     }
     else
     {
-        
-//        self.modelPositionLabel.text = [NSString stringWithFormat:@"%@ · %@",model.typeName,model.address];
-//        CGRect positionRect = self.modelPositionLabel.frame;
-//        self.modelPositionLabel.frame = CGRectMake(self.modelName.frame.origin.x+nameWidth+5, positionRect.origin.y, positionRect.size.width, positionRect.size.height);
     }
-//    [self.endPointBtn setTitle:name forState:UIControlStateNormal];
 
 }
 - (void)setupModelInfoByNodel:(QueryDBModel *)model
 {
-    self.enableEnterIndoor = NO;
+    _enableEnterIndoor = NO;
     [self setupBottomView];
 }
 
 - (void)setupBottomView
 {
-    self.enterIndoorBtn.hidden = !self.enableEnterIndoor;
+    self.enterIndoorBtn.hidden = !_enableEnterIndoor;
     [UIView animateWithDuration:0.4 animations:^{
         CGRect frame = self.frame;
-        frame.size.height = self.enableEnterIndoor == YES ? 94: 74;
+        frame.size.height = _enableEnterIndoor == YES ? 94: 74;
         self.frame = frame;
-        self.startNavBtn.frame = CGRectMake(self.enableEnterIndoor == YES ? 27:kScreenWidth-27-self.startNavBtn.width, self.enableEnterIndoor == YES ? 38 : (self.height-self.startNavBtn.height)/2,  self.startNavBtn.width, self.enableEnterIndoor == YES ? 38 : 43);
-        self.powerLabel.frame = CGRectMake(self.enableEnterIndoor == YES ? kScreenWidth-27-self.powerLabel.width : 27, self.enableEnterIndoor == YES ? 6 : 6*2+self.timeLabel.height , self.powerLabel.width, self.powerLabel.height);
-        self.powerLabel.bottom = self.enableEnterIndoor == YES ? self.timeLabel.bottom: self.startNavBtn.bottom;
+        
+        self.startNavBtn.frame = CGRectMake(_enableEnterIndoor == YES ? 27:kScreenWidth-27-self.startNavBtn.width, _enableEnterIndoor == YES ? 38 : (self.height-self.startNavBtn.height)/2,  self.startNavBtn.width, _enableEnterIndoor == YES ? 38 : 43);
+        self.powerLabel.frame = CGRectMake(_enableEnterIndoor == YES ? kScreenWidth-27-self.powerLabel.width : 27, _enableEnterIndoor == YES ? 6 : 6*2+self.timeLabel.height , self.powerLabel.width, self.powerLabel.height);
+        self.powerLabel.bottom = _enableEnterIndoor == YES ? self.timeLabel.bottom: self.startNavBtn.bottom;
         self.enterIndoorBtn.frame = CGRectMake(self.startNavBtn.right +30, 38, self.enterIndoorBtn.width, self.enterIndoorBtn.height);
+        [self.startNavBtn setTitle:@"开始导航" forState:UIControlStateNormal];
+        [self.enterIndoorBtn setTitle:@"进入室内" forState:UIControlStateNormal];
     }];
 }
 
