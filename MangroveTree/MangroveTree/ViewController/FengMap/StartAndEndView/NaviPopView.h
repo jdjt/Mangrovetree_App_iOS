@@ -15,6 +15,7 @@ typedef void(^SwitchStartAndEnd)();
 @protocol NaviPopViewDelegate <NSObject>
 
 - (void)enterIndoorMapBtnClick:(NSString *)modelFid;
+@optional
 - (void)startNavi;
 - (void)switchStartAndEnd;
 

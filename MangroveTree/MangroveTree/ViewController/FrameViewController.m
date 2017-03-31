@@ -18,7 +18,7 @@
 
 NSString* const FMModelSelected = @"FMModelSelected";
 
-@interface FrameViewController () <MTRequestNetWorkDelegate>
+@interface FrameViewController () <MTRequestNetWorkDelegate,UIActionSheetDelegate>
 
 @property (nonatomic, strong) FMZoneManager * myZoneManager;
 

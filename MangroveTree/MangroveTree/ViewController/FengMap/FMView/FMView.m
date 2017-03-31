@@ -85,7 +85,7 @@ extern NSString* FMModelSelected;
 	int _lastSetupMapID;//导航模式下非上次设置地图ID
 }
 
-@property (nonatomic, assign) __block int categoryTag;
+@property (nonatomic, assign) __block NSInteger categoryTag;
 @property (nonatomic, assign) __block int oldImageMarkerIndex;
 @property (nonatomic, strong) NSMutableArray * naviResults;
 @property (nonatomic, strong) UIAlertController *alertView;
@@ -467,7 +467,7 @@ extern NSString* FMModelSelected;
 	}
 }
 
-- (void)setCategoryTag:(int)categoryTag
+- (void)setCategoryTag:(NSInteger)categoryTag
 {
 	if (_categoryTag != categoryTag)
 	{
@@ -480,7 +480,7 @@ extern NSString* FMModelSelected;
 		_categoryTag = NSNotFound;
 	}
 }
-- (void)showCategoryByTag:(int)tag
+- (void)showCategoryByTag:(NSInteger)tag
 {
 	[self.fengMapView showAllOnMap];
 	[self hiddenRoute];
@@ -520,7 +520,7 @@ extern NSString* FMModelSelected;
 			break;
 	}
 }
-- (void)hiddenCategoryByTag:(int)tag
+- (void)hiddenCategoryByTag:(NSInteger)tag
 {
 	switch (tag) {
 		case 100://设施
@@ -1239,6 +1239,11 @@ extern NSString* FMModelSelected;
 }
 
 #pragma mark - FMLocationManagerDelegate
+
+- (void)wifiInfoTime:(NSTimeInterval)time wifiStatus:(BOOL)wifiStatus GPSHorizontalAccuracy:(float)GPSHorizontalAccuracy wifiMaxRssi:(int)MaxRssi uMapID:(int)uMapID
+{
+    
+}
 - (void)mapViewDidFinishLoadingMap:(FMKMapView *)mapView
 {
     dispatch_async(dispatch_get_main_queue(), ^{

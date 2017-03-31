@@ -43,8 +43,6 @@ typedef NS_ENUM(NSInteger,SegmentSelected)
 
 - (void)removeLocationOnMap:(DBCallTask *)task;
 
-- (void)testDistanceBy:(DBCallTask *)task;
-
 - (void)changNavViewStyleByLayerMode:(NaviBarType)type;
 
 - (void)startMessageViewLoadBy:(DBCallTask *)task;

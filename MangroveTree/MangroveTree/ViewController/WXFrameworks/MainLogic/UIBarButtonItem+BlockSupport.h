@@ -10,6 +10,6 @@
 
 @interface UIBarButtonItem (BlockSupport)
 
-- (nullable instancetype)initWithTitle:(nullable NSString *)title style:(UIBarButtonItemStyle)style andBlock:(void(^)())clickBlock;
+- (nullable instancetype)initWithTitle:(nullable NSString *)title style:(UIBarButtonItemStyle)style andBlock:(void(^_Nullable)())clickBlock;
 
 @end

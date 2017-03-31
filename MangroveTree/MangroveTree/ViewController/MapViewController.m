@@ -11,7 +11,7 @@
 #import "FrameViewController.h"
 #import "FMNaviAnalyserTool.h"
 
-@interface MapViewController ()<FMLocationManagerDelegate>
+@interface MapViewController ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *mangroveicon;
 

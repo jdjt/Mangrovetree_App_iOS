@@ -50,15 +50,15 @@
 	}
 }
 
-//- (void)addModelInfoPopView
-//{
+- (void)addModelInfoPopView
+{
 //	if (!self.modelInfoPopView) {
 //		self.modelInfoPopView = [IndoorMapModelInfoPopView indoorMapModelInfoPopView];
 //		self.modelInfoPopView.frame = CGRectMake(0, kScreenHeight-kModelInfoPopViewHeight, kScreenWidth, kModelInfoPopViewHeight);
 //		[self.view addSubview:self.modelInfoPopView];
 //		[self addGestureOnView:self.modelInfoPopView];
 //	}
-//}
+}
 
 - (void)addSwitchMapInfoView
 {

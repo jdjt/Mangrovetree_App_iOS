@@ -36,7 +36,14 @@
 		self.modelNameLabel.text = modelName;
 	}
 }
-
+- (void)show
+{
+    
+}
+- (void)hide
+{
+    
+}
 - (void)setupModelInfoByNodel:(QueryDBModel *)model
 {
 	CGFloat nameWidth;

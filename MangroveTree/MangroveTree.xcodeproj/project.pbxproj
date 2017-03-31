@@ -409,7 +409,6 @@
 		FCDD64631E6FA5260057A9C3 /* SecurityGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCDD631A1E6FA5260057A9C3 /* SecurityGuardSDK.framework */; };
 		FCDD64641E6FA5260057A9C3 /* SGMain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCDD631B1E6FA5260057A9C3 /* SGMain.framework */; };
 		FCDD64651E6FA5260057A9C3 /* UTMini.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCDD631C1E6FA5260057A9C3 /* UTMini.framework */; };
-		FCDD64661E6FA5260057A9C3 /* WXOpenIMSDKFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCDD631D1E6FA5260057A9C3 /* WXOpenIMSDKFMWK.framework */; };
 		FCDD64671E6FA5260057A9C3 /* WXOpenIMSDKResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FCDD631E1E6FA5260057A9C3 /* WXOpenIMSDKResource.bundle */; };
 		FCDD64681E6FA5260057A9C3 /* WXOUIModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCDD631F1E6FA5260057A9C3 /* WXOUIModule.framework */; };
 		FCDD64691E6FA5260057A9C3 /* WXOUIModuleResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FCDD63201E6FA5260057A9C3 /* WXOUIModuleResources.bundle */; };
@@ -1149,7 +1148,6 @@
 				FCDD64631E6FA5260057A9C3 /* SecurityGuardSDK.framework in Frameworks */,
 				FCDD64641E6FA5260057A9C3 /* SGMain.framework in Frameworks */,
 				FCDD64651E6FA5260057A9C3 /* UTMini.framework in Frameworks */,
-				FCDD64661E6FA5260057A9C3 /* WXOpenIMSDKFMWK.framework in Frameworks */,
 				FCDD646B1E6FA5260057A9C3 /* YWFeedbackServiceFMWK.framework in Frameworks */,
 				FCDD64681E6FA5260057A9C3 /* WXOUIModule.framework in Frameworks */,
 			);
@@ -2287,7 +2285,7 @@
 		FC5B19941E6E465B0038BCA7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = luoyu;
 				TargetAttributes = {
 					FC5B199B1E6E465B0038BCA7 = {
@@ -2794,7 +2792,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -2837,7 +2835,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

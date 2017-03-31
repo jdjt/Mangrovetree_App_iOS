@@ -17,5 +17,9 @@
     // Drawing code
 }
 */
+- (void)addFengMapView
+{
+    
+}
 
 @end
