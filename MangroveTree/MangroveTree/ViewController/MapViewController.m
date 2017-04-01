@@ -13,7 +13,11 @@
 
 @interface MapViewController ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *mangroveicon;
+@property (weak, nonatomic) IBOutlet UIButton *mangroveicon;
+@property (weak, nonatomic) IBOutlet UILabel *scalingLabel;
+
+@property (nonatomic, assign)BOOL isScaling;
+
 
 @end
 
@@ -22,6 +26,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.isScaling = YES;
+    self.scalingLabel.layer.cornerRadius = 32/2;
+    self.scalingLabel.layer.masksToBounds = YES;
+    self.scalingLabel.layer.borderColor = [[UIColor blackColor]CGColor];
+    self.scalingLabel.layer.borderWidth = 0.1f;
+    self.scalingLabel.adjustsFontSizeToFitWidth = YES;
     
     self.view.backgroundColor = [UIColor colorWithRed:177 / 255.0f green:177 / 255.0f blue:177 / 255.0f alpha:1];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(adddelegateToMap) name:@"AddDelegateToMap" object:nil];
@@ -106,7 +116,7 @@
         self.fmView = [[FMView alloc] initWithFrame:self.view.bounds];
         [self.fmView addFengMapView];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.view  insertSubview:self.fmView belowSubview:self.mangroveicon];
+            [self.view  insertSubview:self.fmView belowSubview:self.scalingLabel];
             NSLog(@"%@",[NSThread currentThread]);
         });
     }
@@ -138,9 +148,44 @@
     self.mangroveicon.hidden = !show;
     if (show == YES)
     {
-        self.mangroveicon.frame = CGRectMake(self.mangroveicon.frame.origin.x, 64+19, 57, 57);
+        self.mangroveicon.frame = CGRectMake(self.mangroveicon.frame.origin.x, 64+13, 35, 35);
     }
 }
+
+- (IBAction)scalingLabelAction:(id)sender
+{
+    NSLog(@"伸缩label");
+    if (self.isScaling)
+    {
+        [UIView animateWithDuration:0.5 animations:^{
+            CGRect rect = self.mangroveicon.frame;
+            rect.origin.x = rect.origin.x - 175;
+            self.mangroveicon.frame = rect;
+            
+            CGRect rect1 = self.scalingLabel.frame;
+            rect1.origin.x = rect.origin.x ;
+            rect1.size.width = 175+35;
+            self.scalingLabel.frame = rect1;
+            
+        }];
+        self.isScaling = NO;
+    }
+    else
+    {
+        [UIView animateWithDuration:0.5 animations:^{
+            CGRect rect = self.mangroveicon.frame;
+            rect.origin.x = rect.origin.x + 175;
+            self.mangroveicon.frame = rect;
+            
+            CGRect rect1 = self.scalingLabel.frame;
+            rect1.origin.x = kScreenWidth-12-35;
+            rect1.size.width = 35;
+            self.scalingLabel.frame = rect1;
+        }];
+        self.isScaling = YES;
+    }
+}
+
 
 /*
 #pragma mark - Navigation
