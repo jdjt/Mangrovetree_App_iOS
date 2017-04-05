@@ -93,6 +93,9 @@
 // 修改个人资料
 #define URI_MODIFY_MEMINFO                  "/uum/mem/account/modify_member.json"
 
+// 用户账号重复验证
+#define URI_REPEATREGIST                    "/uum/mem/account/check_account.json"
+
 //用户注册
 #define URI_REGIST                          "/uum/mem/account/register.json"
 

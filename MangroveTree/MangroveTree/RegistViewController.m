@@ -27,7 +27,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *registeredButton;
 @property (weak, nonatomic) IBOutlet UIImageView *chooseImage;
 
-
+@property (strong, nonatomic) NSURLSessionTask *repeatRegist;
 @property (strong, nonatomic) NSURLSessionTask *registTask;
 @property (strong, nonatomic) NSURLSessionTask *sengCodeTask;
 @property (strong, nonatomic) NSURLSessionTask *loginTask;
@@ -224,26 +224,15 @@
 // 发送验证码
 - (IBAction)validationButtonAction:(id)sender
 {
+    //在发送验证码之前，先判断用户是否已经注册过
     NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithCapacity:2];
-    
+    [params setObject:_phoneNumber.text forKey:@"account"];
     if (![Util isMobileNumber:_phoneNumber.text]&&![Util isValidateEmail:_phoneNumber.text]) {
         
         [MyAlertView showAlert:@"请输入正确的手机号或邮箱"];
         return;
     }
-    
-    [params setObject:_phoneNumber.text forKey:@"account"];
-    [params setObject:@"1" forKey:@"logicFlag"];
-    NSString* uuid = self.loginController.registUUIDDictionary[_phoneNumber.text] ;
-    if (uuid == nil || uuid.length <= 0)
-        uuid = [self getUUID];
-    [params setObject:uuid forKey:@"uuid"];
-    [self.loginController.registUUIDDictionary setObject:uuid forKey:_phoneNumber.text];
-    self.sengCodeTask = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
-                                                                    webURL:@URI_GETUKEY
-                                                                    params:params
-                                                                withByUser:YES
-                                                          andOldInterfaces:YES];
+    self.repeatRegist = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL webURL:@URI_REPEATREGIST params:params withByUser:YES andOldInterfaces:YES];
 }
 
 //  直接登录
@@ -279,6 +268,39 @@
 
 - (void)pushResponseResultsSucceed:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg andData:(NSMutableArray *)datas
 {
+    //验证用户是否注册
+    if (task == self.repeatRegist)
+    {
+        //该手机号，用户已经注册过
+        if ([datas[0] isEqualToString:@"1"])
+        {
+            [MyAlertView showAlert:@"该用户已经注册!"];
+        }
+        //否则没注册过,去注册
+        else
+        {
+            NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithCapacity:2];
+            
+            if (![Util isMobileNumber:_phoneNumber.text]&&![Util isValidateEmail:_phoneNumber.text]) {
+                
+                [MyAlertView showAlert:@"请输入正确的手机号或邮箱"];
+                return;
+            }
+            
+            [params setObject:_phoneNumber.text forKey:@"account"];
+            [params setObject:@"1" forKey:@"logicFlag"];
+            NSString* uuid = self.loginController.registUUIDDictionary[_phoneNumber.text] ;
+            if (uuid == nil || uuid.length <= 0)
+                uuid = [self getUUID];
+            [params setObject:uuid forKey:@"uuid"];
+            [self.loginController.registUUIDDictionary setObject:uuid forKey:_phoneNumber.text];
+            self.sengCodeTask = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
+                                                                            webURL:@URI_GETUKEY
+                                                                            params:params
+                                                                        withByUser:YES
+                                                                  andOldInterfaces:YES];
+        }
+    }
     //发送验证码
     if (task == self.sengCodeTask)
     {
@@ -320,7 +342,7 @@
         [alert addAction:action];
         [self presentViewController:alert animated:YES completion:nil];
     }
-    else if (task == self.registTask)
+    else if (task == self.registTask || task == self.repeatRegist)
     {
         msg = msg.length > 30 ? @"注册失败，请重新尝试注册" : msg;
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示信息" message:msg preferredStyle:UIAlertControllerStyleAlert];

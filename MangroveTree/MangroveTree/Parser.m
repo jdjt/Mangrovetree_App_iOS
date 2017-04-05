@@ -17,6 +17,10 @@
     {
         datas =  [self parserVerificationCode:dict];
     }
+    else if ([ident isEqualToString:@URI_REPEATREGIST])//用户重复注册 
+    {
+        datas = [self parserRepeatRegist:dict];
+    }
     else if ([ident isEqualToString:@URI_LOGIN])//登录
     {
         datas = [self parserLogin:dict];
@@ -31,6 +35,16 @@
     //存储数据
     [[DataManager defaultInstance] saveContext];
     return datas;
+}
+
+#pragma mark - 用户重复注册
+- (NSMutableArray *)parserRepeatRegist:(NSData *)dict
+{
+    NSMutableArray *array = [NSMutableArray array];
+    NSMutableDictionary * mdict = (NSMutableDictionary*)dict;
+    NSString* result = [mdict objectForKey:@"result"];
+    [array addObject:result];
+    return array;
 }
 
 #pragma mark - 验证码
