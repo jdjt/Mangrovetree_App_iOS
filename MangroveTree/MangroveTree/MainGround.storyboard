@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QXi-Tb-bQc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QXi-Tb-bQc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -366,8 +366,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wSP-W8-rsx" firstAttribute="top" secondItem="flb-sz-bDU" secondAttribute="bottom" constant="14" id="3C9-ue-6VX"/>
-                            <constraint firstItem="Svp-zL-V5g" firstAttribute="top" secondItem="flb-sz-bDU" secondAttribute="bottom" constant="13" id="HJt-h6-eu8"/>
                             <constraint firstAttribute="trailing" secondItem="Svp-zL-V5g" secondAttribute="trailing" constant="12" id="OKW-x1-Qcy"/>
+                            <constraint firstItem="Svp-zL-V5g" firstAttribute="top" secondItem="flb-sz-bDU" secondAttribute="bottom" constant="13" id="ZCm-1n-bgW"/>
                             <constraint firstAttribute="trailing" secondItem="wSP-W8-rsx" secondAttribute="trailing" constant="12" id="ePS-fP-y9a"/>
                         </constraints>
                     </view>
@@ -1110,7 +1110,7 @@
         <image name="searchBtn_cancel" width="61" height="20"/>
         <image name="searchBtn_glass" width="18" height="18"/>
         <image name="searchBtn_text" width="48" height="22"/>
-        <image name="searchBtn_white" width="61" height="20"/>
+        <image name="searchBtn_white" width="13" height="11"/>
         <image name="toCallService_default" width="28" height="28"/>
         <image name="toSearch_default" width="28" height="28"/>
         <image name="toUser" width="28" height="28"/>

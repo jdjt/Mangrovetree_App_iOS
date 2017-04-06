@@ -93,6 +93,8 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+    self.mangroveicon.frame = CGRectMake(kScreenWidth - 12 - 35,64 + 13, 35, 35);
+    self.scalingLabel.frame = CGRectMake(kScreenWidth - 12 - 35,64 + 14, 35, 32);
 //    [self.fmView.fengMapView resetMapViewFrameWithWidth:kScreenWidth height:kScreenHeight];
 }
 
@@ -146,40 +148,45 @@
 - (void)showMangroveIcon:(BOOL)show
 {
     self.mangroveicon.hidden = !show;
+    self.scalingLabel.hidden = !show;
     if (show == YES)
     {
-        self.mangroveicon.frame = CGRectMake(self.mangroveicon.frame.origin.x, 64+13, 35, 35);
+        [UIView animateWithDuration:0.4f animations:^{
+            self.mangroveicon.frame = CGRectMake(kScreenWidth - 12 - 35,64 + 13, 35, 35);
+            self.scalingLabel.frame = CGRectMake(kScreenWidth - 12 - 35,64 + 14, 35, 32);
+            self.isScaling = YES;
+        }];
     }
 }
 
 - (IBAction)scalingLabelAction:(id)sender
 {
-    NSLog(@"伸缩label");
     if (self.isScaling)
     {
+        CGRect rect = self.mangroveicon.frame;
+        rect.origin.x = rect.origin.x - 175;
+        
+        CGRect rect1 = self.scalingLabel.frame;
+        rect1.origin.x = rect.origin.x;
+        rect1.size.width = 175+35;
+        
         [UIView animateWithDuration:0.5 animations:^{
-            CGRect rect = self.mangroveicon.frame;
-            rect.origin.x = rect.origin.x - 175;
             self.mangroveicon.frame = rect;
-            
-            CGRect rect1 = self.scalingLabel.frame;
-            rect1.origin.x = rect.origin.x ;
-            rect1.size.width = 175+35;
             self.scalingLabel.frame = rect1;
-            
         }];
         self.isScaling = NO;
     }
     else
     {
+        CGRect rect = self.mangroveicon.frame;
+        rect.origin.x = rect.origin.x + 175;
+        
+        CGRect rect1 = self.scalingLabel.frame;
+        rect1.origin.x = kScreenWidth-12-35;
+        rect1.size.width = 35;
+        
         [UIView animateWithDuration:0.5 animations:^{
-            CGRect rect = self.mangroveicon.frame;
-            rect.origin.x = rect.origin.x + 175;
             self.mangroveicon.frame = rect;
-            
-            CGRect rect1 = self.scalingLabel.frame;
-            rect1.origin.x = kScreenWidth-12-35;
-            rect1.size.width = 35;
             self.scalingLabel.frame = rect1;
         }];
         self.isScaling = YES;
