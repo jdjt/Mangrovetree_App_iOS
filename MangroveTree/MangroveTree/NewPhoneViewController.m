@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *sumbitButtonAction;
 @property (strong, nonatomic) NSURLSessionTask *sendCodeTask;
 @property (strong, nonatomic) NSURLSessionTask *changeAccountlTask;
+@property (strong, nonatomic) NSURLSessionTask *repeatRegist;
 
 @end
 
@@ -136,23 +137,15 @@
 // 发送验证码
 - (IBAction)validationButtonAction:(id)sender
 {
-    if ([self.isPhoneOrEmail isEqualToString:@"0"])//手机
-    {
-        if (![Util isMobileNumber:_PhoneTextField.text])
-        {
-            [MyAlertView showAlert:@"请输入正确的手机号"];
-            return;
-        }
-    }
+    //在发送验证码之前，先判断用户是否已经注册过
     NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithCapacity:2];
     [params setObject:_PhoneTextField.text forKey:@"account"];
-    [params setObject:@"3" forKey:@"logicFlag"];
-    [params setObject:[self getUUID] forKey:@"uuid"];
-    self.sendCodeTask = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
-                                                                    webURL:@URI_GETUKEY
-                                                                    params:params
-                                                                withByUser:YES
-                                                          andOldInterfaces:YES];
+    if (![Util isMobileNumber:_PhoneTextField.text]) {
+        
+        [MyAlertView showAlert:@"请输入正确的手机号"];
+        return;
+    }
+    self.repeatRegist = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL webURL:@URI_REPEATREGIST params:params withByUser:YES andOldInterfaces:YES];
 }
 
 #pragma mark - 网络请求返回结果代理
@@ -162,11 +155,41 @@
 
 - (void)pushResponseResultsSucceed:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg andData:(NSMutableArray *)datas
 {
+    if (task == self.repeatRegist)
+    {
+        //该手机号，用户已经注册过
+        if ([datas[0] isEqualToString:@"1"])
+        {
+            [MyAlertView showAlert:@"此手机号已注册，请重新输入"];
+        }
+        else
+        {
+            if ([self.isPhoneOrEmail isEqualToString:@"0"])//手机
+            {
+                if (![Util isMobileNumber:_PhoneTextField.text])
+                {
+                    [MyAlertView showAlert:@"请输入正确的手机号"];
+                    return;
+                }
+            }
+            NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithCapacity:2];
+            [params setObject:_PhoneTextField.text forKey:@"account"];
+            [params setObject:@"3" forKey:@"logicFlag"];
+            [params setObject:[self getUUID] forKey:@"uuid"];
+            self.sendCodeTask = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
+                                                                            webURL:@URI_GETUKEY
+                                                                            params:params
+                                                                        withByUser:YES
+                                                                  andOldInterfaces:YES];
+        }
+    }
     //发送验证码
-    if (task == self.sendCodeTask) {
+    if (task == self.sendCodeTask)
+    {
         //开始倒计时
         [self startTimer];
-    }else if (task == self.changeAccountlTask)
+    }
+    else if (task == self.changeAccountlTask)
     {//修改成功
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
@@ -174,7 +197,7 @@
 
 - (void)pushResponseResultsFailing:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg
 {
-    if (task == self.sendCodeTask)
+    if (task == self.sendCodeTask || task == self.repeatRegist)
     {
         msg = msg.length > 30 ? @"获取验证码失败，请重新尝试" : msg;
         [MyAlertView showAlert:msg];

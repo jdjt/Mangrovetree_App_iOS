@@ -19,6 +19,7 @@
 
 @property (strong, nonatomic) NSURLSessionTask *loginTask;
 @property (strong, nonatomic) NSURLSessionTask *getMemberInfor;
+@property (strong, nonatomic) NSURLSessionTask *isRegist;
 
 @property (nonatomic, assign) BOOL isVisible;
 
@@ -175,30 +176,20 @@
 // 登录请求
 - (IBAction)loginButtonAction:(id)sender
 {
-    //手机号或者邮箱
-    if (![Util isMobileNumber:_accountTextField.text]&&![Util isValidateEmail:_accountTextField.text]) {
-        
-        [MyAlertView showAlert:@"请输入正确的手机号或邮箱"];
+    //在登录之前，先判断该手机号是否已经注册
+    NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithCapacity:2];
+    [params setObject:_accountTextField.text forKey:@"account"];
+    if (![Util isMobileNumber:_accountTextField.text])
+    {
+        [MyAlertView showAlert:@"请输入正确的手机号"];
         return;
     }
-    
-    //密码
-    if (_passwordTextField.text.length < 6 ||_passwordTextField.text.length >18) {
-        
+    if (_passwordTextField.text.length < 6 ||_passwordTextField.text.length >18)
+    {
         [MyAlertView showAlert:@"请输入6-18位的密码"];
         return;
     }
-    
-    NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithCapacity:2];
-    [params setObject:_accountTextField.text forKey:@"account"];
-    [params setObject:_passwordTextField.text forKey:@"password"];
-    self.loginTask = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
-                                                                 webURL:@URI_LOGIN
-                                                                 params:params
-                                                             withByUser:YES
-                                                       andOldInterfaces:YES];
-    
-     
+    self.isRegist = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL webURL:@URI_REPEATREGIST params:params withByUser:YES andOldInterfaces:YES];
 }
 // 请求会员信息
 - (void)requestMemberInfo
@@ -220,6 +211,39 @@
 
 - (void)pushResponseResultsSucceed:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg andData:(NSMutableArray *)datas
 {
+    //判断是否注册
+    if (task == self.isRegist)
+    {
+        if ([datas[0] isEqualToString:@"1"])
+        {
+            //手机号或者邮箱
+            if (![Util isMobileNumber:_accountTextField.text]) {
+                
+                [MyAlertView showAlert:@"请输入正确的手机号"];
+                return;
+            }
+            
+            //密码
+            if (_passwordTextField.text.length < 6 ||_passwordTextField.text.length >18) {
+                
+                [MyAlertView showAlert:@"请输入6-18位的密码"];
+                return;
+            }
+            
+            NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithCapacity:2];
+            [params setObject:_accountTextField.text forKey:@"account"];
+            [params setObject:_passwordTextField.text forKey:@"password"];
+            self.loginTask = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
+                                                                         webURL:@URI_LOGIN
+                                                                         params:params
+                                                                     withByUser:YES
+                                                               andOldInterfaces:YES];
+        }
+        else
+        {
+            [MyAlertView showAlert:@"该账户未注册,请先注册"];
+        }
+    }
     //登录成功的接口
     if (task == self.loginTask)
     {
@@ -244,12 +268,7 @@
 
 - (void)pushResponseResultsFailing:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg
 {
-    if ([code isEqualToString:@"-1009"])
-    {
-        [MyAlertView showAlert:@"没有网络，操作失败!"];
-        return;
-    }
-    if (task == self.loginTask)
+    if (task == self.loginTask || self.isRegist)
     {
         [[DataManager defaultInstance] cleanCoreDatabyEntityName:@"DBUserLogin"];
         msg = msg.length > 30 ? @"登录失败，请尝试重新登录" : msg;

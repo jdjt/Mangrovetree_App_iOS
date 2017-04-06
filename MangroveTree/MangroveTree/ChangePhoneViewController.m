@@ -105,7 +105,7 @@
 {
     if ([_validationTextField.text isEqualToString:@""]||_validationTextField.text.length !=6)
     {
-        [MyAlertView showAlert:@"请输入正确的验证码"];
+        [MyAlertView showAlert:@"验证码不正确，请重新输入"];
         return;
     }
     
@@ -141,7 +141,7 @@
         }
         else
         {
-            [MyAlertView showAlert:@"验证码错误"];
+            [MyAlertView showAlert:@"验证码不正确，请重新输入"];
         }
     }
 }

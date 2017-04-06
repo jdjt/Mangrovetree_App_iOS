@@ -149,8 +149,8 @@
 {
     NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithCapacity:2];
     NSString* acc = _accounttextfield.text;
-    if (![Util isMobileNumber:acc]&&![Util isValidateEmail:acc]) {
-        [MyAlertView showAlert:@"请输入正确的账号后再验证"];
+    if (![Util isMobileNumber:acc]) {
+        [MyAlertView showAlert:@"请输入正确的手机号后再验证"];
         return;
     }
     [params setObject:acc forKey:@"account"];
@@ -169,16 +169,16 @@
 - (IBAction)nextButtonAction:(id)sender
 {
     //手机号或者邮箱
-    if (![Util isMobileNumber:_accounttextfield.text]&&![Util isValidateEmail:_accounttextfield.text]) {
+    if (![Util isMobileNumber:_accounttextfield.text]) {
         
-        [MyAlertView showAlert:@"请输入正确的手机号或邮箱"];
+        [MyAlertView showAlert:@"请输入正确的手机号"];
         return;
     }
     
     //验证码
     if (_verificationTextfield.text.length != 6) {
         
-        [MyAlertView showAlert:@"请输入正确验证码"];
+        [MyAlertView showAlert:@"验证码不正确，请重新输入"];
         return;
     }
     
@@ -217,7 +217,7 @@
         }
         else
         {
-            [MyAlertView showAlert:@"验证码错误"];
+            [MyAlertView showAlert:@"验证码不正确，请重新输入"];
         }
     }
 }

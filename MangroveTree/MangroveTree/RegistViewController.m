@@ -227,9 +227,9 @@
     //在发送验证码之前，先判断用户是否已经注册过
     NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithCapacity:2];
     [params setObject:_phoneNumber.text forKey:@"account"];
-    if (![Util isMobileNumber:_phoneNumber.text]&&![Util isValidateEmail:_phoneNumber.text]) {
+    if (![Util isMobileNumber:_phoneNumber.text]) {
         
-        [MyAlertView showAlert:@"请输入正确的手机号或邮箱"];
+        [MyAlertView showAlert:@"请输入正确的手机号"];
         return;
     }
     self.repeatRegist = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL webURL:@URI_REPEATREGIST params:params withByUser:YES andOldInterfaces:YES];
