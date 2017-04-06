@@ -5,11 +5,39 @@
       "scale" : "1x"
     },
     {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "tile",
+          "width" : 1,
+          "height" : 1
+        },
+        "cap-insets" : {
+          "bottom" : 11,
+          "top" : 11,
+          "right" : 12,
+          "left" : 14
+        }
+      },
       "idiom" : "universal",
       "filename" : "多选按钮.png",
       "scale" : "2x"
     },
     {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "tile",
+          "width" : 1,
+          "height" : 39
+        },
+        "cap-insets" : {
+          "bottom" : 15,
+          "top" : 13,
+          "right" : 19,
+          "left" : 19
+        }
+      },
       "idiom" : "universal",
       "filename" : "多选按钮-1.png",
       "scale" : "3x"
