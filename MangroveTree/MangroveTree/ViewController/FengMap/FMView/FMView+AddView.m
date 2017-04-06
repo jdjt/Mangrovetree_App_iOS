@@ -38,7 +38,7 @@ const int kTopSpace = 10;
     if (!self.inforView)
     {
         self.inforView = [InforView inforView];
-        self.inforView.frame = CGRectMake(0, kScreenHeight-kNaviPopViewHeight-49 -85, kScreenWidth, 85);
+        self.inforView.frame = CGRectMake(0, kScreenHeight-kNaviPopViewHeight - 49 - 95 , kScreenWidth, 95);
         [self addSubview:self.inforView];
     }
     __weak FMView * wSelf = self;
@@ -120,7 +120,7 @@ const int kTopSpace = 10;
 {
     self.naviPopView.hidden = NO;
     [UIView animateWithDuration:0.4 animations:^{
-        self.inforView.frame = CGRectMake(0, show == YES ? kScreenHeight-49 -85:kScreenHeight -49 - 85 -self.naviPopView.frame.size.height, self.inforView.frame.size.width, self.inforView.frame.size.height);
+        self.inforView.frame = CGRectMake(0, show == YES ? kScreenHeight - 49 - 95:kScreenHeight - 49 - 95 -self.naviPopView.frame.size.height, self.inforView.frame.size.width, self.inforView.frame.size.height);
         self.naviPopView.frame = CGRectMake(0, show == YES ? kScreenHeight - 49 : kScreenHeight-self.naviPopView.frame.size.height-49, self.naviPopView.frame.size.width, self.naviPopView.frame.size.height);
     } completion:^(BOOL finished)
     {

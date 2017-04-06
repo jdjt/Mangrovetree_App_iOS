@@ -47,7 +47,7 @@
     __weak typeof(self)wSelf = self;
     [UIView animateWithDuration:0.4f animations:^{
         CGRect rect = self.frame;
-        wSelf.frame = CGRectMake(0, kScreenHeight-view.frame.size.height-49 -85, kScreenWidth, rect.size.height);
+        wSelf.frame = CGRectMake(0, kScreenHeight-view.frame.size.height - 49 - 95, kScreenWidth, rect.size.height);
         self.hideView = NO;
     }];
 }
@@ -57,7 +57,6 @@
     self.hideView = !self.hideView;
     if (_hideBlock)
         _hideBlock(self.hideView);
-    self.arrowsImage.image = [UIImage imageNamed:self.hideView == YES ?@"up":@"down"];
 }
 - (void)requsrtActivityInforByActivityCode:(NSString *)activityCode
 {
