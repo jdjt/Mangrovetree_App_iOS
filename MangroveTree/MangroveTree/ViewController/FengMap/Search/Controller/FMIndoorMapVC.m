@@ -587,7 +587,7 @@ int const kCallingServiceCount = 5;
 		_lastMapPoint = naviResult.mapPoint;
 		[_locationMarker locateWithGeoCoord:FMKGeoCoordMake(mapCoord.coord.storey, naviResult.mapPoint)];
 		//导航模式下跟随
-		[self.mapView moveToViewCenterByMapCoord:FMKGeoCoordMake(mapCoord.coord.storey, naviResult.mapPoint)];
+//		[self.mapView moveToViewCenterByMapCoord:FMKGeoCoordMake(mapCoord.coord.storey, naviResult.mapPoint)];
 		
 		if (naviResult.type == FMKCONSTRAINT_SUCCESS)
 		{
@@ -597,7 +597,7 @@ int const kCallingServiceCount = 5;
 	else
 	{
 		_lastMapPoint = mapCoord.coord.mapPoint;
-		[self.mapView moveToViewCenterByMapCoord:mapCoord.coord];
+//		[self.mapView moveToViewCenterByMapCoord:mapCoord.coord];
 		_isFirstLocate = NO;
 	}
 	return naviResult;

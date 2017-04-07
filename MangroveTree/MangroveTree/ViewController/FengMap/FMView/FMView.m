@@ -232,7 +232,7 @@ extern NSString* FMModelSelected;
 		naviResult = [self.naviContraint naviContraintByLastPoint:_lastMapPoint currentMapPoint:mapCoord.coord.mapPoint];
 		_lastMapPoint = naviResult.mapPoint;
 		[_locationMarker locateWithGeoCoord:FMKGeoCoordMake(mapCoord.coord.storey, naviResult.mapPoint)];
-		[self.fengMapView moveToViewCenterByMapCoord:mapCoord.coord];
+//		[self.fengMapView moveToViewCenterByMapCoord:mapCoord.coord];
 	}
 	else
 	{
@@ -907,6 +907,7 @@ extern NSString* FMModelSelected;
 - (void)stopNavi
 {
     [self hideNaviBar:NO];
+    [_imageLayer removeAllImageMarker];
 	[FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi = NO;
 	[FMNaviAnalyserTool shareNaviAnalyserTool].planNavi = NO;
 	[self.fengMapView.map.lineLayer removeAllLine];

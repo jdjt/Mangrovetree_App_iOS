@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QXi-Tb-bQc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QXi-Tb-bQc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -209,7 +209,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1LS-Ka-rh3">
-                                <rect key="frame" x="25" y="205" width="325" height="214"/>
+                                <rect key="frame" x="25" y="226.5" width="325" height="214"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="knp-Di-Zdd">
                                         <rect key="frame" x="0.0" y="153" width="325" height="61"/>
@@ -298,7 +298,7 @@
                             <constraint firstItem="6n8-jj-txz" firstAttribute="leading" secondItem="BKf-ij-IEq" secondAttribute="leading" id="nhm-v0-8DJ"/>
                             <constraint firstAttribute="trailing" secondItem="1LS-Ka-rh3" secondAttribute="trailing" constant="25" id="nv0-WC-hqF"/>
                             <constraint firstItem="XOS-jg-trH" firstAttribute="leading" secondItem="BKf-ij-IEq" secondAttribute="leading" id="qBn-8A-lAw"/>
-                            <constraint firstItem="1LS-Ka-rh3" firstAttribute="centerY" secondItem="BKf-ij-IEq" secondAttribute="centerY" constant="-22" id="v0V-A9-ott"/>
+                            <constraint firstItem="1LS-Ka-rh3" firstAttribute="centerY" secondItem="BKf-ij-IEq" secondAttribute="centerY" id="v0V-A9-ott"/>
                             <constraint firstItem="XOS-jg-trH" firstAttribute="top" secondItem="2rG-TZ-lR7" secondAttribute="bottom" id="vQB-ur-xl4"/>
                             <constraint firstAttribute="bottom" secondItem="6n8-jj-txz" secondAttribute="bottom" id="xCv-Zw-GKd"/>
                         </constraints>

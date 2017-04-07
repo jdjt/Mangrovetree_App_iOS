@@ -358,7 +358,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPy-3A-E6D">
-                                                    <rect key="frame" x="58" y="8" width="259" height="284"/>
+                                                    <rect key="frame" x="16" y="8" width="343" height="284"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -366,9 +366,9 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="fPy-3A-E6D" firstAttribute="top" secondItem="XRt-im-uba" secondAttribute="topMargin" id="8tD-Qp-XvM"/>
-                                                <constraint firstItem="fPy-3A-E6D" firstAttribute="leading" secondItem="XRt-im-uba" secondAttribute="leadingMargin" constant="50" id="CXB-g0-jZ9"/>
+                                                <constraint firstItem="fPy-3A-E6D" firstAttribute="leading" secondItem="XRt-im-uba" secondAttribute="leading" constant="16" id="CXB-g0-jZ9"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="fPy-3A-E6D" secondAttribute="bottom" id="TXk-7N-EeG"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="fPy-3A-E6D" secondAttribute="trailing" constant="50" id="sPY-R0-TE2"/>
+                                                <constraint firstAttribute="trailing" secondItem="fPy-3A-E6D" secondAttribute="trailing" constant="16" id="sPY-R0-TE2"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
