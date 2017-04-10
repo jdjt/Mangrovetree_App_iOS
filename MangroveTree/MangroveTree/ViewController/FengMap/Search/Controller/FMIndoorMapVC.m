@@ -33,6 +33,7 @@
 #import "FrameViewController.h"
 #import "SwitchMapInfoView.h"
 #import "UIViewExt.h"
+#import "FMKNodeAssociation.h"
 
 #define DEBUG_ONLINE 0
 
@@ -1240,6 +1241,11 @@ int const kCallingServiceCount = 5;
 	{
 		modelLayer.delegate = self;
 	}
+    for (NSString *groupID in self.mapView.groupIDs)
+    {
+        FMKLabelLayer *labelLayer = [self.mapView.map getLabelLayerWithGroupID:groupID];
+        labelLayer.delegate = self;
+    }
 }
 
 - (void)testDistanceWithResult:(BOOL)result distance:(double)distance

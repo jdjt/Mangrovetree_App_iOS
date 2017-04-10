@@ -11,6 +11,10 @@
 @interface FMKLabel : FMKNode
 
 //标签文本内容
-//@property (nonatomic,readonly)labelCont;
+@property (nonatomic, readonly) NSString *name;
+
+@property (nonatomic, assign) BOOL maskMode;
+
+@property (nonatomic, assign) BOOL highlight;
 
 @end

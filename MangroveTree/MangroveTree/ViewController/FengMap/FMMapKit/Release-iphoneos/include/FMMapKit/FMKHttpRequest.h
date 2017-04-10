@@ -30,7 +30,7 @@ typedef unsigned long long FMUnLongLong;
 @property (nonatomic,readonly) FMUnLongLong currentSize;
 
 /** @brief 从指定网站请求数据
- *  @param url 本地缓存位置
+ *  @param path 本地缓存位置
  *  @param success 成功回调
  *  @param failure 失败回调
  */

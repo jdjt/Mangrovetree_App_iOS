@@ -54,7 +54,7 @@
 /**
  *  外部模型的蒙版效果
  */
-@property (nonatomic,assign)BOOL maskMode;
+@property (nonatomic, assign)BOOL maskMode;
 
 /**
  *  模型的高亮显示

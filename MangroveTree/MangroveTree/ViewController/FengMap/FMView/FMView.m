@@ -94,6 +94,7 @@ extern NSString* FMModelSelected;
 @property (nonatomic, assign) FMKMapCoord waiterMapCoord;
 @property (nonatomic, copy) NSString * cancelMapID;//取消跳转的mapID
 @property (nonatomic, strong) UITextView *textView;
+@property (nonatomic, strong) FMKNodeAssociation *nodeAssociation;
 
 @end
 
@@ -446,6 +447,19 @@ extern NSString* FMModelSelected;
 		wSelf.categoryTag = (int)tag;
 	};
 }
+
+- (FMKNodeAssociation *)nodeAssociation
+{
+    if (!_nodeAssociation)
+    {
+        NSString *bundlepath = [[NSBundle mainBundle] pathForResource:@"FMBundle.bundle" ofType:nil];
+        NSBundle *fmBundle = [NSBundle bundleWithPath:bundlepath];
+        NSString *jsonPath = [fmBundle pathForResource:@"nodeassociation.json" ofType:nil];
+        _nodeAssociation = [[FMKNodeAssociation alloc] initWithMap:self.fengMapView.map path:jsonPath];
+    }
+    return _nodeAssociation;
+}
+
 //添加定位标注物
 - (void)addLocationMarker
 {
@@ -465,6 +479,11 @@ extern NSString* FMModelSelected;
 		FMKExternalModelLayer * emLayer = [self.fengMapView.map getExternalModelLayerWithGroupID:groupID];
 		emLayer.delegate = self;
 	}
+    for (NSString *groupID in self.fengMapView.groupIDs)
+    {
+        FMKLabelLayer *labelLayer = [self.fengMapView.map getLabelLayerWithGroupID:groupID];
+        labelLayer.delegate = self;
+    }
 }
 
 - (void)setCategoryTag:(int)categoryTag
@@ -735,8 +754,10 @@ extern NSString* FMModelSelected;
 	[self modelLayerDelegateIgnore];
     [self stopNavi];
 //	[self.modelInfoPopView hide];//隐藏信息弹框
-	if ([layer isKindOfClass:[FMKExternalModelLayer class]]) {
-		FMKExternalModel * model = (FMKExternalModel *)node;
+    FMKExternalModel * model = nil;
+	if ([node isKindOfClass:[FMKExternalModel class]])
+    {
+		model = (FMKExternalModel *)node;
 
 		if ([model.fid isEqualToString:dimian01] ||
 			[model.fid isEqualToString:dimian02] ||
@@ -747,8 +768,15 @@ extern NSString* FMModelSelected;
 			[self setEnableLocationBtnFrameByView:nil];
 			return;
 		}
-		[self didSelectedEnd:model];
 	}
+    if ([node isKindOfClass:[FMKLabel class]])
+    {
+        if (!_nodeAssociation) [self nodeAssociation];
+        model = [_nodeAssociation externalModelByLabel:(FMKLabel *)node];
+    }
+    
+    [self didSelectedEnd:model];
+
 }
 
 - (void)didSelectedEnd:(FMKExternalModel *)model

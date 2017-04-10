@@ -35,6 +35,7 @@
 #import "FMKSegment.h"
 #import "FMKTextMarker.h"
 #import "FMKExternalModel.h"
+#import "FMKLabel.h"
 
 #import "FMKMapDataManager.h"
 #import "FMKThemeDataManager.h"

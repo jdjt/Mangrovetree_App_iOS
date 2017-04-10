@@ -126,8 +126,8 @@ typedef NS_ENUM(NSInteger, FMKMultiRouteCalcType)
 /**
  *  跨地图路径规划 若使用跨地图路径规划，分析对象需使用跨地图路径分析初始化方法
  *
- *  @param startCoord          起点
- *  @param endCoord            终点
+ *  @param start          起点
+ *  @param end            终点
  *  @param startMapResult 起点所在地图结果
  *  @param endMapResult   终点所在地图结果
  *

@@ -36,7 +36,7 @@
 /**
  *  添加热力图边界值
  *
- *  @param heatBorder 热力图边界对象
+ *  @param border 热力图边界对象
  */
 - (void)addBorder:(FMKHeatBorder * )heatBorder;
 

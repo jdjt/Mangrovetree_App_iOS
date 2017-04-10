@@ -83,7 +83,7 @@
  @param location2 位置点2
  @param distance  设定距离
 
-  比较结果 小于 返回YES
+ @return 比较结果 小于 返回YES
  */
 - (void)testDistanceWithLocation1: (FMLocationBuilderInfo *)location1 location2: (FMLocationBuilderInfo *)location2 distance: (double)distance;
 
