@@ -785,7 +785,7 @@ extern NSString* FMModelSelected;
 			if (_highlightModel) {
 				FMActivity * oldActivity = [self queryActicityByFid:_highlightModel.fid];
 				[self.fengMapView hiddenActivityListOnMap:@[oldActivity]];
-				[self.fengMapView showActivityListOnMap:@[oldActivity]];
+//				[self.fengMapView showActivityListOnMap:@[oldActivity]];
 			}
 			[self highlightActivityByModel:model];
 		}

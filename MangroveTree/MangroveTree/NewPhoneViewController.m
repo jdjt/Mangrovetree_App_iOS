@@ -116,6 +116,7 @@
         return;
     }
     [params setObject:@"1" forKey:@"bindingType"];
+    [params setObject:[[DataManager defaultInstance] findUserLogInByCode:@"1"].password forKey:@"password"];
     NSDictionary *newBinding = @{@"targ":_PhoneTextField.text,
                                  @"code":_validationTextField.text,
                                  @"uuid":[self getUUID]};
