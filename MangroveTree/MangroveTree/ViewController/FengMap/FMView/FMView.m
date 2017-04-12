@@ -400,11 +400,11 @@ extern NSString* FMModelSelected;
 		CGRect rect = CGRectMake(0, 64, self.frame.size.width, kScreenHeight - 64);
 		self.fengMapView = [[FMMangroveMapView alloc] initWithFrame:rect path:_mapPath delegate:self];
 		[self addSubview:self.fengMapView];
-		[self.fengMapView zoomWithScale:1.5];
+		[self.fengMapView zoomWithScale:1.6];
 		[self.fengMapView setRotateWithAngle:45.0];
 //		[self.fengMapView setInclineAngle:50.0/180*M_PI];
         // 默认加载90度
-        [self.fengMapView inclineWithAngle:30.0f];
+        [self.fengMapView inclineWithAngle:60.0f];
 		
 		self.fengMapView.showCompass = YES;
 		//添加图片标注物图层

@@ -346,7 +346,7 @@ int const kCallingServiceCount = 5;
 			mapName = @"木棉酒店A";
 			break;
 		case 79981:
-			mapName = @"皇后棕/大王棕酒店";
+			mapName = @"皇后棕/大王棕";
 			break;
 		case 70148:
 			mapName = @"木棉酒店B";
@@ -357,7 +357,7 @@ int const kCallingServiceCount = 5;
 		default:
 			break;
 	}
-    return mapName;
+    return [NSString stringWithFormat:@"%@•%@",mapName,@"室内地图"];
 }
 
 - (void)didUpdatePosition:(FMKMapCoord)mapCoord success:(BOOL)success
