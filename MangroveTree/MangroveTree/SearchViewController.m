@@ -89,6 +89,7 @@
         if ([viewController isKindOfClass:[MapViewController class]])
         {
             MapViewController *map = (MapViewController *)viewController;
+            map.centerVC.function = FUNCTION_DEFAULT;
             [map.centerVC.navigationController setNavigationBarHidden:YES animated:YES];
             [self.navigationController setNavigationBarHidden:YES animated:YES];
         }
@@ -103,6 +104,7 @@
         if ([viewController isKindOfClass:[MapViewController class]])
         {
             MapViewController *map = (MapViewController *)viewController;
+            map.centerVC.function = FUNCTION_MAP;
             [map.centerVC.navigationController setNavigationBarHidden:NO animated:YES];
         }
     }

@@ -52,6 +52,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
 @property (nonatomic, strong) NSURLSessionTask * loginTask;
 
 @property (nonatomic, assign) NSInteger segmentSelect;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottombarConstraint;
 
 @end
 
@@ -632,7 +633,27 @@ NSString* const FMModelSelected = @"FMModelSelected";
 	}
 	return _myZoneManager;
 }
-
+- (void)setFunction:(CurrentFunction)function
+{
+    switch (function)
+    {
+        case FUNCTION_DEFAULT:
+            [self showBottomViewByFunction:NO];
+            break;
+        default:
+            [self showBottomViewByFunction:YES];
+            break;
+    }
+}
+- (void)showBottomViewByFunction:(BOOL)show
+{
+//    CGRect showFrame = CGRectMake(0, kScreenHeight-self.bottomBarView.frame.size.height, self.bottomBarView.frame.size.width, self.bottomBarView.frame.size.height);
+//    CGRect hideFrame = CGRectMake(0, kScreenHeight, self.bottomBarView.frame.size.width, self.bottomBarView.frame.size.height);
+    [UIView animateWithDuration:0.3 animations:^{
+        self.bottomBarView.hidden = !show;
+    }];
+    
+}
 - (void)showWelcome
 {
     

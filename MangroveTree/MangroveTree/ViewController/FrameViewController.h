@@ -19,7 +19,11 @@ typedef NS_ENUM(NSInteger,NaviBarType)
     NAVIVARTYPE_IN            = 2,
     NAVIVARTYPE_OUT           = 3,
 };
-
+typedef NS_ENUM(NSInteger, CurrentFunction)
+{
+    FUNCTION_MAP        = 1,
+    FUNCTION_DEFAULT    = 2,
+};
 /**
  * @abstract 底部栏选择
  */
@@ -38,6 +42,7 @@ typedef NS_ENUM(NSInteger,SegmentSelected)
 
 @property (assign, nonatomic) NSInteger lastSelectedIndex;
 @property (strong, nonatomic) DBCallTask *currentTask;
+@property (assign, nonatomic) CurrentFunction function;
 
 - (void)addLocationOnMap:(DBCallTask *)task;
 

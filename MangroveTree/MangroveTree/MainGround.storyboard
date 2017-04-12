@@ -310,6 +310,7 @@
                     <connections>
                         <outlet property="bottomBarView" destination="6n8-jj-txz" id="jWp-Xy-Xaa"/>
                         <outlet property="bottomContraint" destination="bKO-ER-bZT" id="jxk-2c-7Mb"/>
+                        <outlet property="bottombarConstraint" destination="xCv-Zw-GKd" id="kFU-hm-GV9"/>
                         <outlet property="loginAlertTapView" destination="knp-Di-Zdd" id="05r-Wa-rJC"/>
                         <outlet property="loginAlertView" destination="1LS-Ka-rh3" id="REQ-CI-3bH"/>
                         <outlet property="messageView" destination="57a-av-jS8" id="FNp-5w-vSF"/>
