@@ -11,6 +11,7 @@
 @interface AboutViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UILabel *aboutLabelText;
 
+@property (weak, nonatomic) IBOutlet UITextView *aboutTextView;
 
 
 
@@ -20,8 +21,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.aboutLabelText.text = @"红树林导航，是集红树林全球度假平台、园区导航服务、呼叫服务、红树林一卡通系统于一体的综合性平台。功能涵盖酒店搜索、酒店展示、度假资讯、客房预订、度假产品销售，以及红树林自营酒店的地图导航、呼叫服务、一卡通消费等功能。";
-    self.aboutLabelText.numberOfLines = 0;
+//    self.aboutLabelText.text = @"      红树林导航，是集红树林全球度假平台、园区导航服务、呼叫服务、红树林一卡通系统于一体的综合性平台。功能涵盖酒店搜索、酒店展示、度假资讯、客房预订、度假产品销售，以及红树林自营酒店的地图导航、呼叫服务、一卡通消费等功能。";
+//    self.aboutLabelText.numberOfLines = 0;
+    //    textview 改变字体的行间距
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = 15;// 字体的行间距
+    paragraphStyle.firstLineHeadIndent = 35.0f;
+    NSDictionary *attributes = @{
+                                 NSFontAttributeName:[UIFont systemFontOfSize:17],
+                                 NSParagraphStyleAttributeName:paragraphStyle
+                                 };
+    self.aboutTextView.attributedText = [[NSAttributedString alloc] initWithString:self.aboutTextView.text attributes:attributes];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -29,6 +29,8 @@
 		A8E4136F1E7692C40096EA62 /* InforView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E4136E1E7692C40096EA62 /* InforView.m */; };
 		A8E413711E7692D70096EA62 /* InforView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8E413701E7692D70096EA62 /* InforView.xib */; };
 		A8FDA43E1E9F815D00272B7D /* ChatHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8FDA43D1E9F815D00272B7D /* ChatHeadView.m */; };
+		C42DA9081E9DCAD300A76B4C /* BaseAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42DA9071E9DCAD300A76B4C /* BaseAlertViewController.m */; };
+		C42DA90B1E9DD5EE00A76B4C /* AlertPresentAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = C42DA90A1E9DD5EE00A76B4C /* AlertPresentAnimation.m */; };
 		C44B16701E70F0E900EE8257 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C44B166F1E70F0E800EE8257 /* MainViewController.m */; };
 		C44B167B1E70F24C00EE8257 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C44B16721E70F24C00EE8257 /* UserViewController.m */; };
 		C45B62001E7A257600F70D3F /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45B61FF1E7A257600F70D3F /* SearchViewController.m */; };
@@ -40,6 +42,8 @@
 		C46A63F41E711E06008A8A29 /* MainGround.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C46A63F31E711E06008A8A29 /* MainGround.storyboard */; };
 		C46A63FC1E712837008A8A29 /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C46A63F81E712837008A8A29 /* UserCell.m */; };
 		C46A63FD1E712837008A8A29 /* UserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C46A63FA1E712837008A8A29 /* UserInfoCell.m */; };
+		C46BEDCD1E9C9CA3009E3379 /* BaseAlert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C46BEDCC1E9C9CA3009E3379 /* BaseAlert.storyboard */; };
+		C46BEDD01E9CA7B8009E3379 /* AlertViewCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C46BEDCF1E9CA7B8009E3379 /* AlertViewCenterCell.m */; };
 		C4C720F51E6FCB79003523A2 /* libFMMapKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C720F11E6FCB09003523A2 /* libFMMapKit.a */; };
 		C4C722B61E6FCC2E003523A2 /* IndoorMapInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C720F91E6FCC2D003523A2 /* IndoorMapInfo.m */; };
 		C4C722B71E6FCC2E003523A2 /* 0.fmi in Resources */ = {isa = PBXBuildFile; fileRef = C4C720FC1E6FCC2D003523A2 /* 0.fmi */; };
@@ -489,6 +493,10 @@
 		A8E413701E7692D70096EA62 /* InforView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InforView.xib; sourceTree = "<group>"; };
 		A8FDA43C1E9F815D00272B7D /* ChatHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatHeadView.h; sourceTree = "<group>"; };
 		A8FDA43D1E9F815D00272B7D /* ChatHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatHeadView.m; sourceTree = "<group>"; };
+		C42DA9061E9DCAD300A76B4C /* BaseAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseAlertViewController.h; path = ../BaseAlertViewController.h; sourceTree = "<group>"; };
+		C42DA9071E9DCAD300A76B4C /* BaseAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseAlertViewController.m; path = ../BaseAlertViewController.m; sourceTree = "<group>"; };
+		C42DA9091E9DD5EE00A76B4C /* AlertPresentAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertPresentAnimation.h; sourceTree = "<group>"; };
+		C42DA90A1E9DD5EE00A76B4C /* AlertPresentAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertPresentAnimation.m; sourceTree = "<group>"; };
 		C44B166E1E70F0E800EE8257 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		C44B166F1E70F0E800EE8257 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		C44B16711E70F24C00EE8257 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
@@ -509,6 +517,9 @@
 		C46A63F81E712837008A8A29 /* UserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCell.m; sourceTree = "<group>"; };
 		C46A63F91E712837008A8A29 /* UserInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoCell.h; sourceTree = "<group>"; };
 		C46A63FA1E712837008A8A29 /* UserInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoCell.m; sourceTree = "<group>"; };
+		C46BEDCC1E9C9CA3009E3379 /* BaseAlert.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BaseAlert.storyboard; sourceTree = "<group>"; };
+		C46BEDCE1E9CA7B8009E3379 /* AlertViewCenterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertViewCenterCell.h; sourceTree = "<group>"; };
+		C46BEDCF1E9CA7B8009E3379 /* AlertViewCenterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertViewCenterCell.m; sourceTree = "<group>"; };
 		C4C720F11E6FCB09003523A2 /* libFMMapKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFMMapKit.a; path = "MangroveTree/ViewController/FengMap/FMMapKit/Release-iphoneos/libFMMapKit.a"; sourceTree = "<group>"; };
 		C4C720F81E6FCC2D003523A2 /* IndoorMapInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndoorMapInfo.h; sourceTree = "<group>"; };
 		C4C720F91E6FCC2D003523A2 /* IndoorMapInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndoorMapInfo.m; sourceTree = "<group>"; };
@@ -1334,6 +1345,20 @@
 			name = Homepage;
 			sourceTree = "<group>";
 		};
+		C46BEDC61E9C7CD6009E3379 /* BaseAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				C46BEDCC1E9C9CA3009E3379 /* BaseAlert.storyboard */,
+				C42DA9061E9DCAD300A76B4C /* BaseAlertViewController.h */,
+				C42DA9071E9DCAD300A76B4C /* BaseAlertViewController.m */,
+				C42DA9091E9DD5EE00A76B4C /* AlertPresentAnimation.h */,
+				C42DA90A1E9DD5EE00A76B4C /* AlertPresentAnimation.m */,
+				C46BEDCE1E9CA7B8009E3379 /* AlertViewCenterCell.h */,
+				C46BEDCF1E9CA7B8009E3379 /* AlertViewCenterCell.m */,
+			);
+			name = BaseAlertView;
+			sourceTree = "<group>";
+		};
 		C4C720F61E6FCC2D003523A2 /* FengMap */ = {
 			isa = PBXGroup;
 			children = (
@@ -2010,6 +2035,7 @@
 				FC5B1A781E6E47BF0038BCA7 /* SDWebImage */,
 				FC5B1ADD1E6E50E00038BCA7 /* CButton */,
 				FC5B1AEC1E6E515C0038BCA7 /* MyAlertView */,
+				C46BEDC61E9C7CD6009E3379 /* BaseAlertView */,
 				FC5B1AF31E6E52B70038BCA7 /* Utils */,
 			);
 			name = Plugins;
@@ -2473,6 +2499,7 @@
 				C4C723331E6FCC2F003523A2 /* daliangcang.fmi in Resources */,
 				FCDD64691E6FA5260057A9C3 /* WXOUIModuleResources.bundle in Resources */,
 				C4C723C11E6FCC2F003523A2 /* CategoryView.xib in Resources */,
+				C46BEDCD1E9C9CA3009E3379 /* BaseAlert.storyboard in Resources */,
 				A8E413711E7692D70096EA62 /* InforView.xib in Resources */,
 				C4C7231C1E6FCC2F003523A2 /* 180002.fmi in Resources */,
 				C4C722CC1E6FCC2E003523A2 /* 120006.fmi in Resources */,
@@ -2728,6 +2755,7 @@
 				C4C723B61E6FCC2F003523A2 /* BaseCollectionViewCell.m in Sources */,
 				FC5B1AA31E6E47BF0038BCA7 /* UIButton+WebCache.m in Sources */,
 				A861B4011E9F0C92002D61F0 /* ChatInputBar.m in Sources */,
+				C46BEDD01E9CA7B8009E3379 /* AlertViewCenterCell.m in Sources */,
 				FC5B1AEB1E6E51510038BCA7 /* MyAlertView.m in Sources */,
 				A861B4111E9F0FCB002D61F0 /* NSLayoutConstraint+PureLayout.m in Sources */,
 				A8E4136F1E7692C40096EA62 /* InforView.m in Sources */,
@@ -2744,6 +2772,7 @@
 				FC5B1AA11E6E47BF0038BCA7 /* SDWebImageManager.m in Sources */,
 				FC5B1AF11E6E52B30038BCA7 /* Util.m in Sources */,
 				FC5B1A771E6E47A70038BCA7 /* UIView+MJExtension.m in Sources */,
+				C42DA9081E9DCAD300A76B4C /* BaseAlertViewController.m in Sources */,
 				C4C723B51E6FCC2F003523A2 /* BaseCollectionView.m in Sources */,
 				FC5B1AA81E6E47BF0038BCA7 /* UIImageView+WebCache.m in Sources */,
 				FC5B1AE51E6E50E00038BCA7 /* UIButton+Bootstrap.m in Sources */,
@@ -2780,6 +2809,7 @@
 				C4C723F51E6FE66F003523A2 /* UIViewExt.m in Sources */,
 				C4C723AE1E6FCC2F003523A2 /* MapSearchViewController.m in Sources */,
 				A80F2FE41E7BB04100E0ED51 /* InforModel.m in Sources */,
+				C42DA90B1E9DD5EE00A76B4C /* AlertPresentAnimation.m in Sources */,
 				C4C723AF1E6FCC2F003523A2 /* CollCellModel.m in Sources */,
 				FCDD644B1E6FA5260057A9C3 /* SPInputViewPluginCallingCard.m in Sources */,
 				FC5B1A9F1E6E47BF0038BCA7 /* SDWebImageDownloader.m in Sources */,
