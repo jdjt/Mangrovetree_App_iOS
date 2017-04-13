@@ -43,7 +43,7 @@
 /**
  当前定位位置
  */
-@property (nonatomic, readonly) FMKMapCoord currentMapCoord;
+@property (nonatomic, readonly) FMKMapCoord currentMapCoord;//当前定位位置
 
 /**
  上传位置开关  默认开启

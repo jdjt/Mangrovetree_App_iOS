@@ -94,6 +94,7 @@ extern NSString* FMModelSelected;
 @property (nonatomic, assign) FMKMapCoord waiterMapCoord;
 @property (nonatomic, copy) NSString * cancelMapID;//取消跳转的mapID
 @property (nonatomic, strong) UITextView *textView;
+@property (nonatomic, strong) FMKNodeAssociation *nodeAssociation;
 
 @end
 
@@ -232,7 +233,7 @@ extern NSString* FMModelSelected;
 		naviResult = [self.naviContraint naviContraintByLastPoint:_lastMapPoint currentMapPoint:mapCoord.coord.mapPoint];
 		_lastMapPoint = naviResult.mapPoint;
 		[_locationMarker locateWithGeoCoord:FMKGeoCoordMake(mapCoord.coord.storey, naviResult.mapPoint)];
-		[self.fengMapView moveToViewCenterByMapCoord:mapCoord.coord];
+//		[self.fengMapView moveToViewCenterByMapCoord:mapCoord.coord];
 	}
 	else
 	{
@@ -399,11 +400,11 @@ extern NSString* FMModelSelected;
 		CGRect rect = CGRectMake(0, 64, self.frame.size.width, kScreenHeight - 64);
 		self.fengMapView = [[FMMangroveMapView alloc] initWithFrame:rect path:_mapPath delegate:self];
 		[self addSubview:self.fengMapView];
-		[self.fengMapView zoomWithScale:1.5];
+		[self.fengMapView zoomWithScale:1.6];
 		[self.fengMapView setRotateWithAngle:45.0];
 //		[self.fengMapView setInclineAngle:50.0/180*M_PI];
         // 默认加载90度
-        [self.fengMapView inclineWithAngle:30.0f];
+        [self.fengMapView inclineWithAngle:60.0f];
 		
 		self.fengMapView.showCompass = YES;
 		//添加图片标注物图层
@@ -446,6 +447,19 @@ extern NSString* FMModelSelected;
 		wSelf.categoryTag = (int)tag;
 	};
 }
+
+- (FMKNodeAssociation *)nodeAssociation
+{
+    if (!_nodeAssociation)
+    {
+        NSString *bundlepath = [[NSBundle mainBundle] pathForResource:@"FMBundle.bundle" ofType:nil];
+        NSBundle *fmBundle = [NSBundle bundleWithPath:bundlepath];
+        NSString *jsonPath = [fmBundle pathForResource:@"nodeassociation.json" ofType:nil];
+        _nodeAssociation = [[FMKNodeAssociation alloc] initWithMap:self.fengMapView.map path:jsonPath];
+    }
+    return _nodeAssociation;
+}
+
 //添加定位标注物
 - (void)addLocationMarker
 {
@@ -465,6 +479,11 @@ extern NSString* FMModelSelected;
 		FMKExternalModelLayer * emLayer = [self.fengMapView.map getExternalModelLayerWithGroupID:groupID];
 		emLayer.delegate = self;
 	}
+    for (NSString *groupID in self.fengMapView.groupIDs)
+    {
+        FMKLabelLayer *labelLayer = [self.fengMapView.map getLabelLayerWithGroupID:groupID];
+        labelLayer.delegate = self;
+    }
 }
 
 - (void)setCategoryTag:(int)categoryTag
@@ -735,8 +754,10 @@ extern NSString* FMModelSelected;
 	[self modelLayerDelegateIgnore];
     [self stopNavi];
 //	[self.modelInfoPopView hide];//隐藏信息弹框
-	if ([layer isKindOfClass:[FMKExternalModelLayer class]]) {
-		FMKExternalModel * model = (FMKExternalModel *)node;
+    FMKExternalModel * model = nil;
+	if ([node isKindOfClass:[FMKExternalModel class]])
+    {
+		model = (FMKExternalModel *)node;
 
 		if ([model.fid isEqualToString:dimian01] ||
 			[model.fid isEqualToString:dimian02] ||
@@ -747,8 +768,15 @@ extern NSString* FMModelSelected;
 			[self setEnableLocationBtnFrameByView:nil];
 			return;
 		}
-		[self didSelectedEnd:model];
 	}
+    if ([node isKindOfClass:[FMKLabel class]])
+    {
+        if (!_nodeAssociation) [self nodeAssociation];
+        model = [_nodeAssociation externalModelByLabel:(FMKLabel *)node];
+    }
+    
+    [self didSelectedEnd:model];
+
 }
 
 - (void)didSelectedEnd:(FMKExternalModel *)model
@@ -785,7 +813,7 @@ extern NSString* FMModelSelected;
 			if (_highlightModel) {
 				FMActivity * oldActivity = [self queryActicityByFid:_highlightModel.fid];
 				[self.fengMapView hiddenActivityListOnMap:@[oldActivity]];
-				[self.fengMapView showActivityListOnMap:@[oldActivity]];
+//				[self.fengMapView showActivityListOnMap:@[oldActivity]];
 			}
 			[self highlightActivityByModel:model];
 		}
@@ -907,6 +935,7 @@ extern NSString* FMModelSelected;
 - (void)stopNavi
 {
     [self hideNaviBar:NO];
+    [_imageLayer removeAllImageMarker];
 	[FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi = NO;
 	[FMNaviAnalyserTool shareNaviAnalyserTool].planNavi = NO;
 	[self.fengMapView.map.lineLayer removeAllLine];

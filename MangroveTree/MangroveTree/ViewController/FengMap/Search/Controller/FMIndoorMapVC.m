@@ -33,6 +33,7 @@
 #import "FrameViewController.h"
 #import "SwitchMapInfoView.h"
 #import "UIViewExt.h"
+#import "FMKNodeAssociation.h"
 
 #define DEBUG_ONLINE 0
 
@@ -345,7 +346,7 @@ int const kCallingServiceCount = 5;
 			mapName = @"木棉酒店A";
 			break;
 		case 79981:
-			mapName = @"皇后棕/大王棕酒店";
+			mapName = @"皇后棕/大王棕";
 			break;
 		case 70148:
 			mapName = @"木棉酒店B";
@@ -356,7 +357,7 @@ int const kCallingServiceCount = 5;
 		default:
 			break;
 	}
-    return mapName;
+    return [NSString stringWithFormat:@"%@•%@",mapName,@"室内地图"];
 }
 
 - (void)didUpdatePosition:(FMKMapCoord)mapCoord success:(BOOL)success
@@ -587,7 +588,7 @@ int const kCallingServiceCount = 5;
 		_lastMapPoint = naviResult.mapPoint;
 		[_locationMarker locateWithGeoCoord:FMKGeoCoordMake(mapCoord.coord.storey, naviResult.mapPoint)];
 		//导航模式下跟随
-		[self.mapView moveToViewCenterByMapCoord:FMKGeoCoordMake(mapCoord.coord.storey, naviResult.mapPoint)];
+//		[self.mapView moveToViewCenterByMapCoord:FMKGeoCoordMake(mapCoord.coord.storey, naviResult.mapPoint)];
 		
 		if (naviResult.type == FMKCONSTRAINT_SUCCESS)
 		{
@@ -597,7 +598,7 @@ int const kCallingServiceCount = 5;
 	else
 	{
 		_lastMapPoint = mapCoord.coord.mapPoint;
-		[self.mapView moveToViewCenterByMapCoord:mapCoord.coord];
+//		[self.mapView moveToViewCenterByMapCoord:mapCoord.coord];
 		_isFirstLocate = NO;
 	}
 	return naviResult;
@@ -1240,6 +1241,11 @@ int const kCallingServiceCount = 5;
 	{
 		modelLayer.delegate = self;
 	}
+    for (NSString *groupID in self.mapView.groupIDs)
+    {
+        FMKLabelLayer *labelLayer = [self.mapView.map getLabelLayerWithGroupID:groupID];
+        labelLayer.delegate = self;
+    }
 }
 
 - (void)testDistanceWithResult:(BOOL)result distance:(double)distance

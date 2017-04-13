@@ -44,8 +44,8 @@
 /**
  *  场景惯性动画
  *
- *  @param velocityX x轴速度
- *  @param velocityY Y轴速度
+ *  @param VelocityX x轴速度
+ *  @param VelocityY Y轴速度
  *  @param startTime 起始时间
  *  @param endTime   终止时间
  */

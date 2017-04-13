@@ -23,7 +23,7 @@
 /**
  *  Show pois
  *
- *  @param activities pois
+ *  @param activeties pois
  */
 - (void)showActivityListOnMap:(NSArray *)activities;
 /**

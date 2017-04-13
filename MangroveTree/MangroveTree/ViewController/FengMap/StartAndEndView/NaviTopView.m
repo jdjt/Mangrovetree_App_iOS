@@ -26,6 +26,8 @@
 
 - (void)updateLength:(double)length
 {
+    self.timeLab.text = @"";
+    self.lengthLab.text = @"";
 	float time = length/60+0.5;
 	if (time<1.0) {
 		self.timeLab.text = @"1分钟";

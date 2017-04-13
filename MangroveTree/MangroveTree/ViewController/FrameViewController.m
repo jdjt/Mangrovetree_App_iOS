@@ -116,22 +116,22 @@ NSString* const FMModelSelected = @"FMModelSelected";
     [MBProgressHUD hideAllHUDsForView:[AppDelegate sharedDelegate].window animated:YES];
     if ([Util locationServicesEnabled] == NO)
     {
-//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提醒" message:@"使用酒店地图定位以及导航功能需要应用允许访问您当前的位置，是否前往设置打开GPS定位" preferredStyle:UIAlertControllerStyleAlert];
-//        UIAlertAction *action = [UIAlertAction actionWithTitle:@"前往" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
-//                                 {
-//                                     [[UIApplication sharedApplication]openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-//                                 }];
-//        
-//        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
-//                                       {
-//                                           
-//                                       }];
-//        
-//        [alert addAction:cancelAction];
-//        [alert addAction:action];
-//        [self  presentViewController:alert animated:YES completion:^{
-//            
-//        }];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提醒" message:@"使用酒店地图定位以及导航功能需要应用允许访问您当前的位置，是否前往设置打开GPS定位" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"前往" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+                                 {
+                                     [[UIApplication sharedApplication]openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+                                 }];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+                                       {
+                                           
+                                       }];
+        
+        [alert addAction:cancelAction];
+        [alert addAction:action];
+        [self  presentViewController:alert animated:YES completion:^{
+            
+        }];
     }
 }
 
@@ -155,9 +155,6 @@ NSString* const FMModelSelected = @"FMModelSelected";
     [[FMLocationManager shareLocationManager] setMapView:nil];
     
     [[MTRequestNetwork defaultManager] registerDelegate:self];
-    
-    
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"OPENMAP"];
     
     // 如果是第一次启动，首先显示欢迎页，然后弹出登录界面
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"])
@@ -415,8 +412,10 @@ NSString* const FMModelSelected = @"FMModelSelected";
         self.toWorldPlatformImage.image = [UIImage imageNamed:@"toWorld_default"];
         self.toCallServiceImage.image = [UIImage imageNamed:@"toCallService_act"];
         [self tapCallService];
+        self.toCallServiceImage.image = [UIImage imageNamed:@"toCallService_default"];
     }
 }
+
 - (void)toSearchAction
 {
     if (![FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi)
@@ -452,7 +451,8 @@ NSString* const FMModelSelected = @"FMModelSelected";
 //    {
 //        [MyAlertView showAlert:@"服务上线准备中,敬请期待"];
 //    }
-    [self.msgViewController sendCallRequest];
+//    [self.msgViewController sendCallRequest];
+    [self performSegueWithIdentifier:@"showBind" sender:nil];
 }
 
 - (void)setLastSelectedIndex:(NSInteger)lastSelectedIndex

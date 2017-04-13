@@ -81,6 +81,7 @@ typedef NS_ENUM(NSInteger, FMKMapCoordZType){
 /**
  *初始化地图,地图ID需通过蜂鸟官网获取
  *详情请见：http://developers.fengmap.com/map_data.html
+ @brief
  @param frame   地图区域
  @param mapID   地图ID
  @param target  地图的代理
@@ -363,13 +364,13 @@ typedef NS_ENUM(NSInteger, FMKMapCoordZType){
 
 /*!
  @brief 当地图将要加载
- @param mapView 地图View对象
+ @param mapview 地图View对象
  */
 - (void)mapViewWillStartLoadingMap:(FMKMapView *)mapView;
 
 /*!
  @brief 地图加载完成
- @param mapView 地图View对象
+ @param mapview 地图View对象
  */
 - (void)mapViewDidFinishLoadingMap:(FMKMapView *)mapView;
 

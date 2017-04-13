@@ -11,7 +11,8 @@
 
 @interface NewPassWordViewController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *acctountLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *acctountLabel;
+@property (weak, nonatomic) IBOutlet UITextField *NPassWordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passWordTextField;
 @property (weak, nonatomic) IBOutlet UIButton *completeButton;
 @property (strong, nonatomic) NSURLSessionTask *findPassTask;
@@ -30,7 +31,7 @@
     [super viewDidLoad];
     
     //账号
-    _acctountLabel.text = acctount;
+//    _acctountLabel.text = acctount;
     _passWordTextField.delegate = self;
     
     //设置按钮样式
@@ -107,8 +108,13 @@
 //找回密码
 - (IBAction)completeButtonAction:(id)sender
 {
-    if (_passWordTextField.text.length<6||_passWordTextField.text.length>18) {
+    if (_passWordTextField.text.length<6||_passWordTextField.text.length>18 || _NPassWordTextField.text.length<6||_NPassWordTextField.text.length>18) {
         [MyAlertView showAlert:@"请输入6-18位的密码"];
+        return;
+    }
+    if (![_NPassWordTextField.text isEqualToString:_passWordTextField.text])
+    {
+        [MyAlertView showAlert:@"两次密码输入不一致，请重新输入"];
         return;
     }
     NSMutableDictionary* params = [[NSMutableDictionary alloc]init];

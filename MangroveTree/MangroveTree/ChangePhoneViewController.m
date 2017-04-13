@@ -211,7 +211,7 @@
     NewPhoneViewController *newPhoneController = (NewPhoneViewController *)segue.destinationViewController;
     newPhoneController.uuid = uuidString;
     newPhoneController.code = _validationTextField.text;
-    newPhoneController.account = _acctountLabel.text;
+    newPhoneController.account = user.mobile;
     if ([segue.identifier isEqualToString:@"newPhone"])//修改新手机
     {
         newPhoneController.newAccount = YES;

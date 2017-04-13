@@ -13,9 +13,9 @@
  *	return  返回当前SDK的版本号
  */
 
-UIKIT_STATIC_INLINE NSString * FMKGetMapSDKVersion()
+FOUNDATION_STATIC_INLINE NSString * FMKGetMapSDKVersion()
 {
-	return @"1.1.9";
+	return @"1.6.2";
 }
 
 @interface FMKMapSDK : NSObject

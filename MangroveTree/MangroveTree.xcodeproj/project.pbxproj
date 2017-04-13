@@ -19,6 +19,7 @@
 		9C47374D1E728E0700A30C91 /* NameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C47374C1E728E0700A30C91 /* NameViewController.m */; };
 		9C4737501E7292A500A30C91 /* ModifypawdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C47374F1E7292A500A30C91 /* ModifypawdViewController.m */; };
 		A80F2FE41E7BB04100E0ED51 /* InforModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A80F2FE31E7BB04100E0ED51 /* InforModel.m */; };
+		A861B2C31E9CA3A9002D61F0 /* BindRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A861B2C21E9CA3A9002D61F0 /* BindRoomViewController.m */; };
 		A8E4136F1E7692C40096EA62 /* InforView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E4136E1E7692C40096EA62 /* InforView.m */; };
 		A8E413711E7692D70096EA62 /* InforView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8E413701E7692D70096EA62 /* InforView.xib */; };
 		C42DA9081E9DCAD300A76B4C /* BaseAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42DA9071E9DCAD300A76B4C /* BaseAlertViewController.m */; };
@@ -463,6 +464,8 @@
 		9C47374F1E7292A500A30C91 /* ModifypawdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifypawdViewController.m; sourceTree = "<group>"; };
 		A80F2FE21E7BB04100E0ED51 /* InforModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InforModel.h; sourceTree = "<group>"; };
 		A80F2FE31E7BB04100E0ED51 /* InforModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InforModel.m; sourceTree = "<group>"; };
+		A861B2C11E9CA3A9002D61F0 /* BindRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindRoomViewController.h; sourceTree = "<group>"; };
+		A861B2C21E9CA3A9002D61F0 /* BindRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindRoomViewController.m; sourceTree = "<group>"; };
 		A8E4136D1E7692C40096EA62 /* InforView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InforView.h; sourceTree = "<group>"; };
 		A8E4136E1E7692C40096EA62 /* InforView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InforView.m; sourceTree = "<group>"; };
 		A8E413701E7692D70096EA62 /* InforView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InforView.xib; sourceTree = "<group>"; };
@@ -1205,6 +1208,15 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
+		A861B2C01E9CA343002D61F0 /* CallService */ = {
+			isa = PBXGroup;
+			children = (
+				A861B2C11E9CA3A9002D61F0 /* BindRoomViewController.h */,
+				A861B2C21E9CA3A9002D61F0 /* BindRoomViewController.m */,
+			);
+			name = CallService;
+			sourceTree = "<group>";
+		};
 		C44B16801E70F25C00EE8257 /* UserCenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -1870,6 +1882,7 @@
 				C461989B1E8B60C6005590D2 /* BaseWebViewController.m */,
 				C46A63F31E711E06008A8A29 /* MainGround.storyboard */,
 				C46A63FE1E714DE0008A8A29 /* Homepage */,
+				A861B2C01E9CA343002D61F0 /* CallService */,
 				C44B16801E70F25C00EE8257 /* UserCenter */,
 				FC5B19BB1E6E47230038BCA7 /* Plugins */,
 				C4C720F61E6FCC2D003523A2 /* FengMap */,
@@ -2695,6 +2708,7 @@
 				C4C723D21E6FCC2F003523A2 /* SwitchMapInfoView.m in Sources */,
 				C4C723A01E6FCC2F003523A2 /* ParserJsondata.m in Sources */,
 				C44B167B1E70F24C00EE8257 /* UserViewController.m in Sources */,
+				A861B2C31E9CA3A9002D61F0 /* BindRoomViewController.m in Sources */,
 				C4C723B11E6FCC2F003523A2 /* FMPOIModel.m in Sources */,
 				FCDD644D1E6FA5260057A9C3 /* SPGreetingBubbleViewModel.m in Sources */,
 				FC5B19A41E6E465B0038BCA7 /* AppDelegate.m in Sources */,

@@ -54,7 +54,7 @@
             break;
         case 0:
         default:
-            serviceAddress = type == YES ?@"mws.mymhotel.com" : @"syw.mymhotel.com";
+            serviceAddress = type == YES ?@"rc-ws.mymhotel.com" : @"syw.mymhotel.com";
             break;
     }
     
