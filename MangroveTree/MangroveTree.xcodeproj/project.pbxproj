@@ -53,6 +53,7 @@
 		C46FA8231E9F0AB900F18D47 /* WXOUIModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C46FA81A1E9F0AB900F18D47 /* WXOUIModule.framework */; };
 		C46FA8241E9F0AB900F18D47 /* WXOUIModuleResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C46FA81B1E9F0AB900F18D47 /* WXOUIModuleResources.bundle */; };
 		C46FA8261E9F0AB900F18D47 /* YWFeedbackServiceFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C46FA81D1E9F0AB900F18D47 /* YWFeedbackServiceFMWK.framework */; };
+		C4792DD61EA0990D00C273AA /* MarqueeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C4792DD51EA0990D00C273AA /* MarqueeLabel.m */; };
 		C4C720F51E6FCB79003523A2 /* libFMMapKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C720F11E6FCB09003523A2 /* libFMMapKit.a */; };
 		C4C722B61E6FCC2E003523A2 /* IndoorMapInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C720F91E6FCC2D003523A2 /* IndoorMapInfo.m */; };
 		C4C722B71E6FCC2E003523A2 /* 0.fmi in Resources */ = {isa = PBXBuildFile; fileRef = C4C720FC1E6FCC2D003523A2 /* 0.fmi */; };
@@ -531,6 +532,8 @@
 		C46FA81A1E9F0AB900F18D47 /* WXOUIModule.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WXOUIModule.framework; path = MainLogic/WXOUIModule.framework; sourceTree = "<group>"; };
 		C46FA81B1E9F0AB900F18D47 /* WXOUIModuleResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = WXOUIModuleResources.bundle; path = MainLogic/WXOUIModuleResources.bundle; sourceTree = "<group>"; };
 		C46FA81D1E9F0AB900F18D47 /* YWFeedbackServiceFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YWFeedbackServiceFMWK.framework; path = MainLogic/YWFeedbackServiceFMWK.framework; sourceTree = "<group>"; };
+		C4792DD41EA0990D00C273AA /* MarqueeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarqueeLabel.h; sourceTree = "<group>"; };
+		C4792DD51EA0990D00C273AA /* MarqueeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarqueeLabel.m; sourceTree = "<group>"; };
 		C4C720F11E6FCB09003523A2 /* libFMMapKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFMMapKit.a; path = "MangroveTree/ViewController/FengMap/FMMapKit/Release-iphoneos/libFMMapKit.a"; sourceTree = "<group>"; };
 		C4C720F81E6FCC2D003523A2 /* IndoorMapInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndoorMapInfo.h; sourceTree = "<group>"; };
 		C4C720F91E6FCC2D003523A2 /* IndoorMapInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndoorMapInfo.m; sourceTree = "<group>"; };
@@ -1339,6 +1342,8 @@
 				FCDD62E31E6FA5260057A9C3 /* MsgViewController.m */,
 				FCDD62DD1E6FA5260057A9C3 /* GradingView.h */,
 				FCDD62DE1E6FA5260057A9C3 /* GradingView.m */,
+				C4792DD41EA0990D00C273AA /* MarqueeLabel.h */,
+				C4792DD51EA0990D00C273AA /* MarqueeLabel.m */,
 				C45B62011E7A35DD00F70D3F /* SearchTypeCell.h */,
 				C45B62021E7A35DD00F70D3F /* SearchTypeCell.m */,
 				C45B62041E7A5A4900F70D3F /* SearchHeaderView.h */,
@@ -2863,6 +2868,7 @@
 				FCDD64491E6FA5260057A9C3 /* SPCallingCardBubbleChatView.m in Sources */,
 				FC5B1A9D1E6E47BF0038BCA7 /* SDWebImageCompat.m in Sources */,
 				FC5B1ADA1E6E502D0038BCA7 /* MTNetwork.m in Sources */,
+				C4792DD61EA0990D00C273AA /* MarqueeLabel.m in Sources */,
 				FC5B1A731E6E47A70038BCA7 /* MJRefreshLegendFooter.m in Sources */,
 				FC0755451E6EB8E000EAB144 /* DataManager.m in Sources */,
 				FCDD64791E6FA9BE0057A9C3 /* DBCallTask+CoreDataProperties.m in Sources */,
