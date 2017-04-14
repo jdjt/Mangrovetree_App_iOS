@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QXi-Tb-bQc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QXi-Tb-bQc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -73,7 +73,7 @@
         <scene sceneID="jqW-Jt-GHL">
             <objects>
                 <navigationController storyboardIdentifier="centerNav" id="l7G-pg-Sib" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Akx-Pb-2hN">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Akx-Pb-2hN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -272,16 +272,13 @@
                                     <constraint firstItem="sig-Ox-6If" firstAttribute="centerX" secondItem="1LS-Ka-rh3" secondAttribute="centerX" id="cIr-bk-kKI"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点击任意建筑 即可为您提供导航路线" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XOS-jg-trH">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ue1-oe-9KJ" customClass="MarqueeLabel">
                                 <rect key="frame" x="0.0" y="64" width="375" height="44"/>
                                 <color key="backgroundColor" red="0.92941176470588238" green="0.50980392156862742" blue="0.33725490196078434" alpha="0.89835723458904104" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="xT4-nk-eM6"/>
+                                    <constraint firstAttribute="height" constant="44" id="X0r-rR-Hof"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -290,17 +287,17 @@
                             <constraint firstItem="Xpc-JH-pRS" firstAttribute="centerY" secondItem="BKf-ij-IEq" secondAttribute="centerY" id="CkG-kt-Hsd"/>
                             <constraint firstItem="57a-av-jS8" firstAttribute="centerX" secondItem="BKf-ij-IEq" secondAttribute="centerX" id="GZn-If-Y5I"/>
                             <constraint firstItem="Xpc-JH-pRS" firstAttribute="width" secondItem="BKf-ij-IEq" secondAttribute="width" id="XdX-5q-QJB"/>
+                            <constraint firstItem="Ue1-oe-9KJ" firstAttribute="top" secondItem="2rG-TZ-lR7" secondAttribute="bottom" id="b5L-XR-zUM"/>
                             <constraint firstItem="Dve-cn-46b" firstAttribute="top" secondItem="57a-av-jS8" secondAttribute="bottom" id="bKO-ER-bZT"/>
                             <constraint firstItem="57a-av-jS8" firstAttribute="top" secondItem="2rG-TZ-lR7" secondAttribute="bottom" id="dqx-m5-YvC"/>
                             <constraint firstItem="1LS-Ka-rh3" firstAttribute="leading" secondItem="BKf-ij-IEq" secondAttribute="leading" constant="25" id="gVt-X0-f3R"/>
                             <constraint firstItem="Xpc-JH-pRS" firstAttribute="centerX" secondItem="BKf-ij-IEq" secondAttribute="centerX" id="hFr-Eu-PSP"/>
-                            <constraint firstAttribute="trailing" secondItem="XOS-jg-trH" secondAttribute="trailing" id="hnR-Ey-VP7"/>
                             <constraint firstItem="Xpc-JH-pRS" firstAttribute="height" secondItem="BKf-ij-IEq" secondAttribute="height" id="iHw-RJ-x7c"/>
+                            <constraint firstAttribute="trailing" secondItem="Ue1-oe-9KJ" secondAttribute="trailing" id="mol-ps-RZD"/>
                             <constraint firstItem="6n8-jj-txz" firstAttribute="leading" secondItem="BKf-ij-IEq" secondAttribute="leading" id="nhm-v0-8DJ"/>
                             <constraint firstAttribute="trailing" secondItem="1LS-Ka-rh3" secondAttribute="trailing" constant="25" id="nv0-WC-hqF"/>
-                            <constraint firstItem="XOS-jg-trH" firstAttribute="leading" secondItem="BKf-ij-IEq" secondAttribute="leading" id="qBn-8A-lAw"/>
+                            <constraint firstItem="Ue1-oe-9KJ" firstAttribute="leading" secondItem="BKf-ij-IEq" secondAttribute="leading" id="ryo-3D-ime"/>
                             <constraint firstItem="1LS-Ka-rh3" firstAttribute="centerY" secondItem="BKf-ij-IEq" secondAttribute="centerY" id="v0V-A9-ott"/>
-                            <constraint firstItem="XOS-jg-trH" firstAttribute="top" secondItem="2rG-TZ-lR7" secondAttribute="bottom" id="vQB-ur-xl4"/>
                             <constraint firstAttribute="bottom" secondItem="6n8-jj-txz" secondAttribute="bottom" id="xCv-Zw-GKd"/>
                         </constraints>
                     </view>
@@ -320,7 +317,7 @@
                         <outlet property="toSearchView" destination="ezM-aN-UuJ" id="b7U-bv-adq"/>
                         <outlet property="toWorldPlatform" destination="6zt-yn-Zw3" id="ZcY-Rt-xhc"/>
                         <outlet property="toWorldPlatformImage" destination="Y6e-kA-XZm" id="Yjm-KV-Ktz"/>
-                        <outlet property="topAlertView" destination="XOS-jg-trH" id="jMA-Qs-CEp"/>
+                        <outlet property="topAlertView" destination="Ue1-oe-9KJ" id="z3p-oh-8XJ"/>
                         <outlet property="topConstraint" destination="dqx-m5-YvC" id="9tp-pB-KvZ"/>
                         <segue destination="Vx6-mD-Ury" kind="show" identifier="showBind" id="VQe-WG-j74"/>
                     </connections>
@@ -388,7 +385,7 @@
         <scene sceneID="rQf-b2-029">
             <objects>
                 <navigationController id="I7M-cL-o8d" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="AA1-gP-46G">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AA1-gP-46G">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1085,7 +1082,7 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Gzy-HC-XED">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Gzy-HC-XED">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

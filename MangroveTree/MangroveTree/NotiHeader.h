@@ -10,35 +10,40 @@
 #define NotiHeader_h
 
 
-#define NotiCurrentLocation  @"NotiCurrentLocation"
+#define NotiCurrentLocation             @"NotiCurrentLocation"
 
 /**
  * @abstract 新消息通知，刷新界面
  */
-#define NotiReloadCallMSg   @"NotiReloadCallMSg"
+#define NotiReloadCallMSg               @"NotiReloadCallMSg"
 
 /**
  * @abstract 显示个人中心
  */
-#define NotiShowSettings        @"NotiShowSettings"
+#define NotiShowSettings                @"NotiShowSettings"
 
 /**
  * @abstract 返回主界面
  */
-#define NotiBackToMain          @"NotiBackToMain"
+#define NotiBackToMain                  @"NotiBackToMain"
 /**
  *  @abstract 加载地图
  */
-#define NotiLoadFMMap           @"NotiLoadFMMap"
+#define NotiLoadFMMap                   @"NotiLoadFMMap"
 
 /**
  *  @abstract 改变状态栏
  */
-#define NotiChangeStatusBar          @"NotiChangeStatusBar"
+#define NotiChangeStatusBar             @"NotiChangeStatusBar"
 
 /**
  *  @abstract 关闭首页地图topalert
  */
-#define NotiCloseTopAlert         @"NotiCloseTopAlert"
+#define NotiCloseTopAlert               @"NotiCloseTopAlert"
+
+/**
+ *  @abstract IM获取新消息
+ */
+#define NotiGetNewMessage               @"NotiGetNewMessage"
 
 #endif /* NotiHeader_h */

@@ -15,6 +15,7 @@
 #import "FMView.h"
 #import "FMZoneManager.h"
 #import "ChatViewController.h"
+#import "MarqueeLabel.h"
 
 NSString* const FMModelSelected = @"FMModelSelected";
 
@@ -28,7 +29,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
 @property (weak, nonatomic) IBOutlet UIView *bottomBarView;
 @property (weak, nonatomic) IBOutlet UIView *loginAlertView;
 @property (weak, nonatomic) IBOutlet UIView *loginAlertTapView;
-@property (weak, nonatomic) IBOutlet UILabel *topAlertView;
+@property (weak, nonatomic) IBOutlet MarqueeLabel *topAlertView;
 // 底部栏
 @property (weak, nonatomic) IBOutlet UIView *toSearchView;
 @property (weak, nonatomic) IBOutlet UIView *toWorldPlatform;
@@ -71,7 +72,13 @@ NSString* const FMModelSelected = @"FMModelSelected";
     self.bottomContraint.constant = 64- kScreenHeight;
     self.loginAlertView.layer.cornerRadius = 7.0f;
     self.loginAlertView.clipsToBounds = YES;
-
+    
+    self.topAlertView.pauseInterval = 0;
+    self.topAlertView.bufferSpaceBetweenLabels = 30;
+    self.topAlertView.textColor = [UIColor whiteColor];
+    self.topAlertView.font = [UIFont systemFontOfSize:18];
+    self.topAlertView.Text = @"点击任意建筑 即可为您提供导航路线 您可以通过手势进行缩放 旋转地图及调整地图倾斜角";
+     
     //    self.segmentCallOrNavigation.selectedSegmentIndex = 0;
     self.title = @"红树林导航";
     
