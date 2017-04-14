@@ -13,8 +13,8 @@
 #import "LoginViewController.h"
 #import "SearchViewController.h"
 #import "FMView.h"
-
 #import "FMZoneManager.h"
+#import "ChatViewController.h"
 
 NSString* const FMModelSelected = @"FMModelSelected";
 
@@ -52,6 +52,8 @@ NSString* const FMModelSelected = @"FMModelSelected";
 @property (nonatomic, strong) NSURLSessionTask * loginTask;
 
 @property (nonatomic, assign) NSInteger segmentSelect;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottombarConstraint;
+@property (assign, nonatomic) BOOL showMsg;
 
 @end
 
@@ -62,7 +64,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
     [super viewDidLoad];
     //self.bottomBarView.hidden = YES;
 	[UIApplication sharedApplication].idleTimerDisabled = YES;//不自动锁屏
-    
+    self.showMsg = NO;
     self.segmentSelect = NSNotFound;
     self.messageView.hidden = YES;
     self.topConstraint.constant = kScreenHeight- 64;
@@ -452,7 +454,17 @@ NSString* const FMModelSelected = @"FMModelSelected";
 //        [MyAlertView showAlert:@"服务上线准备中,敬请期待"];
 //    }
 //    [self.msgViewController sendCallRequest];
-    [self performSegueWithIdentifier:@"showBind" sender:nil];
+//    self.showMsg = !self.showMsg;
+//    if (self.showMsg == YES)
+//    {
+//        [self performSegueWithIdentifier:@"showBind" sender:nil];
+//    }else
+//    {
+        ChatViewController *chat = [[ChatViewController alloc] init];
+//    chat.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+        [self.navigationController pushViewController:chat animated:YES];
+//    }
+    
 }
 
 - (void)setLastSelectedIndex:(NSInteger)lastSelectedIndex
@@ -632,7 +644,27 @@ NSString* const FMModelSelected = @"FMModelSelected";
 	}
 	return _myZoneManager;
 }
-
+- (void)setFunction:(CurrentFunction)function
+{
+    switch (function)
+    {
+        case FUNCTION_DEFAULT:
+            [self showBottomViewByFunction:NO];
+            break;
+        default:
+            [self showBottomViewByFunction:YES];
+            break;
+    }
+}
+- (void)showBottomViewByFunction:(BOOL)show
+{
+//    CGRect showFrame = CGRectMake(0, kScreenHeight-self.bottomBarView.frame.size.height, self.bottomBarView.frame.size.width, self.bottomBarView.frame.size.height);
+//    CGRect hideFrame = CGRectMake(0, kScreenHeight, self.bottomBarView.frame.size.width, self.bottomBarView.frame.size.height);
+    [UIView animateWithDuration:0.3 animations:^{
+        self.bottomBarView.hidden = !show;
+    }];
+    
+}
 - (void)showWelcome
 {
     

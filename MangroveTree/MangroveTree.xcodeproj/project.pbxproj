@@ -19,8 +19,15 @@
 		9C4737501E7292A500A30C91 /* ModifypawdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C47374F1E7292A500A30C91 /* ModifypawdViewController.m */; };
 		A80F2FE41E7BB04100E0ED51 /* InforModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A80F2FE31E7BB04100E0ED51 /* InforModel.m */; };
 		A861B2C31E9CA3A9002D61F0 /* BindRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A861B2C21E9CA3A9002D61F0 /* BindRoomViewController.m */; };
+		A861B3331E9E1659002D61F0 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A861B3321E9E1659002D61F0 /* ChatViewController.m */; };
+		A861B3FE1E9F0C33002D61F0 /* ChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A861B3FD1E9F0C33002D61F0 /* ChatCell.m */; };
+		A861B4011E9F0C92002D61F0 /* ChatInputBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A861B4001E9F0C92002D61F0 /* ChatInputBar.m */; };
+		A861B40F1E9F0FCB002D61F0 /* ALView+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A861B4071E9F0FCB002D61F0 /* ALView+PureLayout.m */; };
+		A861B4101E9F0FCB002D61F0 /* NSArray+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A861B4091E9F0FCB002D61F0 /* NSArray+PureLayout.m */; };
+		A861B4111E9F0FCB002D61F0 /* NSLayoutConstraint+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A861B40B1E9F0FCB002D61F0 /* NSLayoutConstraint+PureLayout.m */; };
 		A8E4136F1E7692C40096EA62 /* InforView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E4136E1E7692C40096EA62 /* InforView.m */; };
 		A8E413711E7692D70096EA62 /* InforView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8E413701E7692D70096EA62 /* InforView.xib */; };
+		A8FDA43E1E9F815D00272B7D /* ChatHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8FDA43D1E9F815D00272B7D /* ChatHeadView.m */; };
 		C42DA9081E9DCAD300A76B4C /* BaseAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42DA9071E9DCAD300A76B4C /* BaseAlertViewController.m */; };
 		C42DA90B1E9DD5EE00A76B4C /* AlertPresentAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = C42DA90A1E9DD5EE00A76B4C /* AlertPresentAnimation.m */; };
 		C44B16701E70F0E900EE8257 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C44B166F1E70F0E800EE8257 /* MainViewController.m */; };
@@ -466,9 +473,26 @@
 		A80F2FE31E7BB04100E0ED51 /* InforModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InforModel.m; sourceTree = "<group>"; };
 		A861B2C11E9CA3A9002D61F0 /* BindRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindRoomViewController.h; sourceTree = "<group>"; };
 		A861B2C21E9CA3A9002D61F0 /* BindRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindRoomViewController.m; sourceTree = "<group>"; };
+		A861B3311E9E1659002D61F0 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		A861B3321E9E1659002D61F0 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		A861B3FC1E9F0C33002D61F0 /* ChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatCell.h; sourceTree = "<group>"; };
+		A861B3FD1E9F0C33002D61F0 /* ChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatCell.m; sourceTree = "<group>"; };
+		A861B3FF1E9F0C92002D61F0 /* ChatInputBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatInputBar.h; sourceTree = "<group>"; };
+		A861B4001E9F0C92002D61F0 /* ChatInputBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatInputBar.m; sourceTree = "<group>"; };
+		A861B4061E9F0FCB002D61F0 /* ALView+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALView+PureLayout.h"; sourceTree = "<group>"; };
+		A861B4071E9F0FCB002D61F0 /* ALView+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALView+PureLayout.m"; sourceTree = "<group>"; };
+		A861B4081E9F0FCB002D61F0 /* NSArray+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+PureLayout.h"; sourceTree = "<group>"; };
+		A861B4091E9F0FCB002D61F0 /* NSArray+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+PureLayout.m"; sourceTree = "<group>"; };
+		A861B40A1E9F0FCB002D61F0 /* NSLayoutConstraint+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+PureLayout.h"; sourceTree = "<group>"; };
+		A861B40B1E9F0FCB002D61F0 /* NSLayoutConstraint+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+PureLayout.m"; sourceTree = "<group>"; };
+		A861B40C1E9F0FCB002D61F0 /* PureLayout+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PureLayout+Internal.h"; sourceTree = "<group>"; };
+		A861B40D1E9F0FCB002D61F0 /* PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PureLayout.h; sourceTree = "<group>"; };
+		A861B40E1E9F0FCB002D61F0 /* PureLayoutDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PureLayoutDefines.h; sourceTree = "<group>"; };
 		A8E4136D1E7692C40096EA62 /* InforView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InforView.h; sourceTree = "<group>"; };
 		A8E4136E1E7692C40096EA62 /* InforView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InforView.m; sourceTree = "<group>"; };
 		A8E413701E7692D70096EA62 /* InforView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InforView.xib; sourceTree = "<group>"; };
+		A8FDA43C1E9F815D00272B7D /* ChatHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatHeadView.h; sourceTree = "<group>"; };
+		A8FDA43D1E9F815D00272B7D /* ChatHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatHeadView.m; sourceTree = "<group>"; };
 		C42DA9061E9DCAD300A76B4C /* BaseAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseAlertViewController.h; path = ../BaseAlertViewController.h; sourceTree = "<group>"; };
 		C42DA9071E9DCAD300A76B4C /* BaseAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseAlertViewController.m; path = ../BaseAlertViewController.m; sourceTree = "<group>"; };
 		C42DA9091E9DD5EE00A76B4C /* AlertPresentAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertPresentAnimation.h; sourceTree = "<group>"; };
@@ -1217,8 +1241,65 @@
 				C46FA8131E9F08D600F18D47 /* MTIMManager.m */,
 				A861B2C11E9CA3A9002D61F0 /* BindRoomViewController.h */,
 				A861B2C21E9CA3A9002D61F0 /* BindRoomViewController.m */,
+				A861B32D1E9E15E9002D61F0 /* MsgViewController */,
 			);
 			name = CallService;
+			sourceTree = "<group>";
+		};
+		A861B32D1E9E15E9002D61F0 /* MsgViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A861B4051E9F0FCB002D61F0 /* PureLayout */,
+				A861B32E1E9E1605002D61F0 /* Controller */,
+				A861B3301E9E1618002D61F0 /* Views */,
+				A861B32F1E9E1611002D61F0 /* Model */,
+			);
+			name = MsgViewController;
+			sourceTree = "<group>";
+		};
+		A861B32E1E9E1605002D61F0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A861B3311E9E1659002D61F0 /* ChatViewController.h */,
+				A861B3321E9E1659002D61F0 /* ChatViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		A861B32F1E9E1611002D61F0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		A861B3301E9E1618002D61F0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A861B3FC1E9F0C33002D61F0 /* ChatCell.h */,
+				A861B3FD1E9F0C33002D61F0 /* ChatCell.m */,
+				A861B3FF1E9F0C92002D61F0 /* ChatInputBar.h */,
+				A861B4001E9F0C92002D61F0 /* ChatInputBar.m */,
+				A8FDA43C1E9F815D00272B7D /* ChatHeadView.h */,
+				A8FDA43D1E9F815D00272B7D /* ChatHeadView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		A861B4051E9F0FCB002D61F0 /* PureLayout */ = {
+			isa = PBXGroup;
+			children = (
+				A861B4061E9F0FCB002D61F0 /* ALView+PureLayout.h */,
+				A861B4071E9F0FCB002D61F0 /* ALView+PureLayout.m */,
+				A861B4081E9F0FCB002D61F0 /* NSArray+PureLayout.h */,
+				A861B4091E9F0FCB002D61F0 /* NSArray+PureLayout.m */,
+				A861B40A1E9F0FCB002D61F0 /* NSLayoutConstraint+PureLayout.h */,
+				A861B40B1E9F0FCB002D61F0 /* NSLayoutConstraint+PureLayout.m */,
+				A861B40C1E9F0FCB002D61F0 /* PureLayout+Internal.h */,
+				A861B40D1E9F0FCB002D61F0 /* PureLayout.h */,
+				A861B40E1E9F0FCB002D61F0 /* PureLayoutDefines.h */,
+			);
+			path = PureLayout;
 			sourceTree = "<group>";
 		};
 		C44B16801E70F25C00EE8257 /* UserCenter */ = {
@@ -2640,6 +2721,7 @@
 				FC5B1A511E6E47610038BCA7 /* MBProgressHUD.m in Sources */,
 				C4C723A21E6FCC2F003523A2 /* UILabel+AddtionString.m in Sources */,
 				FC5B1A6F1E6E47A70038BCA7 /* MJRefreshFooter.m in Sources */,
+				A861B3FE1E9F0C33002D61F0 /* ChatCell.m in Sources */,
 				9C47374D1E728E0700A30C91 /* NameViewController.m in Sources */,
 				C4C723EA1E6FD34E003523A2 /* StatusAcceptExpired.m in Sources */,
 				C45B620D1E7A8CA300F70D3F /* SearchResultCell.m in Sources */,
@@ -2653,6 +2735,7 @@
 				FC5B1AF21E6E52B30038BCA7 /* MySingleton.m in Sources */,
 				C45B62031E7A35DD00F70D3F /* SearchTypeCell.m in Sources */,
 				FC5B1AF61E6E55A20038BCA7 /* NetWorkHelp.m in Sources */,
+				A861B40F1E9F0FCB002D61F0 /* ALView+PureLayout.m in Sources */,
 				C4C723AB1E6FCC2F003523A2 /* FMIndoorMapVC+Navi.m in Sources */,
 				FCDD644A1E6FA5260057A9C3 /* SPCallingCardBubbleViewModel.m in Sources */,
 				C4C723A71E6FCC2F003523A2 /* FMIndoorView.m in Sources */,
@@ -2674,8 +2757,10 @@
 				FC5B1A741E6E47A70038BCA7 /* MJRefreshLegendHeader.m in Sources */,
 				C4C723B61E6FCC2F003523A2 /* BaseCollectionViewCell.m in Sources */,
 				FC5B1AA31E6E47BF0038BCA7 /* UIButton+WebCache.m in Sources */,
+				A861B4011E9F0C92002D61F0 /* ChatInputBar.m in Sources */,
 				C46BEDD01E9CA7B8009E3379 /* AlertViewCenterCell.m in Sources */,
 				FC5B1AEB1E6E51510038BCA7 /* MyAlertView.m in Sources */,
+				A861B4111E9F0FCB002D61F0 /* NSLayoutConstraint+PureLayout.m in Sources */,
 				A8E4136F1E7692C40096EA62 /* InforView.m in Sources */,
 				C4C723951E6FCC2F003523A2 /* FMDatabasePool.m in Sources */,
 				C461989C1E8B60C6005590D2 /* BaseWebViewController.m in Sources */,
@@ -2684,6 +2769,7 @@
 				FC07554B1E6EBB7400EAB144 /* AgreementViewController.m in Sources */,
 				FCDD64461E6FA5260057A9C3 /* MsgViewController.m in Sources */,
 				9C47374A1E7283C200A30C91 /* NewPhoneViewController.m in Sources */,
+				A8FDA43E1E9F815D00272B7D /* ChatHeadView.m in Sources */,
 				C4C723C01E6FCC2F003523A2 /* CategoryView.m in Sources */,
 				C4C723E81E6FD34E003523A2 /* StatusWaitingExpired.m in Sources */,
 				FC5B1AA11E6E47BF0038BCA7 /* SDWebImageManager.m in Sources */,
@@ -2696,6 +2782,7 @@
 				FC5B1AC01E6E48FD0038BCA7 /* Parser.m in Sources */,
 				C4C723B81E6FCC2F003523A2 /* HistoryRecordCell.m in Sources */,
 				C45B62061E7A5A4900F70D3F /* SearchHeaderView.m in Sources */,
+				A861B4101E9F0FCB002D61F0 /* NSArray+PureLayout.m in Sources */,
 				FCDD64451E6FA5260057A9C3 /* MapViewController.m in Sources */,
 				C4C723A31E6FCC2F003523A2 /* UIView+TransitionAnimation.m in Sources */,
 				9C00D71F1E8CB6C600766FAA /* AboutViewController.m in Sources */,
@@ -2739,6 +2826,7 @@
 				FC5B1ACC1E6E4EDC0038BCA7 /* LoginViewController.m in Sources */,
 				C4C723B31E6FCC2F003523A2 /* QueryDBModel.m in Sources */,
 				C4C723AC1E6FCC2F003523A2 /* FMIndoorMapVC.m in Sources */,
+				A861B3331E9E1659002D61F0 /* ChatViewController.m in Sources */,
 				FC5B1AA21E6E47BF0038BCA7 /* SDWebImagePrefetcher.m in Sources */,
 				FC5B1ACD1E6E4EDC0038BCA7 /* RegistViewController.m in Sources */,
 				FC5B1ADC1E6E502D0038BCA7 /* MTBaseNetworkController.m in Sources */,
