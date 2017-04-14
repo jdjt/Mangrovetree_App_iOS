@@ -30,6 +30,7 @@
 #import "DataManager.h"
 #import "DataManager+User.h"
 #import "SPKitExample.h"
+#import "MTIMManager.h"
 #import "AppDelegate.h"
 #import "MBProgressHUD.h"
 #import "MTRequestNetwork.h"
