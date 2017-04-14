@@ -655,7 +655,7 @@ void ProviderReleaseData (void *info, const void *data, size_t size){
 
 + (BOOL)locationServicesEnabled
 {
-    if (([CLLocationManager locationServicesEnabled]) && ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways)) {
+    if (([CLLocationManager locationServicesEnabled]) && (([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) || ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse))) {
         
         NSLog(@"手机gps定位已经开启");
         return YES;
