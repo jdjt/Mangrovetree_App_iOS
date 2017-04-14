@@ -12,10 +12,12 @@
 
 @protocol SendMsgDelegate <NSObject>
 
-- (void)sendMsgByChatBarView:(ChatInputBar *)inputView;
+- (void)sendMsgByChatBarView:(NSString *)inputText;
 
 @end
 
 @interface ChatInputBar : UIView
+
+@property (nonatomic, weak) id<SendMsgDelegate>delegate;
 
 @end

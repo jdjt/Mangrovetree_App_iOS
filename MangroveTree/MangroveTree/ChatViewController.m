@@ -11,14 +11,16 @@
 #import "ChatCell.h"
 #import "PureLayout.h"
 #import "ChatHeadView.h"
+#import "NSString+Addtions.h"
 
 #define kSizeHead CGSizeMake(kScreenWidth, 64)
 
-@interface ChatViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface ChatViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate,SendMsgDelegate>
 
 @property (nonatomic, strong) UITableView *chatTabelView;
 @property (nonatomic, strong) ChatInputBar *chatInputView;
 @property (nonatomic, strong) ChatHeadView *headView;
+@property (nonatomic, strong) NSMutableArray *dataSource;
 
 @end
 
@@ -34,7 +36,6 @@
     [self.headView autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:0];
     [self.headView autoSetDimensionsToSize:kSizeHead];
     self.headView.backgroundColor = [UIColor redColor];
-    UIEdgeInsets inset = UIEdgeInsetsMake(0, 0, 0, 0);
     
     // add tableView
     [self.view addSubview:self.chatTabelView];
@@ -46,6 +47,7 @@
     [self.chatInputView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.chatTabelView];
     [self.chatInputView autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
     [self.chatInputView autoSetDimension:ALDimensionWidth toSize:kScreenWidth];
+    self.chatInputView.delegate = self;
 }
 
 #pragma mark - Getter Method
@@ -83,6 +85,14 @@
     }
     return _headView;
 }
+- (NSMutableArray *)dataSource
+{
+    if (_dataSource == nil)
+    {
+        _dataSource = [NSMutableArray array];
+    }
+    return _dataSource;
+}
 #pragma mark - UITableView  Delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -92,24 +102,44 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return self.dataSource.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 44;
+    if (self.dataSource.count > 0)
+    {
+        NSDictionary *dic = self.dataSource[0];
+        CGFloat height = [NSString heightFromString:dic[@"text"] withFont:[UIFont systemFontOfSize:18.0f]  constraintToWidth:kScreenWidth-8*2];
+        return height +64;
+    }
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"chatCell"];
+    ChatCell *cell = [tableView dequeueReusableCellWithIdentifier:@"chatCell"];
     if (!cell)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"chatCell"];
+        cell = [[ChatCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"chatCell"];
         cell.backgroundColor = [UIColor colorWithRed:0.922 green:0.925 blue:0.929 alpha:1];
-        cell.backgroundColor = [UIColor blueColor];
+        if (self.dataSource.count>0) cell.model = self.dataSource[indexPath.row];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return cell;
+}
+- (void)sendMsgByChatBarView:(NSString *)inputText
+{
+    if (self.dataSource.count > 0)
+    {
+        return;
+    }
+    if (inputText != nil && ![inputText isEqualToString:@""])
+    {
+        NSDictionary *dic = @{@"text":@"您好，我的房间需要一杯饮料，请问你们都有什么类型的饮料，请给我列出一个清单，供我选择",@"are":@"叶林酒店",@"time":@"2017-05-24 05:24:21"};
+        [self.dataSource addObject:dic];
+        [self.chatTabelView reloadData];
+    }
 }
 #warning 暂时舍弃自己手写聊天界面
 /*

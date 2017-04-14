@@ -145,7 +145,12 @@
 
 - (void)sendMsgBtnClick:(UIButton *)button
 {
-    
+    if ([self.delegate respondsToSelector:@selector(sendMsgByChatBarView:)])
+    {
+        [self.delegate sendMsgByChatBarView:_mInputTextView.text];
+        _mInputTextView.text = @"";//清空输入框
+        [self textViewDidChange:_mInputTextView];
+    }
 }
 
 #pragma mark - Getter Method
@@ -226,7 +231,10 @@
         if (![textView.text isEqualToString:@""])
         {//输入框当前有数据才需要发送
             
-        
+            if ([self.delegate respondsToSelector:@selector(sendMsgByChatBarView:)])
+            {
+                [self.delegate sendMsgByChatBarView:textView.text];
+            }
             textView.text = @"";//清空输入框
             [self textViewDidChange:textView];
         }

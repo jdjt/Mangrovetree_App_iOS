@@ -10,4 +10,6 @@
 
 @interface ChatCell : UITableViewCell
 
+@property (nonatomic, strong) NSDictionary *model;
+
 @end
