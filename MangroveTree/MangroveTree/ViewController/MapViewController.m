@@ -71,7 +71,6 @@
         });
     }
 
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"inDoorMap"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -107,7 +106,6 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    NSLog(@"+++++++++++++++++++++++InOut  dealloc");
 }
 
 - (void)loadMap
@@ -119,14 +117,8 @@
         [self.fmView addFengMapView];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.view  insertSubview:self.fmView belowSubview:self.scalingLabel];
-            NSLog(@"%@",[NSThread currentThread]);
         });
     }
-    NSLog(@"%@",[NSThread currentThread]);
-    // 默认回到地图 把自己的坐标位置移动到屏幕中央
-    // 定位模式下 导航防止多次跳转室内地图
-//    self.fmView.inDoorMap = YES;
-    //重新设置室外地图的主题
     [self.fmView resetTheme];
 
     [self.fmView addLocationDelegate];
@@ -134,7 +126,6 @@
         [self.fmView planNaviAct];
     });
     
-
     self.fmView.isFirstLocate = YES;
 
     if ([FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi)
