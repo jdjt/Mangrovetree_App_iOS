@@ -31,16 +31,16 @@
 		A8F3DC0E1EA0B35A0044C0A7 /* SecurityGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F3DC051EA0B35A0044C0A7 /* SecurityGuardSDK.framework */; };
 		A8F3DC0F1EA0B35A0044C0A7 /* SGMain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F3DC061EA0B35A0044C0A7 /* SGMain.framework */; };
 		A8F3DC101EA0B35A0044C0A7 /* UTMini.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F3DC071EA0B35A0044C0A7 /* UTMini.framework */; };
-		A8F3DC111EA0B35A0044C0A7 /* WXOpenIMSDKFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F3DC081EA0B35A0044C0A7 /* WXOpenIMSDKFMWK.framework */; };
 		A8F3DC121EA0B35A0044C0A7 /* WXOpenIMSDKResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A8F3DC091EA0B35A0044C0A7 /* WXOpenIMSDKResource.bundle */; };
 		A8F3DC131EA0B35A0044C0A7 /* WXOUIModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F3DC0A1EA0B35A0044C0A7 /* WXOUIModule.framework */; };
 		A8F3DC141EA0B35A0044C0A7 /* WXOUIModuleResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A8F3DC0B1EA0B35A0044C0A7 /* WXOUIModuleResources.bundle */; };
-		A8F3DC151EA0B35A0044C0A7 /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A8F3DC0C1EA0B35A0044C0A7 /* yw_1222.jpg */; };
-		A8F3DC161EA0B35A0044C0A7 /* YWFeedbackServiceFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F3DC0D1EA0B35A0044C0A7 /* YWFeedbackServiceFMWK.framework */; };
 		A8FDA43E1E9F815D00272B7D /* ChatHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8FDA43D1E9F815D00272B7D /* ChatHeadView.m */; };
 		C42DA90B1E9DD5EE00A76B4C /* AlertPresentAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = C42DA90A1E9DD5EE00A76B4C /* AlertPresentAnimation.m */; };
 		C44B16701E70F0E900EE8257 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C44B166F1E70F0E800EE8257 /* MainViewController.m */; };
 		C44B167B1E70F24C00EE8257 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C44B16721E70F24C00EE8257 /* UserViewController.m */; };
+		C45892CE1EA5C3770014BAD5 /* WXOpenIMSDKFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C45892CC1EA5C3770014BAD5 /* WXOpenIMSDKFMWK.framework */; };
+		C45892CF1EA5C3770014BAD5 /* YWFeedbackServiceFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C45892CD1EA5C3770014BAD5 /* YWFeedbackServiceFMWK.framework */; };
+		C45892D11EA5F5640014BAD5 /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C45892D01EA5F5640014BAD5 /* yw_1222.jpg */; };
 		C45B62001E7A257600F70D3F /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45B61FF1E7A257600F70D3F /* SearchViewController.m */; };
 		C45B62031E7A35DD00F70D3F /* SearchTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C45B62021E7A35DD00F70D3F /* SearchTypeCell.m */; };
 		C45B62061E7A5A4900F70D3F /* SearchHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C45B62051E7A5A4900F70D3F /* SearchHeaderView.m */; };
@@ -497,12 +497,9 @@
 		A8F3DC051EA0B35A0044C0A7 /* SecurityGuardSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SecurityGuardSDK.framework; sourceTree = "<group>"; };
 		A8F3DC061EA0B35A0044C0A7 /* SGMain.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SGMain.framework; sourceTree = "<group>"; };
 		A8F3DC071EA0B35A0044C0A7 /* UTMini.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTMini.framework; sourceTree = "<group>"; };
-		A8F3DC081EA0B35A0044C0A7 /* WXOpenIMSDKFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WXOpenIMSDKFMWK.framework; sourceTree = "<group>"; };
 		A8F3DC091EA0B35A0044C0A7 /* WXOpenIMSDKResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WXOpenIMSDKResource.bundle; sourceTree = "<group>"; };
 		A8F3DC0A1EA0B35A0044C0A7 /* WXOUIModule.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WXOUIModule.framework; sourceTree = "<group>"; };
 		A8F3DC0B1EA0B35A0044C0A7 /* WXOUIModuleResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WXOUIModuleResources.bundle; sourceTree = "<group>"; };
-		A8F3DC0C1EA0B35A0044C0A7 /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yw_1222.jpg; sourceTree = "<group>"; };
-		A8F3DC0D1EA0B35A0044C0A7 /* YWFeedbackServiceFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YWFeedbackServiceFMWK.framework; sourceTree = "<group>"; };
 		A8FDA43C1E9F815D00272B7D /* ChatHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatHeadView.h; sourceTree = "<group>"; };
 		A8FDA43D1E9F815D00272B7D /* ChatHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatHeadView.m; sourceTree = "<group>"; };
 		C42DA9091E9DD5EE00A76B4C /* AlertPresentAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertPresentAnimation.h; sourceTree = "<group>"; };
@@ -511,6 +508,9 @@
 		C44B166F1E70F0E800EE8257 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		C44B16711E70F24C00EE8257 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
 		C44B16721E70F24C00EE8257 /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
+		C45892CC1EA5C3770014BAD5 /* WXOpenIMSDKFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WXOpenIMSDKFMWK.framework; sourceTree = "<group>"; };
+		C45892CD1EA5C3770014BAD5 /* YWFeedbackServiceFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YWFeedbackServiceFMWK.framework; sourceTree = "<group>"; };
+		C45892D01EA5F5640014BAD5 /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yw_1222.jpg; sourceTree = "<group>"; };
 		C45B61FE1E7A257600F70D3F /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		C45B61FF1E7A257600F70D3F /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		C45B62011E7A35DD00F70D3F /* SearchTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTypeCell.h; sourceTree = "<group>"; };
@@ -1173,13 +1173,13 @@
 				FCDD646E1E6FA70D0057A9C3 /* libxml2.tbd in Frameworks */,
 				FCDD64911E6FB25D0057A9C3 /* libz.tbd in Frameworks */,
 				FCDD64931E6FB26B0057A9C3 /* libstdc++.6.0.9.tbd in Frameworks */,
-				A8F3DC111EA0B35A0044C0A7 /* WXOpenIMSDKFMWK.framework in Frameworks */,
 				FCDD64721E6FA7290057A9C3 /* libsqlite3.0.tbd in Frameworks */,
 				FCDD64471E6FA5260057A9C3 /* libUMessage_Sdk_1.4.0.a in Frameworks */,
 				C4C723F91E6FEBF4003523A2 /* UserNotifications.framework in Frameworks */,
 				FCDD649D1E6FB2B00057A9C3 /* AssetsLibrary.framework in Frameworks */,
 				FCDD649B1E6FB29A0057A9C3 /* AVFoundation.framework in Frameworks */,
 				FCDD64991E6FB2900057A9C3 /* AudioToolbox.framework in Frameworks */,
+				C45892CE1EA5C3770014BAD5 /* WXOpenIMSDKFMWK.framework in Frameworks */,
 				FCDD64971E6FB2830057A9C3 /* ImageIO.framework in Frameworks */,
 				A8F3DC101EA0B35A0044C0A7 /* UTMini.framework in Frameworks */,
 				FCDD64951E6FB2780057A9C3 /* MobileCoreServices.framework in Frameworks */,
@@ -1191,7 +1191,7 @@
 				FCDD64871E6FB20F0057A9C3 /* UIKit.framework in Frameworks */,
 				FCDD64851E6FAC300057A9C3 /* OpenGLES.framework in Frameworks */,
 				FCDD64831E6FAC250057A9C3 /* CoreMotion.framework in Frameworks */,
-				A8F3DC161EA0B35A0044C0A7 /* YWFeedbackServiceFMWK.framework in Frameworks */,
+				C45892CF1EA5C3770014BAD5 /* YWFeedbackServiceFMWK.framework in Frameworks */,
 				FCDD64811E6FAB5A0057A9C3 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2222,15 +2222,15 @@
 		FCDD62E71E6FA5260057A9C3 /* WXFrameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C45892CC1EA5C3770014BAD5 /* WXOpenIMSDKFMWK.framework */,
+				C45892CD1EA5C3770014BAD5 /* YWFeedbackServiceFMWK.framework */,
 				A8F3DC051EA0B35A0044C0A7 /* SecurityGuardSDK.framework */,
 				A8F3DC061EA0B35A0044C0A7 /* SGMain.framework */,
 				A8F3DC071EA0B35A0044C0A7 /* UTMini.framework */,
-				A8F3DC081EA0B35A0044C0A7 /* WXOpenIMSDKFMWK.framework */,
 				A8F3DC091EA0B35A0044C0A7 /* WXOpenIMSDKResource.bundle */,
 				A8F3DC0A1EA0B35A0044C0A7 /* WXOUIModule.framework */,
 				A8F3DC0B1EA0B35A0044C0A7 /* WXOUIModuleResources.bundle */,
-				A8F3DC0C1EA0B35A0044C0A7 /* yw_1222.jpg */,
-				A8F3DC0D1EA0B35A0044C0A7 /* YWFeedbackServiceFMWK.framework */,
+				C45892D01EA5F5640014BAD5 /* yw_1222.jpg */,
 				FCDD62E81E6FA5260057A9C3 /* Customize */,
 				FCDD630C1E6FA5260057A9C3 /* MainLogic */,
 			);
@@ -2575,7 +2575,7 @@
 				C4C723461E6FCC2F003523A2 /* hongmofangcanting.fmi in Resources */,
 				C4C722B71E6FCC2E003523A2 /* 0.fmi in Resources */,
 				C4C722FF1E6FCC2E003523A2 /* 150004.fmi in Resources */,
-				A8F3DC151EA0B35A0044C0A7 /* yw_1222.jpg in Resources */,
+				C45892D11EA5F5640014BAD5 /* yw_1222.jpg in Resources */,
 				C4C722D91E6FCC2E003523A2 /* 140002.fmi in Resources */,
 				C4C723711E6FCC2F003523A2 /* veromoda.fmi in Resources */,
 				C4C723B91E6FCC2F003523A2 /* HistoryRecordCell.xib in Resources */,
