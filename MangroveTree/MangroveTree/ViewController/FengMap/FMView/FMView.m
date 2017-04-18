@@ -150,7 +150,7 @@ extern NSString* FMModelSelected;
         // 默认加载90度
         [self.fengMapView inclineWithAngle:60.0f];
         self.fengMapView.showCompass = YES;
-        //        [self.fengMapView moveToViewCenterByMapCoord:FMKGeoCoordMake(0, FMKMapPointMake(1.2188270E7, 2071090.0))];
+        [self.fengMapView moveToViewCenterByMapCoord:FMKGeoCoordMake(0, FMKMapPointMake(1.2188250E7, 2071090.0))];
         //添加图片标注物图层
         _imageLayer = [[FMKImageLayer alloc] initWithGroupID:@"1"];
         [self.fengMapView.map addLayer:_imageLayer];
@@ -490,7 +490,6 @@ extern NSString* FMModelSelected;
     if ([node isKindOfClass:[FMKExternalModel class]])
     {
         model = (FMKExternalModel *)node;
-        
         if ([model.fid isEqualToString:dimian01] ||
             [model.fid isEqualToString:dimian02] ||
             [model.type isEqualToString:treeType])
@@ -508,7 +507,6 @@ extern NSString* FMModelSelected;
     }
     
     [self didSelectedEnd:model];
-    
 }
 - (void)mapView:(FMKMapView *)mapView didSingleTapWithPoint:(CGPoint)point
 {
