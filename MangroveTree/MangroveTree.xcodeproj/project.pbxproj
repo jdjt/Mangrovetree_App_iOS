@@ -25,6 +25,8 @@
 		A861B40F1E9F0FCB002D61F0 /* ALView+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A861B4071E9F0FCB002D61F0 /* ALView+PureLayout.m */; };
 		A861B4101E9F0FCB002D61F0 /* NSArray+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A861B4091E9F0FCB002D61F0 /* NSArray+PureLayout.m */; };
 		A861B4111E9F0FCB002D61F0 /* NSLayoutConstraint+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A861B40B1E9F0FCB002D61F0 /* NSLayoutConstraint+PureLayout.m */; };
+		A8995A251EA5B228001B83DF /* PDKeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = A8995A241EA5B228001B83DF /* PDKeyChain.m */; };
+		A8995A271EA5B4BB001B83DF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8995A261EA5B4BA001B83DF /* Security.framework */; };
 		A8E4136F1E7692C40096EA62 /* InforView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E4136E1E7692C40096EA62 /* InforView.m */; };
 		A8E413711E7692D70096EA62 /* InforView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8E413701E7692D70096EA62 /* InforView.xib */; };
 		A8F3DBE21EA0AEA80044C0A7 /* BaseAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8F3DBE11EA0AEA80044C0A7 /* BaseAlertViewController.m */; };
@@ -489,6 +491,9 @@
 		A861B40C1E9F0FCB002D61F0 /* PureLayout+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PureLayout+Internal.h"; sourceTree = "<group>"; };
 		A861B40D1E9F0FCB002D61F0 /* PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PureLayout.h; sourceTree = "<group>"; };
 		A861B40E1E9F0FCB002D61F0 /* PureLayoutDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PureLayoutDefines.h; sourceTree = "<group>"; };
+		A8995A231EA5B228001B83DF /* PDKeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDKeyChain.h; sourceTree = "<group>"; };
+		A8995A241EA5B228001B83DF /* PDKeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDKeyChain.m; sourceTree = "<group>"; };
+		A8995A261EA5B4BA001B83DF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A8E4136D1E7692C40096EA62 /* InforView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InforView.h; sourceTree = "<group>"; };
 		A8E4136E1E7692C40096EA62 /* InforView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InforView.m; sourceTree = "<group>"; };
 		A8E413701E7692D70096EA62 /* InforView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InforView.xib; sourceTree = "<group>"; };
@@ -1165,6 +1170,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8995A271EA5B4BB001B83DF /* Security.framework in Frameworks */,
 				C4C723FC1E6FEF6F003523A2 /* libiconv.tbd in Frameworks */,
 				A8F3DC131EA0B35A0044C0A7 /* WXOUIModule.framework in Frameworks */,
 				C4C720F51E6FCB79003523A2 /* libFMMapKit.a in Frameworks */,
@@ -1303,6 +1309,15 @@
 				A861B40E1E9F0FCB002D61F0 /* PureLayoutDefines.h */,
 			);
 			path = PureLayout;
+			sourceTree = "<group>";
+		};
+		A8995A221EA5B20F001B83DF /* KeyChain */ = {
+			isa = PBXGroup;
+			children = (
+				A8995A231EA5B228001B83DF /* PDKeyChain.h */,
+				A8995A241EA5B228001B83DF /* PDKeyChain.m */,
+			);
+			name = KeyChain;
 			sourceTree = "<group>";
 		};
 		C44B16801E70F25C00EE8257 /* UserCenter */ = {
@@ -2035,6 +2050,7 @@
 		FC5B19BB1E6E47230038BCA7 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				A8995A221EA5B20F001B83DF /* KeyChain */,
 				C4C723DA1E6FD33F003523A2 /* TaskStatus */,
 				FCDD62E41E6FA5260057A9C3 /* UMessage_Sdk */,
 				FCDD62E71E6FA5260057A9C3 /* WXFrameworks */,
@@ -2359,6 +2375,7 @@
 		FCDD646C1E6FA70D0057A9C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A8995A261EA5B4BA001B83DF /* Security.framework */,
 				C4C723FF1E6FEFAB003523A2 /* CoreFoundation.framework */,
 				C4C723FD1E6FEF9B003523A2 /* GLKit.framework */,
 				C4C723FB1E6FEF6F003523A2 /* libiconv.tbd */,
@@ -2421,6 +2438,9 @@
 						DevelopmentTeam = 29HSV437NA;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -2782,6 +2802,7 @@
 				FC5B1A771E6E47A70038BCA7 /* UIView+MJExtension.m in Sources */,
 				C4C723B51E6FCC2F003523A2 /* BaseCollectionView.m in Sources */,
 				FC5B1AA81E6E47BF0038BCA7 /* UIImageView+WebCache.m in Sources */,
+				A8995A251EA5B228001B83DF /* PDKeyChain.m in Sources */,
 				FC5B1AE51E6E50E00038BCA7 /* UIButton+Bootstrap.m in Sources */,
 				FC5B1AC01E6E48FD0038BCA7 /* Parser.m in Sources */,
 				C4C723B81E6FCC2F003523A2 /* HistoryRecordCell.m in Sources */,
