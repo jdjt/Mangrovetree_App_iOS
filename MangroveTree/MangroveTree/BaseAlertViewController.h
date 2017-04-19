@@ -29,6 +29,8 @@ typedef NS_ENUM(NSInteger,BaseAlertType)
 @property (weak, nonatomic) IBOutlet UIButton *comfirmButton;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
+@property (nonatomic, assign) NSInteger selectTable;
+
 // 根据标题等初始化
 + (instancetype)initWithHeadTitle:(NSString *)headTitle andWithCheckTitles:(NSArray *)checkTitles andWithButtonTitles:(NSArray *)buttonTitles andWithHeadImage:(UIImage *)image;
 
@@ -42,7 +44,7 @@ typedef NS_ENUM(NSInteger,BaseAlertType)
 - (void)setButtonLeadingTrailingContants:(CGFloat)contant;
 
 // 设置headimage大小
-- (void)setHeadImageSize:(CGFloat)height;
+- (void)setHeadImageSizes:(CGFloat)height;
 
 // 设置label，button文字大小
 - (void)setHeadTitleFont:(UIFont *)headTitleFont andWithButtonTitleFont:(UIFont *)buttonTitleFont;
