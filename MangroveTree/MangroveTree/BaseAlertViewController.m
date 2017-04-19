@@ -18,7 +18,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *buttonLeading;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *buttonTrailing;
 @property (nonatomic, strong) NSArray * dataArray;
-@property (nonatomic, assign) NSInteger selectTable;
 @property (nonatomic, strong) UIView * backView;
 
 @property (nonatomic, copy) NSString * headTitle;
@@ -141,18 +140,34 @@
 
 - (void)addButtonAction
 {
-    [self.comfirmButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-    [self.cancelButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-    
-    if (self.action1 != nil)
-        [self.comfirmButton addTarget:self.target action:self.action1 forControlEvents:UIControlEventTouchUpInside];
-    if (self.action2 != nil)
-        [self.cancelButton addTarget:self.target action:self.action2 forControlEvents:UIControlEventTouchUpInside];
+    [self.comfirmButton addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
+    [self.cancelButton addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)back
+- (void)back:(UIButton *)sender
 {
+    if (!self.target)
+        return;
+    if (self.dataArray.count > 0 && self.selectTable == NSNotFound)
+    {
+        [MyAlertView showAlert:@"请选择取消原因"];
+        return;
+    }
     [self dismissViewControllerAnimated:NO completion:nil];
+    if (sender == self.comfirmButton)
+    {
+        if ([self.target respondsToSelector:self.action1])
+        {
+            [self.target performSelector:self.action1 withObject:self afterDelay:0.0];
+        }
+    }
+    else if (sender == self.cancelButton)
+    {
+        if ([self.target respondsToSelector:self.action2])
+        {
+            [self.target performSelector:self.action2 withObject:self afterDelay:0.0];
+        }
+    }
 }
 
 #pragma mark - tableView delegate
@@ -206,7 +221,7 @@
     self.buttonLeadingContant = contant;
 }
 
-- (void)setHeadImageSize:(CGFloat)height
+- (void)setHeadImageSizes:(CGFloat)height
 {
     self.headImageSize = height;
 }
@@ -238,7 +253,7 @@
 {
     self.isSetButtonContant = NO;
     self.headImageSize = 0;
-    self.headTitleFont = nil;
+    self.headTitleFont = [UIFont systemFontOfSize:15];
     self.buttonTitleFont = nil;
 }
 
