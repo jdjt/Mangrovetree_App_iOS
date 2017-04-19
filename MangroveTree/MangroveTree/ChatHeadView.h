@@ -8,6 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, TextStatus)
+{
+    TextStatus_default = 1,
+    TextStatus_waiting = 2,
+    TextStatus_proceed = 3,
+};
+
 @interface ChatHeadView : UIView
+
+@property (nonatomic, assign) TextStatus textStatus;
+@property (nonatomic, strong) UILabel *labelText;
+@property (nonatomic, strong) UILabel *timerLabel;
+
+- (void)startTaskTimerByStartTime:(NSString *)time;
+- (void)stopTimer;
 
 @end

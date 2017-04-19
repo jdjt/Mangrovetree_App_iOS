@@ -139,6 +139,7 @@
         NSDictionary *dic = @{@"text":@"您好，我的房间需要一杯饮料，请问你们都有什么类型的饮料，请给我列出一个清单，供我选择",@"are":@"叶林酒店",@"time":@"2017-05-24 05:24:21"};
         [self.dataSource addObject:dic];
         [self.chatTabelView reloadData];
+        self.headView.textStatus = TextStatus_waiting;
     }
 }
 #warning 暂时舍弃自己手写聊天界面
