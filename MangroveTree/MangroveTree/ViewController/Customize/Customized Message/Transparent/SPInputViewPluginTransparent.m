@@ -81,7 +81,6 @@
         NSString *text = [[alertView textFieldAtIndex:0] text];
         
         if (text.length > 0) {
-            __weak typeof(self) weakSelf = self;
             
             NSDictionary *contentDictionary = @{
                                                 kSPCustomizeMessageType:@"yuehoujifen",
@@ -90,16 +89,6 @@
             NSData *data = [NSJSONSerialization dataWithJSONObject:contentDictionary
                                                            options:0
                                                              error:NULL];
-            NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-
-            
-            [[SPKitExample sharedInstance] exampleSendTransparentCommand:content inConversation:self.conversationViewController.conversation completion:^(NSError *error, NSString *messageID) {
-                if (error.code == 0) {
-                    [[SPUtil sharedInstance] showNotificationInViewController:weakSelf.conversationViewController title:@"发送成功" subtitle:@"" type:SPMessageNotificationTypeMessage];
-                } else {
-                    [[SPUtil sharedInstance] showNotificationInViewController:weakSelf.conversationViewController title:@"发送失败" subtitle:@"" type:SPMessageNotificationTypeError];
-                }
-            }];
         } else {
             [[SPUtil sharedInstance] showNotificationInViewController:self.conversationViewController title:@"内容为空" subtitle:@"" type:SPMessageNotificationTypeMessage];
         }
