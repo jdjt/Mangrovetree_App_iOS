@@ -27,6 +27,7 @@
 		A861B4111E9F0FCB002D61F0 /* NSLayoutConstraint+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A861B40B1E9F0FCB002D61F0 /* NSLayoutConstraint+PureLayout.m */; };
 		A8995A251EA5B228001B83DF /* PDKeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = A8995A241EA5B228001B83DF /* PDKeyChain.m */; };
 		A8995A271EA5B4BB001B83DF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8995A261EA5B4BA001B83DF /* Security.framework */; };
+		A8DC4F2E1EA8AB080056C699 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DC4F2D1EA8AB080056C699 /* UIColor+Hex.m */; };
 		A8E4136F1E7692C40096EA62 /* InforView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E4136E1E7692C40096EA62 /* InforView.m */; };
 		A8E413711E7692D70096EA62 /* InforView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8E413701E7692D70096EA62 /* InforView.xib */; };
 		A8F3DBE21EA0AEA80044C0A7 /* BaseAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8F3DBE11EA0AEA80044C0A7 /* BaseAlertViewController.m */; };
@@ -494,6 +495,8 @@
 		A8995A231EA5B228001B83DF /* PDKeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDKeyChain.h; sourceTree = "<group>"; };
 		A8995A241EA5B228001B83DF /* PDKeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDKeyChain.m; sourceTree = "<group>"; };
 		A8995A261EA5B4BA001B83DF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		A8DC4F2C1EA8AB080056C699 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
+		A8DC4F2D1EA8AB080056C699 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
 		A8E4136D1E7692C40096EA62 /* InforView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InforView.h; sourceTree = "<group>"; };
 		A8E4136E1E7692C40096EA62 /* InforView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InforView.m; sourceTree = "<group>"; };
 		A8E413701E7692D70096EA62 /* InforView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InforView.xib; sourceTree = "<group>"; };
@@ -2210,6 +2213,8 @@
 		FC5B1AF31E6E52B70038BCA7 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				A8DC4F2C1EA8AB080056C699 /* UIColor+Hex.h */,
+				A8DC4F2D1EA8AB080056C699 /* UIColor+Hex.m */,
 				FC5B1AED1E6E52B30038BCA7 /* Util.h */,
 				FC5B1AEE1E6E52B30038BCA7 /* Util.m */,
 				C45B62091E7A7C7A00F70D3F /* vacation.json */,
@@ -2834,6 +2839,7 @@
 				FC5B19A11E6E465B0038BCA7 /* main.m in Sources */,
 				FC5B1AA71E6E47BF0038BCA7 /* UIImageView+HighlightedWebCache.m in Sources */,
 				C4C723C41E6FCC2F003523A2 /* IndoorMapModelInfoPopView.m in Sources */,
+				A8DC4F2E1EA8AB080056C699 /* UIColor+Hex.m in Sources */,
 				FC0755461E6EB8E000EAB144 /* DataManager+User.m in Sources */,
 				C4C723F51E6FE66F003523A2 /* UIViewExt.m in Sources */,
 				C4C723AE1E6FCC2F003523A2 /* MapSearchViewController.m in Sources */,

@@ -75,7 +75,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
     
     self.topAlertView.pauseInterval = 0;
     self.topAlertView.bufferSpaceBetweenLabels = 30;
-    self.topAlertView.textColor = [UIColor whiteColor];
+    self.topAlertView.textColor = [UIColor colorWithHexString:@"#484b59"];
     self.topAlertView.font = [UIFont systemFontOfSize:18];
     self.topAlertView.Text = @"点击任意建筑 即可为您提供导航路线 您可以通过手势进行缩放 旋转地图及调整地图倾斜角";
      
@@ -100,8 +100,6 @@ NSString* const FMModelSelected = @"FMModelSelected";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backToMain:) name:NotiBackToMain object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeTopAlert:) name:NotiCloseTopAlert object:nil];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotiChangeStatusBar object:@"1"];
-
     [[MTRequestNetwork defaultManager] registerDelegate:self];
     // 检查是否登录
     BOOL login = [[DataManager defaultInstance] findLocationUserPersonalInformation];
@@ -123,25 +121,6 @@ NSString* const FMModelSelected = @"FMModelSelected";
         }
     }
     [MBProgressHUD hideAllHUDsForView:[AppDelegate sharedDelegate].window animated:YES];
-    if ([Util locationServicesEnabled] == NO)
-    {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提醒" message:@"使用酒店地图定位以及导航功能需要应用允许访问您当前的位置，是否前往设置打开GPS定位" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *action = [UIAlertAction actionWithTitle:@"前往" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
-                                 {
-                                     [[UIApplication sharedApplication]openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-                                 }];
-        
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
-                                       {
-                                           
-                                       }];
-        
-        [alert addAction:cancelAction];
-        [alert addAction:action];
-        [self  presentViewController:alert animated:YES completion:^{
-            
-        }];
-    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -469,6 +448,8 @@ NSString* const FMModelSelected = @"FMModelSelected";
 //    {
         ChatViewController *chat = [[ChatViewController alloc] init];
 //    chat.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+        UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:nil action:nil];
+        self.navigationItem.backBarButtonItem = barButtonItem;
         [self.navigationController pushViewController:chat animated:YES];
 //    }
     

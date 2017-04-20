@@ -178,6 +178,8 @@
         _mInputTextView.keyboardType = UIKeyboardTypeDefault;
         _mInputTextView.returnKeyType = UIReturnKeySend;
         _mInputTextView.textAlignment = NSTextAlignmentLeft;
+        _mInputTextView.text = @"请输入您需要的服务内容";
+        _mInputTextView.textColor = [UIColor darkGrayColor];
     }
     return _mInputTextView;
 }
@@ -188,11 +190,10 @@
         _mSendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _mSendBtn.translatesAutoresizingMaskIntoConstraints = NO;
         [_mSendBtn addTarget:self action:@selector(sendMsgBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        _mSendBtn.backgroundColor = [UIColor redColor];
+        _mSendBtn.backgroundColor = [UIColor colorWithHexString:@"#ed8256"];
+        _mSendBtn.clipsToBounds = YES;
+        _mSendBtn.layer.cornerRadius = 4.0f;
         [_mSendBtn setTitle:@"发送" forState:UIControlStateNormal];
-        [_mSendBtn setImage:[UIImage imageNamed:@"chat_bottom_up_nor@3x"] forState:UIControlStateNormal];
-        [_mSendBtn setImage:[UIImage imageNamed:@"chat_bottom_up_press@3x"] forState:UIControlStateHighlighted];
-        [_mSendBtn  setImage:[UIImage imageNamed:@"chat_bottom_keyboard_nor@3x"] forState:UIControlStateSelected];
         [_mSendBtn autoSetDimensionsToSize:kSizeBtn];
 
     }
@@ -203,8 +204,8 @@
 {
     [self addSubview:self.mSendBtn];
     [self.mSendBtn autoAlignAxis:ALAxisHorizontal toSameAxisOfView:self];
-    [self.mSendBtn autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:0];
-    [self.mSendBtn  autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.mInputTextView withOffset:0];
+    [self.mSendBtn autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:5];
+    [self.mSendBtn  autoPinEdge:ALEdgeLeading toEdge:ALEdgeTrailing ofView:self.mInputTextView withOffset:5];
 }
 
 - (void)addInputView
@@ -220,6 +221,8 @@
 //输入框获取输入焦点后，隐藏其他视图
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
+    _mInputTextView.textColor = [UIColor blackColor];
+    _mInputTextView.text = @"";
 }
 
 //判断用户是否点击了键盘发送按钮
@@ -270,7 +273,11 @@
         [self invalidateIntrinsicContentSize];
     }
 }
-
+- (void)inPutViewresignFirstResponder
+{
+    [self.mInputTextView resignFirstResponder];
+    [self.mInputTextView setText:@""];
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

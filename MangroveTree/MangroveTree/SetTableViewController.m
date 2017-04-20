@@ -8,7 +8,7 @@
 
 #import "SetTableViewController.h"
 #import "FrameViewController.h"
-@interface SetTableViewController ()<MTRequestNetWorkDelegate,UINavigationControllerDelegate>
+@interface SetTableViewController ()<MTRequestNetWorkDelegate>
 @property (strong, nonatomic) NSURLSessionTask *logoutTask;
 @property (weak, nonatomic) IBOutlet UIButton *logoutButton;
 
@@ -18,7 +18,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.delegate = self;
     //设置按钮样式
     [self.logoutButton loginStyle];
 }
@@ -154,31 +153,6 @@
     }
 }
 
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
-{
-    if ([viewController isKindOfClass:[FrameViewController class]])
-    {
-        //进入到主页面时
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotiChangeStatusBar object:@"1"];
-        [self.navigationController.navigationBar setBackgroundImage:[Util createImageWithColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1.0]] forBarMetrics:UIBarMetricsDefault];
-        
-        [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
-        [self.navigationController.navigationBar setTitleTextAttributes:
-         @{NSFontAttributeName:[UIFont systemFontOfSize:17],
-           NSForegroundColorAttributeName:[UIColor blackColor]}];
-    }
-    else
-    {
-        //进入到本页面时
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotiChangeStatusBar object:@"0"];
-        [self.navigationController.navigationBar setBackgroundImage:[Util createImageWithColor:[UIColor colorWithRed:237 / 255.0f green:130 / 255.0f blue:86 / 255.0f alpha:1]] forBarMetrics:UIBarMetricsDefault];
-        
-        [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-        [self.navigationController.navigationBar setTitleTextAttributes:
-         @{NSFontAttributeName:[UIFont systemFontOfSize:17],
-           NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    }
-}
 
 - (void)pushResponseResultsFailing:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg
 {

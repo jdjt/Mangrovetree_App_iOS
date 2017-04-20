@@ -12,14 +12,16 @@
 #import "PureLayout.h"
 #import "ChatHeadView.h"
 #import "NSString+Addtions.h"
+#import "FrameViewController.h"
 
-#define kSizeHead CGSizeMake(kScreenWidth, 64)
+#define kSizeHead CGSizeMake(kScreenWidth, 74)
 
-@interface ChatViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate,SendMsgDelegate>
+@interface ChatViewController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,SendMsgDelegate>
 
 @property (nonatomic, strong) UITableView *chatTabelView;
 @property (nonatomic, strong) ChatInputBar *chatInputView;
 @property (nonatomic, strong) ChatHeadView *headView;
+@property (nonatomic, strong) UIView *textView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 
 @end
@@ -29,20 +31,35 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationController.delegate = self;
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.headView];
-    [self.headView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:64];
+    [self.headView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:74];
     [self.headView autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:0];
     [self.headView autoSetDimensionsToSize:kSizeHead];
-    self.headView.backgroundColor = [UIColor redColor];
     
     // add tableView
     [self.view addSubview:self.chatTabelView];
     self.chatTabelView.backgroundColor = [UIColor colorWithRed:0.922 green:0.925 blue:0.929 alpha:1];
     [self.chatTabelView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.headView withOffset:0];
     [self.chatTabelView autoSetDimension:ALDimensionWidth toSize:kScreenWidth];
+#warning test
+    self.textView = [[UIView alloc] initWithFrame:self.view.bounds];
+    [self.view addSubview:self.textView];
+    self.textView.backgroundColor = [UIColor orangeColor];
+//    self.textView.backgroundColor = [UIColor colorWithRed:0.922 green:0.925 blue:0.929 alpha:1];
+    [self.textView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.headView withOffset:0];
+    [self.textView autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
+    [self.textView autoSetDimension:ALDimensionWidth toSize:kScreenWidth];
     // add inputView
+    self.textView.hidden = YES;
+    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.textView.frame.size.height-2, kScreenWidth, 2)];
+    bottomView.backgroundColor = [UIColor redColor];
+    [self.textView addSubview:bottomView];
+    [bottomView autoPinEdgeToSuperviewEdge:ALEdgeBottom];
+    [bottomView autoSetDimensionsToSize:CGSizeMake(kScreenWidth, 1)];
+    
     [self.view addSubview:self.chatInputView];
     [self.chatInputView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.chatTabelView];
     [self.chatInputView autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
@@ -140,8 +157,13 @@
         [self.dataSource addObject:dic];
         [self.chatTabelView reloadData];
         self.headView.textStatus = TextStatus_waiting;
+//        self.chatTabelView.hidden = YES;
+//        self.textView.hidden = NO;
+//        self.chatInputView.hidden = YES;
+//        [self.chatInputView inPutViewresignFirstResponder];
     }
 }
+
 #warning 暂时舍弃自己手写聊天界面
 /*
 - (void)routerEventWithType:(EventChatCellType)eventType userInfo:(NSDictionary *)userInfo

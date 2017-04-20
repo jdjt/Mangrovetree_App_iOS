@@ -46,7 +46,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotiChangeStatusBar object:@"1"];
 	FMKMapCoord currentMapCoord = [FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;
 	if (currentMapCoord.mapID == kOutdoorMapID) {
 		[FMKLocationServiceManager shareLocationServiceManager].delegate = self.fmView;
@@ -76,7 +75,6 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotiChangeStatusBar object:@"1"];
     self.navigationController.navigationBar.hidden = NO;
 }
 

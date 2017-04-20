@@ -94,7 +94,6 @@
             [self.navigationController setNavigationBarHidden:YES animated:YES];
         }
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotiChangeStatusBar object:@"0"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

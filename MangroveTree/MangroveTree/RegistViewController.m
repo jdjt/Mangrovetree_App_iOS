@@ -324,7 +324,6 @@
     else if (task == self.getMemberInfor)
     {
         [self dismissViewControllerAnimated:YES completion:^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotiChangeStatusBar object:@"1"];
             [[NSNotificationCenter defaultCenter] postNotificationName:NotiLoadFMMap object:nil];
         }];
     }

@@ -9,7 +9,7 @@
 #import "PersonalDataViewController.h"
 #import "FrameViewController.h"
 #import "BaseNavigationController.h"
-@interface PersonalDataViewController ()<UINavigationControllerDelegate>
+@interface PersonalDataViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *phoneNumberLabel;
@@ -21,7 +21,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.delegate = self;
     
 }
 
@@ -80,30 +79,6 @@
     }
 }
 
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
-{
-    if ([viewController isKindOfClass:[FrameViewController class]])
-    {
-//        [[NSNotificationCenter defaultCenter] postNotificationName:NotiShowSettings object:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotiChangeStatusBar object:@"1"];
-        [self.navigationController.navigationBar setBackgroundImage:[Util createImageWithColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1.0]] forBarMetrics:UIBarMetricsDefault];
-        
-        [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
-        [self.navigationController.navigationBar setTitleTextAttributes:
-         @{NSFontAttributeName:[UIFont systemFontOfSize:17],
-           NSForegroundColorAttributeName:[UIColor blackColor]}];
-
-    }else
-    {
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotiChangeStatusBar object:@"0"];
-        [self.navigationController.navigationBar setBackgroundImage:[Util createImageWithColor:[UIColor colorWithRed:237 / 255.0f green:130 / 255.0f blue:86 / 255.0f alpha:1]] forBarMetrics:UIBarMetricsDefault];
-        
-        [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-        [self.navigationController.navigationBar setTitleTextAttributes:
-         @{NSFontAttributeName:[UIFont systemFontOfSize:17],
-           NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    }
-}
 
 //- (void)back:(UIButton *)btn
 //{

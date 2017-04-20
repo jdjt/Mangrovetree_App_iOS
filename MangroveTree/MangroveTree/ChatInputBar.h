@@ -20,4 +20,6 @@
 
 @property (nonatomic, weak) id<SendMsgDelegate>delegate;
 
+- (void)inPutViewresignFirstResponder;
+
 @end
