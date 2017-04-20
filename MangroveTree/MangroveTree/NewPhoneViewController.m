@@ -197,13 +197,6 @@
         userLogin.mobile = _PhoneTextField.text;
         [[DataManager defaultInstance] saveContext];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotiChangeStatusBar object:@"1"];
-        [self.navigationController.navigationBar setBackgroundImage:[Util createImageWithColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1.0]] forBarMetrics:UIBarMetricsDefault];
-        [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
-        [self.navigationController.navigationBar setTitleTextAttributes:
-         @{NSFontAttributeName:[UIFont systemFontOfSize:17],
-           NSForegroundColorAttributeName:[UIColor blackColor]}];
-        [self.navigationController popToRootViewControllerAnimated:YES];
     }
 }
 

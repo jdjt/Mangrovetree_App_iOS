@@ -30,7 +30,6 @@
     [super viewDidLoad];
     [self addWebView];
     
-    [[NSNotificationCenter defaultCenter]postNotificationName:NotiChangeStatusBar object:@"0"];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont boldSystemFontOfSize:17]};
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"backBtn_white"] style:UIBarButtonItemStyleDone target:self action:@selector(backAction)];

@@ -422,7 +422,27 @@ extern NSString* FMModelSelected;
         [MBProgressHUD hideAllHUDsForView:[AppDelegate sharedDelegate].window animated:YES];
     });
     self.mapFinish = YES;
+    if ([Util locationServicesEnabled] == NO)
+    {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提醒" message:@"使用酒店地图定位以及导航功能需要应用允许访问您当前的位置，是否前往设置打开GPS定位" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"前往" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+                                 {
+                                     [[UIApplication sharedApplication]openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+                                 }];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+                                       {
+                                           
+                                       }];
+        
+        [alert addAction:cancelAction];
+        [alert addAction:action];
+        [[self getCurrentController]  presentViewController:alert animated:YES completion:^{
+            
+        }];
+    }
 }
+
 #pragma mark - FMLocationManagerDelegate
 
 - (void)wifiInfoTime:(NSTimeInterval)time wifiStatus:(BOOL)wifiStatus GPSHorizontalAccuracy:(float)GPSHorizontalAccuracy wifiMaxRssi:(int)MaxRssi uMapID:(int)uMapID

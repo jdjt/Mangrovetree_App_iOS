@@ -32,7 +32,6 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSettings:) name:NotiShowSettings object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backToMain:) name:NotiBackToMain object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeStatusBar:) name: NotiChangeStatusBar object:nil];
 
 }
 - (void)viewWillLayoutSubviews
@@ -98,7 +97,6 @@
 // 显示个人中心
 - (void)showSettings:(NSNotification *)notification
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotiChangeStatusBar object:@"0"];
     self.userViewController.user = [[DataManager defaultInstance] findUserLogInByCode:@"1"];
     [self.userViewController.tableView reloadRowsAtIndexPaths: @[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
     self.shadowView.hidden = NO;
@@ -113,7 +111,6 @@
 // 返回home
 - (void)backToMain:(NSNotification *)notification
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotiChangeStatusBar object:@"1"];
     CGRect rect = self.UserView.frame;
     rect.origin.x = -kScreenWidth * 4 / 5 - 10;
     [UIView animateWithDuration:0.2 animations:^{
@@ -126,14 +123,13 @@
 
 - (void)changeStatusBar:(NSNotification *)noti
 {
-    if ([noti.object isEqualToString:@"0"])
-    {
-        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    }
-    else
-    {
-        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-    }
+//    if ([noti.object isEqualToString:@"0"])
+//    {
+//    }
+//    else
+//    {
+//        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+//    }
 }
 
 - (void)didReceiveMemoryWarning {

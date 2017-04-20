@@ -44,6 +44,7 @@
 #import "BaseWebViewController.h"
 #import "BaseNavigationController.h"
 #import "BaseAlertViewController.h"
+#import "UIColor+Hex.h"
 
 #endif
 
