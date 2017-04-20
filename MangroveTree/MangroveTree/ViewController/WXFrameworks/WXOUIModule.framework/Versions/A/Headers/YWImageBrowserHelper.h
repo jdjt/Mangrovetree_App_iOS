@@ -14,6 +14,7 @@
 
 FOUNDATION_EXTERN NSString *const YWImageBrowserHelperActionKeyMessageId;
 FOUNDATION_EXTERN NSString *const YWImageBrowserHelperActionKeyConversationId;
+FOUNDATION_EXTERN NSString *const YWImageBrowserHelperActionKeyImage;
 
 /// 图片加载完成的通知
 FOUNDATION_EXTERN NSString *const YWImageBrowserHelperNotificationImageLoad;
@@ -39,7 +40,7 @@ FOUNDATION_EXTERN NSString *const YWImageBrowserHelperParamKeyEnableSave;
  *  @param aConversation 所属会话
  *  @param aNavigationController 用于Push的导航栏控制器
  *  @param aNeedDefaultSaveAction 是否需要默认的保存按钮
- *  @param aAdditionalActions 更多选项，数组中每一个对象都必须是YWMoreActionItem对象，用户点击回调的UserInfo中使用 YWImageBrowserHelperActionKeyMessage 作为Key，传递当前操作的id<IYWMessage>对象
+ *  @param aAdditionalActions 更多选项，数组中每一个对象都必须是YWMoreActionItem对象，用户点击回调的UserInfo中使用 YWImageBrowserHelperActionKeyMessageId 传递 messageId; 使用 YWImageBrowserHelperActionKeyConversationId 传递 conversationId; 使用 YWImageBrowserHelperActionKeyImage 传递 UIImage *对象
  */
 + (void)previewImageMessage:(id<IYWMessage>)aMessage
                conversation:(YWConversation *)aConversation
@@ -53,7 +54,7 @@ FOUNDATION_EXTERN NSString *const YWImageBrowserHelperParamKeyEnableSave;
  *  @param aConversation 所属会话
  *  @param aNavigationController 用于Push的导航栏控制器
  *  @param aNeedDefaultSaveAction 是否需要默认的保存按钮
- *  @param aAdditionalActions 更多选项，数组中每一个对象都必须是YWMoreActionItem对象，用户点击回调的UserInfo中使用 YWImageBrowserHelperActionKeyMessage 作为Key，传递当前操作的id<IYWMessage>对象
+ *  @param aAdditionalActions 更多选项，数组中每一个对象都必须是YWMoreActionItem对象，用户点击回调的UserInfo中使用 YWImageBrowserHelperActionKeyMessageId 传递 messageId; 使用 YWImageBrowserHelperActionKeyConversationId 传递 conversationId; 使用 YWImageBrowserHelperActionKeyImage 传递 UIImage *对象
  *  @param aIMKit 用于多账号同时登录的情况
  */
 + (void)previewImageMessage:(id<IYWMessage>)aMessage
@@ -69,7 +70,7 @@ FOUNDATION_EXTERN NSString *const YWImageBrowserHelperParamKeyEnableSave;
  *  @param aNavigationController 用于Push的导航栏控制器
  *  @param aFromView 可用于呈现动画
  *  @param aNeedDefaultSaveAction 是否需要默认的保存按钮
- *  @param aAdditionalActions 更多选项，数组中每一个对象都必须是YWMoreActionItem对象，用户点击回调的UserInfo中使用 YWImageBrowserHelperActionKeyMessage 作为Key，传递当前操作的id<IYWMessage>对象
+ *  @param aAdditionalActions 更多选项，数组中每一个对象都必须是YWMoreActionItem对象，用户点击回调的UserInfo中使用 YWImageBrowserHelperActionKeyMessageId 传递 messageId; 使用 YWImageBrowserHelperActionKeyConversationId 传递 conversationId; 使用 YWImageBrowserHelperActionKeyImage 传递 UIImage *对象
  *  @param aIMKit 用于多账号同时登录的情况
  */
 + (void)previewImageMessage:(id<IYWMessage>)aMessage

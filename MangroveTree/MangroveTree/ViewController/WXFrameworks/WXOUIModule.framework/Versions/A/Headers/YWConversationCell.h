@@ -11,7 +11,6 @@
 typedef NS_ENUM(NSInteger, YWConversationCellBadgeType) {
     YWConversationCellBadgeTypeText,        // 显示未读数的具体文本
     YWConversationCellBadgeTypeRedDot,      // 显示为红点
-    YWConversationCellBadgeTypeAutomatic    // 根据会话的消息接收状态自动选择类型，接收并提醒显示具体文本，其他显示为红点
 };
 
 @interface YWConversationCell : UITableViewCell
@@ -37,10 +36,8 @@ typedef NS_ENUM(NSInteger, YWConversationCellBadgeType) {
  */
 @property (nonatomic, assign) UIEdgeInsets avatarImageViewMargin UI_APPEARANCE_SELECTOR;
 
-/**
- *  未读消息的提示类型，默认值为 YWConversationCellBadgeTypeAutomatic
- */
-@property (nonatomic, assign) YWConversationCellBadgeType badgeType UI_APPEARANCE_SELECTOR;
+/// 设置未读数以及显示类型
+- (void)setBadgeValue:(NSString *)aBadgeValue badgeType:(YWConversationCellBadgeType)aBadgeType;
 
 /**
  *  未读数视图的 frame.origin ，默认值 (55, 13)
@@ -67,9 +64,5 @@ typedef NS_ENUM(NSInteger, YWConversationCellBadgeType) {
  */
 @property (nonatomic, assign) UIEdgeInsets bottomSeparatorInset UI_APPEARANCE_SELECTOR;
 
-/**
- *  为 YES 时永远隐藏消息接收状态图标；为 NO 时，根据需要显示“接收不提醒”“屏蔽”图标，默认值为 NO
- */
-@property (nonatomic, assign) BOOL shouldNerverShowMessageReceiveStatusIcon UI_APPEARANCE_SELECTOR;
 
 @end

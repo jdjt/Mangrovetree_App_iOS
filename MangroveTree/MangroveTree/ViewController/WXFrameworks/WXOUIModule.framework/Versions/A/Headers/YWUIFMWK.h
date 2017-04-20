@@ -58,3 +58,6 @@
 #import <WXOUIModule/YWContactListControllerForAlphabetic.h>
 #import <WXOUIModule/YWContactListControllerForSearch.h>
 
+///选择好友
+#import <WXOUIModule/YWPickFriendViewController.h>
+#import <WXOUIModule/LSSwitch.h>

@@ -15,6 +15,8 @@
 /// 选中表情回调
 typedef void(^YWInputViewPluginEmoticonPickBlock)(id<YWInputViewPluginProtocol> plugin, YWEmoticon *emoticon, YWEmoticonType type);
 
+typedef void(^YWInputViewPluginEmoticonPickBlockV2)(id<YWInputViewPluginProtocol> plugin, id<IYWEmoticon> emoticon);
+
 /// 点击发送回调
 typedef void(^YWInputViewPluginEmoticonSendBlock)(id<YWInputViewPluginProtocol> plugin, NSString *sendText);
 
@@ -30,6 +32,13 @@ extern NSString *kPluginIndentityEmoticonPicker;
 /// @param sendBlk 发送按钮按下的回调
 - (instancetype)initWithPickerOverBlock:(YWInputViewPluginEmoticonPickBlock)pickBlk
                               sendBlock:(YWInputViewPluginEmoticonSendBlock)sendBlk;
+
+/// @brief 初始化表情选择插件
+/// @param pickBlk 选中某个表情的回调
+/// @param sendBlk 发送按钮按下的回调
+- (instancetype)initWithPickerOverBlockV2:(YWInputViewPluginEmoticonPickBlockV2)pickBlk
+                                sendBlock:(YWInputViewPluginEmoticonSendBlock)sendBlk;
+
 
 
 /**
@@ -87,5 +96,8 @@ extern NSString *kPluginIndentityEmoticonPicker;
 @property (nonatomic, strong) UIColor *emoticonGroupSeparatorColor;
 /// 外部设置表情发送按钮。IMSDK会添加响应事件及修改frame
 @property (nonatomic, strong) UIButton *rightMinorButtonForDefaultGroup;
+
+/// 只有一个分组时隐藏分组icon
+@property (nonatomic, assign) BOOL hideIconWhenOneGroup;
 
 @end

@@ -8,34 +8,17 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "IYWEmoticon.h"
 
 @class GifImage;
 
-@interface YWEmoticon : NSObject
+@interface YWEmoticon : NSObject<IYWEmoticon>
 
-@property (nonatomic, strong) NSString * emoticon;
-@property (nonatomic, strong) NSString * fileName;
-@property (nonatomic, strong) NSString * comments;
+@property (nonatomic, copy) NSString *emoticon;
+@property (nonatomic, copy) NSString *fileName;
+@property (nonatomic, copy) NSString *comments;
 
 @end
-
-
-typedef enum YWEmoticon_type
-{
-    /// 静态表情
-    YWEmoticonTypeStaticImage = 0,
-
-    /// Gif表情
-    YWEmoticonTypeGifAnimateImage,
-    
-    /// 目前暂不支持以下类型
-    /// 系统表情
-    YWEmoticonTypeSymblEmoticon,
-    /// 自定义表情
-    YWEmoticonTyperUserCustom,
-    
-    YWEmoticonTypeCount
-}YWEmoticonType;
 
 @interface YWEmoticonFactory : NSObject
 + (YWEmoticonFactory *)sharedInstance;

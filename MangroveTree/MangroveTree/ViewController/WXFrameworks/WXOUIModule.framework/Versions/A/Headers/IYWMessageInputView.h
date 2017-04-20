@@ -74,15 +74,21 @@
 
 
 /// 高度变化相关
+
+/**
+ *  输入栏与底部区域整体高度变更
+ */
+- (void)messageInputView:(UIView<IYWMessageInputView> *)inputView heightDidChange:(CGFloat)height;
+
 /**
  *  输入栏高度发生变更
  */
-- (void)messageInputView:(UIView<IYWMessageInputView> *)inputView heightOfBarDidChange:(CGFloat)height;
+- (void)messageInputView:(UIView<IYWMessageInputView> *)inputView heightOfBarDidChange:(CGFloat)height __attribute__((deprecated("请使用 -messageInputView:heightDidChange:")));
 
 /**
  *  输入栏底部区域高度发生变更，如键盘高度或插件面板高度发生变更
  */
-- (void)messageInputView:(UIView<IYWMessageInputView> *)inputView heightOfKeyboardDidChange:(CGFloat)height;
+- (void)messageInputView:(UIView<IYWMessageInputView> *)inputView heightOfKeyboardDidChange:(CGFloat)height __attribute__((deprecated("请使用 -messageInputView:heightDidChange:")));
 
 /**
  *  是否发送文本消息，如果返回NO，则不会发送

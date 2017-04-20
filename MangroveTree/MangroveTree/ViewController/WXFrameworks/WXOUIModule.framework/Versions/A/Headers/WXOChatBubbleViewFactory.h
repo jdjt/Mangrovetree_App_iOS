@@ -12,4 +12,6 @@
 
 @interface WXOChatBubbleViewFactory : NSObject
 + (YWBaseBubbleChatView *)bubbleViewWithViewModel:(YWBaseBubbleViewModel *)viewModel;
++ (YWBaseBubbleChatView *)cachedBubbleViewForCalculationWithViewModel:(YWBaseBubbleViewModel *)viewModel;
+
 @end

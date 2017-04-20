@@ -39,6 +39,8 @@ typedef void (^WXOTextBubbleDoubleClickBlock) (NSString *content, BOOL leftAlign
 @property (nonatomic, copy) WXOTextBubbleDoubleClickBlock doublClickBlock;
 - (void)setDoublClickBlock:(WXOTextBubbleDoubleClickBlock)doublClickBlock;
 
+@property (nonatomic, assign) BOOL shouldHighlightAtMember;
+
 #pragma mark - 信息面板
 /// 为宝贝、店铺等特定链接插入信息面板
 @property (nonatomic, weak) id<WXOTextBubbleVMDelegate> delegate;

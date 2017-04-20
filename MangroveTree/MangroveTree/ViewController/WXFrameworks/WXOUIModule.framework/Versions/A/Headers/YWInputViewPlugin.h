@@ -50,6 +50,9 @@ typedef NS_ENUM(NSUInteger, YWInputViewPluginPosition) {
 // 插件位置，默认为YWInputViewPluginPositionMorePanel
 @property (nonatomic, assign) YWInputViewPluginPosition pluginPosition;
 
+// 插件图标的 URL，会首先使用 pluginIconImage 属性提供的图标，然后异步加载该 URL 对应的图标
+@property (nonatomic, strong) NSString *pluginIconImageURL;
+
 // 是否在面板关闭时popPluginContentView，默认是YES
 - (BOOL)shouldPopPluginContentViewWhenMorePanelClose;
 
@@ -79,10 +82,10 @@ typedef NS_ENUM(NSUInteger, YWInputViewPluginPosition) {
 @property (nonatomic, readonly) YWInputViewPluginType pluginType;
 
 // 插件图标
-@property (nonatomic, readonly, strong) UIImage  *pluginIconImage;
+@property (nonatomic, strong) UIImage  *pluginIconImage;
 
 // 插件名称
-@property (nonatomic, readonly, copy) NSString *pluginName;
+@property (nonatomic, copy) NSString *pluginName;
 
 // 插件对应的view，会被加载到inputView上
 @property (nonatomic, readonly, strong) UIView   *pluginContentView;
@@ -91,6 +94,10 @@ typedef NS_ENUM(NSUInteger, YWInputViewPluginPosition) {
 
 // 插件被选中运行
 - (void)pluginDidClicked;
+
+@optional
+// 是否禁用
+@property (nonatomic, assign) BOOL disabled;
 
 @end
 

@@ -23,17 +23,23 @@ typedef void(^YWMoreActionBlock)(NSDictionary *aUserInfo);
 /**
  *  Item的显示名称
  */
-@property (nonatomic, copy, readonly) NSString *actionName;
+@property (nonatomic, copy) NSString *actionName;
+
+/**
+ *  Item的图标
+ */
+@property (nonatomic, copy) UIImage *actionIcon;
+@property (nonatomic, copy) UIImage *actionIconDisabled;
 
 /**
  *  Item被点击后的回调
  */
-@property (nonatomic, copy, readonly) YWMoreActionBlock actionBlock;
+@property (nonatomic, copy) YWMoreActionBlock actionBlock;
 
 /**
- *  是否合法：actionName和actionBlock非空
+ *  用以识别Item，可能为nil。某些使用场景下给出
  */
-- (BOOL)isValid;
+@property (nonatomic, copy) NSString *actionIdentify;
 
 @end
 

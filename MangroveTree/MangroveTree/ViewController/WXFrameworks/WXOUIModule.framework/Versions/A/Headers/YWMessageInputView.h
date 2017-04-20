@@ -11,6 +11,8 @@
 #import "IYWMessageInputView.h"
 #import "YWInputViewPlugin.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class YWIMKit, YWRecordKit;
 
 /**
@@ -26,6 +28,28 @@ FOUNDATION_EXTERN NSString *const YWMorePanelHeightWillChangeNotificationKeyAnim
 FOUNDATION_EXTERN NSString *const YWMorePanelHeightWillChangeNotificationKeyDuration;
 /// 菜单、键盘模式切换
 FOUNDATION_EXTERN NSString *const YWInputViewSwitchMenuWillChangeNotification;
+
+/**
+ *  状态
+ */
+typedef NS_ENUM(NSUInteger, YWMessageInputViewInputStatus) {
+    /**
+     *  处于非输入状态
+     */
+    YWMessageInputViewInputStatusNone,
+    /**
+     *  输入文本的状态
+     */
+    YWMessageInputViewInputStatusText,
+    /**
+     *  输入语音的状态
+     */
+    YWMessageInputViewInputStatusVoice,
+    /**
+     *  打开更多面板的状态
+     */
+    YWMessageInputViewInputStatusMorePanel
+};
 
 @interface YWMessageInputView : UIView
 <IYWMessageInputView,
@@ -90,6 +114,12 @@ YWInputViewPluginDelegate>
  */
 - (NSArray *)allPluginList;
 
+
+/**
+ * 设置插件禁用状态  
+ */
+- (void)setPlugin:(id<YWInputViewPluginProtocol>)plugin disabled:(BOOL)disabled;
+
 /**
  *  刷新
  */
@@ -110,4 +140,33 @@ YWInputViewPluginDelegate>
 
 - (void)switchMenuAnimated:(BOOL)animated;//切换菜单和输入框
 
+ /**
+ *   输入栏高度
+ */
+@property (nonatomic, readonly, assign) CGFloat barHeight;
+
+/**
+ *  输入栏底部区域高度，如键盘高度或插件面板高度
+ */
+@property (nonatomic, readonly, assign) CGFloat keyboardHeight; 
+
+/**
+ *  设置输入栏底部区域高度
+ */
+- (void)updateLayoutWithKeyboardHeight:(CGFloat)height duration:(CGFloat)duration animationOptions:(UIViewAnimationOptions)animationOption;
+
+@property (nonatomic, assign) YWMessageInputViewInputStatus inputStatus;
+
+/**
+ *  textView 的背景视图
+ */
+@property (nonatomic, readonly, strong) UIImageView *textViewBackgroudView;
+/**
+ *  textView 相对 textViewBackgroudView 的 margins，仅 left、right 有效
+ */
+@property (nonatomic, assign) UIEdgeInsets textViewMargins;
+
 @end
+
+NS_ASSUME_NONNULL_END
+

@@ -44,6 +44,11 @@
 /// h5页面需要免登
 #define YWActionDefaultAutoLoginForH5               @"wangwang://h5/autologin"
 
+#define YWActionDefaultICloudPhoto                  @"wangx://iCloud/photo"
+#define YWActionDefaultICloudIdentifier             @"iCloudIdentifier"
+#define YWActionDefaultICloudNeedOrigin             @"iCloudNeedOrigin"
+#define YWActionDefaultICloudImage                  @"iCloudImage"
+
 
 @interface YWPerson (Action)
 

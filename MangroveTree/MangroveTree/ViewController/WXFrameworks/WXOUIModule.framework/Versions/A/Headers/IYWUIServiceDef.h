@@ -13,6 +13,7 @@
 @class YWPerson;
 @class YWTribe;
 @class YWConversation;
+@class YWCustomConversation;
 
 @protocol IYWMessage;
 @class YWConversation;
@@ -81,14 +82,19 @@ typedef void (^YWFetchProfileForEServiceBlock) (YWPerson *aPerson, YWProfileProg
  *  @param aDisplayName 显示名称
  *  @param aAvatarImage 头像
  */
-typedef void(^YWFetchCustomProfileCompletionBlock)(BOOL aIsSuccess, YWConversation *conversation, NSString *aDisplayName, UIImage *aAvatarImage);
+typedef void(^YWFetchCustomProfileCompletionBlock)(BOOL aIsSuccess, YWCustomConversation *conversation, NSString *aDisplayName, UIImage *aAvatarImage);
 
 /**
  *  自定义会话，当IM需要显示profile时，会调用这个block
  *  @param conversation 会话对象
  *  @param aCompletionBlock 获取profile完成后，调用这个block通知IM
  */
-typedef void(^YWFetchCustomProfileBlock)(YWConversation *conversation, YWFetchCustomProfileCompletionBlock aCompletionBlock);
+typedef void(^YWFetchCustomProfileBlock)(YWCustomConversation *conversation, YWFetchCustomProfileCompletionBlock aCompletionBlock);
+
+/**
+ *  当IM需要显示升级按钮时，点击按钮会调用这个block
+ */
+typedef void(^YWAppUpdateBlock)();
 
 #pragma mark - Make Navigation Back Button
 
@@ -202,20 +208,6 @@ typedef NS_ENUM(NSInteger, YWMessageNotificationType) {
  */
 typedef void(^YWShowNotificationBlock)(UIViewController *aViewController, NSString *aTitle, NSString *aSubtitle, YWMessageNotificationType aType);
 
-
-
-#pragma mark - 其他定义 三方开发者不需要关心
-
-/**
- *  淘宝h5页面需要免登的回调block
- */
-typedef void(^YWAutoLoginForH5Block)();
-
-/**
- *  淘宝账号点击修改漫游密码的回调
- */
-typedef void(^YWWantChangeRoamingPasswordBlock)(NSString *aConversationId);
-
 /**
  *  页面需要透出的通用事件，例如viewDidLoad，viewWillAppear，viewDidAppear等
  */
@@ -246,6 +238,45 @@ typedef void(^YWViewControllerWillDeallocBlock) (void);
 - (void)setViewControllerWillDeallocBlock:(YWViewControllerWillDeallocBlock)viewControllerWillDeallocBlock;
 
 @end
+
+#pragma mark - UI自定义的标准接口
+
+/**
+ *  用于某些支持异步返回结果的场景下，异步告知自定义结果
+ */
+typedef void(^YWUICustomizeAsyncBlock)(NSDictionary *aResult);
+
+/// 如果支持异步返回结果，使用这个key传递block，不包含此key则表示不支持
+FOUNDATION_EXTERN NSString *const YWUICustomizeUserInfoKeyAsyncBlock;
+
+/**
+ *  云旺UI层各个界面通用的自定义回调协议
+ */
+@protocol YWUICustomizeProtocol <NSObject>
+
+/**
+ *  这个回调定义了云旺UI界面自定义的统一机制
+ *  例如，你可以实现会话列表的这个delegate，当会话列表上各个自定义的点需要数据时，会通过这个回调问你实现的delegate索要数据。
+ *  @return 你需要返回该自定义点所要求返回的数据，具体的key由各个自定义点定义
+ *  @param  aTypeString 自定义点的type定义。详见各个页面的定义
+ *  @param  aUserInfo   传递给你的上下文信息，包含的key由各个自定义点定义。默认包含：YWUICustomizeUserInfoKeySupportAsyncBlock
+ */
+- (NSDictionary *)ywUICustomizeWithTypeString:(NSString *)aTypeString userInfo:(NSDictionary *)aUserInfo;
+
+@end
+
+#pragma mark - 其他定义 三方开发者不需要关心
+
+/**
+ *  淘宝h5页面需要免登的回调block
+ */
+typedef void(^YWAutoLoginForH5Block)();
+
+/**
+ *  淘宝账号点击修改漫游密码的回调
+ */
+typedef void(^YWWantChangeRoamingPasswordBlock)(NSString *aConversationId);
+
 
 @interface IYWUIServiceDef : NSObject
 

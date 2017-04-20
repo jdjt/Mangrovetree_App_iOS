@@ -20,10 +20,13 @@ typedef NS_ENUM(NSUInteger, YWPhotoPickerType) {
 
 typedef void(^YWPhotoPickerResultBlock)(NSDictionary *aUserInfo);
 
-/// 所选中的图片数据组成的NSArray
-FOUNDATION_EXTERN NSString *const YWPhotoPickerResultKeySelectedImageDatasArray;
+/// 所选中的图片数据组成的NSArray<NSData *> *
+FOUNDATION_EXTERN NSString *const YWPhotoPickerResultKeySelectedImageDataArray;
 
-/// 用户勾选了发送原图
+/// 所选中的图片数据组成的NSArray<id<YWIBAsset>> *
+FOUNDATION_EXTERN NSString *const YWPhotoPickerResultKeySelectedAssetsArray;
+
+/// 用户勾选了发送原图，类型为由BOOL构建的：NSNumber *
 FOUNDATION_EXTERN NSString *const YWPhotoPickerResultKeyOriginalChecked;
 
 
@@ -37,11 +40,11 @@ FOUNDATION_EXTERN NSString *const YWPhotoPickerResultKeyOriginalChecked;
 - (instancetype)initWithYWIMKit:(YWIMKit *)aIMKit;
 
 @property (nonatomic, assign) YWPhotoPickerType photoPickerType;
-
 @property (nonatomic, copy) YWPhotoPickerResultBlock photoPickerResultBlock;
+@property (nonatomic, assign) NSUInteger maxCount2Pick; // 照片选择张数上限，多选时生效。默认六张
 
 - (void)setPhotoPickerResultBlock:(YWPhotoPickerResultBlock)photoPickerResultBlock;
-
 - (void)presentFromController:(UIViewController *)aController;
+- (void)presentFromController:(UIViewController *)aController completion:(void (^)(void))completion;
 
 @end

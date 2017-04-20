@@ -146,6 +146,11 @@
 - (void)setFetchProfileForEServiceBlock:(YWFetchProfileForEServiceBlock)fetchProfileForEServiceBlock;
 
 /**
+ *  当IM需要显示升级按钮时，点击按钮会调用这个block
+ */
+@property (nonatomic, copy) YWAppUpdateBlock appUpdateBlock;
+- (void)setAppUpdateBlock:(YWAppUpdateBlock)appUpdateBlock;
+/**
  *  缓存失效时长，单位是秒。
  */
 @property (nonatomic, assign) NSTimeInterval profileCacheExpireTime;
@@ -243,6 +248,11 @@
 @property (nonatomic, copy) YWOpenProfileBlock openProfileBlock;
 - (void)setOpenProfileBlock:(YWOpenProfileBlock)openProfileBlock;
 
+
+/**
+ *  打开某个会话的回调 block
+ */
+@property (nonatomic, copy) void (^openConversationBlock)(YWConversation *conversation, UIViewController *fromViewController);
 
 /**
  *  当IMUIKit需要预览地理位置时，会调用这个block

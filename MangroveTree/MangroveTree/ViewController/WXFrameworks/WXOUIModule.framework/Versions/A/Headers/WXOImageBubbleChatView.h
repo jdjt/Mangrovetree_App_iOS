@@ -17,5 +17,7 @@
 
 @property (nonatomic, strong) UIImageView *msgImageView;
 @property (nonatomic, assign) BOOL showMask;
+@property (nonatomic, assign) BOOL iCloudLoadingShouldShow;
+@property (nonatomic, copy) NSString * assetIdentifier;
 
 @end

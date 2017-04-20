@@ -13,9 +13,12 @@
 #import "YWMessageInputView.h"
 
 @class YWConversation;
-@protocol IYWMessage;
+@protocol IYWMessage, YWIBAsset;
 @class YWIMCore;
 @class YWIMKit;
+@class YWMoreActionItem;
+@class YWMessageBodyCustomizeInternal;
+
 
 /**
  *  自定义长按菜单项使用这个Key传递Controller
@@ -33,10 +36,41 @@ FOUNDATION_EXTERN NSString *const YWConversationMessageCustomMenuItemUserInfoKey
  */
 typedef NSArray *(^YWConversationMessageCustomMenuItemsBlock)(id<IYWMessage> aMessage);
 
+/**
+ *  某一个消息长按后弹出的菜单
+ *  @return 返回的NSArray中包含的必须是 YWMoreActionItem 对象
+ *  @note 当菜单项被点击时，会调用该菜单项的actionBlock
+ */
+typedef NSArray *(^YWConversationMessageCustomMenuItemsBlockV2)(id<IYWMessage> aMessage, NSArray *defaultItems);
+
+FOUNDATION_EXTERN NSString *const YWConversationViewActionIdentifyDelete; /// 删除
+
+
+#pragma mark - UI自定义点的定义
+
+/// * 自定义消息 Cell 的头像和显示名
+/// * UserInfo中使用YWConvViewCustomCommonKeyMessage传递消息
+/// * UserInfo中使用YWConvViewCustomCommonKeyConversationViewController传递controller
+/// * UserInfo中使用YWUICustomizeUserInfoKeyAsyncBlock传递异步block，支持异步回调
+FOUNDATION_EXTERN NSString *const YWConvViewCustomTypeCell;
+
+/// 传递自定义的头像，类型为 UIImage *
+FOUNDATION_EXTERN NSString *const YWConvViewCustomTypeCellAvatar;
+/// 传递自定义的显示名，类型为 NSString *
+FOUNDATION_EXTERN NSString *const YWConvViewCustomTypeCellDisplayName;
+/// 传递是否需要在聊天气泡旁边显示时间，类型为 BOOL 生成的 NSNumber *
+FOUNDATION_EXTERN NSString *const YWConvViewCustomTypeCellShowTimeBesideBubbleView;
+
+/// 在UI自定义回调的UserInfo中，一般使用这个Key传递消息对象，类型为id<IYWMessage> *
+FOUNDATION_EXTERN NSString *const YWConvViewCustomCommonKeyMessage;
+/// 在UI自定义回调的UserInfo中，默认使用这个Key传递会话列表Controller，类型为YWConversationViewController *
+FOUNDATION_EXTERN NSString *const YWConvViewCustomCommonKeyConversationViewController;
+
 
 @interface YWConversationViewController : UIViewController
 <UITableViewDataSource, UITableViewDelegate,
-YWViewControllerEventProtocol>
+YWViewControllerEventProtocol,
+YWMessageInputViewDelegate>
 
 
 /**
@@ -56,6 +90,13 @@ YWViewControllerEventProtocol>
  */
 @property (nonatomic, strong, readonly) YWConversation *conversation;
 
+/**
+ *  加载更多消息
+ *
+ *  @param moreCount 期望加载更多消息的额外条数
+ */
+- (void)loadMoreMessages:(NSUInteger)moreCount;
+
 #pragma mark - for CustomUI
 
 /// 输入框
@@ -69,6 +110,7 @@ YWViewControllerEventProtocol>
 
 /// 顶部自定义View
 @property (nonatomic, strong) UIView *customTopView;
+
 
 /**
  * 设置顶部自定义View及其显示和隐藏View
@@ -87,12 +129,22 @@ YWViewControllerEventProtocol>
  *  @return 返回的NSArray中包含的必须是 YWMoreActionItem 对象
  */
 @property (nonatomic, copy, readwrite) YWConversationMessageCustomMenuItemsBlock messageCustomMenuItemsBlock;
+@property (nonatomic, copy, readwrite) YWConversationMessageCustomMenuItemsBlockV2 messageCustomMenuItemsBlockV2;
+
+
+/**
+ *  合并聊天气泡点击后，sdk会构建一个专门用于展示合并聊天消息的页面controller，通过这个block传递controller和点击事件
+ *  @return 合并聊天详情会话vc对象
+ */
+typedef void(^YWCombineChatBubbleClickedBlock)(YWConversationViewController *);
+@property (nonatomic, copy, readwrite) YWCombineChatBubbleClickedBlock combineChatBubbleClickedBlock;
+
+
 /**
  *  某一个消息长按后弹出的菜单
  *  @return 返回的NSArray中包含的必须是 YWMoreActionItem 对象
  */
 - (void)setMessageCustomMenuItemsBlock:(YWConversationMessageCustomMenuItemsBlock)messageCustomMenuItemsBlock;
-
 
 #pragma mark - 消息发送
 /**
@@ -108,6 +160,14 @@ YWViewControllerEventProtocol>
  * @param image, 要发送的图片
  */
 - (void)sendImageMessage:(UIImage *)image;
+
+- (void)sendImageAsset:(id<YWIBAsset>)asset withOriginData:(BOOL)origin;
+- (void)sendImageAsset:(id<YWIBAsset>)asset withOriginData:(BOOL)origin controlParameters:(NSDictionary *)controlParameters;
+
+- (void)sendImageMessage:(UIImage *)image
+       controlParameters:(NSDictionary *)controlParameters
+           progressBlock:(YWMessageSendingProgressBlock)aProgressBlock
+         completionBlock:(YWMessageSendingCompletionBlock)aCompletionBlock;
 
 /**
  *  图片发送 包含图片上传交互
@@ -201,9 +261,79 @@ YWViewControllerEventProtocol>
 @property (nonatomic, assign) BOOL disablePersonTribeNick;
 
 /**
+ *  控制消息是否显示发送者的昵称
+ */
+@property (nonatomic, copy) BOOL (^shouldShowNickForMessageBlock)(id<IYWMessage> message);
+
+/**
  *  禁用聊天窗口中显示接收方消息已读未读标记，默认为NO
  */
 @property (nonatomic, assign) BOOL disableReceiverReadFlag;
+
+/// 设置cell头像点击回调
+@property (nonatomic, copy) void (^avatarPressedBlock)(id<IYWMessage> message, YWConversationViewController *viewController);
+
+/**
+ *  UI自定义的回调对象
+ *  支持自定义的点统一在底部定义
+ */
+@property (nonatomic, weak, readwrite) id<YWUICustomizeProtocol> customizeDelegate;
+
+@end
+
+@interface YWConversationViewController(TribeAtFeature)
+
+@property (nonatomic, readonly, strong) NSArray<YWPerson *>* selectedAtMembers;
+
+- (void)setSelectedAtMembers:(NSArray<YWPerson *> *)selectedAtMembers atAll:(BOOL)atAll;
+
+@end
+
+
+
+#pragma mark - 菜单项相关工具函数
+
+
+@interface YWConversationViewController ()
+
+/// SDK提供的消息长按菜单项：时间显示控制菜单
+- (YWMoreActionItem *)fetchLongPressItemForTimeControl;
+/// 时间显示菜单项
+@property (nonatomic, assign) BOOL shouldShowTimeBesideBubbleView;
+
+/// SDK提供的消息长按菜单项：“更多”菜单，点击后会进入多选模式(编辑模式)
+- (YWMoreActionItem *)fetchLongPressItemForEditMode;
+
+
+
+/// 开启或者关闭消息TableView多选模式
+@property (nonatomic, assign) BOOL editingFlag;
+
+
+/**
+ *  用于获取消息多选模式下的菜单项
+ *  @brief 当某个菜单项被选中时，SDK会通过 YWMoreActionBlock 中的 aUserInfo 参数，传递相关信息，具体的key值定义见下面
+ *  @return 你需要返回正确构建的菜单项
+ */
+typedef NSArray<YWMoreActionItem *> *(^YWCVCEditModeActionsBlock)(YWConversationViewController *aFromController);
+/// 如果进入多选模式，则SDK会调用这个block来获取多选模式的底部菜单
+@property (nonatomic, copy) YWCVCEditModeActionsBlock editModeActionsBlock;
+
+/// 被选中的消息
+FOUNDATION_EXTERN NSString *const YWCVCEditModeActionsUserInfoKeySelectedMessages;
+
+/// SDK提供的多选模式底部菜单:"删除"菜单, 点击后会删除选中的消息
+- (YWMoreActionItem *)fetchEditModeItemForDelete;
+/// SDK提供的多选模式底部菜单:"转发"菜单, 点击后会显示进入转发逻辑
+- (YWMoreActionItem *)fetchEditModeItemForForward;
+
+/// 多选消息后，点击合并转发后的回调
+typedef void(^YWCVCEditModeMergeForwardBlock)(YWMessageBodyCustomizeInternal *aMergedBody, YWConversationViewController *aFromController);
+@property (nonatomic, copy) YWCVCEditModeMergeForwardBlock mergeForwardBlock;
+
+/// 多选消息后，点击逐条转发后的回调
+typedef void(^YWCVCEditModeRespectivelyForwardBlock)(NSArray< id<IYWMessage> > *aMessages, YWConversationViewController *aFromController);
+@property (nonatomic, copy) YWCVCEditModeRespectivelyForwardBlock respectivelyForwardBlock;
 
 @end
 

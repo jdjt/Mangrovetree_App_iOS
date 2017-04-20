@@ -19,6 +19,8 @@
     UIImage *_normalBackgroundImage;
     UIImage *_highLightBackgroundImage;
     
+    NSString *_urlForNormalBackgroundImage;
+    
     UIEdgeInsets _contentEdgeInsets;
     BOOL _overlayContent;
 }
@@ -61,6 +63,9 @@ typedef enum : NSUInteger {
 
 /// 自定义气泡背景
 @property (nonatomic, strong) UIImage *normalBackgroundImage;
+
+/// 自定义气泡背景的图片url
+@property (nonatomic, copy) NSString *urlForNormalBackgroundImage;
 
 /// 自定义高亮气泡背景
 @property (nonatomic, strong) UIImage *highLightBackgroundImage;

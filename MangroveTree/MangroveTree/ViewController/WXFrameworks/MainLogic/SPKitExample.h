@@ -11,15 +11,8 @@
 #import <WXOpenIMSDKFMWK/YWFMWK.h>
 #import <WXOUIModule/YWUIFMWK.h>
 
-#define SPTribeSystemConversationID [NSString stringWithFormat:@"%@SPTribeSystem", kYWCustomConversationIdPrefix]
-
-/// 自定义会话的id
-FOUNDATION_EXTERN NSString *const kSPCustomConversationIdForPortal;
-FOUNDATION_EXTERN NSString *const kSPCustomConversationIdForFAQ;
-
 /// 定义用于自定义消息内部类型的key
 #define kSPCustomizeMessageType @"customizeMessageType"
-
 
 @class YWIMKit;
 
@@ -56,10 +49,10 @@ FOUNDATION_EXTERN NSString *const kSPCustomConversationIdForFAQ;
  *  入口胶水函数：登录入口函数
  *
  *  用户在应用的服务器登录成功之后，向云旺服务器登录之前调用
- *  @param ywLoginId 用来登录云旺IMSDK的id
- *  @param passWord 用来登录云旺IMSDK的密码
- *  @param aSuccessBlock 登陆成功的回调
- *  @param aFailedBlock 登录失败的回调
+ *  @param ywLoginId, 用来登录云旺IMSDK的id
+ *  @param password, 用来登录云旺IMSDK的密码
+ *  @param aSuccessBlock, 登陆成功的回调
+ *  @param aFailedBlock, 登录失败的回调
  */
 - (void)callThisAfterISVAccountLoginSuccessWithYWLoginId:(NSString *)ywLoginId passWord:(NSString *)passWord preloginedBlock:(void(^)())aPreloginedBlock successBlock:(void(^)())aSuccessBlock failedBlock:(void (^)(NSError *))aFailedBlock;
 
@@ -70,21 +63,6 @@ FOUNDATION_EXTERN NSString *const kSPCustomConversationIdForFAQ;
  */
 - (void)callThisBeforeISVAccountLogout;
 
-
-
-
-
-/****************************************************************************
- ****************************************************************************
- ****************************************************************************
- ****************************************************************************
- 
- 以下是各个子功能的胶水函数
- 
- ****************************************************************************
- ****************************************************************************
- ****************************************************************************
- ****************************************************************************/
 
 #pragma mark - basic
 
@@ -132,40 +110,12 @@ FOUNDATION_EXTERN NSString *const kSPCustomConversationIdForFAQ;
  */
 - (void)exampleSetAvatarStyle;
 
-
-/**
- *  设置头像和昵称
- */
-- (void)exampleSetProfile;
-
 #pragma mark - UI pages
-
-/**
- *  创建会话列表页面
- */
-- (YWConversationListViewController *)exampleMakeConversationListControllerWithSelectItemBlock:(YWConversationsListDidSelectItemBlock)aSelectItemBlock;
-
-/**
- *  打开某个会话
- */
-- (void)exampleOpenConversationViewControllerWithConversation:(YWConversation *)aConversation fromNavigationController:(UINavigationController *)aNavigationController;
 
 /**
  *  打开单聊页面
  */
 - (void)exampleOpenConversationViewControllerWithPerson:(YWPerson *)aPerson fromNavigationController:(UINavigationController *)aNavigationController;
-
-/**
- *  打开群聊页面
- */
-- (void)exampleOpenConversationViewControllerWithTribe:(YWTribe *)aTribe fromNavigationController:(UINavigationController *)aNavigationController;
-
-/**
- *  打开客服会话
- *  @param aPersonId 客服Id
- */
-- (void)exampleOpenEServiceConversationWithPersonId:(NSString *)aPersonId
-                    fromNavigationController:(UINavigationController *)aNavigationController;
 
 /**
  *  创建某个会话Controller
@@ -176,59 +126,10 @@ FOUNDATION_EXTERN NSString *const kSPCustomConversationIdForFAQ;
 #pragma mark - 自定义业务
 
 /**
- *  设置如何显示自定义消息
- */
-- (void)exampleShowCustomMessageWithConversationController:(YWConversationViewController *)aConversationController;
-
-/**
- *  添加或者更新自定义会话
- */
-- (void)exampleAddOrUpdateCustomConversation;
-
-/**
- *  自定义优先级的置顶会话（可保持长期置顶）
- */
-- (void)exampleAddHighPriorityCustomConversation;
-
-/**
- *  将会话置顶，或者取消置顶
- */
-- (void)exampleMarkConversationOnTop:(YWConversation *)aConversation onTop:(BOOL)aOnTop;
-
-/**
- *  自定义会话Cell及菜单
- */
-- (void)exampleCustomizeConversationCellWithConversationListController:(YWConversationListViewController *)aConversationListController;
-
-/**
- *  发送透传指令
- *  并且展示了如何在客户端控制对方iOS设备收到的Push文案
- *  不显示在会话列表和聊天页面，开发者可以监听到该消息，做特定的逻辑处理
- */
-- (void)exampleSendTransparentCommand:(NSString *)aCommand inConversation:(YWConversation *)aConversation completion:(YWMessageSendingCompletionBlock)aCompletion;
-
-/**
  *  插入本地消息
  *  消息不会被发送到对方，仅本地展示
  */
 - (void)exampleInsertLocalMessageBody:(YWMessageBody *)aBody inConversation:(YWConversation *)aConversation;
-
-#pragma mark - Customize
-
-/**
- *  自定义全局导航栏
- */
-- (void)exampleCustomGlobleNavigationBar;
-
-/**
- *  自定义皮肤
- */
-- (void)exampleCustomUISkin;
-
-/**
- *  开启群@消息功能
- */
-- (void)exampleEnableTribeAtMessage;
 
 #pragma mark - 聊天页面自定义
 
@@ -239,7 +140,6 @@ FOUNDATION_EXTERN NSString *const kSPCustomConversationIdForFAQ;
 
 /**
  *  设置消息的长按菜单
- *  这个方法展示如何设置图片消息的长按菜单
  */
 - (void)exampleSetMessageMenuToConversationController:(YWConversationViewController *)aConversationController;
 
@@ -247,7 +147,6 @@ FOUNDATION_EXTERN NSString *const kSPCustomConversationIdForFAQ;
  *  设置气泡最大宽度
  */
 - (void)exampleSetMaxBubbleWidth;
-
 
 #pragma mark - events
 
@@ -262,11 +161,6 @@ FOUNDATION_EXTERN NSString *const kSPCustomConversationIdForFAQ;
 - (void)exampleListenMyMessageLife;
 
 /**
- * 头像点击事件
- */
-- (void)exampleListenOnClickAvatar;
-
-/**
  *  链接点击事件
  */
 - (void)exampleListenOnClickUrl;
@@ -275,7 +169,6 @@ FOUNDATION_EXTERN NSString *const kSPCustomConversationIdForFAQ;
  *  预览大图事件
  */
 - (void)exampleListenOnPreviewImage;
-
 
 #pragma mark - apns
 
@@ -292,25 +185,6 @@ FOUNDATION_EXTERN NSString *const kSPCustomConversationIdForFAQ;
  *  获取EService对象
  */
 - (YWPerson *)exampleFetchEServicePersonWithPersonId:(NSString *)aPersonId groupId:(NSString *)aGroupId;
-
-
-#pragma mrk - Feedback
-
-/**
- *  监听反馈新消息
- */
-- (void)exampleListenFeedbackNewMessage;
-
-/**
- *  获取反馈未读数，用于在反馈入口或其他位置标注红点引导用户查看反馈消息
- */
-- (void)exampleGetFeedbackUnreadCount:(BOOL)isAnonLogin inViewController:(UIViewController *)viewController;
-
-/**
- *  获取反馈并打开反馈页面
- */
-- (void)exampleOpenFeedbackViewController:(BOOL)isAnonLogin
-                       fromViewController:(UIViewController *)aViewController;
 
 @end
 

@@ -21,7 +21,7 @@ typedef enum _BubbleStyle{
     BubbleStyleCommonMiddle,    // 居中气泡样式
     BubbleStyleCommonRight,     // 右侧气泡样式
     
-    /// 图片、地理位置等气泡中间镂空样式
+    /// 地理位置等气泡中间镂空样式
     BubbleStyleHollowLeft,      // 左侧气泡样式
     BubbleStyleHollowMiddle,    // 居中气泡样式
     BubbleStyleHollowRight,     // 右侧气泡样式
@@ -29,8 +29,15 @@ typedef enum _BubbleStyle{
     /// 系统通知等弱提示消息样式
     BubbleStyleHintMiddle,      // 居中气泡样式
     
+    /// 右侧不反色气泡风格，跟BubbleStyleCommonLeft对称
+    BubbleStyleCommonRightSymmetry,
+    
     // 自定义气泡风格
     BubbleStyleCustomize,
+    
+    /// 遮罩方式的图片样式
+    BubbleStyleHollowMaskRight,
+    BubbleStyleHollowMaskLeft,
 }BubbleStyle;
 
 /**
