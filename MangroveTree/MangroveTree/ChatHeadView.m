@@ -11,8 +11,8 @@
 
 @interface ChatHeadView ()
 
-@property (nonatomic, strong) UILabel *label1;
-@property (nonatomic, strong) UILabel *label2;
+@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, strong) NSString *startTime;
 
 @end
 
@@ -29,22 +29,80 @@
 }
 - (void)addInforView
 {
-    self.label1 = [[UILabel alloc] init];
-    _label1.textAlignment = NSTextAlignmentCenter;
-    [self addSubview:self.label1];
+    self.labelText = [[UILabel alloc] init];
+    self.labelText.textAlignment = NSTextAlignmentCenter;
+    [self addSubview:self.self.labelText];
     
-    [self.label1 autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:0];
-    [self.label1 autoConstrainAttribute:ALAttributeHeight toAttribute:ALAttributeHeight ofView:self withMultiplier:0.5];
-    [self.label1 autoSetDimension:ALDimensionWidth toSize:kScreenWidth];
-    self.label1.text = @"我就是一测试数据，我想看下实现教过如何，你不必当真";
+    [self.labelText autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:0];
+    [self.labelText autoConstrainAttribute:ALAttributeHeight toAttribute:ALAttributeHeight ofView:self withMultiplier:0.5];
+    [self.labelText autoSetDimension:ALDimensionWidth toSize:kScreenWidth];
+    self.labelText.text = @"请您输入需要服务的内容，以便服务员接单";
+    self.labelText.font = [UIFont systemFontOfSize:16.0f];
     
-    self.label2 = [[UILabel alloc] init];
-    _label2.textAlignment = NSTextAlignmentCenter;
-    [self addSubview:_label2];
-    [self.label2 autoSetDimension:ALDimensionWidth toSize:kScreenWidth];
-    [self.label2 autoConstrainAttribute:ALAttributeHeight toAttribute:ALAttributeHeight ofView:self withMultiplier:0.5];
-    [self.label2 autoPinEdgeToSuperviewMargin:ALEdgeBottom];
-    self.label2.text = @"我想效果还算不错，效果很好";
+    self.timerLabel = [[UILabel alloc] init];
+    self.timerLabel.textAlignment = NSTextAlignmentCenter;
+    [self addSubview:self.timerLabel];
+    [self.timerLabel autoSetDimension:ALDimensionWidth toSize:kScreenWidth];
+    [self.timerLabel autoConstrainAttribute:ALAttributeHeight toAttribute:ALAttributeHeight ofView:self withMultiplier:0.5];
+    [self.timerLabel autoPinEdgeToSuperviewMargin:ALEdgeBottom];
+    self.timerLabel.text = @"谢谢合作，祝您入住愉快！";
+    self.labelText.font = [UIFont systemFontOfSize:16.0f];
+
 }
 
+- (void)setTextStatus:(TextStatus)textStatus
+{
+    if (_textStatus != textStatus)
+    {
+        _textStatus = textStatus;
+        [self changeTextContentByTextStatus:_textStatus];
+     }
+}
+- (void)changeTextContentByTextStatus:(TextStatus)status
+{
+    switch (status)
+    {
+        case TextStatus_default:
+            self.labelText.text = @"请您输入需要服务的内容，以便服务员接单";
+            self.timerLabel.text = @"谢谢合作，祝您入住愉快！";
+            break;
+        case TextStatus_waiting:
+            self.labelText.text = @"您的服务订单请求已发送，请等待接单后再发送更多内容";
+            self.timerLabel.text = @"等候时长:00:00:01";
+            [self startTaskTimerByStartTime:nil];
+            break;
+        case TextStatus_proceed:
+            self.labelText.text = @"服务员T001已接单，您可以语音聊天啦！";
+            self.timerLabel.text = @"服务时长:00:00:01";
+            [self startTaskTimerByStartTime:nil];
+            break;
+        default:
+            break;
+    }
+
+}
+- (void)startTaskTimerByStartTime:(NSString *)time
+{
+    self.startTime = time;
+    if (!self.timer)
+    {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(myLog:) userInfo:nil repeats:YES];
+    }
+}
+- (void)myLog:(NSTimer *)timer
+{
+    
+}
+- (void)stopTimer
+{
+    if (self.timer && self.timer.isValid)
+    {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+}
+- (void)dealloc
+{
+    [self stopTimer];
+}
 @end
