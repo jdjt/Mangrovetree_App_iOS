@@ -68,6 +68,7 @@
 		C44F13561EA855A400AB7809 /* SPUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = C44F13391EA855A400AB7809 /* SPUtil.m */; };
 		C44F13571EA855A400AB7809 /* UIBarButtonItem+BlockSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = C44F133B1EA855A400AB7809 /* UIBarButtonItem+BlockSupport.m */; };
 		C44F13581EA855A400AB7809 /* UIControl+BlockSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = C44F133D1EA855A400AB7809 /* UIControl+BlockSupport.m */; };
+		C44F135B1EA8BC2400AB7809 /* UILabel+ChangeLineSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = C44F135A1EA8BC2400AB7809 /* UILabel+ChangeLineSpace.m */; };
 		C45892D11EA5F5640014BAD5 /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C45892D01EA5F5640014BAD5 /* yw_1222.jpg */; };
 		C45B62001E7A257600F70D3F /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45B61FF1E7A257600F70D3F /* SearchViewController.m */; };
 		C45B62031E7A35DD00F70D3F /* SearchTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C45B62021E7A35DD00F70D3F /* SearchTypeCell.m */; };
@@ -553,6 +554,8 @@
 		C44F133B1EA855A400AB7809 /* UIBarButtonItem+BlockSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+BlockSupport.m"; sourceTree = "<group>"; };
 		C44F133C1EA855A400AB7809 /* UIControl+BlockSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+BlockSupport.h"; sourceTree = "<group>"; };
 		C44F133D1EA855A400AB7809 /* UIControl+BlockSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+BlockSupport.m"; sourceTree = "<group>"; };
+		C44F13591EA8BC2400AB7809 /* UILabel+ChangeLineSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+ChangeLineSpace.h"; sourceTree = "<group>"; };
+		C44F135A1EA8BC2400AB7809 /* UILabel+ChangeLineSpace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+ChangeLineSpace.m"; sourceTree = "<group>"; };
 		C45892D01EA5F5640014BAD5 /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yw_1222.jpg; sourceTree = "<group>"; };
 		C45B61FE1E7A257600F70D3F /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		C45B61FF1E7A257600F70D3F /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
@@ -1494,6 +1497,8 @@
 				C46BEDCC1E9C9CA3009E3379 /* BaseAlert.storyboard */,
 				A8F3DBE01EA0AEA80044C0A7 /* BaseAlertViewController.h */,
 				A8F3DBE11EA0AEA80044C0A7 /* BaseAlertViewController.m */,
+				C44F13591EA8BC2400AB7809 /* UILabel+ChangeLineSpace.h */,
+				C44F135A1EA8BC2400AB7809 /* UILabel+ChangeLineSpace.m */,
 				C42DA9091E9DD5EE00A76B4C /* AlertPresentAnimation.h */,
 				C42DA90A1E9DD5EE00A76B4C /* AlertPresentAnimation.m */,
 				C46BEDCE1E9CA7B8009E3379 /* AlertViewCenterCell.h */,
@@ -2856,6 +2861,7 @@
 				FC5B1AA21E6E47BF0038BCA7 /* SDWebImagePrefetcher.m in Sources */,
 				C44F13431EA855A400AB7809 /* SPGreetingBubbleViewModel.m in Sources */,
 				FC5B1ACD1E6E4EDC0038BCA7 /* RegistViewController.m in Sources */,
+				C44F135B1EA8BC2400AB7809 /* UILabel+ChangeLineSpace.m in Sources */,
 				FC5B1ADC1E6E502D0038BCA7 /* MTBaseNetworkController.m in Sources */,
 				FC5B1A711E6E47A70038BCA7 /* MJRefreshGifHeader.m in Sources */,
 				FC0755401E6EB74B00EAB144 /* DBUserLogin+CoreDataProperties.m in Sources */,
