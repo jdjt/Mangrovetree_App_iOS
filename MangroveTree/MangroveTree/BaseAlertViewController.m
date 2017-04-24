@@ -30,7 +30,7 @@
 
 @property (nonatomic, strong) NSArray * dataArray;
 
-@property (nonatomic, copy) NSString * headTitle;
+@property (nonatomic, copy) NSMutableAttributedString * headTitle;
 @property (nonatomic, copy) NSString * detail;
 @property (nonatomic, strong) NSArray * buttonTitles;
 @property (nonatomic, strong) UIImage * topImage;
@@ -49,7 +49,7 @@
 
 @implementation BaseAlertViewController
 
-+ (instancetype)initWithHeadTitle:(NSString *)headTitle andWithDetail:(NSString *)detail andWithCheckTitles:(NSArray *)checkTitles andWithButtonTitles:(NSArray *)buttonTitles andWithHeadImage:(UIImage *)image
++ (instancetype)initWithHeadTitle:(NSMutableAttributedString *)headTitle andWithDetail:(NSString *)detail andWithCheckTitles:(NSArray *)checkTitles andWithButtonTitles:(NSArray *)buttonTitles andWithHeadImage:(UIImage *)image
 {
     UIStoryboard * story = [UIStoryboard storyboardWithName:@"BaseAlert" bundle:nil];
     BaseAlertViewController * viewController = (BaseAlertViewController *)[story instantiateViewControllerWithIdentifier:@"BaseAlertViewController"];
@@ -76,23 +76,31 @@
     {
         case AlertType_systemAutoCancelTask:
         {
-            alert = [BaseAlertViewController initWithHeadTitle:nil andWithDetail:[NSString stringWithFormat:@"您好，我是服务员%@，很高兴为您服务！",waiterId] andWithCheckTitles:checkTitles andWithButtonTitles:@[@"确 认"] andWithHeadImage:nil];
+            alert = [BaseAlertViewController initWithHeadTitle:nil andWithDetail:@"" andWithCheckTitles:checkTitles andWithButtonTitles:@[@"确 认"] andWithHeadImage:nil];
         }
             break;
         case AlertType_callTaskComplete:
         {
-            alert = [BaseAlertViewController initWithHeadTitle:[NSString stringWithFormat:@"服务员：%@",waiterId] andWithDetail:@"您的呼叫服务已完成，请您确认，谢谢配合！" andWithCheckTitles:checkTitles andWithButtonTitles:@[@"未完成",@"已完成"] andWithHeadImage:nil];
+            NSString * head = @"服务员：";
+            NSMutableAttributedString * title = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@",head,waiterId]];
+            [title addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:255 / 255.0 green:128 / 255.0 blue:75 / 255.0 alpha:1] range:NSMakeRange(head.length,waiterId.length)];
+            alert = [BaseAlertViewController initWithHeadTitle:title andWithDetail:@"您的呼叫服务已完成，请您确认，谢谢配合！" andWithCheckTitles:checkTitles andWithButtonTitles:@[@"未完成",@"已完成"] andWithHeadImage:nil];
         }
             break;
         case AlertType_cancelTaskReason:
         {
-            alert = [BaseAlertViewController initWithHeadTitle:@"选择取消呼叫服务原因：" andWithDetail:nil andWithCheckTitles:checkTitles andWithButtonTitles:@[@"呼叫继续",@"放弃呼叫"] andWithHeadImage:nil];
+            alert = [BaseAlertViewController initWithHeadTitle:[[NSMutableAttributedString alloc]initWithString:@"选择取消呼叫服务原因："] andWithDetail:nil andWithCheckTitles:checkTitles andWithButtonTitles:@[@"呼叫继续",@"放弃呼叫"] andWithHeadImage:nil];
             [alert setTitleTextAlignment:NSTextAlignmentLeft];
+        }
+            break;
+        case AlertType_waiterOrderReceiving:
+        {
+            alert = [BaseAlertViewController initWithHeadTitle:nil andWithDetail:[NSString stringWithFormat:@"您好，我是服务员%@，很高兴为您服务！",waiterId] andWithCheckTitles:checkTitles andWithButtonTitles:@[@"确 认"] andWithHeadImage:nil];
         }
             break;
         default:
         {
-            alert = [BaseAlertViewController initWithHeadTitle:@"系统提示" andWithDetail:nil andWithCheckTitles:checkTitles andWithButtonTitles:@[@"确 认"] andWithHeadImage:nil];
+            alert = [BaseAlertViewController initWithHeadTitle:[[NSMutableAttributedString alloc]initWithString:@"系统提示"] andWithDetail:nil andWithCheckTitles:checkTitles andWithButtonTitles:@[@"确 认"] andWithHeadImage:nil];
         }
             break;
     }
@@ -148,7 +156,7 @@
     self.headTitleTop.constant = self.headTitle.length > 0 ? (self.detail.length > 0 ? 25 : 24) : 0;
     self.headTitleHeight.constant = self.headTitleFont.lineHeight;
     self.titleLabel.textAlignment = self.titleTextAlignment;
-    self.titleLabel.text = self.headTitle;
+    self.titleLabel.attributedText = self.headTitle;
     
     // detail
     CGFloat lineSpace = self.headTitle.length > 0 ? 11 : 18;
