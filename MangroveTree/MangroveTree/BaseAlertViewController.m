@@ -9,37 +9,47 @@
 #import "BaseAlertViewController.h"
 #import "AlertViewCenterCell.h"
 #import "AlertPresentAnimation.h"
+#import "UILabel+ChangeLineSpace.h"
 
 @interface BaseAlertViewController () <UITableViewDelegate,UITableViewDataSource,UIViewControllerTransitioningDelegate>
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageTop;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headTitleTop;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headTitleHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *detailTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *detailHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *buttonTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *buttonHeight;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *detailTraling;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *comfirmWidth;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *buttonLeading;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *buttonTrailing;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headTitleTraling;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *backGroundLeading;
+
 @property (nonatomic, strong) NSArray * dataArray;
-@property (nonatomic, strong) UIView * backView;
 
 @property (nonatomic, copy) NSString * headTitle;
+@property (nonatomic, copy) NSString * detail;
 @property (nonatomic, strong) NSArray * buttonTitles;
 @property (nonatomic, strong) UIImage * topImage;
 @property (nonatomic, assign) CGFloat buttonLeadingContant;
 @property (nonatomic, assign) CGFloat buttonTrailingContant;
 @property (nonatomic, assign) CGFloat headImageSize;
 @property (nonatomic, strong) UIFont * headTitleFont;
+@property (nonatomic, strong) UIFont * detailFont;
 @property (nonatomic, strong) UIFont * buttonTitleFont;
+@property (nonatomic, assign) NSTextAlignment titleTextAlignment;
 @property (nonatomic, strong) id target;
 @property (nonatomic, assign) SEL action1;
 @property (nonatomic, assign) SEL action2;
-
-// will view 中方法控制
-@property (nonatomic, assign) BOOL isSetButtonContant;
 
 @end
 
 @implementation BaseAlertViewController
 
-+ (instancetype)initWithHeadTitle:(NSString *)headTitle andWithCheckTitles:(NSArray *)checkTitles andWithButtonTitles:(NSArray *)buttonTitles andWithHeadImage:(UIImage *)image
++ (instancetype)initWithHeadTitle:(NSString *)headTitle andWithDetail:(NSString *)detail andWithCheckTitles:(NSArray *)checkTitles andWithButtonTitles:(NSArray *)buttonTitles andWithHeadImage:(UIImage *)image
 {
     UIStoryboard * story = [UIStoryboard storyboardWithName:@"BaseAlert" bundle:nil];
     BaseAlertViewController * viewController = (BaseAlertViewController *)[story instantiateViewControllerWithIdentifier:@"BaseAlertViewController"];
@@ -47,15 +57,52 @@
     {
         viewController.transitioningDelegate = viewController;
         viewController.modalPresentationStyle = UIModalPresentationCustom;
-        viewController.backView = viewController.backGroundView;
         viewController.topImage = image;
         viewController.selectTable = NSNotFound;
         viewController.headTitle = headTitle;
+        viewController.detail = detail;
         viewController.dataArray = [NSArray arrayWithArray:checkTitles];
         viewController.buttonTitles = buttonTitles;
         [viewController initializeFuncStatus];
     }
     return viewController;
+}
+
+// 根据使用类型初始化(使用tableView选择框的)
++ (instancetype)alertWithAlertType:(BaseAlertType)alertType andWithCheckTitles:(NSArray *)checkTitles andWithWaiterId:(NSString *)waiterId
+{
+    BaseAlertViewController * alert = nil;
+    switch (alertType)
+    {
+        case AlertType_systemAutoCancelTask:
+        {
+            alert = [BaseAlertViewController initWithHeadTitle:nil andWithDetail:[NSString stringWithFormat:@"您好，我是服务员%@，很高兴为您服务！",waiterId] andWithCheckTitles:checkTitles andWithButtonTitles:@[@"确 认"] andWithHeadImage:nil];
+        }
+            break;
+        case AlertType_callTaskComplete:
+        {
+            alert = [BaseAlertViewController initWithHeadTitle:[NSString stringWithFormat:@"服务员：%@",waiterId] andWithDetail:@"您的呼叫服务已完成，请您确认，谢谢配合！" andWithCheckTitles:checkTitles andWithButtonTitles:@[@"未完成",@"已完成"] andWithHeadImage:nil];
+        }
+            break;
+        case AlertType_cancelTaskReason:
+        {
+            alert = [BaseAlertViewController initWithHeadTitle:@"选择取消呼叫服务原因：" andWithDetail:nil andWithCheckTitles:checkTitles andWithButtonTitles:@[@"呼叫继续",@"放弃呼叫"] andWithHeadImage:nil];
+            [alert setTitleTextAlignment:NSTextAlignmentLeft];
+        }
+            break;
+        default:
+        {
+            alert = [BaseAlertViewController initWithHeadTitle:@"系统提示" andWithDetail:nil andWithCheckTitles:checkTitles andWithButtonTitles:@[@"确 认"] andWithHeadImage:nil];
+        }
+            break;
+    }
+    return alert;
+}
+
+// 根据使用类型初始化
++ (instancetype)alertWithAlertType:(BaseAlertType)alertType andWithWaiterId:(NSString *)waiterId
+{
+    return [BaseAlertViewController alertWithAlertType:alertType andWithCheckTitles:nil andWithWaiterId:waiterId];
 }
 
 - (NSArray *)dataArray
@@ -71,7 +118,9 @@
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5];
+    self.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+    self.backGroundView.clipsToBounds = YES;
+    self.backGroundView.layer.cornerRadius = 7.0f;
 }
 
 - (void)viewWillLayoutSubviews
@@ -90,38 +139,52 @@
     self.view.clipsToBounds = NO;
     [self setWordFont];
     
+    // headImage
+    self.imageTop.constant = self.topImage == nil ? 0 : 30;
     self.imageHeight.constant = self.topImage == nil ? 0 : (self.headImageSize > 0 ? self.headImageSize : 80);
     self.headImage.image = self.topImage == nil ? nil : self.topImage;
     
-    CGSize size = [self.headTitle boundingRectWithSize:CGSizeMake(self.titleLabel.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:self.headTitleFont} context:nil].size;
-    self.headTitleHeight.constant = size.height;
-    self.alertHeight.constant = 20 + self.imageHeight.constant + 10 + self.headTitleHeight.constant + 10 + 30 * self.dataArray.count + 10 + 30 + 8;
-    
+    // headTitle
+    self.headTitleTop.constant = self.headTitle.length > 0 ? (self.detail.length > 0 ? 25 : 24) : 0;
+    self.headTitleHeight.constant = self.headTitleFont.lineHeight;
+    self.titleLabel.textAlignment = self.titleTextAlignment;
     self.titleLabel.text = self.headTitle;
+    
+    // detail
+    CGFloat lineSpace = self.headTitle.length > 0 ? 11 : 18;
+    self.detailTop.constant = self.detail.length > 0 ? (self.headTitle.length > 0 ? 25 : 32) : 0;
+    CGSize detailSize = self.detail.length > 0 ? [self.detail sizeWithAttributes: @{NSFontAttributeName:self.detailFont}] : CGSizeMake(0, 0);
+    NSInteger lines = ceilf(detailSize.width / (kScreenWidth - 2 * (self.backGroundLeading.constant + self.detailTraling.constant)));
+    self.detailHeight.constant =  lines > 1 ? (lines * (1 + lineSpace + self.detailFont.lineHeight) - lineSpace) : (lines == 1 ? (self.detailFont.lineHeight + 1) : 0);
+    self.detailLabel.text = self.detail;
+    if (self.detail.length > 0)
+        [UILabel changeLineSpaceForLabel:self.detailLabel WithSpace:lineSpace];
+    
+    // tableView
+    self.tableViewHeight.constant = self.dataArray.count > 0 ? 18 : 0;
+    
+    // buttonTop
+    self.buttonTop.constant = self.dataArray.count > 0 ? 11 : 32;
+    
+    self.alertHeight.constant = self.imageTop.constant + self.imageHeight.constant + self.headTitleTop.constant + self.headTitleHeight.constant + self.detailTop.constant + self.detailHeight.constant + self.tableViewHeight.constant + (45 * self.dataArray.count + (self.dataArray.count > 0 ? 0.5 : 0)) + self.buttonTop.constant + self.buttonHeight.constant;
+    
+    self.headImage.image = self.topImage == nil ? nil : self.topImage;
     if (self.buttonTitles.count == 1)
     {
         [self.comfirmButton setTitle:self.buttonTitles[0] forState:UIControlStateNormal];
         self.cancelButton.hidden = YES;
-        self.comfirmWidth.constant = self.backGroundView.frame.size.width * 3 / 5 - self.buttonLeading.constant - self.buttonTrailing.constant;
+        self.comfirmWidth.constant = self.backGroundView.frame.size.width * 0.5;
     }
     else if (self.buttonTitles.count > 1)
     {
         [self.cancelButton setTitle:self.buttonTitles[0] forState:UIControlStateNormal];
         [self.comfirmButton setTitle:self.buttonTitles[1] forState:UIControlStateNormal];
     }
-    self.cancelButton.layer.borderColor = [UIColor darkGrayColor].CGColor;
-    self.cancelButton.layer.borderWidth = 1.0f;
-    self.cancelButton.layer.cornerRadius = 5.0f;
-    self.comfirmButton.layer.borderColor = [UIColor colorWithRed:237 / 255.0f green:130 / 255.0f blue:86 / 255.0f alpha:1].CGColor;
-    self.comfirmButton.layer.borderWidth = 1.0f;
-    self.comfirmButton.layer.cornerRadius = 5.0f;
-    
-    self.backGroundView.layer.cornerRadius = 10.0f;
     [self.tableView reloadData];
-    
-    if (self.isSetButtonContant == YES)
-        [self settingButtonContant];
 }
+
+#pragma mark - constraint func model
+
 
 #pragma mark - action
 
@@ -177,16 +240,23 @@
     return self.dataArray.count;
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return self.dataArray.count > 0 ? 1 : 0;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 30.0f;
+    return 45.0f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AlertViewCenterCell * cell = [tableView dequeueReusableCellWithIdentifier:@"alertCenter"];
-    cell.chooseImage.image = self.selectTable == indexPath.row ? [UIImage imageNamed:@"read_Y"] : [UIImage imageNamed:@"read_N"];
+    cell.chooseImage.image = self.selectTable == indexPath.row ? [UIImage imageNamed:@"AlertSelectImage_Yes"] : [UIImage imageNamed:@"AlertSelectImage_No"];
     cell.chooseTitle.text = self.dataArray[indexPath.row];
+    if (indexPath.row == self.dataArray.count - 1)
+        cell.bottomLine.hidden = YES;
     return cell;
 }
 
@@ -212,23 +282,29 @@
     [self.tableView reloadRowsAtIndexPaths:set withRowAnimation:UITableViewRowAnimationNone];
 }
 
-#pragma mark - 公开方法
-
-- (void)setButtonLeadingTrailingContants:(CGFloat)contant
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    self.isSetButtonContant = YES;
-    self.buttonTrailingContant = contant;
-    self.buttonLeadingContant = contant;
+    UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width,0.5f)];
+    view.backgroundColor = [UIColor colorWithRed:97 / 255.0f green:97 / 255.0f blue:97 / 255.0f alpha:1];
+    return view;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0.5f;
+}
+
+#pragma mark - 公开方法
 
 - (void)setHeadImageSizes:(CGFloat)height
 {
     self.headImageSize = height;
 }
 
-- (void)setHeadTitleFont:(UIFont *)headTitleFont andWithButtonTitleFont:(UIFont *)buttonTitleFont
+- (void)setHeadTitleFont:(UIFont *)headTitleFont andDetailFont:(UIFont *)detailFont andWithButtonTitleFont:(UIFont *)buttonTitleFont
 {
     self.headTitleFont = headTitleFont;
+    self.detailFont = detailFont;
     self.buttonTitleFont = buttonTitleFont;
 }
 
@@ -236,6 +312,8 @@
 {
     if (self.headTitleFont != nil)
         self.titleLabel.font = self.headTitleFont;
+    if (self.detailFont != nil)
+        self.detailLabel.font = self.detailFont;
     if (self.buttonTitleFont != nil)
     {
         self.cancelButton.titleLabel.font = self.buttonTitleFont;
@@ -243,18 +321,18 @@
     }
 }
 
-- (void)settingButtonContant
+- (void)setHeadTitleTextAlignment:(NSTextAlignment)textAlignment
 {
-    self.buttonLeading.constant = self.buttonLeadingContant;
-    self.buttonTrailing.constant = self.buttonTrailingContant;
+    self.titleTextAlignment = textAlignment;
 }
 
 - (void)initializeFuncStatus
 {
-    self.isSetButtonContant = NO;
     self.headImageSize = 0;
-    self.headTitleFont = [UIFont systemFontOfSize:15];
+    self.headTitleFont = [UIFont systemFontOfSize:19];
+    self.detailFont = [UIFont systemFontOfSize:19];
     self.buttonTitleFont = nil;
+    self.titleTextAlignment = NSTextAlignmentCenter;
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate

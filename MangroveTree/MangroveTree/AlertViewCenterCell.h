@@ -12,5 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *chooseImage;
 @property (weak, nonatomic) IBOutlet UILabel *chooseTitle;
+@property (weak, nonatomic) IBOutlet UIView *bottomLine;
 
 @end
