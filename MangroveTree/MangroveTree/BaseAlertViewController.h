@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger,BaseAlertType)
     AlertType_systemAutoCancelTask              = 0, // 系统自动取消任务提示
     AlertType_callTaskComplete                  = 1, // 呼叫服务完成提示
     AlertType_cancelTaskReason                  = 2, // 取消呼叫任务弹窗
+    AlertType_waiterOrderReceiving              = 3, // 服务员接单提示
 };
 
 @interface BaseAlertViewController : UIViewController
@@ -33,7 +34,7 @@ typedef NS_ENUM(NSInteger,BaseAlertType)
 @property (nonatomic, assign) NSInteger selectTable;
 
 // 根据标题等初始化
-+ (instancetype)initWithHeadTitle:(NSString *)headTitle andWithDetail:(NSString *)detail andWithCheckTitles:(NSArray *)checkTitles andWithButtonTitles:(NSArray *)buttonTitles andWithHeadImage:(UIImage *)image;
++ (instancetype)initWithHeadTitle:(NSMutableAttributedString *)headTitle andWithDetail:(NSString *)detail andWithCheckTitles:(NSArray *)checkTitles andWithButtonTitles:(NSArray *)buttonTitles andWithHeadImage:(UIImage *)image;
 
 // 根据使用类型初始化(使用tableView选择框的)
 + (instancetype)alertWithAlertType:(BaseAlertType)alertType andWithCheckTitles:(NSArray *)checkTitles andWithWaiterId:(NSString *)waiterId;
