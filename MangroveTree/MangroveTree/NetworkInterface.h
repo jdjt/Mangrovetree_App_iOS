@@ -117,4 +117,9 @@
 // 新接口获取业态详情
 #define URL_ACTIVITY_DETAIL                 @"/syw_projectmanager/activitydetail/getActivitydetail"
 
+// 检查是否绑定客房
+#define URL_CHECKBINDROOM                   @"/hotelcallservice/customer/getBindingInfo.json"
+// 绑定客房
+#define URL_BINGROOM                        @"/hotelcallservice/customer/binding.json"
+
 #endif /* NetworkInterface_h */

@@ -86,14 +86,6 @@
             DBUserLogin *userLogin = [[DataManager defaultInstance] findUserLogInByCode:@"1"];
             tokenid = userLogin.ticker;
         }
-#warning mark - 获取设备ID。
-        NSString *mac = [PDKeyChain keyChainLoad];
-        if (!mac)
-        {
-            mac = [Util getUUID];
-            [PDKeyChain keyChainSave:mac];
-        }
-        NSLog(@"_________%@",mac);
         NSMutableDictionary* header = [[NSMutableDictionary alloc]init];
         [header setObject:@"application/json; charset=utf-8" forKey:@"Content-Type"];
         [header setObject:tokenid forKey:@"mymhotel-ticket"];
@@ -101,7 +93,7 @@
         [header setObject:@"4.0" forKey:@"mymhotel-version"];
         [header setObject:@"JSON" forKey:@"mymhotel-dataType"];
         [header setObject:@"JSON" forKey:@"mymhotel-ackDataType"];
-        [header setObject:mac forKey:@"mymhotel-sourceCode"];
+        [header setObject:[self getsourceCode] forKey:@"mymhotel-sourceCode"];
         [header setObject:[NSString stringWithFormat:@"%f",timestamp] forKey:@"mymhotel-dateTime"];
         [header setObject:@"no-cache" forKey:@"Pragma"];
         [header setObject:@"no-cache" forKey:@"Cache-Control"];
@@ -330,6 +322,26 @@
         [self.hud removeFromSuperview];
         self.hud = nil;
     }
+}
+
+- (NSString *)getsourceCode
+{
+    NSString *sourceCode = @"";
+    if (![PDKeyChain keyChainLoad])
+    {
+        sourceCode = [Util getUUID];
+        [PDKeyChain keyChainSave:sourceCode];
+    }else
+    {
+        sourceCode = [PDKeyChain keyChainLoad];
+    }
+    NSString *deviceToken = [[DataManager defaultInstance] getParameter].deviceToken;
+    NSString *token = @"1";
+    if (deviceToken)
+        sourceCode = [NSString stringWithFormat:@"%@|%@",sourceCode,deviceToken];
+    else
+        sourceCode = [NSString stringWithFormat:@"%@|%@",sourceCode,token];
+    return sourceCode;
 }
 
 #pragma mark - 自动登录

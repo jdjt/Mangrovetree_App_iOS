@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16B2555" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16D32" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="DBBindCustomer" syncable="YES">
+        <attribute name="attribute14" optional="YES" syncable="YES"/>
+        <attribute name="attribute15" optional="YES" syncable="YES"/>
+        <attribute name="attribute16" optional="YES" syncable="YES"/>
+        <attribute name="attribute17" optional="YES" syncable="YES"/>
+        <attribute name="attribute18" optional="YES" syncable="YES"/>
+        <attribute name="attribute19" optional="YES" syncable="YES"/>
+        <attribute name="attribute20" optional="YES" syncable="YES"/>
+        <attribute name="attribute21" optional="YES" syncable="YES"/>
+        <attribute name="attribute22" optional="YES" syncable="YES"/>
+        <attribute name="customerId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deviceId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deviceToken" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deviceType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hotelCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hotelName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imAccount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="servcieDiv" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serviceBeginTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serviceEndTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userAccount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userId" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="DBCallTask" representedClassName="DBCallTask" syncable="YES">
         <attribute name="acceptStatus" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cancelTime" optional="YES" attributeType="String" syncable="YES"/>
@@ -56,8 +81,9 @@
         <attribute name="ticker" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="DBUserLogin" positionX="-27" positionY="-108" width="128" height="285"/>
         <element name="DBCallTask" positionX="-27" positionY="9" width="128" height="480"/>
         <element name="DBParameter" positionX="-18" positionY="54" width="128" height="105"/>
+        <element name="DBUserLogin" positionX="-27" positionY="-108" width="128" height="285"/>
+        <element name="DBBindCustomer" positionX="-18" positionY="45" width="128" height="390"/>
     </elements>
 </model>

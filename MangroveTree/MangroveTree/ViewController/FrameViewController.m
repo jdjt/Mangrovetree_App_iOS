@@ -55,6 +55,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
 @property (nonatomic, assign) NSInteger segmentSelect;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottombarConstraint;
 @property (assign, nonatomic) BOOL showMsg;
+@property (nonatomic, strong) NSURLSessionTask *checkBind;
 
 @end
 
@@ -447,11 +448,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
 //        [self performSegueWithIdentifier:@"showBind" sender:nil];
 //    }else
 //    {
-        ChatViewController *chat = [[ChatViewController alloc] init];
-//    chat.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-        UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:nil action:nil];
-        self.navigationItem.backBarButtonItem = barButtonItem;
-        [self.navigationController pushViewController:chat animated:YES];
+    [self checkBindRoomInfor];
 //    }
     
 }
@@ -683,6 +680,17 @@ NSString* const FMModelSelected = @"FMModelSelected";
     if (task == self.loginTask)
     {
 //        [self loadFMMap];
+    }else if (task == self.checkBind)
+    {
+        NSDictionary *dic = datas[0];
+        if ([dic[@"retOk"] isEqualToString:@"0"])
+        {
+            ChatViewController *chat = [[ChatViewController alloc] init];
+            UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:nil action:nil];
+            self.navigationItem.backBarButtonItem = barButtonItem;
+            [self.navigationController pushViewController:chat animated:YES];
+        }else
+            [MyAlertView showAlert:dic[@"message"]];
     }
 }
 
@@ -746,7 +754,29 @@ NSString* const FMModelSelected = @"FMModelSelected";
                                                              withByUser:YES
                                                        andOldInterfaces:YES];
 }
+- (void)checkBindRoomInfor
+{
+    NSString *deviceId = @"";
+    if (![PDKeyChain keyChainLoad])
+    {
+        deviceId = [Util getUUID];
+        [PDKeyChain keyChainSave:deviceId];
+    }else
+        deviceId = [PDKeyChain keyChainLoad];
+    
+    NSString *deviceToken = [[DataManager defaultInstance] getParameter].deviceToken;
+    if (!deviceToken)
+        deviceToken = @"1";
 
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
+    [params setValue:deviceId forKey:@"deviceId"];
+    [params setValue:deviceToken forKey:@"deviceToken"];
+    self.checkBind = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
+                                                webURL:URL_CHECKBINDROOM
+                                                params:params
+                                            withByUser:YES
+                                      andOldInterfaces:YES];
+}
 - (void)showBottomView:(SegmentSelected)select
 {
     switch (select)
