@@ -108,10 +108,10 @@ int const kCallingServiceCount = 5;
         if ([VC isKindOfClass:[MapViewController class]])
         {
             MapViewController *mapVC = (MapViewController *)VC;
-            if ([mapVC.centerVC.navigationItem.leftBarButtonItem.title isEqualToString:@"取消"])
-            {
-                [mapVC.centerVC showCallResult:YES];
-            }
+//            if ([mapVC.centerVC.navigationItem.leftBarButtonItem.title isEqualToString:@"取消"])
+//            {
+//                [mapVC.centerVC showCallResult:YES];
+//            }
             [mapVC.centerVC changNavViewStyleByLayerMode:NAVIVARTYPE_IN];
             mapVC.centerVC.navigationController.navigationBar.hidden = NO;
             self.navigationController.navigationBar.hidden = YES;
@@ -243,18 +243,18 @@ int const kCallingServiceCount = 5;
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
-    for (UIViewController *VC in self.navigationController.viewControllers)
-    {
-        if ([VC isKindOfClass:[MapViewController class]])
-        {
-            MapViewController *mapVC = (MapViewController *)VC;
-            if ([mapVC.centerVC.navigationItem.leftBarButtonItem.title isEqualToString:@"取消"])
-            {
-                [mapVC.centerVC showCallResult:YES];
-            }
-            [mapVC.centerVC changNavViewStyleByLayerMode:NAVIVARTYPE_OUT];
-        }
-    }
+//    for (UIViewController *VC in self.navigationController.viewControllers)
+//    {
+//        if ([VC isKindOfClass:[MapViewController class]])
+//        {
+//            MapViewController *mapVC = (MapViewController *)VC;
+//            if ([mapVC.centerVC.navigationItem.leftBarButtonItem.title isEqualToString:@"取消"])
+//            {
+//                [mapVC.centerVC showCallResult:YES];
+//            }
+//            [mapVC.centerVC changNavViewStyleByLayerMode:NAVIVARTYPE_OUT];
+//        }
+//    }
     self.navigationController.navigationBar.hidden = NO;
     [super viewWillDisappear:animated];
 }

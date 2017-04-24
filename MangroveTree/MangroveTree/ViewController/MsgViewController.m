@@ -41,6 +41,7 @@
 
 @implementation MsgViewController
 
+/*
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -723,7 +724,7 @@
         };
     }
 }
-
+*/
 /*
 #pragma mark - Navigation
 

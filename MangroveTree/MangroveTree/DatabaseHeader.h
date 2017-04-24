@@ -15,4 +15,6 @@
 
 #import "DBParameter+CoreDataClass.h"
 
+#import "DBBindCustom+CoreDataClass.h"
+
 #endif /* DatabaseHeader_h */

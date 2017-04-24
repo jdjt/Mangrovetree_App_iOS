@@ -2,7 +2,7 @@
 //  DBCallTask+CoreDataProperties.h
 //  MangroveTree
 //
-//  Created by 罗禹 on 2017/3/8.
+//  Created by liuchao on 2017/4/24.
 //  Copyright © 2017年 luoyu. All rights reserved.
 //
 
@@ -15,35 +15,33 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<DBCallTask *> *)fetchRequest;
 
-@property (nullable, nonatomic, copy) NSString *acceptStatus;
-@property (nullable, nonatomic, copy) NSString *cancelTime;
-@property (nullable, nonatomic, copy) NSString *category;
-@property (nullable, nonatomic, copy) NSString *confirmState;
-@property (nullable, nonatomic, copy) NSString *deviceToken;
-@property (nullable, nonatomic, copy) NSString *diviceId;
-@property (nullable, nonatomic, copy) NSString *drOrderNo;
-@property (nullable, nonatomic, copy) NSString *guestUserID;
-@property (nullable, nonatomic, copy) NSString *location;
-@property (nullable, nonatomic, copy) NSString *locationArea;
-@property (nullable, nonatomic, copy) NSString *locationDesc;
-@property (nullable, nonatomic, copy) NSString *messageInfo;
-@property (nullable, nonatomic, copy) NSString *orderTime;
-@property (nullable, nonatomic, copy) NSString *patternInfo;
-@property (nullable, nonatomic, copy) NSString *priority;
-@property (nullable, nonatomic, copy) NSString *remark;
-@property (nullable, nonatomic, copy) NSString *score;
-@property (nullable, nonatomic, copy) NSString *sendTime;
-@property (nullable, nonatomic, copy) NSString *status;
 @property (nullable, nonatomic, copy) NSString *taskCode;
-@property (nullable, nonatomic, copy) NSString *timelimit;
-@property (nullable, nonatomic, copy) NSString *waiterAppKey;
-@property (nullable, nonatomic, copy) NSString *waiterUserID;
-@property (nullable, nonatomic, copy) NSString *workAcceptTime;
-@property (nullable, nonatomic, copy) NSString *workDeviceId;
-@property (nullable, nonatomic, copy) NSString *workDeviceToken;
-@property (nullable, nonatomic, copy) NSString *workFinishTime;
-@property (nullable, nonatomic, copy) NSString *workLocation;
-@property (nullable, nonatomic, copy) NSString *workNum;
+@property (nullable, nonatomic, copy) NSString *taskContent;
+@property (nullable, nonatomic, copy) NSString *taskStatus;
+@property (nullable, nonatomic, copy) NSString *hotelCode;
+@property (nullable, nonatomic, copy) NSString *areaCode;
+@property (nullable, nonatomic, copy) NSString *areaName;
+@property (nullable, nonatomic, copy) NSString *cancelDetail;
+@property (nullable, nonatomic, copy) NSString *cancelTime;
+@property (nullable, nonatomic, copy) NSString *cancelPoint;
+@property (nullable, nonatomic, copy) NSString *cancelCode;
+@property (nullable, nonatomic, copy) NSString *cancelDesc;
+@property (nullable, nonatomic, copy) NSString *scoreTime;
+@property (nullable, nonatomic, copy) NSString *scoreMod;
+@property (nullable, nonatomic, copy) NSString *scoreVal;
+@property (nullable, nonatomic, copy) NSString *customerId;
+@property (nullable, nonatomic, copy) NSString *cImAccount;
+@property (nullable, nonatomic, copy) NSString *waiterId;
+@property (nullable, nonatomic, copy) NSString *wImAccount;
+@property (nullable, nonatomic, copy) NSString *nowDate;
+@property (nullable, nonatomic, copy) NSString *waiteTime;
+@property (nullable, nonatomic, copy) NSString *waiterEndTime;
+@property (nullable, nonatomic, copy) NSString *acceptTime;
+@property (nullable, nonatomic, copy) NSString *finishTime;
+@property (nullable, nonatomic, copy) NSString *finishEndTime;
+@property (nullable, nonatomic, copy) NSString *waiterDeviceId;
+@property (nullable, nonatomic, copy) NSString *userDeviceId;
+@property (nullable, nonatomic, retain) DBUserLogin *belongUser;
 
 @end
 

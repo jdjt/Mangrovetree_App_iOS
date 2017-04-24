@@ -21,11 +21,12 @@ NSString* const FMModelSelected = @"FMModelSelected";
 
 @interface FrameViewController () <MTRequestNetWorkDelegate,UIActionSheetDelegate>
 
+// 地图数据相关
 @property (nonatomic, strong) FMZoneManager * myZoneManager;
-
 @property (strong, nonatomic) FMLocationBuilderInfo *waiterLocation;
 @property (strong, nonatomic) FMLocationBuilderInfo *mySelfLocation;
-@property (weak, nonatomic) IBOutlet UIView *messageView;
+
+// UI
 @property (weak, nonatomic) IBOutlet UIView *bottomBarView;
 @property (weak, nonatomic) IBOutlet UIView *loginAlertView;
 @property (weak, nonatomic) IBOutlet UIView *loginAlertTapView;
@@ -38,23 +39,13 @@ NSString* const FMModelSelected = @"FMModelSelected";
 @property (weak, nonatomic) IBOutlet UIImageView *toWorldPlatformImage;
 @property (weak, nonatomic) IBOutlet UIImageView *toCallServiceImage;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomContraint;
-
-@property (strong, nonatomic) MsgViewController *msgViewController;
-
 // 导航栏 按钮
-@property (retain, nonatomic) UIBarButtonItem *searchBarButton;
-@property (retain, nonatomic) UIBarButtonItem *reloadBarButton;
-@property (retain, nonatomic) UIBarButtonItem *cancelBarButton;
 @property (retain, nonatomic) UIBarButtonItem *userBarBtn;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *buttonWConstraint;
 @property (nonatomic, retain) NSTimer *countDownTimer;
 @property (nonatomic, strong) NSURLSessionTask * loginTask;
 
 @property (nonatomic, assign) NSInteger segmentSelect;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottombarConstraint;
-@property (assign, nonatomic) BOOL showMsg;
 @property (nonatomic, strong) NSURLSessionTask *checkBind;
 
 @end
@@ -64,52 +55,20 @@ NSString* const FMModelSelected = @"FMModelSelected";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //self.bottomBarView.hidden = YES;
+    
 	[UIApplication sharedApplication].idleTimerDisabled = YES;//不自动锁屏
-    self.showMsg = NO;
-    self.segmentSelect = NSNotFound;
-    self.messageView.hidden = YES;
-    self.topConstraint.constant = kScreenHeight- 64;
-    self.bottomContraint.constant = 64- kScreenHeight;
-    self.loginAlertView.layer.cornerRadius = 7.0f;
-    self.loginAlertView.clipsToBounds = YES;
     
-    self.topAlertView.pauseInterval = 0;
-    self.topAlertView.alpha = 0.9f;
-    self.topAlertView.bufferSpaceBetweenLabels = 30;
-    self.topAlertView.textColor = [UIColor grayColor];
-    self.topAlertView.font = [UIFont systemFontOfSize:18];
-    self.topAlertView.Text = @"点击任意建筑 即可为您提供导航路线 您可以通过手势进行缩放 旋转地图及调整地图倾斜角";
-     
-    //    self.segmentCallOrNavigation.selectedSegmentIndex = 0;
-    self.title = @"红树林导航";
+    [self addUI];
     
-    UITapGestureRecognizer * tap1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction:)];
-    [self.toSearchView addGestureRecognizer:tap1];
-    UITapGestureRecognizer * tap2 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction:)];
-    [self.toWorldPlatform addGestureRecognizer:tap2];
-    UITapGestureRecognizer * tap3 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction:)];
-    [self.toCallService addGestureRecognizer:tap3];
+    [self addGestureRecognizer];
     
-    UITapGestureRecognizer * alertTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(alertSelect)];
-    [self.loginAlertTapView addGestureRecognizer:alertTap];
-    
-    self.navigationItem.leftBarButtonItem = self.userBarBtn;
-    //self.navigationItem.rightBarButtonItem = self.searchBarButton;
-    //监听点击地图，获取模型内的poi
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPoiNames:)  name:FMModelSelected object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startLoadFMMap:) name:NotiLoadFMMap object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backToMain:) name:NotiBackToMain object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeTopAlert:) name:NotiCloseTopAlert object:nil];
+    [self addNotification];
     
     [[MTRequestNetwork defaultManager] registerDelegate:self];
     // 检查是否登录
     BOOL login = [[DataManager defaultInstance] findLocationUserPersonalInformation];
     // 在这里开始发送网络请求
-    if (login == YES)
-    {
-        [self updateFromNetwork];
-    }
+    if (login == YES) [self updateFromNetwork];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -117,8 +76,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
     [super viewDidAppear:animated];
     if (self.currentTask != nil)
     {
-        [self startMessageViewLoadBy:self.currentTask];
-        if (self.currentTask.workDeviceId != nil && ![self.currentTask.workDeviceId isEqualToString:@""]) {
+        if (self.currentTask.waiterDeviceId != nil && ![self.currentTask.waiterDeviceId isEqualToString:@""]) {
             [self addLocationOnMap:self.currentTask];
         }
     }
@@ -165,35 +123,43 @@ NSString* const FMModelSelected = @"FMModelSelected";
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    self.buttonWConstraint.constant = kScreenWidth/2;
-    self.topConstraint.constant = kScreenHeight - 64;
-    self.bottomContraint.constant = 64 - kScreenHeight;
-    if (self.currentTask != nil)
-    {
-        [self showCallResult:YES];
-    }
-
 }
-
-- (void)startMessageViewLoadBy:(DBCallTask *)task;
+#pragma mark - init
+- (void)addGestureRecognizer
 {
-    self.lastSelectedIndex = 1;
-    self.currentTask = task;
-    [self showCallResult:YES];
-    self.msgViewController.curentTask = task;
-    [self.msgViewController startCountDown];
-    [self changNavViewStyleByLayerMode:NAVIVARTYPE_CALL];
-    // 已经接单的状态
-    if ([self.currentTask.acceptStatus isEqualToString:@"1"])
-    {
-        // 任务被接受 获取用户和服务员友盟userid
-        if (self.msgViewController.conversationView == nil)
-        {
-            [self.msgViewController loadUserID];
-        }
-    }
-}
+    UITapGestureRecognizer * tap1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction:)];
+    [self.toSearchView addGestureRecognizer:tap1];
+    UITapGestureRecognizer * tap2 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction:)];
+    [self.toWorldPlatform addGestureRecognizer:tap2];
+    UITapGestureRecognizer * tap3 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction:)];
+    [self.toCallService addGestureRecognizer:tap3];
+    
+    UITapGestureRecognizer * alertTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(alertSelect)];
+    [self.loginAlertTapView addGestureRecognizer:alertTap];
 
+}
+- (void)addUI
+{
+    self.segmentSelect = NSNotFound;
+    self.loginAlertView.layer.cornerRadius = 7.0f;
+    self.loginAlertView.clipsToBounds = YES;
+    
+    self.topAlertView.pauseInterval = 0;
+    self.topAlertView.alpha = 0.9f;
+    self.topAlertView.bufferSpaceBetweenLabels = 30;
+    self.topAlertView.textColor = [UIColor grayColor];
+    self.topAlertView.font = [UIFont systemFontOfSize:18];
+    self.topAlertView.Text = @"点击任意建筑 即可为您提供导航路线 您可以通过手势进行缩放 旋转地图及调整地图倾斜角";
+    
+    self.title = @"红树林导航";
+    self.navigationItem.leftBarButtonItem = self.userBarBtn;
+}
+- (void)addNotification
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backToMain:) name:NotiBackToMain object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeTopAlert:) name:NotiCloseTopAlert object:nil];
+
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -211,46 +177,6 @@ NSString* const FMModelSelected = @"FMModelSelected";
     return _userBarBtn;
 }
 
-- (UIBarButtonItem *)searchBarButton
-{
-    if (_searchBarButton == nil)
-    {
-        _searchBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"search_icon_navi"] style:UIBarButtonItemStylePlain target:self action:@selector(naviSearch:)];
-    }
-    return _searchBarButton;
-}
-
-- (UIBarButtonItem *)cancelBarButton
-{
-    if (_cancelBarButton == nil)
-    {
-        _cancelBarButton = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancelCallAction:)];
-    }
-    return _cancelBarButton;
-}
-
-- (UIBarButtonItem *)reloadBarButton
-{
-    if (_reloadBarButton == nil)
-    {
-        _reloadBarButton = [[UIBarButtonItem alloc] initWithTitle:@"刷新" style:UIBarButtonItemStylePlain target:self action:@selector(reloadTaskAction:)];
-    }
-    return _reloadBarButton;
-    
-}
-
-- (void)cancelCallAction:(UIBarButtonItem *)bar
-{
-    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示信息" message:@"确认取消任务？" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-    UIAlertAction * action2 = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self.msgViewController getLastTaskListByType:0];
-    }];
-    [alert addAction:action1];
-    [alert addAction:action2];
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
 - (void)alertSelect
 {
     self.loginAlertView.hidden = YES;
@@ -263,23 +189,11 @@ NSString* const FMModelSelected = @"FMModelSelected";
     }
 }
 
-- (void)getPoiNames:(NSNotification *)noti
-{
-    NSDictionary *dic = noti.userInfo;
-    NSArray * poiNames = dic[@"poiNames"];
-    NSString * modelName = dic[@"modelName"];
-    [self showFMActionSheetViewByNames:poiNames modelName:modelName];
-    
-}
+#pragma mark - Notif
 
 - (void)closeTopAlert:(NSNotification *)noti
 {
     self.topAlertView.hidden = YES;
-}
-
-- (void)startLoadFMMap:(NSNotification *)noti
-{
-//    [self loadFMMap];
 }
 
 - (void)backToMain:(NSNotification *)notification
@@ -319,26 +233,12 @@ NSString* const FMModelSelected = @"FMModelSelected";
     }
 }
 
-- (void)showFMActionSheetViewByNames:(NSArray *)poiNames modelName:(NSString *)modelName
-{
-    UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:modelName
-                                                            delegate:self
-                                                   cancelButtonTitle:nil
-                                              destructiveButtonTitle:nil
-                                                   otherButtonTitles:nil];
-    
-    for (NSString * poiName in poiNames) {
-        [actionSheet addButtonWithTitle:poiName];
-    }
-    [actionSheet addButtonWithTitle:@"取消"];
-    //	actionSheet.cancelButtonIndex = actionSheet.numberOfButtons -1;
-    [actionSheet showInView:self.view];
-}
-
 - (void)showSettings:(UIBarButtonItem *)sender
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiShowSettings object:sender];
 }
+
+#pragma mark - Action 
 
 - (void)backHomeAction:(UIBarButtonItem *)bar
 {
@@ -354,11 +254,6 @@ NSString* const FMModelSelected = @"FMModelSelected";
         }
         [self.mapVC.navigationController popViewControllerAnimated:YES];
 	}
-}
-
-- (void)reloadTaskAction:(UIBarButtonItem *)bar
-{
-    [self.msgViewController getLastTaskListByType:1];
 }
 
 //搜索页面跳转消息
@@ -432,6 +327,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
         }
     }
 }
+
 - (void)tapCallService
 {
 //    if ([FMKLocationServiceManager shareLocationServiceManager].currentMapCoord.mapID == 0)
@@ -452,65 +348,14 @@ NSString* const FMModelSelected = @"FMModelSelected";
 //    }
     
 }
-
-- (void)setLastSelectedIndex:(NSInteger)lastSelectedIndex
+// 显示登录界面
+- (void)showLogin
 {
-    _lastSelectedIndex = lastSelectedIndex;
-//    self.segmentCallOrNavigation.selectedSegmentIndex = _lastSelectedIndex;
-    NSString *name = @"(暂未获取到您当前的位置)";
-    if ([self getCurrentZoneName] != nil && ![[self getCurrentZoneName] isEqualToString:@""])
-    {
-        name = [self getCurrentZoneName];
-    }
-    [self changeSegment:_lastSelectedIndex];
-}
-
-// 显示callview
-- (void)showCallView:(BOOL)show
-{
-}
-
-// 显示发送呼叫的结果
-- (void)showCallResult:(BOOL)show
-{
-    self.messageView.hidden = !show;
-    
-    CGRect showRect = CGRectMake(0, kScreenHeight - 60, kScreenWidth, kScreenHeight-64);
-    CGRect HiddenRect = CGRectMake(0, kScreenHeight, kScreenWidth, kScreenHeight-64);
-    self.msgViewController.messageLabel.hidden = self.msgViewController.messageLabel.text.integerValue > 0 ? NO : YES;
-    [UIView animateWithDuration:0.25 animations:^{
-        self.messageView.frame = show ? showRect: HiddenRect;
-//        self.topConstraint.constant = show ? kScreenHeight - 60 : kScreenHeight;
-//        self.bottomContraint.constant = show ? 60 -kScreenHeight : -kScreenHeight;
-    }];
-}
-
-// 显示聊天界面
-- (void)showMsgView:(BOOL)show
-{
-    self.messageView.hidden = NO;
-    self.msgViewController.showMessage = show;
-    CGRect showRect = CGRectMake(0, 64, kScreenWidth, kScreenHeight-64);
-    CGRect HiddenRect = CGRectMake(0, kScreenHeight - 64, kScreenWidth, kScreenHeight-64);
-    [UIView animateWithDuration:0.25 animations:^{
-        self.messageView.frame = show ? showRect:HiddenRect;
-//        self.topConstraint.constant = show ? 0:kScreenHeight - 64;
-//        self.bottomContraint.constant = show ? 0: 64 - kScreenHeight;
-    }];
-}
-
-- (void)changeSegment:(NSInteger)selectedIndex
-{
-    // 地图模式
-    if (selectedIndex == 0)
-    {
-        self.messageView.hidden = YES;
-    }
-    // 呼叫模式
-    else if (selectedIndex == 1)
-    {
-        self.messageView.hidden = YES;
-    }
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+    UINavigationController *navi = (UINavigationController *) [storyBoard instantiateViewControllerWithIdentifier:@"loginNavi"];
+    LoginViewController* loginVC = (LoginViewController*)[navi topViewController];
+    loginVC.showStop = NO;
+    [self presentViewController:navi animated:YES completion:nil];
 }
 
 - (void)changNavViewStyleByLayerMode:(NaviBarType)type
@@ -521,22 +366,26 @@ NSString* const FMModelSelected = @"FMModelSelected";
 //        self.navigationItem.titleView = self.segmentCallOrNavigation;
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(backHomeAction:)];
     }
-    // 地图呼叫模式
-    else if (type == NAVIVARTYPE_CALL)
-    {
-        self.navigationItem.leftBarButtonItem = self.cancelBarButton;
-        self.navigationItem.rightBarButtonItem = self.reloadBarButton;
-        self.title = @"呼叫任务";
-    }else if (type == NAVIVARTYPE_IN)
+    else if (type == NAVIVARTYPE_IN)
     {
         self.navigationItem.rightBarButtonItem = nil;
-        //        self.navigationItem.titleView = self.segmentCallOrNavigation;
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(backHomeAction:)];
     }else if (type == NAVIVARTYPE_OUT)
     {
         self.navigationItem.rightBarButtonItem = nil;
         self.navigationItem.leftBarButtonItem = self.userBarBtn;
     }
+}
+
+#pragma mark - Map
+
+- (FMZoneManager *)myZoneManager
+{
+    if (!_myZoneManager)
+    {
+        _myZoneManager = [[FMZoneManager alloc] initWithMangroveMapView:nil];
+    }
+    return _myZoneManager;
 }
 
 - (void)addLocationOnMap:(DBCallTask *)task
@@ -571,7 +420,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
     if (self.waiterLocation == nil)
     {
         self.waiterLocation = [[FMLocationBuilderInfo alloc] init];
-        self.waiterLocation.loc_mac  = task.workDeviceId;
+        self.waiterLocation.loc_mac  = task.waiterDeviceId;
         self.waiterLocation.loc_desc = @"服务员信息";
         self.waiterLocation.loc_icon = @"waiter_lcon.png";
     }
@@ -584,7 +433,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
     if (self.mySelfLocation == nil)
     {
         self.mySelfLocation = [[FMLocationBuilderInfo alloc] init];
-        self.mySelfLocation.loc_mac = task.diviceId;
+        self.mySelfLocation.loc_mac = task.userDeviceId;
         self.mySelfLocation.loc_desc = @"我的信息";
         self.mySelfLocation.loc_icon = @"clien_icon.png";
     }
@@ -598,23 +447,12 @@ NSString* const FMModelSelected = @"FMModelSelected";
     [FMKLocationServiceManager shareLocationServiceManager].delegate = nil;
 }
 
-- (IBAction)goMyCurrentLocation:(id)sender
-{
-    BOOL inDoorMap = [[NSUserDefaults standardUserDefaults] boolForKey:@"inDoorMap"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotiCurrentLocation object:@(inDoorMap)];
-}
-
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"showMsg"])
-    {
-        self.msgViewController = (MsgViewController *)[segue destinationViewController];
-        self.msgViewController.centerVC = self;
-    }
-    else if ([segue.identifier isEqualToString:@"showMap"])
+    if ([segue.identifier isEqualToString:@"showMap"])
     {
         UINavigationController *nav = [segue destinationViewController];
         self.mapVC = (MapViewController *)[nav topViewController];
@@ -622,14 +460,8 @@ NSString* const FMModelSelected = @"FMModelSelected";
     }
 }
 
-- (FMZoneManager *)myZoneManager
-{
-	if (!_myZoneManager)
-	{
-		_myZoneManager = [[FMZoneManager alloc] initWithMangroveMapView:nil];
-	}
-	return _myZoneManager;
-}
+#pragma mark - Set
+
 - (void)setFunction:(CurrentFunction)function
 {
     switch (function)
@@ -642,15 +474,15 @@ NSString* const FMModelSelected = @"FMModelSelected";
             break;
     }
 }
+
 - (void)showBottomViewByFunction:(BOOL)show
 {
-//    CGRect showFrame = CGRectMake(0, kScreenHeight-self.bottomBarView.frame.size.height, self.bottomBarView.frame.size.width, self.bottomBarView.frame.size.height);
-//    CGRect hideFrame = CGRectMake(0, kScreenHeight, self.bottomBarView.frame.size.width, self.bottomBarView.frame.size.height);
     [UIView animateWithDuration:0.3 animations:^{
         self.bottomBarView.hidden = !show;
     }];
     
 }
+
 - (void)showWelcome
 {
     
@@ -658,17 +490,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
     [self showLogin];
 }
 
-// 显示登录界面
-- (void)showLogin
-{
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
-    UINavigationController *navi = (UINavigationController *) [storyBoard instantiateViewControllerWithIdentifier:@"loginNavi"];
-    LoginViewController* loginVC = (LoginViewController*)[navi topViewController];
-    loginVC.showStop = NO;
-    [self presentViewController:navi animated:YES completion:nil];
-}
-
-#pragma mark- nekwork
+#pragma mark- Netkwork
 
 - (void)startRequest:(NSURLSessionTask *)task
 {
@@ -725,15 +547,6 @@ NSString* const FMModelSelected = @"FMModelSelected";
     }
 }
 
-- (void)loadFMMap
-{
-    MBProgressHUD *HUD =[MBProgressHUD showHUDAddedTo:[AppDelegate sharedDelegate].window animated:YES];
-    HUD.labelText = @"正在加载地图，请稍等";
-    [HUD show:YES];
-    sleep(5);
-    [self.mapVC loadMap];
-}
-
 // 更新登录
 - (void)requestAutoLogin
 {
@@ -754,6 +567,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
                                                              withByUser:YES
                                                        andOldInterfaces:YES];
 }
+
 - (void)checkBindRoomInfor
 {
     NSString *deviceId = @"";
@@ -777,6 +591,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
                                             withByUser:YES
                                       andOldInterfaces:YES];
 }
+
 - (void)showBottomView:(SegmentSelected)select
 {
     switch (select)
@@ -838,7 +653,6 @@ NSString* const FMModelSelected = @"FMModelSelected";
 	self.mapVC.fmView = nil;
 	self.mapVC = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    NSLog(@"______________________________");
 }
 
 @end

@@ -2,12 +2,13 @@
 //  DBUserLogin+CoreDataProperties.h
 //  MangroveTree
 //
-//  Created by 罗禹 on 2017/3/7.
+//  Created by liuchao on 2017/4/24.
 //  Copyright © 2017年 luoyu. All rights reserved.
 //
 
 #import "DBUserLogin+CoreDataClass.h"
-
+#import "DBBindCustom+CoreDataClass.h"
+#import "DBCallTask+CoreDataClass.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -31,6 +32,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *sex;
 @property (nullable, nonatomic, copy) NSString *stste;
 @property (nullable, nonatomic, copy) NSString *ticker;
+@property (nullable, nonatomic, retain) DBBindCustom *hasCustomBind;
+@property (nullable, nonatomic, retain) NSSet<DBCallTask *> *hasTask;
+
+@end
+
+@interface DBUserLogin (CoreDataGeneratedAccessors)
+
+- (void)addHasTaskObject:(DBCallTask *)value;
+- (void)removeHasTaskObject:(DBCallTask *)value;
+- (void)addHasTask:(NSSet<DBCallTask *> *)values;
+- (void)removeHasTask:(NSSet<DBCallTask *> *)values;
 
 @end
 

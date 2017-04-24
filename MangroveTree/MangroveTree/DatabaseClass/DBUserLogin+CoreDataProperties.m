@@ -2,7 +2,7 @@
 //  DBUserLogin+CoreDataProperties.m
 //  MangroveTree
 //
-//  Created by 罗禹 on 2017/3/7.
+//  Created by liuchao on 2017/4/24.
 //  Copyright © 2017年 luoyu. All rights reserved.
 //
 
@@ -30,5 +30,7 @@
 @dynamic sex;
 @dynamic stste;
 @dynamic ticker;
+@dynamic hasCustomBind;
+@dynamic hasTask;
 
 @end

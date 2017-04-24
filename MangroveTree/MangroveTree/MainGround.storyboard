@@ -83,7 +83,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UkX-1d-EdB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-282" y="-600"/>
+            <point key="canvasLocation" x="-526" y="-967"/>
         </scene>
         <!--Frame View Controller-->
         <scene sceneID="zFE-DT-SIQ">
@@ -102,12 +102,6 @@
                                 <color key="backgroundColor" red="0.67843137249999996" green="0.6705882353" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <segue destination="I7M-cL-o8d" kind="embed" identifier="showMap" id="gcf-au-cLb"/>
-                                </connections>
-                            </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="57a-av-jS8" userLabel="MessageView">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <connections>
-                                    <segue destination="yPX-vf-5QQ" kind="embed" identifier="" id="suw-zj-rJz"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6n8-jj-txz">
@@ -282,14 +276,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="57a-av-jS8" firstAttribute="width" secondItem="BKf-ij-IEq" secondAttribute="width" id="B3X-kx-Zws"/>
                             <constraint firstAttribute="trailing" secondItem="6n8-jj-txz" secondAttribute="trailing" id="BzM-k0-TO7"/>
                             <constraint firstItem="Xpc-JH-pRS" firstAttribute="centerY" secondItem="BKf-ij-IEq" secondAttribute="centerY" id="CkG-kt-Hsd"/>
-                            <constraint firstItem="57a-av-jS8" firstAttribute="centerX" secondItem="BKf-ij-IEq" secondAttribute="centerX" id="GZn-If-Y5I"/>
                             <constraint firstItem="Xpc-JH-pRS" firstAttribute="width" secondItem="BKf-ij-IEq" secondAttribute="width" id="XdX-5q-QJB"/>
                             <constraint firstItem="Ue1-oe-9KJ" firstAttribute="top" secondItem="2rG-TZ-lR7" secondAttribute="bottom" id="b5L-XR-zUM"/>
-                            <constraint firstItem="Dve-cn-46b" firstAttribute="top" secondItem="57a-av-jS8" secondAttribute="bottom" id="bKO-ER-bZT"/>
-                            <constraint firstItem="57a-av-jS8" firstAttribute="top" secondItem="2rG-TZ-lR7" secondAttribute="bottom" id="dqx-m5-YvC"/>
                             <constraint firstItem="1LS-Ka-rh3" firstAttribute="leading" secondItem="BKf-ij-IEq" secondAttribute="leading" constant="25" id="gVt-X0-f3R"/>
                             <constraint firstItem="Xpc-JH-pRS" firstAttribute="centerX" secondItem="BKf-ij-IEq" secondAttribute="centerX" id="hFr-Eu-PSP"/>
                             <constraint firstItem="Xpc-JH-pRS" firstAttribute="height" secondItem="BKf-ij-IEq" secondAttribute="height" id="iHw-RJ-x7c"/>
@@ -306,11 +296,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bottomBarView" destination="6n8-jj-txz" id="jWp-Xy-Xaa"/>
-                        <outlet property="bottomContraint" destination="bKO-ER-bZT" id="jxk-2c-7Mb"/>
                         <outlet property="bottombarConstraint" destination="xCv-Zw-GKd" id="kFU-hm-GV9"/>
                         <outlet property="loginAlertTapView" destination="knp-Di-Zdd" id="05r-Wa-rJC"/>
                         <outlet property="loginAlertView" destination="1LS-Ka-rh3" id="REQ-CI-3bH"/>
-                        <outlet property="messageView" destination="57a-av-jS8" id="FNp-5w-vSF"/>
                         <outlet property="toCallService" destination="DjH-NZ-Zdh" id="myc-fg-fXE"/>
                         <outlet property="toCallServiceImage" destination="Q93-VM-7PJ" id="Zox-ro-Xgp"/>
                         <outlet property="toSearchImage" destination="U9i-mU-l7t" id="Bbm-fr-Kt0"/>
@@ -318,14 +306,14 @@
                         <outlet property="toWorldPlatform" destination="6zt-yn-Zw3" id="ZcY-Rt-xhc"/>
                         <outlet property="toWorldPlatformImage" destination="Y6e-kA-XZm" id="Yjm-KV-Ktz"/>
                         <outlet property="topAlertView" destination="Ue1-oe-9KJ" id="z3p-oh-8XJ"/>
-                        <outlet property="topConstraint" destination="dqx-m5-YvC" id="9tp-pB-KvZ"/>
                         <segue destination="Vx6-mD-Ury" kind="show" identifier="showBind" id="VQe-WG-j74"/>
+                        <segue destination="aH1-1m-eUi" kind="show" id="NV2-qy-qh7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GPv-yh-KFy" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="ga7-P4-tqf"/>
             </objects>
-            <point key="canvasLocation" x="-282.39999999999998" y="178.56071964017991"/>
+            <point key="canvasLocation" x="-527" y="-196"/>
         </scene>
         <!--MapController-->
         <scene sceneID="Fsp-X1-9ZJ">
@@ -379,7 +367,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t5R-fJ-YhV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1066.4000000000001" y="1780.6596701649178"/>
+            <point key="canvasLocation" x="-1202" y="1447"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rQf-b2-029">
@@ -395,7 +383,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="egq-VX-kjj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1065" y="973"/>
+            <point key="canvasLocation" x="-1202" y="641"/>
         </scene>
         <!--Bind Room View Controller-->
         <scene sceneID="29H-0w-gm5">
@@ -560,7 +548,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yrf-k1-qaL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-282.39999999999998" y="993.55322338830592"/>
+            <point key="canvasLocation" x="-484" y="641"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="h1a-BV-FGP">
@@ -1007,7 +995,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Chz-0C-pLB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1213.5999999999999" y="178.56071964017991"/>
+            <point key="canvasLocation" x="239" y="641"/>
         </scene>
         <!--Msg View Controller-->
         <scene sceneID="wOB-G8-DY7">
@@ -1125,7 +1113,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="814-LA-IEt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1977" y="-600"/>
+            <point key="canvasLocation" x="-1942" y="-966"/>
         </scene>
         <!--USER SETTINGS-->
         <scene sceneID="QAN-tK-uwO">
@@ -1260,7 +1248,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HiT-pQ-4kM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1977.5999999999999" y="178.56071964017991"/>
+            <point key="canvasLocation" x="-1942" y="-195"/>
         </scene>
     </scenes>
     <resources>

@@ -40,7 +40,6 @@ typedef NS_ENUM(NSInteger,SegmentSelected)
 
 @property (weak, nonatomic) MapViewController *mapVC;
 
-@property (assign, nonatomic) NSInteger lastSelectedIndex;
 @property (strong, nonatomic) DBCallTask *currentTask;
 @property (assign, nonatomic) CurrentFunction function;
 
@@ -49,14 +48,6 @@ typedef NS_ENUM(NSInteger,SegmentSelected)
 - (void)removeLocationOnMap:(DBCallTask *)task;
 
 - (void)changNavViewStyleByLayerMode:(NaviBarType)type;
-
-- (void)startMessageViewLoadBy:(DBCallTask *)task;
-
-- (void)showCallView:(BOOL)show;
-
-- (void)showCallResult:(BOOL)show;
-
-- (void)showMsgView:(BOOL)show;
 
 - (void)showBottomView:(SegmentSelected)select;
 
