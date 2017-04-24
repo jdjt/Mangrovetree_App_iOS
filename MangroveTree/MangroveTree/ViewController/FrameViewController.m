@@ -74,8 +74,9 @@ NSString* const FMModelSelected = @"FMModelSelected";
     self.loginAlertView.clipsToBounds = YES;
     
     self.topAlertView.pauseInterval = 0;
+    self.topAlertView.alpha = 0.9f;
     self.topAlertView.bufferSpaceBetweenLabels = 30;
-    self.topAlertView.textColor = [UIColor colorWithHexString:@"#484b59"];
+    self.topAlertView.textColor = [UIColor grayColor];
     self.topAlertView.font = [UIFont systemFontOfSize:18];
     self.topAlertView.Text = @"点击任意建筑 即可为您提供导航路线 您可以通过手势进行缩放 旋转地图及调整地图倾斜角";
      
