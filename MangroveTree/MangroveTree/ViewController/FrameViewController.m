@@ -293,11 +293,8 @@ NSString* const FMModelSelected = @"FMModelSelected";
     {
         if (self.segmentSelect == Segment_toService)
             return;
-        self.toSearchImage.image = [UIImage imageNamed:@"toSearch_default"];
-        self.toWorldPlatformImage.image = [UIImage imageNamed:@"toWorld_default"];
-        self.toCallServiceImage.image = [UIImage imageNamed:@"toCallService_act"];
+        [self showBottomView:Segment_toService];
         [self tapCallService];
-        self.toCallServiceImage.image = [UIImage imageNamed:@"toCallService_default"];
     }
 }
 
