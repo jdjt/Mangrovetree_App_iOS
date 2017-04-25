@@ -121,5 +121,15 @@
 #define URL_CHECKBINDROOM                   @"/hotelcallservice/customer/getBindingInfo.json"
 // 绑定客房
 #define URL_BINGROOM                        @"/hotelcallservice/customer/binding.json"
+// 发送呼叫任务
+#define URL_SENG_TASK                       @"/hotelcallservice/customer/addTask.json"
+// 取消任务
+#define URL_CANCEL_TASK                     @"/hotelcallservice/customer/cancelTask.json"
+
+// 取消任务模版
+#define URL_CANCEL_LIST                     @"/hotelcallservice/customer/cacel/getCacelDescList.json"
+
+// 根据任务号获取任务详情
+#define URL_GETTASK_TASKCODE                @"/hotelcallservice/customer/getMessageByTaskCode.json "
 
 #endif /* NetworkInterface_h */

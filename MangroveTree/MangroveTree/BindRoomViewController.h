@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FrameViewController.h"
 
 @interface BindRoomViewController : UITableViewController
+
+@property (nonatomic, strong) FrameViewController *frameController;
 
 @end

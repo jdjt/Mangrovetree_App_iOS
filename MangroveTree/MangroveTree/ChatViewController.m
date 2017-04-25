@@ -13,15 +13,17 @@
 #import "ChatHeadView.h"
 #import "NSString+Addtions.h"
 #import "FrameViewController.h"
+#import "ChatViewController+NetWork.h"
 
 #define kSizeHead CGSizeMake(kScreenWidth, 74)
 
-@interface ChatViewController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,SendMsgDelegate>
+@interface ChatViewController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,SendMsgDelegate,MTRequestNetWorkDelegate>
 
 @property (nonatomic, strong) UITableView *chatTabelView;
 @property (nonatomic, strong) ChatInputBar *chatInputView;
 @property (nonatomic, strong) ChatHeadView *headView;
 @property (nonatomic, strong) UIView *textView;
+@property (nonatomic, strong) UIBarButtonItem *cancelBarItem;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 
 @end
@@ -67,6 +69,17 @@
     self.chatInputView.delegate = self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[MTRequestNetwork defaultManager] registerDelegate:self];
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [[MTRequestNetwork defaultManager] removeDelegate:self];
+}
+
 #pragma mark - Getter Method
 
 - (UITableView *)chatTabelView
@@ -109,6 +122,14 @@
         _dataSource = [NSMutableArray array];
     }
     return _dataSource;
+}
+- (UIBarButtonItem *)cancelBarItem
+{
+    if (!_cancelBarItem)
+    {
+        _cancelBarItem = [[UIBarButtonItem alloc] initWithTitle:@"取消任务" style:UIBarButtonItemStylePlain target:self action:@selector(cancelTaskAction:)];
+    }
+    return _cancelBarItem;
 }
 #pragma mark - UITableView  Delegate
 
@@ -161,141 +182,48 @@
 //        self.textView.hidden = NO;
 //        self.chatInputView.hidden = YES;
 //        [self.chatInputView inPutViewresignFirstResponder];
+        [self sengMsgToSerive];
     }
 }
 
-#warning 暂时舍弃自己手写聊天界面
-/*
-- (void)routerEventWithType:(EventChatCellType)eventType userInfo:(NSDictionary *)userInfo
-{
-    switch (eventType)
-    {
-        case EventChatMoreViewPickerImage:
-            [self invokingSystemPhoto];
-            break;
-        case EventChatCellTypeSendMsgEvent:
-            break;
-        case EventChatMoreViewCemera:
-            [self invokingSystemCemera];
-            break;
-        default:
-            break;
-    }
-}
-- (void)invokingSystemPhoto
-{
-    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
-    if (status == PHAuthorizationStatusRestricted ||
-        status == PHAuthorizationStatusDenied)
-    {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"去开启访问相册权限?" message:nil preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            
-        }];
-        UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-            
-            [self openJurisdiction];
-        }];
-        // 将UIAlertAction添加到UIAlertController中
-        [alertController addAction:cancel];
-        [alertController addAction:ok];
-        // present显示
-        [self presentViewController:alertController animated:YES completion:nil];
-        return;
-    }
-    //创建UIImagePickerController
-    UIImagePickerController *pickVC = [[UIImagePickerController alloc] init];
-    
-    //设置图片源类型
-    pickVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary; //取出所有图片资源的相簿
-    
-    //设置代理
-    pickVC.delegate = self;
-    
-    [self presentViewController:pickVC animated:YES completion:nil];
-}
-
-- (void)invokingSystemCemera
-{
-    AVAuthorizationStatus authStatus =  [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
-    if (authStatus == AVAuthorizationStatusRestricted || authStatus ==AVAuthorizationStatusDenied){
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"去开启访问相机权限?" message:nil preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            
-        }];
-        UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-            [self openJurisdiction];
-        }];
-        [alertController addAction:cancel];
-        [alertController addAction:ok];
-        [self presentViewController:alertController animated:YES completion:nil];
-        return;
-    }
-    if ([self isCameraAvailable])
-    {
-        // 初始化图片选择控制器
-        UIImagePickerController *controller = [[UIImagePickerController alloc] init];
-        [controller setSourceType:UIImagePickerControllerSourceTypeCamera];
-        NSString *requiredMediaType = ( NSString *)kUTTypeImage;
-        NSArray *arrMediaTypes=[NSArray arrayWithObjects:requiredMediaType,nil];
-        [controller setMediaTypes:arrMediaTypes];
-        // 设置是否可以管理已经存在的图片或者视频
-        [controller setAllowsEditing:YES];
-        // 设置代理
-        [controller setDelegate:self];
-        [self presentViewController:controller animated:YES completion:nil];
-    }
-}
-
--(void)openJurisdiction
-{
-    NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-    if ([[UIApplication sharedApplication] canOpenURL:url])
-    {
-        [[UIApplication sharedApplication] openURL:url];
-    }
-}
-
-// 判断设备是否有摄像头
-- (BOOL)isCameraAvailable
-{
-    return [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
-}
-// 前面的摄像头是否可用
-- (BOOL)isFrontCameraAvailable
-{
-    return [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront];
-}
-// 后面的摄像头是否可用
-- (BOOL)isRearCameraAvailable
-{
-    return [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear];
-}
-#pragma mark - UIImagePickerControllerDelegate
-
-// 当得到照片或者视频后，调用该方法
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
-    if ([mediaType isEqualToString:( NSString *)kUTTypeImage])
-    {
-        UIImage *theImage = nil;
-        if ([picker allowsEditing]){
-            //获取用户编辑之后的图像
-            theImage = [info objectForKey:UIImagePickerControllerEditedImage];
-        } else {
-            // 照片的原数据
-            theImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-        }
-        // 保存图片到相册中
-    }
-    [picker  dismissViewControllerAnimated:YES completion:nil];
-}
-// 当用户取消时，调用该方法
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+- (void)startRequest:(NSURLSessionTask *)task
 {
     
-    [picker  dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)pushResponseResultsSucceed:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg andData:(NSMutableArray *)datas
+{
+    if (task == self.seesionSengTask)
+    {
+        
+    }else if (task == self.cancelTaskSession)
+    {
+        
+    }else if (task == self.cancelListSession)
+    {
+    }else if (task == self.taskDeatilSession)
+    {
+        
+    }
+}
+- (void)pushResponseResultsFailing:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg
+{
+    if (task == self.seesionSengTask)
+    {
+        
+    }else if (task == self.cancelTaskSession)
+    {
+        
+    }else if (task == self.cancelListSession)
+    {
+    }else if (task == self.taskDeatilSession)
+    {
+        
+    }
+}
+
+- (void)dealloc
+{
+    [[MTRequestNetwork defaultManager] cancleAllRequest];
 }
 
 - (void)didReceiveMemoryWarning
@@ -303,7 +231,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-*/
 /*
 #pragma mark - Navigation
 

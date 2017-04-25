@@ -21,7 +21,7 @@
 + (NSString*)getUUID;
 
 + (NSString*) macaddress;
-
++ (NSString *)deviceToken;
 /**
  * @abstract 获取当前时间
  */

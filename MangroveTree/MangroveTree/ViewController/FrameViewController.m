@@ -16,6 +16,7 @@
 #import "FMZoneManager.h"
 #import "ChatViewController.h"
 #import "MarqueeLabel.h"
+#import "BindRoomViewController.h"
 
 NSString* const FMModelSelected = @"FMModelSelected";
 
@@ -56,6 +57,8 @@ NSString* const FMModelSelected = @"FMModelSelected";
 {
     [super viewDidLoad];
     
+    self.goChat = NO;
+    
 	[UIApplication sharedApplication].idleTimerDisabled = YES;//不自动锁屏
     
     [self addUI];
@@ -69,6 +72,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
     BOOL login = [[DataManager defaultInstance] findLocationUserPersonalInformation];
     // 在这里开始发送网络请求
     if (login == YES) [self updateFromNetwork];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -98,6 +102,12 @@ NSString* const FMModelSelected = @"FMModelSelected";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [self showBottomView:Segment_none];
+    
+    if (self.goChat == YES)
+        [self goChatView];
+    
     [UIApplication sharedApplication].idleTimerDisabled = NO;//自动锁屏
     
     [[FMLocationManager shareLocationManager] setMapView:nil];
@@ -454,6 +464,10 @@ NSString* const FMModelSelected = @"FMModelSelected";
         UINavigationController *nav = [segue destinationViewController];
         self.mapVC = (MapViewController *)[nav topViewController];
         self.mapVC.centerVC = self;
+    }else if ([segue.identifier isEqualToString:@"showBind"])
+    {
+        BindRoomViewController *vc = (BindRoomViewController *)[segue destinationViewController];
+        vc.frameController = self;
     }
 }
 
@@ -486,7 +500,14 @@ NSString* const FMModelSelected = @"FMModelSelected";
 #warning 引导页
     [self showLogin];
 }
-
+- (void)goChatView
+{
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:nil action:nil];
+    self.navigationItem.backBarButtonItem = barButtonItem;
+    ChatViewController *chat = [[ChatViewController alloc] init];
+    [self.navigationController pushViewController:chat animated:YES];
+    self.goChat = NO;
+}
 #pragma mark- Netkwork
 
 - (void)startRequest:(NSURLSessionTask *)task
@@ -502,14 +523,16 @@ NSString* const FMModelSelected = @"FMModelSelected";
     }else if (task == self.checkBind)
     {
         NSDictionary *dic = datas[0];
+        
         if ([dic[@"retOk"] isEqualToString:@"0"])
         {
-            ChatViewController *chat = [[ChatViewController alloc] init];
+            [self goChatView];
+        }else if([dic[@"retOk"] isEqualToString:@"1"])
+        {
             UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:nil action:nil];
             self.navigationItem.backBarButtonItem = barButtonItem;
-            [self.navigationController pushViewController:chat animated:YES];
-        }else
-            [MyAlertView showAlert:dic[@"message"]];
+            [self performSegueWithIdentifier:@"showBind" sender:nil];
+        }
     }
 }
 
@@ -567,21 +590,9 @@ NSString* const FMModelSelected = @"FMModelSelected";
 
 - (void)checkBindRoomInfor
 {
-    NSString *deviceId = @"";
-    if (![PDKeyChain keyChainLoad])
-    {
-        deviceId = [Util getUUID];
-        [PDKeyChain keyChainSave:deviceId];
-    }else
-        deviceId = [PDKeyChain keyChainLoad];
-    
-    NSString *deviceToken = [[DataManager defaultInstance] getParameter].deviceToken;
-    if (!deviceToken)
-        deviceToken = @"1";
-
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
-    [params setValue:deviceId forKey:@"deviceId"];
-    [params setValue:deviceToken forKey:@"deviceToken"];
+    [params setValue:[Util macaddress] forKey:@"deviceId"];
+    [params setValue:[Util deviceToken] forKey:@"deviceToken"];
     self.checkBind = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
                                                 webURL:URL_CHECKBINDROOM
                                                 params:params

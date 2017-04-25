@@ -56,4 +56,18 @@
     return parameter;
 }
 
+- (DBBindCustom *)getCustomerBingRoom
+{
+    DBBindCustom *custombind = nil;
+    NSArray *result = [self arrayFromCoreData:@"DBBindCustom" predicate:nil limit:NSIntegerMax offset:0 orderBy:nil];
+    if (result.count <= 0 || result == nil)
+    {
+        custombind = (DBBindCustom *)[self insertIntoCoreData:@"DBBindCustom"];
+    }else
+    {
+        custombind = result[0];
+    }
+    return custombind;
+}
+
 @end

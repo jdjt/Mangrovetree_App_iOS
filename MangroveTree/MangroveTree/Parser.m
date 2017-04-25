@@ -31,13 +31,20 @@
     }else if ([ident isEqualToString:URL_ACTIVITY_DETAIL])
     {
        datas = [self parserInfor:dict];
+    }else if ([ident isEqualToString:URL_CHECKBINDROOM])// 检查是否绑定客房
+    {
+        datas = [self parserCheckBingRoom:dict];
+    }else if ([ident isEqualToString:URL_BINGROOM])// 绑定客房
+    {
+        datas = [self parserBindRoom:dict];
     }
     //存储数据
     [[DataManager defaultInstance] saveContext];
     return datas;
 }
 
-#pragma mark - 用户重复注册
+#pragma mark - Login
+
 - (NSMutableArray *)parserRepeatRegist:(NSData *)dict
 {
     NSMutableArray *array = [NSMutableArray array];
@@ -47,8 +54,6 @@
     return array;
 }
 
-#pragma mark - 验证码
-
 - (NSMutableArray *)parserVerificationCode:(NSData *)dict
 {
     NSMutableArray *array = [NSMutableArray array];
@@ -57,8 +62,6 @@
     [array addObject:result];
     return array;
 }
-
-#pragma mark - 登录
 
 - (NSMutableArray *)parserLogin:(NSData *)dict
 {
@@ -72,8 +75,6 @@
     [array addObject:ticket];
     return array;
 }
-
-#pragma mark - 请求会员信息
 
 - (NSMutableArray *)parserMembers:(NSData *)dict
 {
@@ -90,6 +91,8 @@
     return array;
 }
 
+#pragma mark - activity
+
 - (NSMutableArray *)parserInfor:(NSData *)dict
 {
     NSMutableArray *array = [NSMutableArray array];
@@ -102,4 +105,23 @@
     return array;
 }
 
+#pragma mark - bingRoom
+
+- (NSMutableArray *)parserCheckBingRoom:(NSData *)dict
+{
+    NSMutableArray *array = [NSMutableArray array];
+    NSMutableDictionary *dic = (NSMutableDictionary *)dict;
+    [array addObject:dic];
+    return array;
+}
+- (NSMutableArray *)parserBindRoom:(NSData *)dict
+{
+    NSMutableArray *array = [NSMutableArray array];
+    NSDictionary *dic = (NSDictionary *)dict;
+    DBBindCustom *custombing = [[DataManager defaultInstance] getCustomerBingRoom];
+    custombing.customerId = dic[@"customerId"];
+    custombing.imAccount = dic[@"imAccount"];
+    [array addObject:custombing];
+    return array;
+}
 @end

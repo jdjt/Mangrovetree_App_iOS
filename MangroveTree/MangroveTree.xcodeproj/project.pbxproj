@@ -27,6 +27,7 @@
 		A861B4111E9F0FCB002D61F0 /* NSLayoutConstraint+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A861B40B1E9F0FCB002D61F0 /* NSLayoutConstraint+PureLayout.m */; };
 		A87812A11EAD9C29002A7F40 /* DBBindCustom+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A878129E1EAD9C29002A7F40 /* DBBindCustom+CoreDataClass.m */; };
 		A87812A21EAD9C29002A7F40 /* DBBindCustom+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A87812A01EAD9C29002A7F40 /* DBBindCustom+CoreDataProperties.m */; };
+		A87812A51EAEE08F002A7F40 /* ChatViewController+NetWork.m in Sources */ = {isa = PBXBuildFile; fileRef = A87812A41EAEE08F002A7F40 /* ChatViewController+NetWork.m */; };
 		A8995A251EA5B228001B83DF /* PDKeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = A8995A241EA5B228001B83DF /* PDKeyChain.m */; };
 		A8995A271EA5B4BB001B83DF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8995A261EA5B4BA001B83DF /* Security.framework */; };
 		A8DC4F2E1EA8AB080056C699 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DC4F2D1EA8AB080056C699 /* UIColor+Hex.m */; };
@@ -498,6 +499,8 @@
 		A878129E1EAD9C29002A7F40 /* DBBindCustom+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DBBindCustom+CoreDataClass.m"; sourceTree = "<group>"; };
 		A878129F1EAD9C29002A7F40 /* DBBindCustom+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DBBindCustom+CoreDataProperties.h"; sourceTree = "<group>"; };
 		A87812A01EAD9C29002A7F40 /* DBBindCustom+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DBBindCustom+CoreDataProperties.m"; sourceTree = "<group>"; };
+		A87812A31EAEE08F002A7F40 /* ChatViewController+NetWork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ChatViewController+NetWork.h"; path = "ViewController/ChatViewController+NetWork.h"; sourceTree = "<group>"; };
+		A87812A41EAEE08F002A7F40 /* ChatViewController+NetWork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ChatViewController+NetWork.m"; path = "ViewController/ChatViewController+NetWork.m"; sourceTree = "<group>"; };
 		A8995A231EA5B228001B83DF /* PDKeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDKeyChain.h; sourceTree = "<group>"; };
 		A8995A241EA5B228001B83DF /* PDKeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDKeyChain.m; sourceTree = "<group>"; };
 		A8995A261EA5B4BA001B83DF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -1282,6 +1285,8 @@
 			children = (
 				A861B3311E9E1659002D61F0 /* ChatViewController.h */,
 				A861B3321E9E1659002D61F0 /* ChatViewController.m */,
+				A87812A31EAEE08F002A7F40 /* ChatViewController+NetWork.h */,
+				A87812A41EAEE08F002A7F40 /* ChatViewController+NetWork.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -2774,6 +2779,7 @@
 				FC5B1ACE1E6E4EDC0038BCA7 /* ForgetpawViewController.m in Sources */,
 				FC5B1A701E6E47A70038BCA7 /* MJRefreshGifFooter.m in Sources */,
 				FC5B1AA61E6E47BF0038BCA7 /* UIImage+WebP.m in Sources */,
+				A87812A51EAEE08F002A7F40 /* ChatViewController+NetWork.m in Sources */,
 				FC5B1A9B1E6E47BF0038BCA7 /* NSData+ImageContentType.m in Sources */,
 				FC5B1AF21E6E52B30038BCA7 /* MySingleton.m in Sources */,
 				C45B62031E7A35DD00F70D3F /* SearchTypeCell.m in Sources */,

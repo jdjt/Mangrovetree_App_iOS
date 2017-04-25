@@ -71,7 +71,10 @@
     NSInteger severIndex = [Util SelectTheServerUrl];
     self.serverAddress = [[MySingleton sharedSingleton] currentServiceAddress:severIndex byInterFaceType:old];
     NetWorkHelp *netWorkHelp = [[NetWorkHelp alloc] init];
-    
+    if ([url isEqualToString:URL_SENG_TASK])
+    {
+        self.serverAddress = @"192.168.10.136:8080";
+    }
     // 判断查询间隔是否满足足够长的状态（当byUser为NO时，间隔不够时将不发送实际请求）
     BOOL sendNetWork = [netWorkHelp ComparingNetworkRequestTime:url ByUser:byUser];
     if (sendNetWork == NO) {
@@ -89,7 +92,7 @@
         NSMutableDictionary* header = [[NSMutableDictionary alloc]init];
         [header setObject:@"application/json; charset=utf-8" forKey:@"Content-Type"];
         [header setObject:tokenid forKey:@"mymhotel-ticket"];
-        [header setObject:@"1002" forKey:@"mymhotel-type"];
+        [header setObject:@"1006" forKey:@"mymhotel-type"];
         [header setObject:@"4.0" forKey:@"mymhotel-version"];
         [header setObject:@"JSON" forKey:@"mymhotel-dataType"];
         [header setObject:@"JSON" forKey:@"mymhotel-ackDataType"];
@@ -326,15 +329,8 @@
 
 - (NSString *)getsourceCode
 {
-    NSString *sourceCode = @"";
-    if (![PDKeyChain keyChainLoad])
-    {
-        sourceCode = [Util getUUID];
-        [PDKeyChain keyChainSave:sourceCode];
-    }else
-    {
-        sourceCode = [PDKeyChain keyChainLoad];
-    }
+    NSString *sourceCode = [Util macaddress];
+    
     NSString *deviceToken = [[DataManager defaultInstance] getParameter].deviceToken;
     NSString *token = @"1";
     if (deviceToken)

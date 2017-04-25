@@ -29,5 +29,9 @@
  * @abstract 获取参数表
  */
 - (DBParameter *)getParameter;
+/**
+ * @abstract 获取绑定客房数据
+ */
+- (DBBindCustom *)getCustomerBingRoom;
 
 @end

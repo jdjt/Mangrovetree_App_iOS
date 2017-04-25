@@ -39,7 +39,7 @@ typedef NS_ENUM(NSInteger,SegmentSelected)
 @interface FrameViewController : UIViewController
 
 @property (weak, nonatomic) MapViewController *mapVC;
-
+@property (assign, nonatomic) BOOL goChat;
 @property (strong, nonatomic) DBCallTask *currentTask;
 @property (assign, nonatomic) CurrentFunction function;
 

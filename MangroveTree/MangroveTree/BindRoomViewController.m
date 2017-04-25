@@ -9,23 +9,35 @@
 #import "BindRoomViewController.h"
 #import "FrameViewController.h"
 
-@interface BindRoomViewController ()
+@interface BindRoomViewController ()<MTRequestNetWorkDelegate>
+
+@property (nonatomic, strong) NSURLSessionTask *bingRoomTask;
+@property (weak, nonatomic) IBOutlet UITextField *roomCode;
+@property (weak, nonatomic) IBOutlet UITextField *idNumber;
 
 @end
 
 @implementation BindRoomViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.title = @"绑定客房";
 }
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[MTRequestNetwork defaultManager] registerDelegate:self];
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [[MTRequestNetwork defaultManager] removeDelegate:self];
+}
+- (void)dealloc
+{
+    [[MTRequestNetwork defaultManager] cancleAllRequest];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -51,6 +63,37 @@
     return 0.01;
 }
 
+#pragma mark - NetWork
+- (IBAction)bingRoomAction:(id)sender
+{
+#warning 输入校验
+    [self bingRoomNetWorking];
+}
+
+- (void)bingRoomNetWorking
+{
+    NSDictionary *dic = @{@"hotelCode":@"2",@"roomCode":@"61112",@"pagersCode":@"4017",@"deviceId":[Util macaddress],@"deviceToken":[Util deviceToken],@"deviceType":@"2"};
+    self.bingRoomTask = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
+                                                                    webURL:URL_BINGROOM
+                                                                    params:dic
+                                                                withByUser:YES
+                                                          andOldInterfaces:YES];
+}
+- (void)pushResponseResultsSucceed:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg andData:(NSMutableArray *)datas
+{
+    if (task == self.bingRoomTask)
+    {
+        self.frameController.goChat = YES;
+        [self.navigationController popViewControllerAnimated:NO];
+    }
+}
+- (void)pushResponseResultsFailing:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg
+{
+    if (task == self.bingRoomTask)
+    {
+        [MyAlertView showAlert:msg];
+    }
+}
 /*
 #pragma mark - Navigation
 

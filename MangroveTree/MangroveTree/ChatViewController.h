@@ -10,4 +10,11 @@
 
 @interface ChatViewController : UIViewController
 
+// 网络请求
+@property (nonatomic, strong) NSURLSessionTask *seesionSengTask;
+@property (nonatomic, strong) NSURLSessionTask *cancelTaskSession;
+@property (nonatomic, strong) NSURLSessionTask *cancelListSession;
+@property (nonatomic, strong) NSURLSessionTask *taskDeatilSession;
+
+
 @end
