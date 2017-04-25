@@ -31,6 +31,8 @@ typedef NS_ENUM(NSInteger,BaseAlertType)
 @property (weak, nonatomic) IBOutlet UIButton *comfirmButton;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
+@property (nonatomic, copy) NSString * selectCauseCode;
+
 @property (nonatomic, assign) NSInteger selectTable;
 
 // 根据标题等初始化

@@ -34,4 +34,9 @@
  */
 - (DBBindCustom *)getCustomerBingRoom;
 
+/**
+ * @abstract 获取指定任务信息
+ */
+- (DBCallTask *)getCallTaskByTaskCode:(NSString *)taskCode;
+
 @end

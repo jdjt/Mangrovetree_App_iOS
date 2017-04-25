@@ -266,7 +266,7 @@ UIAlertViewDelegate>
     if ([self lastEnvironment].intValue == YWEnvironmentRelease || [self lastEnvironment].intValue == YWEnvironmentPreRelease) {
 //#warning TODO: CHANGE TO YOUR AppKey
         /// 线上环境，更换成你自己的AppKey
-        [[YWAPI sharedInstance] syncInitWithOwnAppKey:@"23015524" getError:&error];
+        [[YWAPI sharedInstance] syncInitWithOwnAppKey:@"23758144" getError:&error];
     } else {
         // OpenIM内网环境，暂时不向开发者开放，需要测试环境的，自行申请另一个Appkey作为测试环境
 //        [[YWAPI sharedInstance] syncInitWithOwnAppKey:@"4272" getError:&error];

@@ -70,4 +70,19 @@
     return custombind;
 }
 
+- (DBCallTask *)getCallTaskByTaskCode:(NSString *)taskCode
+{
+    DBCallTask * callTask = nil;
+    NSArray * result = [self arrayFromCoreData:@"DBCallTask" predicate:[NSPredicate predicateWithFormat:@"taskCode = %@", taskCode] limit:NSIntegerMax offset:0 orderBy:nil];
+    if (result.count <= 0 || result == nil)
+    {
+        callTask = (DBCallTask *)[self insertIntoCoreData:@"DBCallTask"];
+        callTask.taskCode = taskCode;
+    }else
+    {
+        callTask = result[0];
+    }
+    return callTask;
+}
+
 @end

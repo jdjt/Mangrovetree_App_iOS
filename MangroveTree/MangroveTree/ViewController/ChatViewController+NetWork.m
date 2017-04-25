@@ -12,42 +12,62 @@
 
 #pragma mark - NetWorking
 
-- (void)cancelTaskAction:(UIBarButtonItem *)bar
+- (void)cancelTask:(NSString *)causeNum
 {
     
-    NSDictionary *dic = @{@"customerId":@"1008",@"taskCode":@"123456",@"causeCode":@"108"};
+    NSDictionary *dic = @{@"customerId":self.customBind.customerId,
+                          @"taskCode":self.currentTask.taskCode,
+                          @"causeCode":causeNum};
     self.cancelTaskSession = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
-                                                                         webURL:URL_CANCEL_TASK params:dic
+                                                                         webURL:URL_CANCEL_TASK
+                                                                         params:dic
                                                                      withByUser:YES andOldInterfaces:YES];
 }
-- (void)sengMsgToSerive
+
+- (void)sengMsgToSerive:(NSString *)message
 {
-    NSDictionary *dic = @{@"customerId":@"1008",
-                          @"taskContent":@"您好，我的房间需要一杯饮料，请问你们都有什么类型的饮料，请给我列出一个清单，供我选择",
-                          @"mapInfo":
-                              @{@"hotelCode":@"2",@"floorNo":@"11",@"mapNo":@"222",@"posionX":@"111",@"positionY":@"22",@"postionZ":@"333"}};
+    NSDictionary *dic = @{@"customerId":self.customBind.customerId,
+                          @"taskContent":message,
+                          @"mapInfo":@{@"hotelCode":@"2",
+                                       @"floorNo":@"11",
+                                       @"mapNo":@"222",
+                                       @"positionX":@"111",
+                                       @"positionY":@"22",
+                                       @"positionZ":@"333"}};
     self.seesionSengTask = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
-                                                                       webURL:URL_SENG_TASK params:dic
+                                                                       webURL:URL_SENG_TASK
+                                                                       params:dic
                                                                    withByUser:YES andOldInterfaces:YES];
 }
+
 - (void)cancelDesicListWithTastStatus:(NSString *)type
 {
     NSDictionary *dic = @{@"cancelType":type};
     self.cancelListSession = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
-                                                                         webURL:URL_CANCEL_LIST params:dic
+                                                                         webURL:URL_CANCEL_LIST
+                                                                         params:dic
                                                                      withByUser:YES andOldInterfaces:YES];
     
 }
+
 - (void)getTaskDetailByTaskCode:(NSString *)taskCode
 {
-    NSDictionary *dic = @{@"taskCode":@"1008"};
-    self.taskDeatilSession = [[MTRequestNetwork defaultManager] POSTWithTopHead:
-                              @REQUEST_HEAD_NORMAL
+    NSDictionary *dic = @{@"taskCode":taskCode};
+    self.taskDeatilSession = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
                                                                          webURL:URL_GETTASK_TASKCODE
                                                                          params:dic
                                                                      withByUser:YES andOldInterfaces:YES];
     
 }
 
+- (void)comfirmTask:(NSString *)comfirm andTaskCode:(NSString *)taskCode
+{
+    NSDictionary *dic = @{@"taskCode":taskCode,
+                          @"confirmStatus":comfirm};
+    self.comfirmTaskSession = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
+                                                                         webURL:URL_COMFIRMTASK
+                                                                         params:dic
+                                                                     withByUser:YES andOldInterfaces:YES];
+}
 
 @end

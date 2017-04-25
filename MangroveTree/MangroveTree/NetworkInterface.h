@@ -119,10 +119,13 @@
 
 // 检查是否绑定客房
 #define URL_CHECKBINDROOM                   @"/hotelcallservice/customer/getBindingInfo.json"
+
 // 绑定客房
 #define URL_BINGROOM                        @"/hotelcallservice/customer/binding.json"
+
 // 发送呼叫任务
 #define URL_SENG_TASK                       @"/hotelcallservice/customer/addTask.json"
+
 // 取消任务
 #define URL_CANCEL_TASK                     @"/hotelcallservice/customer/cancelTask.json"
 
@@ -130,6 +133,18 @@
 #define URL_CANCEL_LIST                     @"/hotelcallservice/customer/cacel/getCacelDescList.json"
 
 // 根据任务号获取任务详情
-#define URL_GETTASK_TASKCODE                @"/hotelcallservice/customer/getMessageByTaskCode.json "
+#define URL_GETTASK_TASKCODE                @"/hotelcallservice/customer/getMessageByTaskCode.json"
+
+//  获取任务信息 （根据任务状态查询）
+#define URL_GETTASK_TASKSTATUS              @"/hotecallservice/customer/getTaskInfo.json"
+
+//  评价呼叫任务
+#define URL_SCORETASK                       @"/hotelcallservice/customer/scoreTask.json"
+
+//  确认任务完成／未完成
+#define URL_COMFIRMTASK                     @"/hotelcallservice/customer/confirmTask.json"
+
+// 获取住客信息
+#define URL_GETCUSTOMINFO                   @"/hotelcallservice/customer/getCustomerInfoByCusId.json"
 
 #endif /* NetworkInterface_h */

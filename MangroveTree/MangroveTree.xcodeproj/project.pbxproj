@@ -86,6 +86,7 @@
 		C4736F311EAD947D003A2244 /* WXOpenIMSDKResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C4736F2B1EAD947D003A2244 /* WXOpenIMSDKResource.bundle */; };
 		C4736F321EAD947D003A2244 /* WXOUIModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4736F2C1EAD947D003A2244 /* WXOUIModule.framework */; };
 		C4736F331EAD947D003A2244 /* WXOUIModuleResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C4736F2D1EAD947D003A2244 /* WXOUIModuleResources.bundle */; };
+		C4760ECB1EAF12FC00EC5246 /* CancelReasonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C4760ECA1EAF12FB00EC5246 /* CancelReasonModel.m */; };
 		C4792DD61EA0990D00C273AA /* MarqueeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C4792DD51EA0990D00C273AA /* MarqueeLabel.m */; };
 		C4C720F51E6FCB79003523A2 /* libFMMapKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C720F11E6FCB09003523A2 /* libFMMapKit.a */; };
 		C4C722B61E6FCC2E003523A2 /* IndoorMapInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C720F91E6FCC2D003523A2 /* IndoorMapInfo.m */; };
@@ -590,6 +591,8 @@
 		C4736F2B1EAD947D003A2244 /* WXOpenIMSDKResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WXOpenIMSDKResource.bundle; sourceTree = "<group>"; };
 		C4736F2C1EAD947D003A2244 /* WXOUIModule.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WXOUIModule.framework; sourceTree = "<group>"; };
 		C4736F2D1EAD947D003A2244 /* WXOUIModuleResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WXOUIModuleResources.bundle; sourceTree = "<group>"; };
+		C4760EC91EAF12FB00EC5246 /* CancelReasonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CancelReasonModel.h; path = DatabaseClass/CancelReasonModel.h; sourceTree = "<group>"; };
+		C4760ECA1EAF12FB00EC5246 /* CancelReasonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CancelReasonModel.m; path = DatabaseClass/CancelReasonModel.m; sourceTree = "<group>"; };
 		C4792DD41EA0990D00C273AA /* MarqueeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarqueeLabel.h; sourceTree = "<group>"; };
 		C4792DD51EA0990D00C273AA /* MarqueeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarqueeLabel.m; sourceTree = "<group>"; };
 		C4C720F11E6FCB09003523A2 /* libFMMapKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFMMapKit.a; path = "MangroveTree/ViewController/FengMap/FMMapKit/Release-iphoneos/libFMMapKit.a"; sourceTree = "<group>"; };
@@ -1294,6 +1297,8 @@
 		A861B32F1E9E1611002D61F0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C4760EC91EAF12FB00EC5246 /* CancelReasonModel.h */,
+				C4760ECA1EAF12FB00EC5246 /* CancelReasonModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2814,6 +2819,7 @@
 				A8E4136F1E7692C40096EA62 /* InforView.m in Sources */,
 				C4C723951E6FCC2F003523A2 /* FMDatabasePool.m in Sources */,
 				C461989C1E8B60C6005590D2 /* BaseWebViewController.m in Sources */,
+				C4760ECB1EAF12FC00EC5246 /* CancelReasonModel.m in Sources */,
 				FC07553F1E6EB74B00EAB144 /* DBUserLogin+CoreDataClass.m in Sources */,
 				C4C723EB1E6FD34E003523A2 /* StatusFinished.m in Sources */,
 				FC07554B1E6EBB7400EAB144 /* AgreementViewController.m in Sources */,

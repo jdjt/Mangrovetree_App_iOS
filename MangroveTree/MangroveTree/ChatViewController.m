@@ -25,6 +25,10 @@
 @property (nonatomic, strong) UIView *textView;
 @property (nonatomic, strong) UIBarButtonItem *cancelBarItem;
 @property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, strong) NSString * comfirmStatus;
+
+@property (nonatomic,strong) YWConversation * conversation;
+@property (nonatomic,strong) YWConversationViewController * conversationView;
 
 @end
 
@@ -36,8 +40,9 @@
     self.navigationController.delegate = self;
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItem = self.cancelBarItem;
     [self.view addSubview:self.headView];
-    [self.headView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:74];
+    [self.headView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:0];
     [self.headView autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:0];
     [self.headView autoSetDimensionsToSize:kSizeHead];
     
@@ -67,6 +72,12 @@
     [self.chatInputView autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
     [self.chatInputView autoSetDimension:ALDimensionWidth toSize:kScreenWidth];
     self.chatInputView.delegate = self;
+    
+    self.pageModelType = pageModel_NOTask;
+    
+    [self instantMessaging];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(callTaskPush:) name:NotiCallTaskPushMessage object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -74,9 +85,9 @@
     [super viewWillAppear:animated];
     [[MTRequestNetwork defaultManager] registerDelegate:self];
 }
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillDisAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillDisappear:animated];
     [[MTRequestNetwork defaultManager] removeDelegate:self];
 }
 
@@ -131,6 +142,16 @@
     }
     return _cancelBarItem;
 }
+
+- (DBBindCustom *)customBind
+{
+    if (_customBind == nil)
+    {
+        _customBind = [[DataManager defaultInstance] findUserLogInByCode:@"1"].hasCustomBind;
+    }
+    return _customBind;
+}
+
 #pragma mark - UITableView  Delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -174,7 +195,7 @@
     }
     if (inputText != nil && ![inputText isEqualToString:@""])
     {
-        NSDictionary *dic = @{@"text":@"您好，我的房间需要一杯饮料，请问你们都有什么类型的饮料，请给我列出一个清单，供我选择",@"are":@"叶林酒店",@"time":@"2017-05-24 05:24:21"};
+        NSDictionary *dic = @{@"text":inputText,@"are":self.customBind.hotelName,@"time":self.customBind.serviceBeginTime};
         [self.dataSource addObject:dic];
         [self.chatTabelView reloadData];
         self.headView.textStatus = TextStatus_waiting;
@@ -182,9 +203,99 @@
 //        self.textView.hidden = NO;
 //        self.chatInputView.hidden = YES;
 //        [self.chatInputView inPutViewresignFirstResponder];
-        [self sengMsgToSerive];
+        [self sengMsgToSerive:inputText];
     }
 }
+
+- (void)cancelTaskAction:(UIBarButtonItem *)bar
+{
+    [self cancelDesicListWithTastStatus:[self.currentTask.taskStatus isEqualToString:@"0"] ? @"0" : @"1"];
+}
+
+- (void)chooseCancelReason:(BaseAlertViewController *)sender
+{
+    [self cancelTask:sender.selectCauseCode];
+}
+
+- (void)becomeActive
+{
+    if (self.currentTask != nil)
+        [self getTaskDetailByTaskCode:self.currentTask.taskCode];
+}
+
+- (void)callTaskPush:(NSNotification *)noti
+{
+    NSString * pushMessage = noti.object;
+    if (self.currentTask == nil)
+        return;
+    if ([pushMessage isEqualToString:@"WaiterAcceptTask"]) //  服务员接受任务
+    {
+        [self getTaskDetailByTaskCode:self.currentTask.taskCode];
+    }
+    else if ([pushMessage isEqualToString:@"WaiterConfirmTaskComplete"]) //  服务员完成任务
+    {
+        [self getTaskDetailByTaskCode:self.currentTask.taskCode];
+    }
+}
+
+- (void)setUIByPageModelType:(pageModelType)pageModelType
+{
+    if (self.pageModelType == pageModelType)
+        return;
+
+    switch (pageModelType)
+    {
+        case pageModel_NOTask:
+        {
+            self.headView.textStatus = TextStatus_default;
+            [self.dataSource removeAllObjects];
+            [self.chatTabelView reloadData];
+            self.textView.hidden = YES;
+        }
+            break;
+        case pageModel_NOReceive:
+        {
+            self.headView.textStatus = TextStatus_waiting;
+            self.textView.hidden = YES;
+        }
+            break;
+        case pageModel_Complete:
+        {
+            BaseAlertViewController * alert = [BaseAlertViewController alertWithAlertType:AlertType_callTaskComplete andWithWaiterId:self.currentTask.waiterId];
+            [alert addTarget:self andWithComfirmAction:@selector(comfirmTaskYES) andWithCancelAction:@selector(comfirmTaskNO)];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+            break;
+        case pageModel_Receive:
+        {
+            self.headView.textStatus = TextStatus_proceed;
+            [self.headView startTaskTimerByStartTime:self.currentTask.acceptTime];
+            self.textView.hidden = NO;
+        }
+            break;
+        case pageModel_waitGrade:
+        {
+#warning  评分弹窗页面
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)comfirmTaskYES
+{
+    self.comfirmStatus = @"1";
+    [self comfirmTask:self.comfirmStatus andTaskCode:self.currentTask.taskCode];
+}
+
+- (void)comfirmTaskNO
+{
+    self.comfirmStatus = @"2";
+    [self comfirmTask:self.comfirmStatus andTaskCode:self.currentTask.taskCode];
+}
+
+#pragma mark - network delegate
 
 - (void)startRequest:(NSURLSessionTask *)task
 {
@@ -194,15 +305,60 @@
 {
     if (task == self.seesionSengTask)
     {
-        
-    }else if (task == self.cancelTaskSession)
+        // 发送任务成功
+        NSDictionary * dic = datas[0];
+        if ([dic[@"retOk"] isEqualToString:@"0"])
+        {
+            // 成功
+        }
+    }
+    else if (task == self.cancelTaskSession)
     {
-        
-    }else if (task == self.cancelListSession)
+        // 取消任务成功 需要重置UI到发送任务时
+        NSDictionary * dic = datas[0];
+        if ([dic[@"retOk"] isEqualToString:@"0"])
+        {
+            // 成功
+            [self setUIByPageModelType:pageModel_NOTask];
+        }
+    }
+    else if (task == self.cancelListSession)
     {
-    }else if (task == self.taskDeatilSession)
+        BaseAlertViewController * alert = [BaseAlertViewController alertWithAlertType:AlertType_cancelTaskReason andWithCheckTitles:datas andWithWaiterId:self.currentTask.waiterId];
+        [alert addTarget:self andWithComfirmAction:@selector(chooseCancelReason:) andWithCancelAction:nil];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    else if (task == self.taskDeatilSession)
     {
-        
+        // 获取任务详情成功
+        DBCallTask * callTask = datas[0];
+        if ([callTask.taskStatus isEqualToString:@"1"])
+        {
+            [self setUIByPageModelType:pageModel_Receive];
+        }
+        else if ([callTask.taskStatus isEqualToString:@"2"] || [callTask.taskStatus isEqualToString:@"7"])
+        {
+            [self setUIByPageModelType:pageModel_Complete];
+        }
+        else if ([callTask.taskStatus isEqualToString:@"0"])
+        {
+            [self setUIByPageModelType:pageModel_NOReceive];
+        }
+        else
+        {
+            [self setUIByPageModelType:pageModel_NOTask];
+        }
+    }
+    else if (task == self.comfirmTaskSession)
+    {
+        if ([self.comfirmStatus isEqualToString:@"1"])
+        {
+            [self setUIByPageModelType:pageModel_Receive];
+        }
+        else
+        {
+            [self setUIByPageModelType:pageModel_waitGrade];
+        }
     }
 }
 - (void)pushResponseResultsFailing:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg
@@ -210,14 +366,90 @@
     if (task == self.seesionSengTask)
     {
         
-    }else if (task == self.cancelTaskSession)
+    }
+    else if (task == self.cancelTaskSession)
     {
         
-    }else if (task == self.cancelListSession)
+    }
+    else if (task == self.cancelListSession)
     {
-    }else if (task == self.taskDeatilSession)
+        // 获取取消原因失败
+    }
+    else if (task == self.taskDeatilSession)
     {
         
+    }
+    else if (task == self.comfirmTaskSession)
+    {
+        
+    }
+}
+
+#pragma mark - 即时通讯
+
+// 即时通讯登录
+- (void)instantMessaging
+{
+    if (self.customBind.imAccount != nil && ![self.customBind.imAccount isEqualToString:@""])
+    {
+        [[SPKitExample sharedInstance]callThisAfterISVAccountLoginSuccessWithYWLoginId:self.customBind.imAccount passWord:@"sjlh2016" preloginedBlock:nil successBlock:^{
+            
+        } failedBlock:^(NSError * error) {
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"通讯模块登录失败" message:@"请检查网络状态重新登录" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            UIAlertAction * action2 = [UIAlertAction actionWithTitle:@"重试" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [self instantMessaging];
+            }];
+            [alert addAction:action1];
+            [alert addAction:action2];
+            [self presentViewController:alert animated:YES completion:nil];
+        }];
+    }
+}
+
+// 创建及时通讯界面
+- (void)instantMessageingFormation
+{
+    [self deallocInstantMessageing];
+    
+    YWPerson * person = [[YWPerson alloc]initWithPersonId:self.currentTask.wImAccount appKey:@"23759225"];
+    self.conversation = [YWP2PConversation fetchConversationByPerson:person creatIfNotExist:YES baseContext: [SPKitExample sharedInstance].ywIMKit.IMCore];
+    if ([[[NSUserDefaults standardUserDefaults]valueForKey:@"CallTaskMessageMemory"] isEqualToString:@"0"])
+    {
+        [self.conversation removeAllLocalMessages];
+        [[NSUserDefaults standardUserDefaults]setValue:@"1" forKey:@"CallTaskMessageMemory"];
+    }
+    
+    self.conversationView = [[SPKitExample sharedInstance]exampleMakeConversationViewControllerWithConversation:self.conversation];
+    self.conversationView.view.frame = CGRectMake(0,0, kScreenWidth, self.textView.frame.size.height);
+    [self.conversationView setMessageInputViewHidden:NO animated:NO];
+    self.conversationView.backgroundImage = nil;
+    self.conversationView.view.backgroundColor = [UIColor clearColor];
+    self.conversationView.tableView.backgroundView = nil;
+    self.conversationView.tableView.backgroundColor = [UIColor clearColor];
+    
+    [self addChildViewController:self.conversationView];
+    [self.textView addSubview: self.conversationView.view];
+}
+
+- (void)deallocInstantMessageing
+{
+    if (self.conversationView != nil) {
+        
+        [self.conversationView setMessageInputViewHidden:YES animated:NO];
+        [self.conversationView.messageInputView removeFromSuperview];
+        
+        [self.conversationView.view removeFromSuperview];
+        [self.conversationView removeFromParentViewController];
+        self.conversationView = nil;
+        
+        for (id subview in self.textView.subviews) {
+            if ([subview isKindOfClass:[YWMessageInputView class]]) {
+                [subview removeFromSuperview];
+            }
+        }
     }
 }
 

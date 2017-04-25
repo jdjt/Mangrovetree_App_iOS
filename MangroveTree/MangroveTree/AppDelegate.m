@@ -23,6 +23,7 @@
     // 定义系统状态栏默认风格
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [[UINavigationBar appearance] setBackgroundImage:[Util createImageWithColor:[UIColor colorWithRed:237 / 255.0f green:130 / 255.0f blue:86 / 255.0f alpha:1]] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setTranslucent:NO];
     [[UINavigationBar appearance] setTintColor:[UIColor colorWithHexString:@"#ffffff"]];
     [[UINavigationBar appearance] setShadowImage:[UIImage new]];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithHexString:@"#ffffff"],NSForegroundColorAttributeName,[UIFont systemFontOfSize:18],NSFontAttributeName,nil]];
@@ -61,16 +62,10 @@
     [UMessage setAutoAlert:NO];
     
     [UMessage didReceiveRemoteNotification:userInfo];
-//    self.messType = userInfo[@"messType"];
-//    NSLog(@"通知消息:%@", userInfo);
-//    if ([self.messType isEqualToString:@"2"]||[self.messType isEqualToString:@"7"]||[self.messType isEqualToString:@"8"])
-//    {
-//        [[NSNotificationCenter defaultCenter]postNotificationName:@"NewNotiCartTask" object:self.messType];
-//    }
-//    else
-//    {
-//        [[NSNotificationCenter defaultCenter] postNotificationName:NotiReloadCallMSg object:self.messType];
-//    }
+    if (userInfo)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotiCallTaskPushMessage object:userInfo];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -95,7 +90,7 @@
     //直接点击应用图标进入app 根据角标来判断当前是否有新消息，如果处于呼叫界面，则有全屏提醒，未处于呼叫界面 会通知首页检查更新
     if (application.applicationIconBadgeNumber > 0)
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotiReloadCallMSg object:nil];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:NotiReloadCallMSg object:nil];
         // 清除icon提示图标
         [application setApplicationIconBadgeNumber:0];
     }

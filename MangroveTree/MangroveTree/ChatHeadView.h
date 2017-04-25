@@ -21,6 +21,8 @@ typedef NS_ENUM(NSInteger, TextStatus)
 @property (nonatomic, strong) UILabel *labelText;
 @property (nonatomic, strong) UILabel *timerLabel;
 
+@property (nonatomic, copy) NSString * waiterId;
+
 - (void)startTaskTimerByStartTime:(NSString *)time;
 - (void)stopTimer;
 

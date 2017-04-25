@@ -10,9 +10,10 @@
 
 @interface ChatViewController (NetWork)
 
-- (void)cancelTaskAction:(UIBarButtonItem *)bar;
-- (void)sengMsgToSerive;;
+- (void)cancelTask:(NSString *)causeNum;
+- (void)sengMsgToSerive:(NSString *)message;
 - (void)cancelDesicListWithTastStatus:(NSString *)type;
 - (void)getTaskDetailByTaskCode:(NSString *)taskCode;
+- (void)comfirmTask:(NSString *)comfirm andTaskCode:(NSString *)taskCode;
 
 @end

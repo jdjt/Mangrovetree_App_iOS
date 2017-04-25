@@ -29,9 +29,9 @@
     [super viewWillAppear:animated];
     [[MTRequestNetwork defaultManager] registerDelegate:self];
 }
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillDisappear:animated];
     [[MTRequestNetwork defaultManager] removeDelegate:self];
 }
 - (void)dealloc
@@ -66,19 +66,29 @@
 #pragma mark - NetWork
 - (IBAction)bingRoomAction:(id)sender
 {
-#warning 输入校验
+    if (self.roomCode.text.length <= 0 || self.idNumber.text.length < 4)
+    {
+        [MyAlertView showAlert:@"请输入正确的房间号与省份证号后四位"];
+        return;
+    }
     [self bingRoomNetWorking];
 }
 
 - (void)bingRoomNetWorking
 {
-    NSDictionary *dic = @{@"hotelCode":@"2",@"roomCode":@"61112",@"pagersCode":@"4017",@"deviceId":[Util macaddress],@"deviceToken":[Util deviceToken],@"deviceType":@"2"};
+    NSDictionary *dic = @{@"hotelCode":@"2",@"roomCode":self.roomCode.text,@"pagersCode":self.idNumber.text,@"deviceId":[Util macaddress],@"deviceToken":[Util deviceToken],@"deviceType":@"2"};
     self.bingRoomTask = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
                                                                     webURL:URL_BINGROOM
                                                                     params:dic
                                                                 withByUser:YES
                                                           andOldInterfaces:YES];
 }
+
+- (void)startRequest:(NSURLSessionTask *)task
+{
+    
+}
+
 - (void)pushResponseResultsSucceed:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg andData:(NSMutableArray *)datas
 {
     if (task == self.bingRoomTask)

@@ -73,7 +73,7 @@
     NetWorkHelp *netWorkHelp = [[NetWorkHelp alloc] init];
     if ([url isEqualToString:URL_SENG_TASK])
     {
-        self.serverAddress = @"192.168.10.136:8080";
+        self.serverAddress = @"rc-ws.mymhotel.com";
     }
     // 判断查询间隔是否满足足够长的状态（当byUser为NO时，间隔不够时将不发送实际请求）
     BOOL sendNetWork = [netWorkHelp ComparingNetworkRequestTime:url ByUser:byUser];

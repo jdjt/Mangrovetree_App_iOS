@@ -37,7 +37,38 @@
     }else if ([ident isEqualToString:URL_BINGROOM])// 绑定客房
     {
         datas = [self parserBindRoom:dict];
+    }else if ([ident isEqualToString:URL_CANCEL_LIST])// 取消原因列表
+    {
+        datas = [self parserCancelReasonList:dict];
+    }else if ([ident isEqualToString:URL_GETTASK_TASKCODE])// 获取任务详情 根据taskCode
+    {
+        datas = [self parserGetTaskDetail:dict];
     }
+    else if ([ident isEqualToString:URL_GETTASK_TASKSTATUS])// 获取任务详情 根据taskStatus
+    {
+        datas = [self parserGetTaskDetailList:dict];
+    }
+    else if ([ident isEqualToString:URL_SCORETASK])// 任务评分
+    {
+        datas = [self parserScoreTask:dict];
+    }
+    else if ([ident isEqualToString:URL_COMFIRMTASK])// 确认任务完成／未完成
+    {
+        datas = [self parserComfirmTask:dict];
+    }
+    else if ([ident isEqualToString:URL_CANCEL_TASK])// 取消任务
+    {
+        datas = [self parserCancelTask:dict];
+    }
+    else if ([ident isEqualToString:URL_SENG_TASK])// 发送任务
+    {
+        datas = [self parserSendTask:dict];
+    }
+    else if ([ident isEqualToString:URL_GETCUSTOMINFO])// 获取住客信息
+    {
+        datas = [self parserGetCustomInfo:dict];
+    }
+    
     //存储数据
     [[DataManager defaultInstance] saveContext];
     return datas;
@@ -118,10 +149,163 @@
 {
     NSMutableArray *array = [NSMutableArray array];
     NSDictionary *dic = (NSDictionary *)dict;
+    DBUserLogin * userLogin = [[DataManager defaultInstance] findUserLogInByCode:@"1"];
     DBBindCustom *custombing = [[DataManager defaultInstance] getCustomerBingRoom];
     custombing.customerId = dic[@"customerId"];
     custombing.imAccount = dic[@"imAccount"];
+    userLogin.hasCustomBind = custombing;
     [array addObject:custombing];
     return array;
 }
+
+#pragma mark - cancelReasonList
+
+- (NSMutableArray *)parserCancelReasonList:(NSData *)dict
+{
+    NSMutableArray *array = [NSMutableArray array];
+    NSDictionary *dic = (NSDictionary *)dict;
+    
+    for (NSDictionary * listDic in dic[@"cancelCauseList"])
+    {
+        CancelReasonModel * model = [[CancelReasonModel alloc]init];
+        model.causeCode = listDic[@"causeCode"];
+        model.causeDesc = listDic[@"causeDesc"];
+        [array addObject:model];
+    }
+    
+    return array;
+}
+
+#pragma mark - GetTaskDetail
+
+- (NSMutableArray *)parserGetTaskDetail:(NSData *)dict
+{
+    NSMutableArray *array = [NSMutableArray array];
+    NSDictionary *dic = (NSDictionary *)dict;
+    
+    DBCallTask * task = [[DataManager defaultInstance] getCallTaskByTaskCode:dic[@"taskCode"]];
+    task.taskContent = dic[@"taskContent"];
+    task.taskStatus = dic[@"taskStatus"];
+    task.taskStatus = dic[@"taskStatus"];
+    task.areaCode = dic[@"areaCode"];
+    task.areaName = dic[@"areaName"];
+    task.cancelTime = dic[@"cancelTime"];
+    task.cancelPoint = dic[@"cancelPoint"];
+    task.cancelCode = dic[@"cancelCode"];
+    task.cancelDesc = dic[@"cancelDesc"];
+    task.scoreTime = dic[@"scoreTime"];
+    task.scoreMod = dic[@"scoreMod"];
+    task.scoreVal = dic[@"scoreVal"];
+    task.customerId = dic[@"customerId"];
+    task.cImAccount = dic[@"cImAccount"];
+    task.waiterId = dic[@"waiterId"];
+    task.wImAccount = dic[@"wImAccount"];
+    task.nowDate = dic[@"nowDate"];
+    task.acceptTime = dic[@"acceptTime"];
+    task.finishTime = dic[@"finishTime"];
+    task.finishEndTime = dic[@"finishEndTime"];
+    [array addObject:task];
+    
+    return array;
+}
+
+#pragma mark - GetTaskDetailList
+
+- (NSMutableArray *)parserGetTaskDetailList:(NSData *)dict
+{
+    NSMutableArray *array = [NSMutableArray array];
+    NSDictionary * dic1 = (NSDictionary *)dict;
+    
+    for (NSDictionary * dic in dic1[@"taskInfoList"])
+    {
+        DBCallTask * task = [[DataManager defaultInstance] getCallTaskByTaskCode:dic[@"taskCode"]];
+        task.taskContent = dic[@"taskContent"];
+        task.taskStatus = dic[@"taskStatus"];
+        task.taskStatus = dic[@"taskStatus"];
+        task.areaCode = dic[@"areaCode"];
+        task.areaName = dic[@"areaName"];
+        task.cancelTime = dic[@"cancelTime"];
+        task.cancelPoint = dic[@"cancelPoint"];
+        task.cancelCode = dic[@"cancelCode"];
+        task.cancelDesc = dic[@"cancelDesc"];
+        task.scoreTime = dic[@"scoreTime"];
+        task.scoreMod = dic[@"scoreMod"];
+        task.scoreVal = dic[@"scoreVal"];
+        task.customerId = dic[@"customerId"];
+        task.cImAccount = dic[@"cImAccount"];
+        task.waiterId = dic[@"waiterId"];
+        task.wImAccount = dic[@"wImAccount"];
+        task.nowDate = dic[@"nowDate"];
+        task.acceptTime = dic[@"acceptTime"];
+        task.finishTime = dic[@"finishTime"];
+        task.finishEndTime = dic[@"finishEndTime"];
+        [array addObject:task];
+    }
+    
+    return array;
+}
+
+#pragma mark - ScoreTask
+
+- (NSMutableArray *)parserScoreTask:(NSData *)dict
+{
+    NSMutableArray * array = [NSMutableArray array];
+    NSDictionary * dic = (NSDictionary *)dict;
+    
+    [array addObject:dic];
+    
+    return array;
+}
+
+#pragma mark - ComfirmTask
+
+- (NSMutableArray *)parserComfirmTask:(NSData *)dict
+{
+    NSMutableArray * array = [NSMutableArray array];
+    NSDictionary * dic = (NSDictionary *)dict;
+    
+    [array addObject:dic];
+    
+    return array;
+}
+
+#pragma mark - CancelTask
+
+- (NSMutableArray *)parserCancelTask:(NSData *)dict
+{
+    NSMutableArray * array = [NSMutableArray array];
+    NSDictionary * dic = (NSDictionary *)dict;
+    
+    [array addObject:dic];
+    
+    return array;
+}
+
+#pragma mark - SendTask
+
+- (NSMutableArray *)parserSendTask:(NSData *)dict
+{
+    NSMutableArray * array = [NSMutableArray array];
+    NSDictionary * dic = (NSDictionary *)dict;
+    
+    DBCallTask * task = [[DataManager defaultInstance] getCallTaskByTaskCode:dic[@"taskCode"]];
+    [array addObject:task];
+    
+    return array;
+}
+
+#pragma mark - GetCustomInfo
+
+- (NSMutableArray *)parserGetCustomInfo:(NSData *)dict
+{
+    NSMutableArray * array = [NSMutableArray array];
+    NSDictionary * dic = (NSDictionary *)dict;
+    
+    DBUserLogin * user = [[DataManager defaultInstance] findUserLogInByCode:@"1"];
+    
+    [array addObject:user];
+    
+    return array;
+}
+
 @end

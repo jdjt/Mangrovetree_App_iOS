@@ -500,6 +500,12 @@ NSString* const FMModelSelected = @"FMModelSelected";
 #warning 引导页
     [self showLogin];
 }
+
+- (void)getCustomDetail
+{
+    
+}
+
 - (void)goChatView
 {
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:nil action:nil];

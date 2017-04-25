@@ -262,7 +262,7 @@
 {
     AlertViewCenterCell * cell = [tableView dequeueReusableCellWithIdentifier:@"alertCenter"];
     cell.chooseImage.image = self.selectTable == indexPath.row ? [UIImage imageNamed:@"AlertSelectImage_Yes"] : [UIImage imageNamed:@"AlertSelectImage_No"];
-    cell.chooseTitle.text = self.dataArray[indexPath.row];
+    cell.chooseTitle.text = [self.dataArray[indexPath.row] causeDesc];
     if (indexPath.row == self.dataArray.count - 1)
         cell.bottomLine.hidden = YES;
     return cell;
@@ -288,6 +288,7 @@
         self.selectTable = indexPath.row;
     }
     [self.tableView reloadRowsAtIndexPaths:set withRowAnimation:UITableViewRowAnimationNone];
+    self.selectCauseCode = self.selectTable == NSNotFound ? @"" : [self.dataArray[indexPath.row] causeCode];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section

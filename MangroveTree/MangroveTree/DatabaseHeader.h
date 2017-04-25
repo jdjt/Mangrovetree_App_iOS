@@ -9,6 +9,8 @@
 #ifndef DatabaseHeader_h
 #define DatabaseHeader_h
 
+#import "CancelReasonModel.h"
+
 #import "DBUserLogin+CoreDataClass.h"
 
 #import "DBCallTask+CoreDataClass.h"

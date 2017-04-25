@@ -26,6 +26,7 @@
  * @abstract 返回主界面
  */
 #define NotiBackToMain                  @"NotiBackToMain"
+
 /**
  *  @abstract 加载地图
  */
@@ -40,5 +41,10 @@
  *  @abstract IM获取新消息
  */
 #define NotiGetNewMessage               @"NotiGetNewMessage"
+
+/**
+ *  @abstract 呼叫任务相关推送
+ */
+#define NotiCallTaskPushMessage               @"NotiCallTaskPushMessage"
 
 #endif /* NotiHeader_h */
