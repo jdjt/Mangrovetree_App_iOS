@@ -199,7 +199,12 @@
     }
     if (inputText != nil && ![inputText isEqualToString:@""])
     {
-        NSDictionary *dic = @{@"text":inputText,@"are":[self.myZoneManager getCurrentZone].zone_name,@"time":[Util getTimeNow]};
+        NSString *are = @"红树林度假世界";
+        if ([self.myZoneManager getCurrentZone].zone_name != nil || ![[self.myZoneManager getCurrentZone].zone_name isEqualToString:@""])
+        {
+            are = [self.myZoneManager getCurrentZone].zone_name;
+        }
+        NSDictionary *dic = @{@"text":inputText,@"are":are,@"time":[Util getTimeNow]};
         [self.dataSource addObject:dic];
         [self.chatTabelView reloadData];
         self.headView.textStatus = TextStatus_waiting;
