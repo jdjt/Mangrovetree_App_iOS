@@ -176,6 +176,8 @@ extern NSString* FMModelSelected;
         __weak FMMangroveMapView * wMapView = _fengMapView;
         [FMNaviAnalyserTool shareNaviAnalyserTool].returnNaviResult = ^(NSArray * result, NSString * mapID)
         {
+            if (result == nil || result.count<= 0)
+                return;
             if ([mapID isEqualToString:@(kOutdoorMapID).stringValue]) {
                 FMKNaviResult * naviResult = result[0];
                 [wSelf.naviContraint updateNaviConstraintDataWith:naviResult.pointArray groupID:@"1"];
@@ -527,6 +529,7 @@ extern NSString* FMModelSelected;
     }
     
     [self didSelectedEnd:model];
+    NSLog(@"%ld %f  %f",model.pointer,model.centerPoint.x,model.centerPoint.y);
 }
 - (void)mapView:(FMKMapView *)mapView didSingleTapWithPoint:(CGPoint)point
 {

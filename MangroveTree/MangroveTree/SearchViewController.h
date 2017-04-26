@@ -12,7 +12,4 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *searchTextFlied;
 
-
-
-
 @end

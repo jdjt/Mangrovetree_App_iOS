@@ -8,7 +8,20 @@
 
 #import "AlertPresentAnimation.h"
 
+@interface AlertPresentAnimation ()
+
+@property (assign, nonatomic) PresentOneTransitionType type;
+
+@end
+
 @implementation AlertPresentAnimation
+
++ (instancetype)transitionWithTransitionType:(PresentOneTransitionType)type
+{
+    AlertPresentAnimation *animation = [[AlertPresentAnimation alloc] init];
+    animation.type = type;
+    return animation;
+}
 
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext
 {
@@ -17,22 +30,58 @@
 
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext
 {
-    BaseAlertViewController * alert = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
-    alert.view.alpha = 0;
-    alert.backGroundView.transform = CGAffineTransformMakeScale(1.3, 1.3);
+    switch (_type)
+    {
+        case PresentOneTransitionTypePresent:
+            [self prsentTransitionAnimate:transitionContext];
+            break;
+        case PresentOneTransitionTypeDismiss:
+            [self dismissTransitionAnimate:transitionContext];
+            break;
+        default:
+            break;
+    }
+}
+- (void)prsentTransitionAnimate:(id<UIViewControllerContextTransitioning>)transitionContext
+{
+    UIViewController * viewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    
+    viewController.view.alpha = 0;
+    viewController.view.transform = CGAffineTransformMakeScale(1.3, 1.3);
     
     UIView *containerView = [transitionContext containerView];
-    [containerView addSubview:alert.view];
+    [containerView addSubview:viewController.view];
     
     NSTimeInterval duration = [self transitionDuration:transitionContext];
     [UIView animateWithDuration:duration
                      animations:^{
-                         alert.view.alpha = 1;
-                         alert.backGroundView.transform = CGAffineTransformIdentity;
+                         viewController.view.alpha = 1;
+                         viewController.view.transform = CGAffineTransformIdentity;
                      }
                      completion:^(BOOL finished) {
                          [transitionContext completeTransition:YES];
                      }];
+
+}
+- (void)dismissTransitionAnimate:(id<UIViewControllerContextTransitioning>)transitionContext
+{
+    UIViewController * viewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    
+    viewController.view.alpha = 1;
+//    viewController.view.transform = CGAffineTransformMakeScale(1, 1);
+    UIView *containerView = [transitionContext containerView];
+    [containerView addSubview:viewController.view];
+    
+    NSTimeInterval duration = [self transitionDuration:transitionContext];
+    [UIView animateWithDuration:duration
+                     animations:^{
+                         viewController.view.alpha = 0;
+//                         viewController.view.transform = CGAffineTransformMakeScale(0.1, 0.1);
+                     }
+                     completion:^(BOOL finished) {
+                         [transitionContext completeTransition:YES];
+                     }];
+
 }
 
 @end

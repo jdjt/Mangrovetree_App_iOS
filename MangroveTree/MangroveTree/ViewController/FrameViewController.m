@@ -245,6 +245,20 @@ NSString* const FMModelSelected = @"FMModelSelected";
 
 - (void)showSettings:(UIBarButtonItem *)sender
 {
+////    BaseAlertViewController *view = [BaseAlertViewController alertWithAlertType:AlertType_callTaskComplete andWithWaiterId:@"11111"];
+//    __weak typeof (self)weakSelf = self;
+//
+//    GradeViewController *view = [GradeViewController initWithGradeInfor:nil withClick:^(ClickType clickType, NSInteger score) {
+//        NSLog(@"%ld %ld",(long)
+//              clickType,(long)score);
+//        [weakSelf dismissViewControllerAnimated:YES completion:^{
+//            
+//        }];
+//    }];
+//    
+//    [self presentViewController:view animated:YES completion:^{
+//        
+//    }];
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiShowSettings object:sender];
 }
 

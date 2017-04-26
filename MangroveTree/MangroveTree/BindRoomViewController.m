@@ -24,6 +24,7 @@
     [super viewDidLoad];
     self.title = @"绑定客房";
 }
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

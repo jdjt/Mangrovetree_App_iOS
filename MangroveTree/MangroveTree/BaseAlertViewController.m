@@ -347,9 +347,12 @@
 #pragma mark - UIViewControllerTransitioningDelegate
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-    
-    AlertPresentAnimation * animation = [[AlertPresentAnimation alloc] init];
-    return animation;
+    return [AlertPresentAnimation transitionWithTransitionType:PresentOneTransitionTypePresent];
+}
+
+- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    return [AlertPresentAnimation transitionWithTransitionType:PresentOneTransitionTypeDismiss];
 }
 
 @end

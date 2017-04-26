@@ -28,6 +28,7 @@
 		A87812A11EAD9C29002A7F40 /* DBBindCustom+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A878129E1EAD9C29002A7F40 /* DBBindCustom+CoreDataClass.m */; };
 		A87812A21EAD9C29002A7F40 /* DBBindCustom+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A87812A01EAD9C29002A7F40 /* DBBindCustom+CoreDataProperties.m */; };
 		A87812A51EAEE08F002A7F40 /* ChatViewController+NetWork.m in Sources */ = {isa = PBXBuildFile; fileRef = A87812A41EAEE08F002A7F40 /* ChatViewController+NetWork.m */; };
+		A87812AA1EAF5002002A7F40 /* GradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A87812A91EAF5002002A7F40 /* GradeViewController.m */; };
 		A8995A251EA5B228001B83DF /* PDKeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = A8995A241EA5B228001B83DF /* PDKeyChain.m */; };
 		A8995A271EA5B4BB001B83DF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8995A261EA5B4BA001B83DF /* Security.framework */; };
 		A8DC4F2E1EA8AB080056C699 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DC4F2D1EA8AB080056C699 /* UIColor+Hex.m */; };
@@ -502,6 +503,8 @@
 		A87812A01EAD9C29002A7F40 /* DBBindCustom+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DBBindCustom+CoreDataProperties.m"; sourceTree = "<group>"; };
 		A87812A31EAEE08F002A7F40 /* ChatViewController+NetWork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ChatViewController+NetWork.h"; path = "ViewController/ChatViewController+NetWork.h"; sourceTree = "<group>"; };
 		A87812A41EAEE08F002A7F40 /* ChatViewController+NetWork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ChatViewController+NetWork.m"; path = "ViewController/ChatViewController+NetWork.m"; sourceTree = "<group>"; };
+		A87812A81EAF5002002A7F40 /* GradeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradeViewController.h; sourceTree = "<group>"; };
+		A87812A91EAF5002002A7F40 /* GradeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradeViewController.m; sourceTree = "<group>"; };
 		A8995A231EA5B228001B83DF /* PDKeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDKeyChain.h; sourceTree = "<group>"; };
 		A8995A241EA5B228001B83DF /* PDKeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDKeyChain.m; sourceTree = "<group>"; };
 		A8995A261EA5B4BA001B83DF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -1486,8 +1489,6 @@
 		C46A63FE1E714DE0008A8A29 /* Homepage */ = {
 			isa = PBXGroup;
 			children = (
-				9C317AEE1E793E69004002A5 /* BaseNavigationController.h */,
-				9C317AEF1E793E69004002A5 /* BaseNavigationController.m */,
 				FCDD611A1E6FA5250057A9C3 /* FrameViewController.h */,
 				FCDD611B1E6FA5250057A9C3 /* FrameViewController.m */,
 				FCDD62E01E6FA5260057A9C3 /* MapViewController.h */,
@@ -1513,9 +1514,15 @@
 		C46BEDC61E9C7CD6009E3379 /* BaseAlertView */ = {
 			isa = PBXGroup;
 			children = (
+				9C317AEE1E793E69004002A5 /* BaseNavigationController.h */,
+				9C317AEF1E793E69004002A5 /* BaseNavigationController.m */,
+				C461989A1E8B60C6005590D2 /* BaseWebViewController.h */,
+				C461989B1E8B60C6005590D2 /* BaseWebViewController.m */,
 				C46BEDCC1E9C9CA3009E3379 /* BaseAlert.storyboard */,
 				A8F3DBE01EA0AEA80044C0A7 /* BaseAlertViewController.h */,
 				A8F3DBE11EA0AEA80044C0A7 /* BaseAlertViewController.m */,
+				A87812A81EAF5002002A7F40 /* GradeViewController.h */,
+				A87812A91EAF5002002A7F40 /* GradeViewController.m */,
 				C44F13591EA8BC2400AB7809 /* UILabel+ChangeLineSpace.h */,
 				C44F135A1EA8BC2400AB7809 /* UILabel+ChangeLineSpace.m */,
 				C42DA9091E9DD5EE00A76B4C /* AlertPresentAnimation.h */,
@@ -2130,8 +2137,6 @@
 				FC5B19A31E6E465B0038BCA7 /* AppDelegate.m */,
 				C44B166E1E70F0E800EE8257 /* MainViewController.h */,
 				C44B166F1E70F0E800EE8257 /* MainViewController.m */,
-				C461989A1E8B60C6005590D2 /* BaseWebViewController.h */,
-				C461989B1E8B60C6005590D2 /* BaseWebViewController.m */,
 				C46A63F31E711E06008A8A29 /* MainGround.storyboard */,
 				C46A63FE1E714DE0008A8A29 /* Homepage */,
 				A861B2C01E9CA343002D61F0 /* CallService */,
@@ -2927,6 +2932,7 @@
 				FC5B1A731E6E47A70038BCA7 /* MJRefreshLegendFooter.m in Sources */,
 				FC0755451E6EB8E000EAB144 /* DataManager.m in Sources */,
 				FCDD64791E6FA9BE0057A9C3 /* DBCallTask+CoreDataProperties.m in Sources */,
+				A87812AA1EAF5002002A7F40 /* GradeViewController.m in Sources */,
 				FC5B1A721E6E47A70038BCA7 /* MJRefreshHeader.m in Sources */,
 				C4C723E91E6FD34E003523A2 /* StatusAccept.m in Sources */,
 				FCDD64431E6FA5260057A9C3 /* GradingView.m in Sources */,

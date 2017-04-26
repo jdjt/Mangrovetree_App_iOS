@@ -78,6 +78,9 @@
     [self instantMessaging];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(callTaskPush:) name:NotiCallTaskPushMessage object:nil];
+    
+    self.navigationItem.rightBarButtonItem = self.cancelBarItem;
+    self.title = @"呼叫服务";
 }
 
 - (void)viewWillAppear:(BOOL)animated
