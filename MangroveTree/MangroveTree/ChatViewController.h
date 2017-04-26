@@ -32,6 +32,7 @@ typedef NS_ENUM(NSInteger,pageModelType)
 @property (nonatomic, strong) NSURLSessionTask *cancelListSession;
 @property (nonatomic, strong) NSURLSessionTask *taskDeatilSession;
 @property (nonatomic, strong) NSURLSessionTask *comfirmTaskSession;
+@property (nonatomic, strong) NSURLSessionTask *scoreTaskSession;
 
 
 @end

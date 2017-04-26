@@ -71,8 +71,8 @@ NSString* const FMModelSelected = @"FMModelSelected";
     // 检查是否登录
     BOOL login = [[DataManager defaultInstance] findLocationUserPersonalInformation];
     // 在这里开始发送网络请求
-    if (login == YES) [self updateFromNetwork];
-    
+    if (login == YES)
+        [self updateFromNetwork];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -127,6 +127,10 @@ NSString* const FMModelSelected = @"FMModelSelected";
         BOOL infor = [[DataManager defaultInstance] findLocationUserPersonalInformation];
         if (infor == NO)
             [self showLogin];
+        else
+        {
+#warning 检查任务
+        }
     }
 }
 
@@ -510,7 +514,6 @@ NSString* const FMModelSelected = @"FMModelSelected";
 
 - (void)showWelcome
 {
-    
 #warning 引导页
     [self showLogin];
 }

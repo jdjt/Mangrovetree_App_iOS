@@ -18,7 +18,7 @@ typedef void(^BlockClick)(ClickType clickType,NSInteger score);
 
 @interface GradeViewController : UIViewController
 
-+ (instancetype)initWithGradeInfor:(NSDictionary *)gradeInfor withClick:(BlockClick)click;
++ (instancetype)initWithGradeInfor:(DBCallTask *)gradeInfor withClick:(BlockClick)click;
 
 @property (weak, nonatomic) IBOutlet UIView *backGroundView;
 

@@ -302,8 +302,10 @@
     NSDictionary * dic = (NSDictionary *)dict;
     
     DBUserLogin * user = [[DataManager defaultInstance] findUserLogInByCode:@"1"];
+    DBCallTask * task = [[DataManager defaultInstance] getCallTaskByTaskCode:dic[@"taskCode"]];
+    [user addHasTaskObject:task];;
     
-    [array addObject:user];
+    [array addObject:task];
     
     return array;
 }

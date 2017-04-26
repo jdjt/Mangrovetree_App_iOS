@@ -14,6 +14,7 @@
 #import "NSString+Addtions.h"
 #import "FrameViewController.h"
 #import "ChatViewController+NetWork.h"
+#import "GradeViewController.h"
 
 #define kSizeHead CGSizeMake(kScreenWidth, 74)
 
@@ -79,7 +80,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(callTaskPush:) name:NotiCallTaskPushMessage object:nil];
     
-    self.navigationItem.rightBarButtonItem = self.cancelBarItem;
     self.title = @"呼叫服务";
 }
 
@@ -202,10 +202,6 @@
         [self.dataSource addObject:dic];
         [self.chatTabelView reloadData];
         self.headView.textStatus = TextStatus_waiting;
-//        self.chatTabelView.hidden = YES;
-//        self.textView.hidden = NO;
-//        self.chatInputView.hidden = YES;
-//        [self.chatInputView inPutViewresignFirstResponder];
         [self sengMsgToSerive:inputText];
     }
 }
@@ -217,7 +213,9 @@
 
 - (void)chooseCancelReason:(BaseAlertViewController *)sender
 {
-    [self cancelTask:sender.selectCauseCode];
+    if (self.currentTask == nil)
+        return;
+    [self cancelTask:sender.selectCauseCode andTaskCode:self.currentTask.taskCode];
 }
 
 - (void)becomeActive
@@ -246,6 +244,7 @@
     if (self.pageModelType == pageModelType)
         return;
 
+    self.pageModelType = pageModelType;
     switch (pageModelType)
     {
         case pageModel_NOTask:
@@ -271,6 +270,7 @@
             break;
         case pageModel_Receive:
         {
+            [self instantMessageingFormation];
             self.headView.textStatus = TextStatus_proceed;
             [self.headView startTaskTimerByStartTime:self.currentTask.acceptTime];
             self.textView.hidden = NO;
@@ -278,7 +278,12 @@
             break;
         case pageModel_waitGrade:
         {
-#warning  评分弹窗页面
+            if (self.currentTask == nil)
+                return;
+            GradeViewController * view = [GradeViewController initWithGradeInfor:self.currentTask withClick:^(ClickType clickType, NSInteger score) {
+                [self scoreTaskBy:self.currentTask.taskCode andScoreType:clickType == ClickType_Submit ? @"1" : @"2" andScore:clickType == ClickType_Submit ? [NSString stringWithFormat:@"%ld",score] : @"5"];
+            }];
+            [self presentViewController:view animated:YES completion:nil];
         }
             break;
         default:
@@ -313,6 +318,7 @@
         if ([dic[@"retOk"] isEqualToString:@"0"])
         {
             // 成功
+            self.currentTask = datas[0];
         }
     }
     else if (task == self.cancelTaskSession)
@@ -363,6 +369,14 @@
             [self setUIByPageModelType:pageModel_waitGrade];
         }
     }
+    else if (task == self.scoreTaskSession)
+    {
+        NSDictionary * dic = datas[0];
+        if ([dic[@"retOk"] isEqualToString:@"0"])// 评价成功
+            [self setUIByPageModelType:pageModel_NOTask];
+        else
+            [MyAlertView showAlert:@"评价失败，请检查网络"];
+    }
 }
 - (void)pushResponseResultsFailing:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg
 {
@@ -386,6 +400,10 @@
     {
         
     }
+    else if (task == self.scoreTaskSession)
+    {
+        
+    }
 }
 
 #pragma mark - 即时通讯
@@ -395,7 +413,7 @@
 {
     if (self.customBind.imAccount != nil && ![self.customBind.imAccount isEqualToString:@""])
     {
-        [[SPKitExample sharedInstance]callThisAfterISVAccountLoginSuccessWithYWLoginId:self.customBind.imAccount passWord:@"sjlh2016" preloginedBlock:nil successBlock:^{
+        [[SPKitExample sharedInstance]callThisAfterISVAccountLoginSuccessWithYWLoginId:self.customBind.imAccount passWord:@"sjlh2017" preloginedBlock:nil successBlock:^{
             
         } failedBlock:^(NSError * error) {
             UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"通讯模块登录失败" message:@"请检查网络状态重新登录" preferredStyle:UIAlertControllerStyleAlert];
