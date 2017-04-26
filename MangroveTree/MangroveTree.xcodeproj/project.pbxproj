@@ -353,14 +353,7 @@
 		C4C723CF1E6FCC2F003523A2 /* RouteDisplayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C722AF1E6FCC2E003523A2 /* RouteDisplayView.xib */; };
 		C4C723D21E6FCC2F003523A2 /* SwitchMapInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C722B41E6FCC2E003523A2 /* SwitchMapInfoView.m */; };
 		C4C723D31E6FCC2F003523A2 /* SwitchMapInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C722B51E6FCC2E003523A2 /* SwitchMapInfoView.xib */; };
-		C4C723D61E6FD2F4003523A2 /* TaskStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C723D51E6FD2F4003523A2 /* TaskStatus.m */; };
 		C4C723D91E6FD326003523A2 /* NSString+Addtions.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C723D81E6FD326003523A2 /* NSString+Addtions.m */; };
-		C4C723E71E6FD34E003523A2 /* StatusWaiting.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C723DC1E6FD34E003523A2 /* StatusWaiting.m */; };
-		C4C723E81E6FD34E003523A2 /* StatusWaitingExpired.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C723DE1E6FD34E003523A2 /* StatusWaitingExpired.m */; };
-		C4C723E91E6FD34E003523A2 /* StatusAccept.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C723E01E6FD34E003523A2 /* StatusAccept.m */; };
-		C4C723EA1E6FD34E003523A2 /* StatusAcceptExpired.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C723E21E6FD34E003523A2 /* StatusAcceptExpired.m */; };
-		C4C723EB1E6FD34E003523A2 /* StatusFinished.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C723E41E6FD34E003523A2 /* StatusFinished.m */; };
-		C4C723EC1E6FD34E003523A2 /* StatusFinishedExpired.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C723E61E6FD34E003523A2 /* StatusFinishedExpired.m */; };
 		C4C723EF1E6FD647003523A2 /* UIImage+AddText.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C723EE1E6FD647003523A2 /* UIImage+AddText.m */; };
 		C4C723F21E6FE64F003523A2 /* Defaut_Enu.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C723F11E6FE64F003523A2 /* Defaut_Enu.m */; };
 		C4C723F51E6FE66F003523A2 /* UIViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C723F41E6FE66F003523A2 /* UIViewExt.m */; };
@@ -432,9 +425,7 @@
 		FC5B1AF61E6E55A20038BCA7 /* NetWorkHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5B1AF51E6E55A20038BCA7 /* NetWorkHelp.m */; };
 		FCDD63231E6FA5260057A9C3 /* FrameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDD611B1E6FA5250057A9C3 /* FrameViewController.m */; };
 		FCDD64421E6FA5260057A9C3 /* FengMap.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCDD62DC1E6FA5260057A9C3 /* FengMap.xcassets */; };
-		FCDD64431E6FA5260057A9C3 /* GradingView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDD62DE1E6FA5260057A9C3 /* GradingView.m */; };
 		FCDD64451E6FA5260057A9C3 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDD62E11E6FA5260057A9C3 /* MapViewController.m */; };
-		FCDD64461E6FA5260057A9C3 /* MsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDD62E31E6FA5260057A9C3 /* MsgViewController.m */; };
 		FCDD64471E6FA5260057A9C3 /* libUMessage_Sdk_1.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FCDD62E51E6FA5260057A9C3 /* libUMessage_Sdk_1.4.0.a */; };
 		FCDD646E1E6FA70D0057A9C3 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FCDD646D1E6FA70D0057A9C3 /* libxml2.tbd */; };
 		FCDD64721E6FA7290057A9C3 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FCDD64711E6FA7290057A9C3 /* libsqlite3.0.tbd */; };
@@ -989,22 +980,8 @@
 		C4C722B31E6FCC2E003523A2 /* SwitchMapInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchMapInfoView.h; sourceTree = "<group>"; };
 		C4C722B41E6FCC2E003523A2 /* SwitchMapInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchMapInfoView.m; sourceTree = "<group>"; };
 		C4C722B51E6FCC2E003523A2 /* SwitchMapInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchMapInfoView.xib; sourceTree = "<group>"; };
-		C4C723D41E6FD2F4003523A2 /* TaskStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskStatus.h; sourceTree = "<group>"; };
-		C4C723D51E6FD2F4003523A2 /* TaskStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskStatus.m; sourceTree = "<group>"; };
 		C4C723D71E6FD326003523A2 /* NSString+Addtions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Addtions.h"; sourceTree = "<group>"; };
 		C4C723D81E6FD326003523A2 /* NSString+Addtions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Addtions.m"; sourceTree = "<group>"; };
-		C4C723DB1E6FD34E003523A2 /* StatusWaiting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusWaiting.h; sourceTree = "<group>"; };
-		C4C723DC1E6FD34E003523A2 /* StatusWaiting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusWaiting.m; sourceTree = "<group>"; };
-		C4C723DD1E6FD34E003523A2 /* StatusWaitingExpired.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusWaitingExpired.h; sourceTree = "<group>"; };
-		C4C723DE1E6FD34E003523A2 /* StatusWaitingExpired.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusWaitingExpired.m; sourceTree = "<group>"; };
-		C4C723DF1E6FD34E003523A2 /* StatusAccept.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusAccept.h; sourceTree = "<group>"; };
-		C4C723E01E6FD34E003523A2 /* StatusAccept.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusAccept.m; sourceTree = "<group>"; };
-		C4C723E11E6FD34E003523A2 /* StatusAcceptExpired.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusAcceptExpired.h; sourceTree = "<group>"; };
-		C4C723E21E6FD34E003523A2 /* StatusAcceptExpired.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusAcceptExpired.m; sourceTree = "<group>"; };
-		C4C723E31E6FD34E003523A2 /* StatusFinished.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusFinished.h; sourceTree = "<group>"; };
-		C4C723E41E6FD34E003523A2 /* StatusFinished.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusFinished.m; sourceTree = "<group>"; };
-		C4C723E51E6FD34E003523A2 /* StatusFinishedExpired.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusFinishedExpired.h; sourceTree = "<group>"; };
-		C4C723E61E6FD34E003523A2 /* StatusFinishedExpired.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusFinishedExpired.m; sourceTree = "<group>"; };
 		C4C723ED1E6FD647003523A2 /* UIImage+AddText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+AddText.h"; sourceTree = "<group>"; };
 		C4C723EE1E6FD647003523A2 /* UIImage+AddText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+AddText.m"; sourceTree = "<group>"; };
 		C4C723F01E6FE64F003523A2 /* Defaut_Enu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Defaut_Enu.h; sourceTree = "<group>"; };
@@ -1148,12 +1125,8 @@
 		FCDD611A1E6FA5250057A9C3 /* FrameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FrameViewController.h; path = ViewController/FrameViewController.h; sourceTree = "<group>"; };
 		FCDD611B1E6FA5250057A9C3 /* FrameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FrameViewController.m; path = ViewController/FrameViewController.m; sourceTree = "<group>"; };
 		FCDD62DC1E6FA5260057A9C3 /* FengMap.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = FengMap.xcassets; path = ViewController/FengMap.xcassets; sourceTree = "<group>"; };
-		FCDD62DD1E6FA5260057A9C3 /* GradingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GradingView.h; path = ViewController/GradingView.h; sourceTree = "<group>"; };
-		FCDD62DE1E6FA5260057A9C3 /* GradingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GradingView.m; path = ViewController/GradingView.m; sourceTree = "<group>"; };
 		FCDD62E01E6FA5260057A9C3 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapViewController.h; path = ViewController/MapViewController.h; sourceTree = "<group>"; };
 		FCDD62E11E6FA5260057A9C3 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapViewController.m; path = ViewController/MapViewController.m; sourceTree = "<group>"; };
-		FCDD62E21E6FA5260057A9C3 /* MsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MsgViewController.h; path = ViewController/MsgViewController.h; sourceTree = "<group>"; };
-		FCDD62E31E6FA5260057A9C3 /* MsgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MsgViewController.m; path = ViewController/MsgViewController.m; sourceTree = "<group>"; };
 		FCDD62E51E6FA5260057A9C3 /* libUMessage_Sdk_1.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.4.0.a; sourceTree = "<group>"; };
 		FCDD62E61E6FA5260057A9C3 /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
 		FCDD646D1E6FA70D0057A9C3 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
@@ -1278,7 +1251,6 @@
 			children = (
 				C44F130C1EA855A400AB7809 /* Customize */,
 				C44F13301EA855A400AB7809 /* MainLogic */,
-				A861B4051E9F0FCB002D61F0 /* PureLayout */,
 				A861B32E1E9E1605002D61F0 /* Controller */,
 				A861B3301E9E1618002D61F0 /* Views */,
 				A861B32F1E9E1611002D61F0 /* Model */,
@@ -1495,10 +1467,6 @@
 				FCDD62E11E6FA5260057A9C3 /* MapViewController.m */,
 				C45B61FE1E7A257600F70D3F /* SearchViewController.h */,
 				C45B61FF1E7A257600F70D3F /* SearchViewController.m */,
-				FCDD62E21E6FA5260057A9C3 /* MsgViewController.h */,
-				FCDD62E31E6FA5260057A9C3 /* MsgViewController.m */,
-				FCDD62DD1E6FA5260057A9C3 /* GradingView.h */,
-				FCDD62DE1E6FA5260057A9C3 /* GradingView.m */,
 				C4792DD41EA0990D00C273AA /* MarqueeLabel.h */,
 				C4792DD51EA0990D00C273AA /* MarqueeLabel.m */,
 				C45B62011E7A35DD00F70D3F /* SearchTypeCell.h */,
@@ -2056,28 +2024,6 @@
 			path = StartAndEndView;
 			sourceTree = "<group>";
 		};
-		C4C723DA1E6FD33F003523A2 /* TaskStatus */ = {
-			isa = PBXGroup;
-			children = (
-				C4C723D41E6FD2F4003523A2 /* TaskStatus.h */,
-				C4C723D51E6FD2F4003523A2 /* TaskStatus.m */,
-				C4C723DB1E6FD34E003523A2 /* StatusWaiting.h */,
-				C4C723DC1E6FD34E003523A2 /* StatusWaiting.m */,
-				C4C723DD1E6FD34E003523A2 /* StatusWaitingExpired.h */,
-				C4C723DE1E6FD34E003523A2 /* StatusWaitingExpired.m */,
-				C4C723DF1E6FD34E003523A2 /* StatusAccept.h */,
-				C4C723E01E6FD34E003523A2 /* StatusAccept.m */,
-				C4C723E11E6FD34E003523A2 /* StatusAcceptExpired.h */,
-				C4C723E21E6FD34E003523A2 /* StatusAcceptExpired.m */,
-				C4C723E31E6FD34E003523A2 /* StatusFinished.h */,
-				C4C723E41E6FD34E003523A2 /* StatusFinished.m */,
-				C4C723E51E6FD34E003523A2 /* StatusFinishedExpired.h */,
-				C4C723E61E6FD34E003523A2 /* StatusFinishedExpired.m */,
-			);
-			name = TaskStatus;
-			path = ViewController;
-			sourceTree = "<group>";
-		};
 		FC0755221E6EAEFA00EAB144 /* DatabaseClass */ = {
 			isa = PBXGroup;
 			children = (
@@ -2202,8 +2148,8 @@
 		FC5B19BB1E6E47230038BCA7 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				A861B4051E9F0FCB002D61F0 /* PureLayout */,
 				A8995A221EA5B20F001B83DF /* KeyChain */,
-				C4C723DA1E6FD33F003523A2 /* TaskStatus */,
 				FCDD62E41E6FA5260057A9C3 /* UMessage_Sdk */,
 				FCDD62E71E6FA5260057A9C3 /* WXFrameworks */,
 				FC5B1A531E6E47A70038BCA7 /* MJRefresh */,
@@ -2781,7 +2727,6 @@
 				C44F13441EA855A400AB7809 /* SPInputViewPluginGreeting.m in Sources */,
 				A861B3FE1E9F0C33002D61F0 /* ChatCell.m in Sources */,
 				9C47374D1E728E0700A30C91 /* NameViewController.m in Sources */,
-				C4C723EA1E6FD34E003523A2 /* StatusAcceptExpired.m in Sources */,
 				C45B620D1E7A8CA300F70D3F /* SearchResultCell.m in Sources */,
 				FC5B1A751E6E47A70038BCA7 /* UIScrollView+MJExtension.m in Sources */,
 				FC5B1ACF1E6E4EDC0038BCA7 /* NewPassWordViewController.m in Sources */,
@@ -2826,15 +2771,12 @@
 				C461989C1E8B60C6005590D2 /* BaseWebViewController.m in Sources */,
 				C4760ECB1EAF12FC00EC5246 /* CancelReasonModel.m in Sources */,
 				FC07553F1E6EB74B00EAB144 /* DBUserLogin+CoreDataClass.m in Sources */,
-				C4C723EB1E6FD34E003523A2 /* StatusFinished.m in Sources */,
 				FC07554B1E6EBB7400EAB144 /* AgreementViewController.m in Sources */,
-				FCDD64461E6FA5260057A9C3 /* MsgViewController.m in Sources */,
 				9C47374A1E7283C200A30C91 /* NewPhoneViewController.m in Sources */,
 				A8FDA43E1E9F815D00272B7D /* ChatHeadView.m in Sources */,
 				A87812A21EAD9C29002A7F40 /* DBBindCustom+CoreDataProperties.m in Sources */,
 				A87812A11EAD9C29002A7F40 /* DBBindCustom+CoreDataClass.m in Sources */,
 				C4C723C01E6FCC2F003523A2 /* CategoryView.m in Sources */,
-				C4C723E81E6FD34E003523A2 /* StatusWaitingExpired.m in Sources */,
 				FC5B1AA11E6E47BF0038BCA7 /* SDWebImageManager.m in Sources */,
 				FC5B1AF11E6E52B30038BCA7 /* Util.m in Sources */,
 				FC5B1A771E6E47A70038BCA7 /* UIView+MJExtension.m in Sources */,
@@ -2885,7 +2827,6 @@
 				C42DA90B1E9DD5EE00A76B4C /* AlertPresentAnimation.m in Sources */,
 				C4C723AF1E6FCC2F003523A2 /* CollCellModel.m in Sources */,
 				FC5B1A9F1E6E47BF0038BCA7 /* SDWebImageDownloader.m in Sources */,
-				C4C723D61E6FD2F4003523A2 /* TaskStatus.m in Sources */,
 				C44B16701E70F0E900EE8257 /* MainViewController.m in Sources */,
 				C4C723941E6FCC2F003523A2 /* FMDatabaseAdditions.m in Sources */,
 				FC5B1AB91E6E480C0038BCA7 /* AFSecurityPolicy.m in Sources */,
@@ -2904,9 +2845,7 @@
 				FC5B1A9C1E6E47BF0038BCA7 /* SDImageCache.m in Sources */,
 				FC5B1AA01E6E47BF0038BCA7 /* SDWebImageDownloaderOperation.m in Sources */,
 				9C4737441E7276DF00A30C91 /* PersonalDataViewController.m in Sources */,
-				C4C723E71E6FD34E003523A2 /* StatusWaiting.m in Sources */,
 				FC5B1A501E6E47610038BCA7 /* HPDProgress.m in Sources */,
-				C4C723EC1E6FD34E003523A2 /* StatusFinishedExpired.m in Sources */,
 				C4C723F21E6FE64F003523A2 /* Defaut_Enu.m in Sources */,
 				FC5B1ABA1E6E480C0038BCA7 /* AFURLRequestSerialization.m in Sources */,
 				C4C723D91E6FD326003523A2 /* NSString+Addtions.m in Sources */,
@@ -2934,8 +2873,6 @@
 				FCDD64791E6FA9BE0057A9C3 /* DBCallTask+CoreDataProperties.m in Sources */,
 				A87812AA1EAF5002002A7F40 /* GradeViewController.m in Sources */,
 				FC5B1A721E6E47A70038BCA7 /* MJRefreshHeader.m in Sources */,
-				C4C723E91E6FD34E003523A2 /* StatusAccept.m in Sources */,
-				FCDD64431E6FA5260057A9C3 /* GradingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

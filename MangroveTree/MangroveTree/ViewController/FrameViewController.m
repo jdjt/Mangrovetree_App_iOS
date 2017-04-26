@@ -8,7 +8,6 @@
 
 #import "FrameViewController.h"
 #import "MapSearchViewController.h"
-#import "MsgViewController.h"
 #import "MapViewController.h"
 #import "LoginViewController.h"
 #import "SearchViewController.h"

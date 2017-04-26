@@ -26,7 +26,7 @@
 @property (nonatomic, strong) UIBarButtonItem *cancelBarItem;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) NSString * comfirmStatus;
-
+@property (nonatomic, strong) FMZoneManager *myZoneManager;
 @property (nonatomic,strong) YWConversation * conversation;
 @property (nonatomic,strong) YWConversationViewController * conversationView;
 
@@ -154,6 +154,14 @@
     }
     return _customBind;
 }
+- (FMZoneManager *)myZoneManager
+{
+    if (!_myZoneManager)
+    {
+        _myZoneManager = [[FMZoneManager alloc] initWithMangroveMapView:nil];
+    }
+    return _myZoneManager;
+}
 
 #pragma mark - UITableView  Delegate
 
@@ -198,7 +206,7 @@
     }
     if (inputText != nil && ![inputText isEqualToString:@""])
     {
-        NSDictionary *dic = @{@"text":inputText,@"are":self.customBind.hotelName,@"time":self.customBind.serviceBeginTime};
+        NSDictionary *dic = @{@"text":inputText,@"are":[self.myZoneManager getCurrentZone].zone_name,@"time":[Util getTimeNow]};
         [self.dataSource addObject:dic];
         [self.chatTabelView reloadData];
         self.headView.textStatus = TextStatus_waiting;
