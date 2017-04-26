@@ -542,6 +542,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
     if (task == self.loginTask)
     {
 //        [self loadFMMap];
+        [self checkBindRoomInfor];
     }else if (task == self.checkBind)
     {
         NSDictionary *dic = datas[0];

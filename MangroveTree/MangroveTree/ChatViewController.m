@@ -43,7 +43,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = self.cancelBarItem;
     [self.view addSubview:self.headView];
-    [self.headView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:0];
+    [self.headView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:74];
     [self.headView autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:0];
     [self.headView autoSetDimensionsToSize:kSizeHead];
     
@@ -55,19 +55,12 @@
 #warning test
     self.textView = [[UIView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.textView];
-    self.textView.backgroundColor = [UIColor orangeColor];
-//    self.textView.backgroundColor = [UIColor colorWithRed:0.922 green:0.925 blue:0.929 alpha:1];
     [self.textView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.headView withOffset:0];
     [self.textView autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
     [self.textView autoSetDimension:ALDimensionWidth toSize:kScreenWidth];
-    // add inputView
     self.textView.hidden = YES;
-    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.textView.frame.size.height-2, kScreenWidth, 2)];
-    bottomView.backgroundColor = [UIColor redColor];
-    [self.textView addSubview:bottomView];
-    [bottomView autoPinEdgeToSuperviewEdge:ALEdgeBottom];
-    [bottomView autoSetDimensionsToSize:CGSizeMake(kScreenWidth, 1)];
-    
+    // add inputView
+
     [self.view addSubview:self.chatInputView];
     [self.chatInputView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.chatTabelView];
     [self.chatInputView autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
@@ -455,9 +448,7 @@
     self.conversationView.view.frame = CGRectMake(0,0, kScreenWidth, self.textView.frame.size.height);
     [self.conversationView setMessageInputViewHidden:NO animated:NO];
     self.conversationView.backgroundImage = nil;
-    self.conversationView.view.backgroundColor = [UIColor clearColor];
     self.conversationView.tableView.backgroundView = nil;
-    self.conversationView.tableView.backgroundColor = [UIColor clearColor];
     
     [self addChildViewController:self.conversationView];
     [self.textView addSubview: self.conversationView.view];
