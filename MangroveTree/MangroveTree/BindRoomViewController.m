@@ -24,12 +24,18 @@
     [super viewDidLoad];
     self.title = @"绑定客房";
 }
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [[MTRequestNetwork defaultManager] registerDelegate:self];
 }
+
 - (void)viewDidAppear:(BOOL)animated
+{
+}
+
+- (void)viewWillDisappear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     [[MTRequestNetwork defaultManager] removeDelegate:self];

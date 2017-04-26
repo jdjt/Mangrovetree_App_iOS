@@ -67,6 +67,9 @@
     [self.chatInputView autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
     [self.chatInputView autoSetDimension:ALDimensionWidth toSize:kScreenWidth];
     self.chatInputView.delegate = self;
+    
+    self.navigationItem.rightBarButtonItem = self.cancelBarItem;
+    self.title = @"呼叫服务";
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -74,9 +77,9 @@
     [super viewWillAppear:animated];
     [[MTRequestNetwork defaultManager] registerDelegate:self];
 }
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillDisappear:animated];
     [[MTRequestNetwork defaultManager] removeDelegate:self];
 }
 

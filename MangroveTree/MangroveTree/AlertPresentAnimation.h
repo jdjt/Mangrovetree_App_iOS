@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSUInteger, PresentOneTransitionType)
+{
+    PresentOneTransitionTypePresent = 0,//管理present动画
+    PresentOneTransitionTypeDismiss = 1 //管理dismiss动画
+};
+
 @interface AlertPresentAnimation : NSObject <UIViewControllerAnimatedTransitioning>
+
++ (instancetype)transitionWithTransitionType:(PresentOneTransitionType)type;
 
 @end
