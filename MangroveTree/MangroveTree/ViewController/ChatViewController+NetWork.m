@@ -12,7 +12,7 @@
 
 #pragma mark - NetWorking
 
-- (void)cancelTask:(NSString *)causeNum
+- (void)cancelTask:(NSString *)causeNum andTaskCode:(NSString *)taskCode
 {
     
     NSDictionary *dic = @{@"customerId":self.customBind.customerId,
@@ -68,6 +68,17 @@
                                                                          webURL:URL_COMFIRMTASK
                                                                          params:dic
                                                                      withByUser:YES andOldInterfaces:YES];
+}
+
+- (void)scoreTaskBy:(NSString *)taskCode andScoreType:(NSString *)type andScore:(NSString *)score
+{
+    NSDictionary *dic = @{@"taskCode":taskCode,
+                          @"scoreMode":type,
+                          @"scoreVal":score};
+    self.scoreTaskSession = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
+                                                                          webURL:URL_SCORETASK
+                                                                          params:dic
+                                                                      withByUser:YES andOldInterfaces:YES];
 }
 
 @end

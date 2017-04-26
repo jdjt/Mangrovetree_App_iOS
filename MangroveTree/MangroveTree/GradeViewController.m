@@ -21,7 +21,7 @@
 
 @implementation GradeViewController
 
-+ (instancetype)initWithGradeInfor:(NSDictionary *)gradeInfor withClick:(BlockClick)click
++ (instancetype)initWithGradeInfor:(DBCallTask *)gradeInfor withClick:(BlockClick)click
 {
     UIStoryboard * story = [UIStoryboard storyboardWithName:@"BaseAlert" bundle:nil];
     GradeViewController * viewController = (GradeViewController *)[story instantiateViewControllerWithIdentifier:@"GradeViewController"];
