@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, TextStatus)
 
 @property (nonatomic, copy) NSString * waiterId;
 
-- (void)startTaskTimerByStartTime:(NSString *)time;
+- (void)startTaskTimerByStartTime:(NSInteger)time;
 - (void)stopTimer;
 
 @end

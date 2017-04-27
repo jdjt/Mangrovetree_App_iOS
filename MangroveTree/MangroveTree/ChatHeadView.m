@@ -12,7 +12,7 @@
 @interface ChatHeadView ()
 
 @property (nonatomic, strong) NSTimer *timer;
-@property (nonatomic, strong) NSString *startTime;
+@property (nonatomic, assign) NSInteger startTime;
 
 @end
 
@@ -75,24 +75,22 @@
             break;
         case TextStatus_waiting:
             self.labelText.text = @"您的服务订单请求已发送，请等待接单后再发送更多内容";
-            self.timerLabel.text = @"等候时长:00:00:01";
+            self.timerLabel.text = @"等待时长：00:00:01";
             self.timerLabel.textColor = [UIColor colorWithHexString:@"#ed8256"];
             self.labelText.textColor = [UIColor colorWithHexString:@"#484b59"];
-            [self startTaskTimerByStartTime:nil];
             break;
         case TextStatus_proceed:
             self.labelText.text = [NSString stringWithFormat:@"服务员%@已接单，您可以语音聊天啦！",self.waiterId.length > 0 ? self.waiterId : @""];
-            self.timerLabel.text = @"服务时长:00:00:01";
+            self.timerLabel.text = @"服务时长：00:00:01";
             self.timerLabel.textColor = [UIColor colorWithHexString:@"#ed8256"];
             self.labelText.textColor = [UIColor colorWithHexString:@"#484b59"];
-            [self startTaskTimerByStartTime:nil];
             break;
         default:
             break;
     }
 
 }
-- (void)startTaskTimerByStartTime:(NSString *)time
+- (void)startTaskTimerByStartTime:(NSInteger)time
 {
     self.startTime = time;
     if (!self.timer)
@@ -102,7 +100,22 @@
 }
 - (void)myLog:(NSTimer *)timer
 {
-    
+    self.startTime += 1;
+    NSInteger s = self.startTime % 60;
+    NSInteger m;
+    NSInteger h;
+    if (self.startTime / 60 == 0)
+    {
+        m = 0;
+        h = 0;
+    }
+    else
+    {
+        m = self.startTime / 60 % 60;
+        h = self.startTime / 60 / 60;
+    }
+    NSString * time = [NSString stringWithFormat:@"%02ld:%02ld:%02ld",h,m,s];
+    self.timerLabel.text = [NSString stringWithFormat:@"%@%@",self.textStatus == TextStatus_waiting ? @"等待时长：" : @"服务时长：",time];
 }
 - (void)stopTimer
 {

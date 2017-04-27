@@ -41,7 +41,6 @@
     self.navigationController.delegate = self;
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.rightBarButtonItem = self.cancelBarItem;
     [self.view addSubview:self.headView];
     [self.headView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:74];
     [self.headView autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:0];
@@ -186,7 +185,8 @@
     {
         cell = [[ChatCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"chatCell"];
         cell.backgroundColor = [UIColor colorWithRed:0.922 green:0.925 blue:0.929 alpha:1];
-        if (self.dataSource.count>0) cell.model = self.dataSource[indexPath.row];
+        if (self.dataSource.count > 0)
+            cell.model = self.dataSource[indexPath.row];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return cell;
@@ -200,7 +200,7 @@
     if (inputText != nil && ![inputText isEqualToString:@""])
     {
         NSString *are = @"红树林度假世界";
-        if ([self.myZoneManager getCurrentZone].zone_name != nil || ![[self.myZoneManager getCurrentZone].zone_name isEqualToString:@""])
+        if ([self.myZoneManager getCurrentZone] != nil && ([self.myZoneManager getCurrentZone].zone_name != nil || ![[self.myZoneManager getCurrentZone].zone_name isEqualToString:@""]))
         {
             are = [self.myZoneManager getCurrentZone].zone_name;
         }
@@ -247,14 +247,26 @@
 
 - (void)setUIByPageModelType:(pageModelType)pageModelType
 {
+    NSDateFormatter * formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSInteger timeLong = 0;
+    NSDate * startTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"CallTaskStartTime"];
     if (self.pageModelType == pageModelType)
+    {
+        if (pageModelType == pageModel_Receive)
+        {
+            [self.headView startTaskTimerByStartTime:[[NSDate date] timeIntervalSince1970] * 2 - [[formatter dateFromString:self.currentTask.acceptTime] timeIntervalSince1970] - [[formatter dateFromString:self.currentTask.nowDate] timeIntervalSince1970]];
+        }
         return;
+    }
 
     self.pageModelType = pageModelType;
     switch (pageModelType)
     {
         case pageModel_NOTask:
         {
+            self.navigationItem.rightBarButtonItem = nil;
+            [self.headView stopTimer];
             self.headView.textStatus = TextStatus_default;
             [self.dataSource removeAllObjects];
             [self.chatTabelView reloadData];
@@ -263,12 +275,24 @@
             break;
         case pageModel_NOReceive:
         {
+            self.navigationItem.rightBarButtonItem = self.cancelBarItem;
             self.headView.textStatus = TextStatus_waiting;
+            if (startTime)
+            {
+                timeLong = (NSInteger)[startTime timeIntervalSinceNow];
+            }
+            else
+            {
+                timeLong = 0;
+                [[NSUserDefaults standardUserDefaults] setObject:startTime forKey:@"CallTaskStartTime"];
+            }
+            [self.headView startTaskTimerByStartTime:timeLong];
             self.textView.hidden = YES;
         }
             break;
         case pageModel_Complete:
         {
+            self.navigationItem.rightBarButtonItem = self.cancelBarItem;
             BaseAlertViewController * alert = [BaseAlertViewController alertWithAlertType:AlertType_callTaskComplete andWithWaiterId:self.currentTask.waiterId];
             [alert addTarget:self andWithComfirmAction:@selector(comfirmTaskYES) andWithCancelAction:@selector(comfirmTaskNO)];
             [self presentViewController:alert animated:YES completion:nil];
@@ -276,9 +300,10 @@
             break;
         case pageModel_Receive:
         {
+            self.navigationItem.rightBarButtonItem = self.cancelBarItem;
             [self instantMessageingFormation];
             self.headView.textStatus = TextStatus_proceed;
-            [self.headView startTaskTimerByStartTime:self.currentTask.acceptTime];
+            [self.headView startTaskTimerByStartTime:[[NSDate date] timeIntervalSince1970] * 2 - [[formatter dateFromString:self.currentTask.acceptTime] timeIntervalSince1970] - [[formatter dateFromString:self.currentTask.nowDate] timeIntervalSince1970]];
             self.textView.hidden = NO;
         }
             break;
@@ -324,7 +349,8 @@
         if ([dic[@"retOk"] isEqualToString:@"0"])
         {
             // 成功
-            self.currentTask = datas[0];
+            self.currentTask = [[DataManager defaultInstance] getCallTaskByTaskCode:dic[@"taskCode"]];
+            [self setUIByPageModelType:pageModel_NOReceive];
         }
     }
     else if (task == self.cancelTaskSession)

@@ -133,7 +133,7 @@
 #define URL_CANCEL_LIST                     @"/hotelcallservice/customer/cacel/getCacelDescList.json"
 
 // 根据任务号获取任务详情
-#define URL_GETTASK_TASKCODE                @"/hotelcallservice/customer/getMessageByTaskCode.json"
+#define URL_GETTASK_TASKCODE                @"/hotelcallservice/customer/getTaskInfoByTaskCode.json"
 
 //  获取任务信息 （根据任务状态查询）
 #define URL_GETTASK_TASKSTATUS              @"/hotecallservice/customer/getTaskInfo.json"

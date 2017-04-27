@@ -51,7 +51,7 @@
     self.mText.numberOfLines = 0;
     self.mText.clipsToBounds = YES;
     self.mText.layer.cornerRadius = 3.0f;
-    self.mText.text = @"您好，我的房间需要一杯饮料，请问你们都有什么类型的饮料，请给我列出一个清单，供我选择";
+    self.mText.text = self.model[@"text"];
     self.mText.font = [UIFont systemFontOfSize:19.0f];
     self.mText.textColor = [UIColor colorWithHexString:@"#5a5a5a"];
     self.mTitle.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -62,7 +62,7 @@
     [self.mText autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:18];
     
     self.mAreTitle = [[UILabel alloc] init];
-    self.mAreTitle.text = @"呼叫区域:椰林酒店";
+    self.mAreTitle.text = [NSString stringWithFormat:@"呼叫区域:%@",self.model[@"are"]];
     self.mAreTitle.font = [UIFont systemFontOfSize:15.0f];
     self.mAreTitle.textColor = [UIColor colorWithHexString:@"#484b59"];
     [self.contentView addSubview:self.mAreTitle];
@@ -70,7 +70,7 @@
     [self.mAreTitle autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.mText withOffset:14];
     
     self.mTime = [[UILabel alloc] init];
-    self.mTime.text = @"2017-05-24 05:24:21";
+    self.mTime.text = self.model[@"time"];
     self.mTime.font = [UIFont systemFontOfSize:12.0f];
     self.mTime.textColor = [UIColor colorWithHexString:@"#ed8256"];
     [self.contentView addSubview:self.mTime];
@@ -83,8 +83,10 @@
     if (_model != model)
     {
         _model = model;
-        
     }
+    self.mText.text = self.model[@"text"];
+    self.mAreTitle.text = [NSString stringWithFormat:@"呼叫区域:%@",self.model[@"are"]];
+    self.mTime.text = self.model[@"time"];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {

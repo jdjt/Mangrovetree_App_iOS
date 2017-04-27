@@ -265,8 +265,7 @@
         contentHeight = size.height;
         textView.scrollEnabled = NO;
     }
-    
-    
+
     if (_mHeightTextView != contentHeight)
     {//如果当前高度需要调整，就调整，避免多做无用功
         _mHeightTextView = contentHeight ;//重新设置自己的高度

@@ -288,8 +288,8 @@
     NSMutableArray * array = [NSMutableArray array];
     NSDictionary * dic = (NSDictionary *)dict;
     
-    DBCallTask * task = [[DataManager defaultInstance] getCallTaskByTaskCode:dic[@"taskCode"]];
-    [array addObject:task];
+    [[DataManager defaultInstance] getCallTaskByTaskCode:dic[@"taskCode"]];
+    [array addObject:dic];
     
     return array;
 }

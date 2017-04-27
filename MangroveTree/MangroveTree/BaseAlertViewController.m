@@ -219,12 +219,12 @@
 {
     if (!self.target)
         return;
-    if (self.dataArray.count > 0 && self.selectTable == NSNotFound)
+    if (self.dataArray.count > 0 && self.selectTable == NSNotFound && sender == self.comfirmButton)
     {
         [MyAlertView showAlert:@"请选择取消原因"];
         return;
     }
-    [self dismissViewControllerAnimated:NO completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
     if (sender == self.comfirmButton)
     {
         if ([self.target respondsToSelector:self.action1])
