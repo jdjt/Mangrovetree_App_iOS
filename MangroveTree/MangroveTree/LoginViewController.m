@@ -257,7 +257,7 @@
     else if (task == self.getMemberInfor)
     {
         [self dismissViewControllerAnimated:YES completion:^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotiLoadFMMap object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotiResetCustomDetail object:nil];
             //[[NSNotificationCenter defaultCenter] postNotificationName:NotiHaveNewNoti object:nil];
         }];
     }

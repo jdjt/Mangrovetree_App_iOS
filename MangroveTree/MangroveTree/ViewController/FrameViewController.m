@@ -75,6 +75,8 @@ NSString* const FMModelSelected = @"FMModelSelected";
     // 在这里开始发送网络请求
     if (login == YES)
         [self updateFromNetwork];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetCustomDetail) name:NotiResetCustomDetail object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -129,10 +131,6 @@ NSString* const FMModelSelected = @"FMModelSelected";
         BOOL infor = [[DataManager defaultInstance] findLocationUserPersonalInformation];
         if (infor == NO)
             [self showLogin];
-        else
-        {
-#warning 检查任务
-        }
     }
 }
 
@@ -567,8 +565,11 @@ NSString* const FMModelSelected = @"FMModelSelected";
             {
                 [self goChatView];
             }
-        }else if([dic[@"retOk"] isEqualToString:@"1"])
+        }
+        else if([dic[@"retOk"] isEqualToString:@"1"])
         {
+            if (self.isLoginCheckBind == YES)
+                return;
             UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:nil action:nil];
             self.navigationItem.backBarButtonItem = barButtonItem;
             [self performSegueWithIdentifier:@"showBind" sender:nil];
@@ -738,6 +739,13 @@ NSString* const FMModelSelected = @"FMModelSelected";
         }
             break;
     }
+}
+
+#pragma mark - notification
+
+- (void)resetCustomDetail
+{
+    [self checkBindRoomInforByLoginCheck:YES];
 }
 
 - (void)dealloc

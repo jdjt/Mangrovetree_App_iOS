@@ -223,7 +223,7 @@
     NSMutableArray *array = [NSMutableArray array];
     NSDictionary * dic1 = (NSDictionary *)dict;
     
-    for (NSDictionary * dic in dic1[@"taskInfoList"])
+    for (NSDictionary * dic in dic1)
     {
         DBCallTask * task = [[DataManager defaultInstance] getCallTaskByTaskCode:dic[@"taskCode"]];
         task.taskContent = dic[@"taskContent"];

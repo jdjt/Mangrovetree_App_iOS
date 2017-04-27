@@ -47,4 +47,9 @@
  */
 #define NotiCallTaskPushMessage               @"NotiCallTaskPushMessage"
 
+/**
+ *  @abstract 登录进入首页刷新用户信息
+ */
+#define NotiResetCustomDetail               @"NotiResetCustomDetail"
+
 #endif /* NotiHeader_h */

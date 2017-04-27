@@ -80,7 +80,8 @@
 {
     [super viewWillAppear:animated];
     [[MTRequestNetwork defaultManager] registerDelegate:self];
-    [self getTaskDetailByTaskCode:self.currentTask.taskCode];
+    if (self.currentTask)
+        [self getTaskDetailByTaskCode:self.currentTask.taskCode];
 }
 - (void)viewWillDisAppear:(BOOL)animated
 {
@@ -255,7 +256,7 @@
     NSDateFormatter * formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSInteger timeLong = 0;
-    NSDate * startTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"CallTaskStartTime"];
+    NSString * startTime = [[NSUserDefaults standardUserDefaults] stringForKey:@"CallTaskStartTime"];
     if (self.pageModelType == pageModelType)
     {
         if (pageModelType == pageModel_Receive)
@@ -270,6 +271,7 @@
     {
         case pageModel_NOTask:
         {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"CallTaskStartTime"];
             self.navigationItem.rightBarButtonItem = nil;
             [self.headView stopTimer];
             self.headView.textStatus = TextStatus_default;
@@ -282,14 +284,14 @@
         {
             self.navigationItem.rightBarButtonItem = self.cancelBarItem;
             self.headView.textStatus = TextStatus_waiting;
-            if (startTime)
+            if (startTime.length > 0)
             {
-                timeLong = (NSInteger)[startTime timeIntervalSinceNow];
+                timeLong = labs((NSInteger)[[formatter dateFromString:startTime] timeIntervalSinceNow]);
             }
             else
             {
                 timeLong = 0;
-                [[NSUserDefaults standardUserDefaults] setObject:startTime forKey:@"CallTaskStartTime"];
+                [[NSUserDefaults standardUserDefaults] setObject:[Util getTimeNow] forKey:@"CallTaskStartTime"];
             }
             [self.headView startTaskTimerByStartTime:timeLong];
             self.textView.hidden = YES;
