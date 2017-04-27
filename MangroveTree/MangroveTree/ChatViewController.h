@@ -27,12 +27,13 @@ typedef NS_ENUM(NSInteger,pageModelType)
 
 @property (nonatomic, assign) pageModelType pageModelType;
 // 网络请求
-@property (nonatomic, strong) NSURLSessionTask *seesionSengTask;
-@property (nonatomic, strong) NSURLSessionTask *cancelTaskSession;
-@property (nonatomic, strong) NSURLSessionTask *cancelListSession;
-@property (nonatomic, strong) NSURLSessionTask *taskDeatilSession;
-@property (nonatomic, strong) NSURLSessionTask *comfirmTaskSession;
-@property (nonatomic, strong) NSURLSessionTask *scoreTaskSession;
+@property (nonatomic, strong) NSURLSessionTask * seesionSengTask;
+@property (nonatomic, strong) NSURLSessionTask * cancelTaskSession;
+@property (nonatomic, strong) NSURLSessionTask * cancelListSession;
+@property (nonatomic, strong) NSURLSessionTask * taskDeatilSession;
+@property (nonatomic, strong) NSURLSessionTask * comfirmTaskSession;
+@property (nonatomic, strong) NSURLSessionTask * scoreTaskSession;
+@property (nonatomic, strong) NSURLSessionTask * getCustomDetailTask;
 
 
 @end

@@ -142,6 +142,13 @@
 {
     NSMutableArray *array = [NSMutableArray array];
     NSMutableDictionary *dic = (NSMutableDictionary *)dict;
+    if (dic[@"customerId"] != nil && ![dic[@"customerId"] isEqualToString:@""])
+    {
+        DBUserLogin * userLogin = [[DataManager defaultInstance] findUserLogInByCode:@"1"];
+        DBBindCustom * bind = [[DataManager defaultInstance] getCustomerBingRoom];
+        bind.customerId = dic[@"customerId"];
+        userLogin.hasCustomBind = bind;
+    }
     [array addObject:dic];
     return array;
 }

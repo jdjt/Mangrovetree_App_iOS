@@ -51,7 +51,8 @@
     self.chatTabelView.backgroundColor = [UIColor colorWithRed:0.922 green:0.925 blue:0.929 alpha:1];
     [self.chatTabelView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.headView withOffset:0];
     [self.chatTabelView autoSetDimension:ALDimensionWidth toSize:kScreenWidth];
-#warning test
+
+    // textView 用来承载IM聊天界面
     self.textView = [[UIView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.textView];
     [self.textView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.headView withOffset:0];
@@ -79,6 +80,7 @@
 {
     [super viewWillAppear:animated];
     [[MTRequestNetwork defaultManager] registerDelegate:self];
+    [self getTaskDetailByTaskCode:self.currentTask.taskCode];
 }
 - (void)viewWillDisAppear:(BOOL)animated
 {
@@ -191,6 +193,9 @@
     }
     return cell;
 }
+
+#pragma FUNCTION
+
 - (void)sendMsgByChatBarView:(NSString *)inputText
 {
     if (self.dataSource.count > 0)
@@ -409,6 +414,11 @@
         else
             [MyAlertView showAlert:@"评价失败，请检查网络"];
     }
+    else if (task == self.getCustomDetailTask)
+    {
+        // 获取custom信息不需要前端显示
+        [self instantMessaging];
+    }
 }
 - (void)pushResponseResultsFailing:(NSURLSessionTask *)task responseCode:(NSString *)code withMessage:(NSString *)msg
 {
@@ -436,6 +446,10 @@
     {
         
     }
+    else if (task == self.getCustomDetailTask)
+    {
+        [MyAlertView showAlert:@"获取用户信息失败，请重新尝试，已便使用语音聊天与服务员即时沟通"];
+    }
 }
 
 #pragma mark - 即时通讯
@@ -459,6 +473,10 @@
             [alert addAction:action2];
             [self presentViewController:alert animated:YES completion:nil];
         }];
+    }
+    else
+    {
+        [self getCustomDetailByCustomId:_customBind.customerId];
     }
 }
 

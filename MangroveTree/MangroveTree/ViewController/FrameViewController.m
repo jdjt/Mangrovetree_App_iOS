@@ -42,11 +42,14 @@ NSString* const FMModelSelected = @"FMModelSelected";
 // 导航栏 按钮
 @property (retain, nonatomic) UIBarButtonItem *userBarBtn;
 @property (nonatomic, retain) NSTimer *countDownTimer;
-@property (nonatomic, strong) NSURLSessionTask * loginTask;
 
 @property (nonatomic, assign) NSInteger segmentSelect;
+@property (nonatomic, assign) BOOL isLoginCheckBind;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottombarConstraint;
-@property (nonatomic, strong) NSURLSessionTask *checkBind;
+@property (nonatomic, strong) NSURLSessionTask * checkBind;
+@property (nonatomic, strong) NSURLSessionTask * loginTask;
+@property (nonatomic, strong) NSURLSessionTask * proceedTask;
+@property (nonatomic, strong) NSURLSessionTask * customDetailTask;
 
 @end
 
@@ -368,7 +371,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
 //        [self performSegueWithIdentifier:@"showBind" sender:nil];
 //    }else
 //    {
-    [self checkBindRoomInfor];
+    [self checkBindRoomInforByLoginCheck:NO];
 //    }
     
 }
@@ -517,16 +520,13 @@ NSString* const FMModelSelected = @"FMModelSelected";
     [self showLogin];
 }
 
-- (void)getCustomDetail
-{
-    
-}
-
 - (void)goChatView
 {
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:nil action:nil];
     self.navigationItem.backBarButtonItem = barButtonItem;
     ChatViewController *chat = [[ChatViewController alloc] init];
+    if (self.currentTask)
+        chat.currentTask = self.currentTask;
     [self.navigationController pushViewController:chat animated:YES];
     self.goChat = NO;
 }
@@ -542,20 +542,49 @@ NSString* const FMModelSelected = @"FMModelSelected";
     if (task == self.loginTask)
     {
 //        [self loadFMMap];
-//        [self checkBindRoomInfor];
-    }else if (task == self.checkBind)
+        [self checkBindRoomInforByLoginCheck:YES];
+    }
+    else if (task == self.checkBind)
     {
         NSDictionary *dic = datas[0];
         
         if ([dic[@"retOk"] isEqualToString:@"0"])
         {
-            [self goChatView];
+            if (self.isLoginCheckBind == YES)
+            {
+                DBBindCustom * bind = [[DataManager defaultInstance] getCustomerBingRoom];
+                if (bind.customerId == nil || [bind.customerId isEqualToString:@""])
+                    return;
+                else
+                {
+                    //  获取正在进行中的任务
+                    [self getProceedTaskLiskByCustom:bind.customerId andTaskStatus:@"1"];
+                    //  获取用户详情
+                    [self getCustomDetailBy:bind.customerId];
+                }
+            }
+            else
+            {
+                [self goChatView];
+            }
         }else if([dic[@"retOk"] isEqualToString:@"1"])
         {
             UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:nil action:nil];
             self.navigationItem.backBarButtonItem = barButtonItem;
             [self performSegueWithIdentifier:@"showBind" sender:nil];
         }
+    }
+    else if (task == self.proceedTask)
+    {
+        if (datas.count > 0)
+        {
+            self.currentTask = datas[0];
+#warning 添加首页呼叫任务提示标识
+        }
+    }
+    else if (task == self.customDetailTask)
+    {
+        // 获取custom信息 不需要前端显示信息 
     }
 }
 
@@ -569,6 +598,18 @@ NSString* const FMModelSelected = @"FMModelSelected";
         }];
         [alert addAction:action];
         [self presentViewController:alert animated:YES completion:nil];
+    }
+    else if (task == self.checkBind)
+    {
+        
+    }
+    else if (task == self.proceedTask)
+    {
+        
+    }
+    else if (task == self.customDetailTask)
+    {
+        
     }
 }
 
@@ -611,8 +652,9 @@ NSString* const FMModelSelected = @"FMModelSelected";
                                                        andOldInterfaces:YES];
 }
 
-- (void)checkBindRoomInfor
+- (void)checkBindRoomInforByLoginCheck:(BOOL)isLogin
 {
+    self.isLoginCheckBind = isLogin;
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
     [params setValue:[Util macaddress] forKey:@"deviceId"];
     [params setValue:[Util deviceToken] forKey:@"deviceToken"];
@@ -621,6 +663,27 @@ NSString* const FMModelSelected = @"FMModelSelected";
                                                 params:params
                                             withByUser:YES
                                       andOldInterfaces:YES];
+}
+
+- (void)getProceedTaskLiskByCustom:(NSString *)customId andTaskStatus:(NSString *)taskStatus
+{
+    NSDictionary * dic = @{@"customerId":customId,
+                           @"taskStatus":taskStatus};
+    self.proceedTask = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
+                                                                   webURL:URL_GETTASK_TASKSTATUS
+                                                                   params:dic
+                                                               withByUser:YES
+                                                         andOldInterfaces:YES];
+}
+
+- (void)getCustomDetailBy:(NSString *)customId
+{
+    NSDictionary * dic = @{@"customerId":customId};
+    self.customDetailTask = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
+                                                                        webURL:URL_GETCUSTOMINFO
+                                                                        params:dic
+                                                                    withByUser:YES
+                                                              andOldInterfaces:YES];
 }
 
 - (void)showBottomView:(SegmentSelected)select

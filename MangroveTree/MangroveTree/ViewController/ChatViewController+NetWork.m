@@ -81,4 +81,14 @@
                                                                       withByUser:YES andOldInterfaces:YES];
 }
 
+- (void)getCustomDetailByCustomId:(NSString *)customId
+{
+    NSDictionary * dic = @{@"customerId":customId};
+    self.getCustomDetailTask = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
+                                                                           webURL:URL_GETCUSTOMINFO
+                                                                           params:dic
+                                                                       withByUser:YES
+                                                                 andOldInterfaces:YES];
+}
+
 @end

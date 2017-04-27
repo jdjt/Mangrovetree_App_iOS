@@ -136,7 +136,7 @@
 #define URL_GETTASK_TASKCODE                @"/hotelcallservice/customer/getTaskInfoByTaskCode.json"
 
 //  获取任务信息 （根据任务状态查询）
-#define URL_GETTASK_TASKSTATUS              @"/hotecallservice/customer/getTaskInfo.json"
+#define URL_GETTASK_TASKSTATUS              @"/hotelcallservice/customer/getTaskInfo.json"
 
 //  评价呼叫任务
 #define URL_SCORETASK                       @"/hotelcallservice/customer/scoreTask.json"
