@@ -54,7 +54,7 @@
     self.mText.text = self.model[@"text"];
     self.mText.font = [UIFont systemFontOfSize:19.0f];
     self.mText.textColor = [UIColor colorWithHexString:@"#5a5a5a"];
-    self.mTitle.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.mText.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self.contentView addSubview:self.mText];
     
     [self.mText autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:18];
