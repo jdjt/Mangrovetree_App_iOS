@@ -2,7 +2,7 @@
 //  DBCallTask+CoreDataProperties.m
 //  MangroveTree
 //
-//  Created by liuchao on 2017/4/24.
+//  Created by 伊舞寻风 on 2017/4/28.
 //  Copyright © 2017年 luoyu. All rights reserved.
 //
 
@@ -14,32 +14,33 @@
 	return [[NSFetchRequest alloc] initWithEntityName:@"DBCallTask"];
 }
 
+@dynamic acceptTime;
+@dynamic areaCode;
+@dynamic areaName;
+@dynamic cancelCode;
+@dynamic cancelDesc;
+@dynamic cancelDetail;
+@dynamic cancelPoint;
+@dynamic cancelTime;
+@dynamic cImAccount;
+@dynamic customerId;
+@dynamic finishEndTime;
+@dynamic finishTime;
+@dynamic hotelCode;
+@dynamic nowDate;
+@dynamic scoreMod;
+@dynamic scoreTime;
+@dynamic scoreVal;
 @dynamic taskCode;
 @dynamic taskContent;
 @dynamic taskStatus;
-@dynamic hotelCode;
-@dynamic areaCode;
-@dynamic areaName;
-@dynamic cancelDetail;
-@dynamic cancelTime;
-@dynamic cancelPoint;
-@dynamic cancelCode;
-@dynamic cancelDesc;
-@dynamic scoreTime;
-@dynamic scoreMod;
-@dynamic scoreVal;
-@dynamic customerId;
-@dynamic cImAccount;
-@dynamic waiterId;
-@dynamic wImAccount;
-@dynamic nowDate;
-@dynamic waiteTime;
-@dynamic waiterEndTime;
-@dynamic acceptTime;
-@dynamic finishTime;
-@dynamic finishEndTime;
-@dynamic waiterDeviceId;
 @dynamic userDeviceId;
+@dynamic waiterDeviceId;
+@dynamic waiterEndTime;
+@dynamic waiterId;
+@dynamic waiteTime;
+@dynamic wImAccount;
+@dynamic produceTime;
 @dynamic belongUser;
 
 @end

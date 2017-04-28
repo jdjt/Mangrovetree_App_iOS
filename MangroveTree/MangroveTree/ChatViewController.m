@@ -201,6 +201,7 @@
 {
     if (self.dataSource.count > 0)
     {
+        [MyAlertView showAlert:@"请耐心等待服务员为您服务"];
         return;
     }
     if (inputText != nil && ![inputText isEqualToString:@""])
@@ -294,6 +295,12 @@
                 [[NSUserDefaults standardUserDefaults] setObject:[Util getTimeNow] forKey:@"CallTaskStartTime"];
             }
             [self.headView startTaskTimerByStartTime:timeLong];
+            
+            NSDictionary *dic = @{@"text":self.currentTask.taskContent,@"are":self.currentTask.areaName,@"time":self.currentTask.produceTime};
+            [self.dataSource removeAllObjects];
+            [self.dataSource addObject:dic];
+            [self.chatTabelView reloadData];
+            
             self.textView.hidden = YES;
         }
             break;
