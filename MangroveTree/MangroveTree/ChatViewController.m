@@ -52,13 +52,6 @@
     [self.chatTabelView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.headView withOffset:0];
     [self.chatTabelView autoSetDimension:ALDimensionWidth toSize:kScreenWidth];
 
-    // textView 用来承载IM聊天界面
-    self.textView = [[UIView alloc] initWithFrame:self.view.bounds];
-    [self.view addSubview:self.textView];
-    [self.textView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.headView withOffset:0];
-    [self.textView autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
-    [self.textView autoSetDimension:ALDimensionWidth toSize:kScreenWidth];
-    self.textView.hidden = YES;
     // add inputView
 
     [self.view addSubview:self.chatInputView];
@@ -66,6 +59,14 @@
     [self.chatInputView autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
     [self.chatInputView autoSetDimension:ALDimensionWidth toSize:kScreenWidth];
     self.chatInputView.delegate = self;
+    
+    // textView 用来承载IM聊天界面
+    self.textView = [[UIView alloc] initWithFrame:self.view.bounds];
+    [self.view addSubview:self.textView];
+    [self.textView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.headView withOffset:0];
+    [self.textView autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
+    [self.textView autoSetDimension:ALDimensionWidth toSize:kScreenWidth];
+    self.textView.hidden = YES;
     
     self.pageModelType = pageModel_NOTask;
     
@@ -262,7 +263,7 @@
     {
         if (pageModelType == pageModel_Receive)
         {
-            [self.headView startTaskTimerByStartTime:[[NSDate date] timeIntervalSince1970] * 2 - [[formatter dateFromString:self.currentTask.acceptTime] timeIntervalSince1970] - [[formatter dateFromString:self.currentTask.nowDate] timeIntervalSince1970]];
+            [self.headView startTaskTimerByStartTime:[[formatter dateFromString:self.currentTask.nowDate] timeIntervalSince1970] - [[formatter dateFromString:self.currentTask.acceptTime] timeIntervalSince1970]];
         }
         return;
     }
@@ -469,7 +470,7 @@
     if (self.customBind.imAccount != nil && ![self.customBind.imAccount isEqualToString:@""])
     {
         [[SPKitExample sharedInstance]callThisAfterISVAccountLoginSuccessWithYWLoginId:self.customBind.imAccount passWord:@"sjlh2017" preloginedBlock:nil successBlock:^{
-            
+
         } failedBlock:^(NSError * error) {
             UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"通讯模块登录失败" message:@"请检查网络状态重新登录" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -504,9 +505,9 @@
     
     self.conversationView = [[SPKitExample sharedInstance]exampleMakeConversationViewControllerWithConversation:self.conversation];
     self.conversationView.view.frame = CGRectMake(0,0, kScreenWidth, self.textView.frame.size.height);
+    self.conversationView.automaticallyAdjustsScrollViewInsets = NO;
     [self.conversationView setMessageInputViewHidden:NO animated:NO];
     self.conversationView.backgroundImage = nil;
-    self.conversationView.tableView.backgroundView = nil;
     
     [self addChildViewController:self.conversationView];
     [self.textView addSubview: self.conversationView.view];
