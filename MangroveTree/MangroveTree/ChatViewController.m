@@ -263,7 +263,7 @@
     {
         if (pageModelType == pageModel_Receive)
         {
-            [self.headView startTaskTimerByStartTime:[[formatter dateFromString:self.currentTask.nowDate] timeIntervalSince1970] - [[formatter dateFromString:self.currentTask.acceptTime] timeIntervalSince1970]];
+            [self.headView startTaskTimerByStartTime:(self.currentTask.nowDate.integerValue - self.currentTask.acceptTime.integerValue) / 1000];
         }
         return;
     }
@@ -295,12 +295,18 @@
                 timeLong = 0;
                 [[NSUserDefaults standardUserDefaults] setObject:[Util getTimeNow] forKey:@"CallTaskStartTime"];
             }
+            if (self.currentTask.produceTime.length > 0 && self.currentTask.nowDate.length > 0)
+                timeLong = (self.currentTask.nowDate.integerValue - self.currentTask.produceTime.integerValue) / 1000;
             [self.headView startTaskTimerByStartTime:timeLong];
             
-            NSDictionary *dic = @{@"text":self.currentTask.taskContent,@"are":self.currentTask.areaName,@"time":self.currentTask.produceTime};
-            [self.dataSource removeAllObjects];
-            [self.dataSource addObject:dic];
-            [self.chatTabelView reloadData];
+            if (self.currentTask.taskContent != nil && ![self.currentTask.taskContent isEqualToString:@""])
+            {
+                NSDate * resetTime = [NSDate dateWithTimeIntervalSince1970:(self.currentTask.produceTime.integerValue / 1000)];
+                NSDictionary *dic = @{@"text":self.currentTask.taskContent,@"are":self.currentTask.areaName,@"time":[formatter stringFromDate:resetTime]};
+                [self.dataSource removeAllObjects];
+                [self.dataSource addObject:dic];
+                [self.chatTabelView reloadData];
+            }
             
             self.textView.hidden = YES;
         }
@@ -318,7 +324,7 @@
             self.navigationItem.rightBarButtonItem = self.cancelBarItem;
             [self instantMessageingFormation];
             self.headView.textStatus = TextStatus_proceed;
-            [self.headView startTaskTimerByStartTime:[[NSDate date] timeIntervalSince1970] * 2 - [[formatter dateFromString:self.currentTask.acceptTime] timeIntervalSince1970] - [[formatter dateFromString:self.currentTask.nowDate] timeIntervalSince1970]];
+            [self.headView startTaskTimerByStartTime:(self.currentTask.nowDate.integerValue - self.currentTask.acceptTime.integerValue) / 1000];
             self.textView.hidden = NO;
         }
             break;
@@ -339,13 +345,13 @@
 
 - (void)comfirmTaskYES
 {
-    self.comfirmStatus = @"1";
+    self.comfirmStatus = @"2";
     [self comfirmTask:self.comfirmStatus andTaskCode:self.currentTask.taskCode];
 }
 
 - (void)comfirmTaskNO
 {
-    self.comfirmStatus = @"2";
+    self.comfirmStatus = @"1";
     [self comfirmTask:self.comfirmStatus andTaskCode:self.currentTask.taskCode];
 }
 
@@ -365,6 +371,8 @@
         {
             // 成功
             self.currentTask = [[DataManager defaultInstance] getCallTaskByTaskCode:dic[@"taskCode"]];
+            if (self.frameViewController != nil)
+                self.frameViewController.currentTask = self.currentTask;
             [self setUIByPageModelType:pageModel_NOReceive];
         }
     }

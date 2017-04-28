@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FrameViewController.h"
 
 @interface ChatViewController : UIViewController
 
@@ -21,6 +22,8 @@ typedef NS_ENUM(NSInteger,pageModelType)
     pageModel_Complete      = 3,  // 服务员点击完成，需用户确认
     pageModel_waitGrade     = 4,  // 待评价
 };
+
+@property (nonatomic, strong) FrameViewController * frameViewController;
 
 @property (nonatomic, strong) DBCallTask * currentTask;
 @property (nonatomic, strong) DBBindCustom * customBind;

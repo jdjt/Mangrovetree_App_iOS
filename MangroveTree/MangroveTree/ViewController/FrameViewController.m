@@ -523,6 +523,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:nil action:nil];
     self.navigationItem.backBarButtonItem = barButtonItem;
     ChatViewController *chat = [[ChatViewController alloc] init];
+    chat.frameViewController = self;
     if (self.currentTask)
         chat.currentTask = self.currentTask;
     [self.navigationController pushViewController:chat animated:YES];
