@@ -59,7 +59,6 @@
 {
     // 关闭友盟自带的弹出框
     [UMessage setAutoAlert:NO];
-    
     [UMessage didReceiveRemoteNotification:userInfo];
     if (userInfo)
     {

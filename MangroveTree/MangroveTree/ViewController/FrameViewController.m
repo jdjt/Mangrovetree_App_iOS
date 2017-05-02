@@ -76,7 +76,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
     if (login == YES)
         [self updateFromNetwork];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetCustomDetail) name:NotiResetCustomDetail object:nil];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -172,6 +172,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backToMain:) name:NotiBackToMain object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeTopAlert:) name:NotiCloseTopAlert object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetCustomDetail) name:NotiResetCustomDetail object:nil];
 
 }
 - (void)didReceiveMemoryWarning
