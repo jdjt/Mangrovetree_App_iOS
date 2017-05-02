@@ -38,6 +38,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
 @property (weak, nonatomic) IBOutlet UIImageView *toSearchImage;
 @property (weak, nonatomic) IBOutlet UIImageView *toWorldPlatformImage;
 @property (weak, nonatomic) IBOutlet UIImageView *toCallServiceImage;
+@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 
 // 导航栏 按钮
 @property (retain, nonatomic) UIBarButtonItem *userBarBtn;
@@ -60,7 +61,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
     [super viewDidLoad];
     
     self.goChat = NO;
-    
+
 	[UIApplication sharedApplication].idleTimerDisabled = YES;//不自动锁屏
     
     [self addUI];
@@ -106,6 +107,11 @@ NSString* const FMModelSelected = @"FMModelSelected";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    if (self.currentTask == nil)
+        self.messageLabel.hidden = YES;
+    else
+        self.messageLabel.hidden = NO;
+    
     
     [self showBottomView:Segment_none];
     
@@ -530,6 +536,22 @@ NSString* const FMModelSelected = @"FMModelSelected";
     [self.navigationController pushViewController:chat animated:YES];
     self.goChat = NO;
 }
+
+- (void)changeTaskStatusByCurrentTask:(DBCallTask *)task
+{
+    NSString *message = @"等待接单";
+    self.messageLabel.hidden = NO;
+    if ([task.taskStatus isEqualToString:@"0"])
+        message = @"等待接单";
+    else if ([task.taskStatus isEqualToString:@"1"])
+        message = @"正在进行";
+    else if ([task.taskStatus isEqualToString:@"2"])
+        message = @"已完成";
+    else
+        self.messageLabel.hidden = YES;
+    self.messageLabel.text = message;
+}
+
 #pragma mark- Netkwork
 
 - (void)startRequest:(NSURLSessionTask *)task
@@ -541,7 +563,6 @@ NSString* const FMModelSelected = @"FMModelSelected";
 {
     if (task == self.loginTask)
     {
-//        [self loadFMMap];
         [self checkBindRoomInforByLoginCheck:YES];
     }
     else if (task == self.checkBind)
@@ -582,6 +603,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
         if (datas.count > 0)
         {
             self.currentTask = datas[0];
+            [self changeTaskStatusByCurrentTask:self.currentTask];
 #warning 添加首页呼叫任务提示标识
         }
     }

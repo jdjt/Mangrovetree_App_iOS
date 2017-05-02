@@ -49,7 +49,7 @@
 #define myNumbers  @"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@._\n"
 
 // 友盟appkey
-#define UM_APPKEY  @"565e92a0e0f55ace6600260f"
+#define UM_APPKEY  @"58f9d3dfc62dca0d1400190c"
 
 #define REQUEST_HEAD_NORMAL "http://"
 #define REQUEST_HEAD_SCREAT "https://"

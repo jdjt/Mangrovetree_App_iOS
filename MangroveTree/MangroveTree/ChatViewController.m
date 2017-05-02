@@ -66,6 +66,7 @@
     [self.textView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.headView withOffset:0];
     [self.textView autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
     [self.textView autoSetDimension:ALDimensionWidth toSize:kScreenWidth];
+    [self.textView autoAlignAxisToSuperviewAxis:ALAxisVertical];
     self.textView.hidden = YES;
     
     self.pageModelType = pageModel_NOTask;
@@ -277,6 +278,7 @@
             self.navigationItem.rightBarButtonItem = nil;
             [self.headView stopTimer];
             self.headView.textStatus = TextStatus_default;
+            self.frameViewController.currentTask = nil;
             [self.dataSource removeAllObjects];
             [self.chatTabelView reloadData];
             self.textView.hidden = YES;
@@ -513,10 +515,9 @@
     
     self.conversationView = [[SPKitExample sharedInstance]exampleMakeConversationViewControllerWithConversation:self.conversation];
     self.conversationView.view.frame = CGRectMake(0,0, kScreenWidth, self.textView.frame.size.height);
-    self.conversationView.automaticallyAdjustsScrollViewInsets = NO;
-    [self.conversationView setMessageInputViewHidden:NO animated:NO];
+    [self.conversationView.messageInputView beginListeningForKeyboard];
     self.conversationView.backgroundImage = nil;
-    
+    self.conversationView.edgesForExtendedLayout = UIRectEdgeNone;
     [self addChildViewController:self.conversationView];
     [self.textView addSubview: self.conversationView.view];
 }
