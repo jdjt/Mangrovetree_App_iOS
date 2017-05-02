@@ -52,13 +52,6 @@
     [self.chatTabelView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.headView withOffset:0];
     [self.chatTabelView autoSetDimension:ALDimensionWidth toSize:kScreenWidth];
 
-    // textView 用来承载IM聊天界面
-    self.textView = [[UIView alloc] initWithFrame:self.view.bounds];
-    [self.view addSubview:self.textView];
-    [self.textView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.headView withOffset:0];
-    [self.textView autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
-    [self.textView autoSetDimension:ALDimensionWidth toSize:kScreenWidth];
-    self.textView.hidden = YES;
     // add inputView
 
     [self.view addSubview:self.chatInputView];
@@ -66,6 +59,14 @@
     [self.chatInputView autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
     [self.chatInputView autoSetDimension:ALDimensionWidth toSize:kScreenWidth];
     self.chatInputView.delegate = self;
+    
+    // textView 用来承载IM聊天界面
+    self.textView = [[UIView alloc] initWithFrame:self.view.bounds];
+    [self.view addSubview:self.textView];
+    [self.textView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.headView withOffset:0];
+    [self.textView autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
+    [self.textView autoSetDimension:ALDimensionWidth toSize:kScreenWidth];
+    self.textView.hidden = YES;
     
     self.pageModelType = pageModel_NOTask;
     
@@ -201,6 +202,7 @@
 {
     if (self.dataSource.count > 0)
     {
+        [MyAlertView showAlert:@"请耐心等待服务员为您服务"];
         return;
     }
     if (inputText != nil && ![inputText isEqualToString:@""])
@@ -261,7 +263,7 @@
     {
         if (pageModelType == pageModel_Receive)
         {
-            [self.headView startTaskTimerByStartTime:[[NSDate date] timeIntervalSince1970] * 2 - [[formatter dateFromString:self.currentTask.acceptTime] timeIntervalSince1970] - [[formatter dateFromString:self.currentTask.nowDate] timeIntervalSince1970]];
+            [self.headView startTaskTimerByStartTime:(self.currentTask.nowDate.integerValue - self.currentTask.acceptTime.integerValue) / 1000];
         }
         return;
     }
@@ -293,7 +295,19 @@
                 timeLong = 0;
                 [[NSUserDefaults standardUserDefaults] setObject:[Util getTimeNow] forKey:@"CallTaskStartTime"];
             }
+            if (self.currentTask.produceTime.length > 0 && self.currentTask.nowDate.length > 0)
+                timeLong = (self.currentTask.nowDate.integerValue - self.currentTask.produceTime.integerValue) / 1000;
             [self.headView startTaskTimerByStartTime:timeLong];
+            
+            if (self.currentTask.taskContent != nil && ![self.currentTask.taskContent isEqualToString:@""])
+            {
+                NSDate * resetTime = [NSDate dateWithTimeIntervalSince1970:(self.currentTask.produceTime.integerValue / 1000)];
+                NSDictionary *dic = @{@"text":self.currentTask.taskContent,@"are":self.currentTask.areaName,@"time":[formatter stringFromDate:resetTime]};
+                [self.dataSource removeAllObjects];
+                [self.dataSource addObject:dic];
+                [self.chatTabelView reloadData];
+            }
+            
             self.textView.hidden = YES;
         }
             break;
@@ -310,7 +324,7 @@
             self.navigationItem.rightBarButtonItem = self.cancelBarItem;
             [self instantMessageingFormation];
             self.headView.textStatus = TextStatus_proceed;
-            [self.headView startTaskTimerByStartTime:[[NSDate date] timeIntervalSince1970] * 2 - [[formatter dateFromString:self.currentTask.acceptTime] timeIntervalSince1970] - [[formatter dateFromString:self.currentTask.nowDate] timeIntervalSince1970]];
+            [self.headView startTaskTimerByStartTime:(self.currentTask.nowDate.integerValue - self.currentTask.acceptTime.integerValue) / 1000];
             self.textView.hidden = NO;
         }
             break;
@@ -331,13 +345,13 @@
 
 - (void)comfirmTaskYES
 {
-    self.comfirmStatus = @"1";
+    self.comfirmStatus = @"2";
     [self comfirmTask:self.comfirmStatus andTaskCode:self.currentTask.taskCode];
 }
 
 - (void)comfirmTaskNO
 {
-    self.comfirmStatus = @"2";
+    self.comfirmStatus = @"1";
     [self comfirmTask:self.comfirmStatus andTaskCode:self.currentTask.taskCode];
 }
 
@@ -357,6 +371,8 @@
         {
             // 成功
             self.currentTask = [[DataManager defaultInstance] getCallTaskByTaskCode:dic[@"taskCode"]];
+            if (self.frameViewController != nil)
+                self.frameViewController.currentTask = self.currentTask;
             [self setUIByPageModelType:pageModel_NOReceive];
         }
     }
@@ -462,7 +478,7 @@
     if (self.customBind.imAccount != nil && ![self.customBind.imAccount isEqualToString:@""])
     {
         [[SPKitExample sharedInstance]callThisAfterISVAccountLoginSuccessWithYWLoginId:self.customBind.imAccount passWord:@"sjlh2017" preloginedBlock:nil successBlock:^{
-            
+
         } failedBlock:^(NSError * error) {
             UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"通讯模块登录失败" message:@"请检查网络状态重新登录" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -497,9 +513,9 @@
     
     self.conversationView = [[SPKitExample sharedInstance]exampleMakeConversationViewControllerWithConversation:self.conversation];
     self.conversationView.view.frame = CGRectMake(0,0, kScreenWidth, self.textView.frame.size.height);
+    self.conversationView.automaticallyAdjustsScrollViewInsets = NO;
     [self.conversationView setMessageInputViewHidden:NO animated:NO];
     self.conversationView.backgroundImage = nil;
-    self.conversationView.tableView.backgroundView = nil;
     
     [self addChildViewController:self.conversationView];
     [self.textView addSubview: self.conversationView.view];

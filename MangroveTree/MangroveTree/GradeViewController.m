@@ -46,6 +46,7 @@
             if (_clickBlock)
             {
                 _clickBlock(ClickType_Submit, _score);
+                [self dismissViewControllerAnimated:YES completion:nil];
             }
             
             break;
@@ -59,6 +60,7 @@
     if (_clickBlock)
     {
         _clickBlock(ClickType_Cancel, _score);
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 

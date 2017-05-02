@@ -211,6 +211,7 @@
     task.acceptTime = dic[@"acceptTime"];
     task.finishTime = dic[@"finishTime"];
     task.finishEndTime = dic[@"finishEndTime"];
+    task.produceTime = dic[@"produceTime"];
     [array addObject:task];
     
     return array;
@@ -246,6 +247,7 @@
         task.acceptTime = dic[@"acceptTime"];
         task.finishTime = dic[@"finishTime"];
         task.finishEndTime = dic[@"finishEndTime"];
+        task.produceTime = dic[@"produceTime"];
         [array addObject:task];
     }
     

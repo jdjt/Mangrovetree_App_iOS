@@ -256,6 +256,9 @@ UIAlertViewDelegate>
  */
 - (BOOL)exampleInit;
 {
+    
+    //[[YWAPI sharedInstance] setLogEnabled:YES];
+
     NSError *error = nil;
     
     /// 异步初始化IM SDK
@@ -521,11 +524,6 @@ UIAlertViewDelegate>
 {
     // 添加插件
     if ([aConversationController.messageInputView isKindOfClass:[YWMessageInputView class]]) {
-        YWMessageInputView *messageInputView = (YWMessageInputView *)aConversationController.messageInputView;
-
-        /// 创建自定义插件
-        SPInputViewPluginGreeting *plugin = [[SPInputViewPluginGreeting alloc] init];
-        [messageInputView addPlugin:plugin];
         
         if ([aConversationController.conversation isKindOfClass:[YWP2PConversation class]]) {
             /// 此功能仅作为示例代码

@@ -232,7 +232,8 @@
     {//点击了发送按钮
         
         if (![textView.text isEqualToString:@""])
-        {//输入框当前有数据才需要发送
+        {
+            //输入框当前有数据才需要发送
             
             if ([self.delegate respondsToSelector:@selector(sendMsgByChatBarView:)])
             {
