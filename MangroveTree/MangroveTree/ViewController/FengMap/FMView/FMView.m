@@ -1117,7 +1117,7 @@ extern NSString* FMModelSelected;
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiCloseTopAlert object:nil];
     [self.naviPopView show];
-    NSLog(@"%@",model.fid);
+    NSLog(@"%@ %@",model.fid,model.name);
     NSString *name = @"";
     if (self.queryModel.name == nil||[self.queryModel.name isEqualToString:@""])
         name = model.name;
