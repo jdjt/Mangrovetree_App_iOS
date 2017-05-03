@@ -241,14 +241,14 @@
 
 - (void)callTaskPush:(NSNotification *)noti
 {
-    NSString * pushMessage = noti.object;
+    NSDictionary * pushMessage = noti.object;
     if (self.currentTask == nil)
         return;
-    if ([pushMessage isEqualToString:@"WaiterAcceptTask"]) //  服务员接受任务
+    if ([pushMessage[@"messType"] isEqualToString:@"WaiterAcceptTask"]) //  服务员接受任务
     {
         [self getTaskDetailByTaskCode:self.currentTask.taskCode];
     }
-    else if ([pushMessage isEqualToString:@"WaiterConfirmTaskComplete"]) //  服务员完成任务
+    else if ([pushMessage[@"messType"] isEqualToString:@"WaiterConfirmTaskComplete"]) //  服务员完成任务
     {
         [self getTaskDetailByTaskCode:self.currentTask.taskCode];
     }
