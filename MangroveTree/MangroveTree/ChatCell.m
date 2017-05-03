@@ -15,6 +15,7 @@
 @property (nonatomic, strong) UILabel *mText;
 @property (nonatomic, strong) UILabel *mTime;
 @property (nonatomic, strong) UILabel *mAreTitle;
+@property (nonatomic, strong) UIButton *againButton;
 
 @end
 
@@ -46,6 +47,10 @@
     [self.mTitle autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:18];
     [self.mTitle autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:18];
     [self.mTitle autoSetDimension:ALDimensionWidth toSize:kScreenWidth/4*3];
+    
+    self.againButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.againButton setImage:[UIImage imageNamed:@"help"] forState:UIControlStateNormal];
+//    [self.contentView addSubview:self.againButton];
     
     self.mText = [[UILabel alloc] init];
     self.mText.numberOfLines = 0;

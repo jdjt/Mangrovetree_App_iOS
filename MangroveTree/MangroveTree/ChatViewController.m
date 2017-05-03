@@ -218,6 +218,7 @@
         [self.chatTabelView reloadData];
         self.headView.textStatus = TextStatus_waiting;
         [self sengMsgToSerive:inputText];
+        [self.chatInputView inPutViewresignFirstResponder];
     }
 }
 
