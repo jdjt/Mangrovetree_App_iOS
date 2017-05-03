@@ -68,7 +68,8 @@
     self.params = params;
     
     // 判断服务器地址
-    self.serverAddress = @"rc-ws.mymhotel.com";
+    NSInteger severIndex = [Util SelectTheServerUrl];
+    self.serverAddress = [[MySingleton sharedSingleton] currentServiceAddress:severIndex byInterFaceType:old];
     NetWorkHelp *netWorkHelp = [[NetWorkHelp alloc] init];
     
     // 判断查询间隔是否满足足够长的状态（当byUser为NO时，间隔不够时将不发送实际请求）
@@ -159,7 +160,8 @@
                 ||[msgs[0] isEqualToString:@"UNLOGIN"]
                 ||[msgs[0] isEqualToString:@"EBF001"]
                 ||[msgs[0] isEqualToString:@"EBF003"]
-                ||[msgs[0] isEqualToString:@"ES0003"])
+                ||[msgs[0] isEqualToString:@"ES0003"]
+                ||[msgs[0] isEqualToString:@"EBCALL001"])
             {
                 [self logIn];
                 return;

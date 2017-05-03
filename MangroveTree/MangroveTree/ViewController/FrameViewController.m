@@ -181,6 +181,8 @@ NSString* const FMModelSelected = @"FMModelSelected";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backToMain:) name:NotiBackToMain object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeTopAlert:) name:NotiCloseTopAlert object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetCustomDetail) name:NotiResetCustomDetail object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeTaskStatus:) name:NotiCallTaskPushMessage object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeTaskStatus:) name:UIApplicationDidBecomeActiveNotification object:nil];
 
 }
 - (void)didReceiveMemoryWarning
@@ -773,7 +775,17 @@ NSString* const FMModelSelected = @"FMModelSelected";
 {
     [self checkBindRoomInforByLoginCheck:YES];
 }
-
+- (void)changeTaskStatus:(NSNotification *)noti
+{
+    DBBindCustom * bind = [[DataManager defaultInstance] getCustomerBingRoom];
+    if (bind.customerId == nil || [bind.customerId isEqualToString:@""])
+        return;
+    else
+    {
+        //  获取正在进行中的任务
+        [self getProceedTaskLiskByCustom:bind.customerId andTaskStatus:@"1"];
+    }
+}
 - (void)dealloc
 {
     [self.countDownTimer invalidate];
