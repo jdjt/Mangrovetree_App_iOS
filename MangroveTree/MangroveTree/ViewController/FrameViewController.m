@@ -110,8 +110,10 @@ NSString* const FMModelSelected = @"FMModelSelected";
     if (self.currentTask == nil)
         self.messageLabel.hidden = YES;
     else
+    {
         self.messageLabel.hidden = NO;
-    
+        [self changeTaskStatusByCurrentTask:self.currentTask];
+    }
     
     [self showBottomView:Segment_none];
     
