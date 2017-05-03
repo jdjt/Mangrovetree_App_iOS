@@ -38,7 +38,7 @@
 #import "MapViewController.h"
 #import "FrameViewController.h"
 #import "UIViewExt.h"
-
+#import "SaveNavigationData.h"
 CGFloat const kFMBottomViewCornerRadius = 8.0f;
 
 CGFloat const kModelInfoViewWidth = 254.0f;
@@ -176,12 +176,18 @@ extern NSString* FMModelSelected;
         __weak FMMangroveMapView * wMapView = _fengMapView;
         [FMNaviAnalyserTool shareNaviAnalyserTool].returnNaviResult = ^(NSArray * result, NSString * mapID)
         {
-            if (result == nil || result.count<= 0)
+#warning 此处应处理导航规划成功失败
+            if (result == nil || result.count<= 0){
+                [[SaveNavigationData shareInstance].mapTestDic setValue:@"失败" forKey:@"导航规划是否成功"];
+                
                 return;
+            }
             if ([mapID isEqualToString:@(kOutdoorMapID).stringValue]) {
                 FMKNaviResult * naviResult = result[0];
                 [wSelf.naviContraint updateNaviConstraintDataWith:naviResult.pointArray groupID:@"1"];
                 [wMapView.map.lineLayer removeAllLine];
+                
+                [[SaveNavigationData shareInstance].mapTestDic setValue:@"成功" forKey:@"导航规划是否成功"];
                 
                 //				[wSelf drawSingleLineByNaviResult:result containStartAndEnd:YES];
             }
@@ -527,9 +533,20 @@ extern NSString* FMModelSelected;
         if (!_nodeAssociation) [self nodeAssociation];
         model = [_nodeAssociation externalModelByLabel:(FMKLabel *)node];
     }
-    
+#warning 室外地图id  都是79981  ，此处应该记录当前的点击位置的数据，满足导航入参
     [self didSelectedEnd:model];
     NSLog(@"%ld %f  %f",model.pointer,model.centerPoint.x,model.centerPoint.y);
+    NSMutableDictionary * mapTestDic = [SaveNavigationData shareInstance].mapTestDic;
+    [mapTestDic setValue:@"79981" forKey:@"fid"];
+    [mapTestDic setValue:model.name forKey:@"name"];
+    [mapTestDic setValue:model.groupID forKey:@"groupID"];
+    [mapTestDic setValue:[NSString stringWithFormat:@"%d",model.mapCoord.storey] forKey:@"FMKMapStorey"];
+    [mapTestDic setValue:[NSString stringWithFormat:@"%f",model.mapCoord.mapPoint.x] forKey:@"FMKMapPoint_x"];
+    [mapTestDic setValue:[NSString stringWithFormat:@"%f",model.mapCoord.mapPoint.y] forKey:@"FMKMapPoint_y"];
+    [mapTestDic setValue:[NSString stringWithFormat:@"%f",model.centerPoint.x] forKey:@"centerPoint_x"];
+    [mapTestDic setValue:[NSString stringWithFormat:@"%f",model.centerPoint.y] forKey:@"centerPoint_y"];
+    [SaveNavigationData saveNavigationData];
+    
 }
 - (void)mapView:(FMKMapView *)mapView didSingleTapWithPoint:(CGPoint)point
 {

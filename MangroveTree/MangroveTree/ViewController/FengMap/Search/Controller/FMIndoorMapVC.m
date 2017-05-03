@@ -34,7 +34,7 @@
 #import "SwitchMapInfoView.h"
 #import "UIViewExt.h"
 #import "FMKNodeAssociation.h"
-
+#import "SaveNavigationData.h"
 #define DEBUG_ONLINE 0
 
 NSString * const dimians01 = @"999800170";
@@ -914,6 +914,19 @@ int const kCallingServiceCount = 5;
 		FMKModelLayer * modelLayer = (FMKModelLayer *)layer;
 		[self setModelSelected:model modelLayer:modelLayer];
 	}
+    
+    
+    NSMutableDictionary * mapTestDic = [SaveNavigationData shareInstance].mapTestDic;
+    [mapTestDic setValue:model.fid forKey:@"fid"];
+    [mapTestDic setValue:model.title forKey:@"name"];
+    [mapTestDic setValue:model.groupID forKey:@"groupID"];
+    [mapTestDic setValue:[NSString stringWithFormat:@"%d",model.coord.storey] forKey:@"FMKMapStorey"];
+    [mapTestDic setValue:[NSString stringWithFormat:@"%f",model.coord.mapPoint.x] forKey:@"FMKMapPoint_x"];
+    [mapTestDic setValue:[NSString stringWithFormat:@"%f",model.coord.mapPoint.y] forKey:@"FMKMapPoint_y"];
+    [mapTestDic setValue:[NSString stringWithFormat:@"%f",model.centerPoint.x] forKey:@"centerPoint_x"];
+    [mapTestDic setValue:[NSString stringWithFormat:@"%f",model.centerPoint.y] forKey:@"centerPoint_y"];
+    
+    
 }
 //设置模型选中
 - (void)setModelSelected:(FMKModel *)model modelLayer:(FMKModelLayer *)modelLayer
@@ -979,6 +992,8 @@ int const kCallingServiceCount = 5;
     else
     {
         [wSelf showProgressWithText:@"路径规划失败"];
+        [[SaveNavigationData shareInstance].mapTestDic setValue:@"失败" forKey:@"导航规划是否成功"];
+        [SaveNavigationData saveNavigationData];
     }
 
 //    [self ];
@@ -1030,11 +1045,19 @@ int const kCallingServiceCount = 5;
 {
 	NSDictionary * naviResult = [FMNaviAnalyserTool shareNaviAnalyserTool].naviResult;
 	self.naviResults = naviResult[_mapID];
-	
+    
+    if (self.naviResults.count < 1) {
+        [[SaveNavigationData shareInstance].mapTestDic setValue:@"失败" forKey:@"导航规划是否成功"];
+       
+    }else{
+     [[SaveNavigationData shareInstance].mapTestDic setValue:@"成功" forKey:@"导航规划是否成功"];
+    }
+	 [SaveNavigationData saveNavigationData];
 	FMKNaviResult * endNaviResult = nil;
 	for (FMKNaviResult * result in self.naviResults) {
 		if (result.groupID.intValue == _displayGroupID.intValue) {
 			endNaviResult = result;
+            
 			break;
 		}
 	}
@@ -1125,6 +1148,8 @@ int const kCallingServiceCount = 5;
 		else
 		{
 			[wSelf showProgressWithText:@"路径规划失败"];
+            [[SaveNavigationData shareInstance].mapTestDic setValue:@"失败" forKey:@"导航规划是否成功"];
+            [SaveNavigationData saveNavigationData];
 		}
 	};
 }

@@ -32,7 +32,6 @@
 		A8995A251EA5B228001B83DF /* PDKeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = A8995A241EA5B228001B83DF /* PDKeyChain.m */; };
 		A8995A271EA5B4BB001B83DF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8995A261EA5B4BA001B83DF /* Security.framework */; };
 		A8DC4F2E1EA8AB080056C699 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DC4F2D1EA8AB080056C699 /* UIColor+Hex.m */; };
-		A8DC4F3A1EA8C4850056C699 /* WXOpenIMSDKFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8DC4F321EA8C4850056C699 /* WXOpenIMSDKFMWK.framework */; };
 		A8E4136F1E7692C40096EA62 /* InforView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E4136E1E7692C40096EA62 /* InforView.m */; };
 		A8E413711E7692D70096EA62 /* InforView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8E413701E7692D70096EA62 /* InforView.xib */; };
 		A8F3DBE21EA0AEA80044C0A7 /* BaseAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8F3DBE11EA0AEA80044C0A7 /* BaseAlertViewController.m */; };
@@ -81,12 +80,6 @@
 		C46BEDCD1E9C9CA3009E3379 /* BaseAlert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C46BEDCC1E9C9CA3009E3379 /* BaseAlert.storyboard */; };
 		C46BEDD01E9CA7B8009E3379 /* AlertViewCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C46BEDCF1E9CA7B8009E3379 /* AlertViewCenterCell.m */; };
 		C46FA8141E9F08D600F18D47 /* MTIMManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C46FA8131E9F08D600F18D47 /* MTIMManager.m */; };
-		C4736F2E1EAD947D003A2244 /* SecurityGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4736F281EAD947D003A2244 /* SecurityGuardSDK.framework */; };
-		C4736F2F1EAD947D003A2244 /* SGMain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4736F291EAD947D003A2244 /* SGMain.framework */; };
-		C4736F301EAD947D003A2244 /* UTMini.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4736F2A1EAD947D003A2244 /* UTMini.framework */; };
-		C4736F311EAD947D003A2244 /* WXOpenIMSDKResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C4736F2B1EAD947D003A2244 /* WXOpenIMSDKResource.bundle */; };
-		C4736F321EAD947D003A2244 /* WXOUIModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4736F2C1EAD947D003A2244 /* WXOUIModule.framework */; };
-		C4736F331EAD947D003A2244 /* WXOUIModuleResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C4736F2D1EAD947D003A2244 /* WXOUIModuleResources.bundle */; };
 		C4760ECB1EAF12FC00EC5246 /* CancelReasonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C4760ECA1EAF12FB00EC5246 /* CancelReasonModel.m */; };
 		C4792DD61EA0990D00C273AA /* MarqueeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C4792DD51EA0990D00C273AA /* MarqueeLabel.m */; };
 		C4C720F51E6FCB79003523A2 /* libFMMapKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C720F11E6FCB09003523A2 /* libFMMapKit.a */; };
@@ -288,21 +281,12 @@
 		C4C723791E6FCC2F003523A2 /* yuyuege.fmi in Resources */ = {isa = PBXBuildFile; fileRef = C4C721BE1E6FCC2E003523A2 /* yuyuege.fmi */; };
 		C4C7237A1E6FCC2F003523A2 /* zhenzhuba.fmi in Resources */ = {isa = PBXBuildFile; fileRef = C4C721BF1E6FCC2E003523A2 /* zhenzhuba.fmi */; };
 		C4C7237B1E6FCC2F003523A2 /* zxj.fmi in Resources */ = {isa = PBXBuildFile; fileRef = C4C721C01E6FCC2E003523A2 /* zxj.fmi */; };
-		C4C7237C1E6FCC2F003523A2 /* 70144.fmap in Resources */ = {isa = PBXBuildFile; fileRef = C4C721C11E6FCC2E003523A2 /* 70144.fmap */; };
-		C4C7237D1E6FCC2F003523A2 /* 70145.fmap in Resources */ = {isa = PBXBuildFile; fileRef = C4C721C21E6FCC2E003523A2 /* 70145.fmap */; };
-		C4C7237E1E6FCC2F003523A2 /* 70146.fmap in Resources */ = {isa = PBXBuildFile; fileRef = C4C721C31E6FCC2E003523A2 /* 70146.fmap */; };
-		C4C7237F1E6FCC2F003523A2 /* 70147.fmap in Resources */ = {isa = PBXBuildFile; fileRef = C4C721C41E6FCC2E003523A2 /* 70147.fmap */; };
-		C4C723801E6FCC2F003523A2 /* 70148.fmap in Resources */ = {isa = PBXBuildFile; fileRef = C4C721C51E6FCC2E003523A2 /* 70148.fmap */; };
-		C4C723811E6FCC2F003523A2 /* 79980.fmap in Resources */ = {isa = PBXBuildFile; fileRef = C4C721C61E6FCC2E003523A2 /* 79980.fmap */; };
-		C4C723821E6FCC2F003523A2 /* 79981.fmap in Resources */ = {isa = PBXBuildFile; fileRef = C4C721C71E6FCC2E003523A2 /* 79981.fmap */; };
-		C4C723831E6FCC2F003523A2 /* 79982.fmap in Resources */ = {isa = PBXBuildFile; fileRef = C4C721C81E6FCC2E003523A2 /* 79982.fmap */; };
 		C4C723841E6FCC2F003523A2 /* acts.json in Resources */ = {isa = PBXBuildFile; fileRef = C4C721C91E6FCC2E003523A2 /* acts.json */; };
 		C4C723851E6FCC2F003523A2 /* facility.json in Resources */ = {isa = PBXBuildFile; fileRef = C4C721CA1E6FCC2E003523A2 /* facility.json */; };
 		C4C723861E6FCC2F003523A2 /* food.json in Resources */ = {isa = PBXBuildFile; fileRef = C4C721CB1E6FCC2E003523A2 /* food.json */; };
 		C4C723871E6FCC2F003523A2 /* indoorMapInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = C4C721CC1E6FCC2E003523A2 /* indoorMapInfo.json */; };
 		C4C723881E6FCC2F003523A2 /* jiantou.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C721CD1E6FCC2E003523A2 /* jiantou.png */; };
 		C4C723891E6FCC2F003523A2 /* locatio.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C721CE1E6FCC2E003523A2 /* locatio.png */; };
-		C4C7238A1E6FCC2F003523A2 /* mangrove.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = C4C721CF1E6FCC2E003523A2 /* mangrove.sqlite */; };
 		C4C7238B1E6FCC2F003523A2 /* nodeassociation.json in Resources */ = {isa = PBXBuildFile; fileRef = C4C721D01E6FCC2E003523A2 /* nodeassociation.json */; };
 		C4C7238C1E6FCC2F003523A2 /* route_food_1.json in Resources */ = {isa = PBXBuildFile; fileRef = C4C721D11E6FCC2E003523A2 /* route_food_1.json */; };
 		C4C7238D1E6FCC2F003523A2 /* route_relax_1.json in Resources */ = {isa = PBXBuildFile; fileRef = C4C721D21E6FCC2E003523A2 /* route_relax_1.json */; };
@@ -360,6 +344,23 @@
 		C4C723F71E6FEB46003523A2 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C723F61E6FEB46003523A2 /* libresolv.tbd */; };
 		C4C723F91E6FEBF4003523A2 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C723F81E6FEBF4003523A2 /* UserNotifications.framework */; };
 		C4C723FC1E6FEF6F003523A2 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C723FB1E6FEF6F003523A2 /* libiconv.tbd */; };
+		D566F2A31EB8748B009AF6CD /* SaveNavigationData.m in Sources */ = {isa = PBXBuildFile; fileRef = D566F2A21EB8748B009AF6CD /* SaveNavigationData.m */; };
+		D566F2AB1EB87D89009AF6CD /* SecurityGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D566F2A41EB87D89009AF6CD /* SecurityGuardSDK.framework */; };
+		D566F2AC1EB87D89009AF6CD /* SGMain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D566F2A51EB87D89009AF6CD /* SGMain.framework */; };
+		D566F2AD1EB87D89009AF6CD /* UTMini.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D566F2A61EB87D89009AF6CD /* UTMini.framework */; };
+		D566F2AE1EB87D89009AF6CD /* WXOpenIMSDKFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D566F2A71EB87D89009AF6CD /* WXOpenIMSDKFMWK.framework */; };
+		D566F2AF1EB87D89009AF6CD /* WXOpenIMSDKResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D566F2A81EB87D89009AF6CD /* WXOpenIMSDKResource.bundle */; };
+		D566F2B01EB87D89009AF6CD /* WXOUIModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D566F2A91EB87D89009AF6CD /* WXOUIModule.framework */; };
+		D566F2B11EB87D89009AF6CD /* WXOUIModuleResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D566F2AA1EB87D89009AF6CD /* WXOUIModuleResources.bundle */; };
+		D57782CB1EB965BA00AA7BD3 /* 70144.fmap in Resources */ = {isa = PBXBuildFile; fileRef = D57782C21EB965BA00AA7BD3 /* 70144.fmap */; };
+		D57782CC1EB965BA00AA7BD3 /* 70145.fmap in Resources */ = {isa = PBXBuildFile; fileRef = D57782C31EB965BA00AA7BD3 /* 70145.fmap */; };
+		D57782CD1EB965BA00AA7BD3 /* 70146.fmap in Resources */ = {isa = PBXBuildFile; fileRef = D57782C41EB965BA00AA7BD3 /* 70146.fmap */; };
+		D57782CE1EB965BA00AA7BD3 /* 70147.fmap in Resources */ = {isa = PBXBuildFile; fileRef = D57782C51EB965BA00AA7BD3 /* 70147.fmap */; };
+		D57782CF1EB965BA00AA7BD3 /* 70148.fmap in Resources */ = {isa = PBXBuildFile; fileRef = D57782C61EB965BA00AA7BD3 /* 70148.fmap */; };
+		D57782D01EB965BA00AA7BD3 /* 79980.fmap in Resources */ = {isa = PBXBuildFile; fileRef = D57782C71EB965BA00AA7BD3 /* 79980.fmap */; };
+		D57782D11EB965BA00AA7BD3 /* 79981.fmap in Resources */ = {isa = PBXBuildFile; fileRef = D57782C81EB965BA00AA7BD3 /* 79981.fmap */; };
+		D57782D21EB965BA00AA7BD3 /* 79982.fmap in Resources */ = {isa = PBXBuildFile; fileRef = D57782C91EB965BA00AA7BD3 /* 79982.fmap */; };
+		D57782D31EB965BA00AA7BD3 /* mangrove.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = D57782CA1EB965BA00AA7BD3 /* mangrove.sqlite */; };
 		FC07553F1E6EB74B00EAB144 /* DBUserLogin+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FC07553C1E6EB74B00EAB144 /* DBUserLogin+CoreDataClass.m */; };
 		FC0755401E6EB74B00EAB144 /* DBUserLogin+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = FC07553E1E6EB74B00EAB144 /* DBUserLogin+CoreDataProperties.m */; };
 		FC0755451E6EB8E000EAB144 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0755421E6EB8E000EAB144 /* DataManager.m */; };
@@ -501,7 +502,6 @@
 		A8995A261EA5B4BA001B83DF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A8DC4F2C1EA8AB080056C699 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
 		A8DC4F2D1EA8AB080056C699 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
-		A8DC4F321EA8C4850056C699 /* WXOpenIMSDKFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WXOpenIMSDKFMWK.framework; sourceTree = "<group>"; };
 		A8E4136D1E7692C40096EA62 /* InforView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InforView.h; sourceTree = "<group>"; };
 		A8E4136E1E7692C40096EA62 /* InforView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InforView.m; sourceTree = "<group>"; };
 		A8E413701E7692D70096EA62 /* InforView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InforView.xib; sourceTree = "<group>"; };
@@ -579,12 +579,6 @@
 		C46BEDCF1E9CA7B8009E3379 /* AlertViewCenterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertViewCenterCell.m; sourceTree = "<group>"; };
 		C46FA8121E9F08D600F18D47 /* MTIMManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTIMManager.h; sourceTree = "<group>"; };
 		C46FA8131E9F08D600F18D47 /* MTIMManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTIMManager.m; sourceTree = "<group>"; };
-		C4736F281EAD947D003A2244 /* SecurityGuardSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SecurityGuardSDK.framework; sourceTree = "<group>"; };
-		C4736F291EAD947D003A2244 /* SGMain.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SGMain.framework; sourceTree = "<group>"; };
-		C4736F2A1EAD947D003A2244 /* UTMini.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTMini.framework; sourceTree = "<group>"; };
-		C4736F2B1EAD947D003A2244 /* WXOpenIMSDKResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WXOpenIMSDKResource.bundle; sourceTree = "<group>"; };
-		C4736F2C1EAD947D003A2244 /* WXOUIModule.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WXOUIModule.framework; sourceTree = "<group>"; };
-		C4736F2D1EAD947D003A2244 /* WXOUIModuleResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WXOUIModuleResources.bundle; sourceTree = "<group>"; };
 		C4760EC91EAF12FB00EC5246 /* CancelReasonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CancelReasonModel.h; path = DatabaseClass/CancelReasonModel.h; sourceTree = "<group>"; };
 		C4760ECA1EAF12FB00EC5246 /* CancelReasonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CancelReasonModel.m; path = DatabaseClass/CancelReasonModel.m; sourceTree = "<group>"; };
 		C4792DD41EA0990D00C273AA /* MarqueeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarqueeLabel.h; sourceTree = "<group>"; };
@@ -789,21 +783,12 @@
 		C4C721BE1E6FCC2E003523A2 /* yuyuege.fmi */ = {isa = PBXFileReference; lastKnownFileType = file; path = yuyuege.fmi; sourceTree = "<group>"; };
 		C4C721BF1E6FCC2E003523A2 /* zhenzhuba.fmi */ = {isa = PBXFileReference; lastKnownFileType = file; path = zhenzhuba.fmi; sourceTree = "<group>"; };
 		C4C721C01E6FCC2E003523A2 /* zxj.fmi */ = {isa = PBXFileReference; lastKnownFileType = file; path = zxj.fmi; sourceTree = "<group>"; };
-		C4C721C11E6FCC2E003523A2 /* 70144.fmap */ = {isa = PBXFileReference; lastKnownFileType = file; path = 70144.fmap; sourceTree = "<group>"; };
-		C4C721C21E6FCC2E003523A2 /* 70145.fmap */ = {isa = PBXFileReference; lastKnownFileType = file; path = 70145.fmap; sourceTree = "<group>"; };
-		C4C721C31E6FCC2E003523A2 /* 70146.fmap */ = {isa = PBXFileReference; lastKnownFileType = file; path = 70146.fmap; sourceTree = "<group>"; };
-		C4C721C41E6FCC2E003523A2 /* 70147.fmap */ = {isa = PBXFileReference; lastKnownFileType = file; path = 70147.fmap; sourceTree = "<group>"; };
-		C4C721C51E6FCC2E003523A2 /* 70148.fmap */ = {isa = PBXFileReference; lastKnownFileType = file; path = 70148.fmap; sourceTree = "<group>"; };
-		C4C721C61E6FCC2E003523A2 /* 79980.fmap */ = {isa = PBXFileReference; lastKnownFileType = file; path = 79980.fmap; sourceTree = "<group>"; };
-		C4C721C71E6FCC2E003523A2 /* 79981.fmap */ = {isa = PBXFileReference; lastKnownFileType = file; path = 79981.fmap; sourceTree = "<group>"; };
-		C4C721C81E6FCC2E003523A2 /* 79982.fmap */ = {isa = PBXFileReference; lastKnownFileType = file; path = 79982.fmap; sourceTree = "<group>"; };
 		C4C721C91E6FCC2E003523A2 /* acts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = acts.json; sourceTree = "<group>"; };
 		C4C721CA1E6FCC2E003523A2 /* facility.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = facility.json; sourceTree = "<group>"; };
 		C4C721CB1E6FCC2E003523A2 /* food.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = food.json; sourceTree = "<group>"; };
 		C4C721CC1E6FCC2E003523A2 /* indoorMapInfo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = indoorMapInfo.json; sourceTree = "<group>"; };
 		C4C721CD1E6FCC2E003523A2 /* jiantou.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jiantou.png; sourceTree = "<group>"; };
 		C4C721CE1E6FCC2E003523A2 /* locatio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locatio.png; sourceTree = "<group>"; };
-		C4C721CF1E6FCC2E003523A2 /* mangrove.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = mangrove.sqlite; sourceTree = "<group>"; };
 		C4C721D01E6FCC2E003523A2 /* nodeassociation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nodeassociation.json; sourceTree = "<group>"; };
 		C4C721D11E6FCC2E003523A2 /* route_food_1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = route_food_1.json; sourceTree = "<group>"; };
 		C4C721D21E6FCC2E003523A2 /* route_relax_1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = route_relax_1.json; sourceTree = "<group>"; };
@@ -994,6 +979,24 @@
 		C4C723FB1E6FEF6F003523A2 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		C4C723FD1E6FEF9B003523A2 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		C4C723FF1E6FEFAB003523A2 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		D566F2A11EB8748B009AF6CD /* SaveNavigationData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveNavigationData.h; sourceTree = "<group>"; };
+		D566F2A21EB8748B009AF6CD /* SaveNavigationData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveNavigationData.m; sourceTree = "<group>"; };
+		D566F2A41EB87D89009AF6CD /* SecurityGuardSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SecurityGuardSDK.framework; sourceTree = "<group>"; };
+		D566F2A51EB87D89009AF6CD /* SGMain.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SGMain.framework; sourceTree = "<group>"; };
+		D566F2A61EB87D89009AF6CD /* UTMini.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTMini.framework; sourceTree = "<group>"; };
+		D566F2A71EB87D89009AF6CD /* WXOpenIMSDKFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WXOpenIMSDKFMWK.framework; sourceTree = "<group>"; };
+		D566F2A81EB87D89009AF6CD /* WXOpenIMSDKResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WXOpenIMSDKResource.bundle; sourceTree = "<group>"; };
+		D566F2A91EB87D89009AF6CD /* WXOUIModule.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WXOUIModule.framework; sourceTree = "<group>"; };
+		D566F2AA1EB87D89009AF6CD /* WXOUIModuleResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WXOUIModuleResources.bundle; sourceTree = "<group>"; };
+		D57782C21EB965BA00AA7BD3 /* 70144.fmap */ = {isa = PBXFileReference; lastKnownFileType = file; path = 70144.fmap; sourceTree = "<group>"; };
+		D57782C31EB965BA00AA7BD3 /* 70145.fmap */ = {isa = PBXFileReference; lastKnownFileType = file; path = 70145.fmap; sourceTree = "<group>"; };
+		D57782C41EB965BA00AA7BD3 /* 70146.fmap */ = {isa = PBXFileReference; lastKnownFileType = file; path = 70146.fmap; sourceTree = "<group>"; };
+		D57782C51EB965BA00AA7BD3 /* 70147.fmap */ = {isa = PBXFileReference; lastKnownFileType = file; path = 70147.fmap; sourceTree = "<group>"; };
+		D57782C61EB965BA00AA7BD3 /* 70148.fmap */ = {isa = PBXFileReference; lastKnownFileType = file; path = 70148.fmap; sourceTree = "<group>"; };
+		D57782C71EB965BA00AA7BD3 /* 79980.fmap */ = {isa = PBXFileReference; lastKnownFileType = file; path = 79980.fmap; sourceTree = "<group>"; };
+		D57782C81EB965BA00AA7BD3 /* 79981.fmap */ = {isa = PBXFileReference; lastKnownFileType = file; path = 79981.fmap; sourceTree = "<group>"; };
+		D57782C91EB965BA00AA7BD3 /* 79982.fmap */ = {isa = PBXFileReference; lastKnownFileType = file; path = 79982.fmap; sourceTree = "<group>"; };
+		D57782CA1EB965BA00AA7BD3 /* mangrove.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = mangrove.sqlite; sourceTree = "<group>"; };
 		FC07553B1E6EB74B00EAB144 /* DBUserLogin+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DBUserLogin+CoreDataClass.h"; sourceTree = "<group>"; };
 		FC07553C1E6EB74B00EAB144 /* DBUserLogin+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DBUserLogin+CoreDataClass.m"; sourceTree = "<group>"; };
 		FC07553D1E6EB74B00EAB144 /* DBUserLogin+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DBUserLogin+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -1164,8 +1167,8 @@
 			files = (
 				A8995A271EA5B4BB001B83DF /* Security.framework in Frameworks */,
 				C4C723FC1E6FEF6F003523A2 /* libiconv.tbd in Frameworks */,
-				C4736F301EAD947D003A2244 /* UTMini.framework in Frameworks */,
 				C4C720F51E6FCB79003523A2 /* libFMMapKit.a in Frameworks */,
+				D566F2AB1EB87D89009AF6CD /* SecurityGuardSDK.framework in Frameworks */,
 				C4C723F71E6FEB46003523A2 /* libresolv.tbd in Frameworks */,
 				FCDD646E1E6FA70D0057A9C3 /* libxml2.tbd in Frameworks */,
 				FCDD64911E6FB25D0057A9C3 /* libz.tbd in Frameworks */,
@@ -1174,11 +1177,12 @@
 				FCDD64471E6FA5260057A9C3 /* libUMessage_Sdk_1.4.0.a in Frameworks */,
 				C4C723F91E6FEBF4003523A2 /* UserNotifications.framework in Frameworks */,
 				FCDD649D1E6FB2B00057A9C3 /* AssetsLibrary.framework in Frameworks */,
-				C4736F2F1EAD947D003A2244 /* SGMain.framework in Frameworks */,
 				FCDD649B1E6FB29A0057A9C3 /* AVFoundation.framework in Frameworks */,
 				FCDD64991E6FB2900057A9C3 /* AudioToolbox.framework in Frameworks */,
-				A8DC4F3A1EA8C4850056C699 /* WXOpenIMSDKFMWK.framework in Frameworks */,
+				D566F2AE1EB87D89009AF6CD /* WXOpenIMSDKFMWK.framework in Frameworks */,
+				D566F2AC1EB87D89009AF6CD /* SGMain.framework in Frameworks */,
 				FCDD64971E6FB2830057A9C3 /* ImageIO.framework in Frameworks */,
+				D566F2AD1EB87D89009AF6CD /* UTMini.framework in Frameworks */,
 				FCDD64951E6FB2780057A9C3 /* MobileCoreServices.framework in Frameworks */,
 				FCDD648F1E6FB2520057A9C3 /* CoreData.framework in Frameworks */,
 				FCDD648D1E6FB23D0057A9C3 /* CoreTelephony.framework in Frameworks */,
@@ -1188,8 +1192,7 @@
 				FCDD64851E6FAC300057A9C3 /* OpenGLES.framework in Frameworks */,
 				FCDD64831E6FAC250057A9C3 /* CoreMotion.framework in Frameworks */,
 				FCDD64811E6FAB5A0057A9C3 /* CoreLocation.framework in Frameworks */,
-				C4736F2E1EAD947D003A2244 /* SecurityGuardSDK.framework in Frameworks */,
-				C4736F321EAD947D003A2244 /* WXOUIModule.framework in Frameworks */,
+				D566F2B01EB87D89009AF6CD /* WXOUIModule.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1530,26 +1533,26 @@
 			isa = PBXGroup;
 			children = (
 				C4C720FB1E6FCC2D003523A2 /* 2002 */,
-				C4C721C11E6FCC2E003523A2 /* 70144.fmap */,
-				C4C721C21E6FCC2E003523A2 /* 70145.fmap */,
-				C4C721C31E6FCC2E003523A2 /* 70146.fmap */,
-				C4C721C41E6FCC2E003523A2 /* 70147.fmap */,
-				C4C721C51E6FCC2E003523A2 /* 70148.fmap */,
-				C4C721C61E6FCC2E003523A2 /* 79980.fmap */,
-				C4C721C71E6FCC2E003523A2 /* 79981.fmap */,
-				C4C721C81E6FCC2E003523A2 /* 79982.fmap */,
 				C4C721C91E6FCC2E003523A2 /* acts.json */,
 				C4C721CA1E6FCC2E003523A2 /* facility.json */,
 				C4C721CB1E6FCC2E003523A2 /* food.json */,
 				C4C721CC1E6FCC2E003523A2 /* indoorMapInfo.json */,
 				C4C721CD1E6FCC2E003523A2 /* jiantou.png */,
 				C4C721CE1E6FCC2E003523A2 /* locatio.png */,
-				C4C721CF1E6FCC2E003523A2 /* mangrove.sqlite */,
 				C4C721D01E6FCC2E003523A2 /* nodeassociation.json */,
 				C4C721D11E6FCC2E003523A2 /* route_food_1.json */,
 				C4C721D21E6FCC2E003523A2 /* route_relax_1.json */,
 				C4C721D31E6FCC2E003523A2 /* shop.json */,
 				C4C721D41E6FCC2E003523A2 /* shop1.json */,
+				D57782C21EB965BA00AA7BD3 /* 70144.fmap */,
+				D57782C31EB965BA00AA7BD3 /* 70145.fmap */,
+				D57782C41EB965BA00AA7BD3 /* 70146.fmap */,
+				D57782C51EB965BA00AA7BD3 /* 70147.fmap */,
+				D57782C61EB965BA00AA7BD3 /* 70148.fmap */,
+				D57782C71EB965BA00AA7BD3 /* 79980.fmap */,
+				D57782C81EB965BA00AA7BD3 /* 79981.fmap */,
+				D57782C91EB965BA00AA7BD3 /* 79982.fmap */,
+				D57782CA1EB965BA00AA7BD3 /* mangrove.sqlite */,
 			);
 			path = FengMapSource;
 			sourceTree = "<group>";
@@ -2079,6 +2082,8 @@
 		FC5B199E1E6E465B0038BCA7 /* MangroveTree */ = {
 			isa = PBXGroup;
 			children = (
+				D566F2A11EB8748B009AF6CD /* SaveNavigationData.h */,
+				D566F2A21EB8748B009AF6CD /* SaveNavigationData.m */,
 				FC5B19A21E6E465B0038BCA7 /* AppDelegate.h */,
 				FC5B19A31E6E465B0038BCA7 /* AppDelegate.m */,
 				C44B166E1E70F0E800EE8257 /* MainViewController.h */,
@@ -2338,13 +2343,13 @@
 		FCDD62E71E6FA5260057A9C3 /* WXFrameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C4736F281EAD947D003A2244 /* SecurityGuardSDK.framework */,
-				C4736F291EAD947D003A2244 /* SGMain.framework */,
-				C4736F2A1EAD947D003A2244 /* UTMini.framework */,
-				C4736F2B1EAD947D003A2244 /* WXOpenIMSDKResource.bundle */,
-				C4736F2C1EAD947D003A2244 /* WXOUIModule.framework */,
-				C4736F2D1EAD947D003A2244 /* WXOUIModuleResources.bundle */,
-				A8DC4F321EA8C4850056C699 /* WXOpenIMSDKFMWK.framework */,
+				D566F2A41EB87D89009AF6CD /* SecurityGuardSDK.framework */,
+				D566F2A51EB87D89009AF6CD /* SGMain.framework */,
+				D566F2A61EB87D89009AF6CD /* UTMini.framework */,
+				D566F2A71EB87D89009AF6CD /* WXOpenIMSDKFMWK.framework */,
+				D566F2A81EB87D89009AF6CD /* WXOpenIMSDKResource.bundle */,
+				D566F2A91EB87D89009AF6CD /* WXOUIModule.framework */,
+				D566F2AA1EB87D89009AF6CD /* WXOUIModuleResources.bundle */,
 				C45892D01EA5F5640014BAD5 /* yw_1222.jpg */,
 			);
 			name = WXFrameworks;
@@ -2463,14 +2468,12 @@
 				C4C722DF1E6FCC2E003523A2 /* 140008.fmi in Resources */,
 				C44F13511EA855A400AB7809 /* YW_TGZ_Emoitons.emo in Resources */,
 				C4C7234D1E6FCC2F003523A2 /* jiweijiuba.fmi in Resources */,
-				C4C7238A1E6FCC2F003523A2 /* mangrove.sqlite in Resources */,
 				C4C723241E6FCC2F003523A2 /* Arcteryx.fmi in Resources */,
 				C4C722C81E6FCC2E003523A2 /* 120002.fmi in Resources */,
 				C4C723CD1E6FCC2F003523A2 /* NumberLineView.xib in Resources */,
 				C4C723181E6FCC2F003523A2 /* 170005.fmi in Resources */,
 				C4C7232A1E6FCC2F003523A2 /* Borida.fmi in Resources */,
 				C4C7233B1E6FCC2F003523A2 /* Eves.fmi in Resources */,
-				C4C723831E6FCC2F003523A2 /* 79982.fmap in Resources */,
 				C4C7230A1E6FCC2F003523A2 /* 160000.fmi in Resources */,
 				C4C7235F1E6FCC2F003523A2 /* plate.png in Resources */,
 				C4C722CD1E6FCC2E003523A2 /* 120007.fmi in Resources */,
@@ -2504,7 +2507,6 @@
 				A8E413711E7692D70096EA62 /* InforView.xib in Resources */,
 				C4C7231C1E6FCC2F003523A2 /* 180002.fmi in Resources */,
 				C4C722CC1E6FCC2E003523A2 /* 120006.fmi in Resources */,
-				C4C723821E6FCC2F003523A2 /* 79981.fmap in Resources */,
 				C4C723131E6FCC2F003523A2 /* 170000.fmi in Resources */,
 				C4C723541E6FCC2F003523A2 /* logo.fmi in Resources */,
 				C4C723781E6FCC2F003523A2 /* yimiangongfangtietu.fmi in Resources */,
@@ -2512,15 +2514,14 @@
 				C4C722CE1E6FCC2E003523A2 /* 120008.fmi in Resources */,
 				C4C722D51E6FCC2E003523A2 /* 130004.fmi in Resources */,
 				C4C723371E6FCC2F003523A2 /* dome.png in Resources */,
-				C4C723811E6FCC2F003523A2 /* 79980.fmap in Resources */,
 				C4C722EA1E6FCC2E003523A2 /* 140019.fmi in Resources */,
 				C4C7234F1E6FCC2F003523A2 /* jixiangzhai.fmi in Resources */,
 				C4C723171E6FCC2F003523A2 /* 170004.fmi in Resources */,
 				C4C7231D1E6FCC2F003523A2 /* 180003.fmi in Resources */,
 				C4C7234C1E6FCC2F003523A2 /* jinriyishuhui.fmi in Resources */,
-				C4C7237C1E6FCC2F003523A2 /* 70144.fmap in Resources */,
 				C44F133E1EA855A400AB7809 /* SPCallingCardBubbleChatContentView.xib in Resources */,
 				C4C723751E6FCC2F003523A2 /* xiangjutietu.fmi in Resources */,
+				D57782CF1EB965BA00AA7BD3 /* 70148.fmap in Resources */,
 				C4C723691E6FCC2F003523A2 /* t100kids.fmi in Resources */,
 				9C4737381E72486A00A30C91 /* User.storyboard in Resources */,
 				C4C723091E6FCC2F003523A2 /* 150014.fmi in Resources */,
@@ -2528,6 +2529,7 @@
 				C4C722E01E6FCC2E003523A2 /* 140009.fmi in Resources */,
 				C4C722B81E6FCC2E003523A2 /* 100000.fmi in Resources */,
 				C4C723101E6FCC2F003523A2 /* 160006.fmi in Resources */,
+				D57782D31EB965BA00AA7BD3 /* mangrove.sqlite in Resources */,
 				C4C722F81E6FCC2E003523A2 /* 140500.fmi in Resources */,
 				C4C723001E6FCC2E003523A2 /* 150005.fmi in Resources */,
 				C4C722FB1E6FCC2E003523A2 /* 150000.fmi in Resources */,
@@ -2542,7 +2544,7 @@
 				FC5B1A6C1E6E47A70038BCA7 /* MJRefresh.bundle in Resources */,
 				C4C7236D1E6FCC2F003523A2 /* track.png in Resources */,
 				C4C723D31E6FCC2F003523A2 /* SwitchMapInfoView.xib in Resources */,
-				C4736F331EAD947D003A2244 /* WXOUIModuleResources.bundle in Resources */,
+				D566F2B11EB87D89009AF6CD /* WXOUIModuleResources.bundle in Resources */,
 				C4C722FA1E6FCC2E003523A2 /* 140700.fmi in Resources */,
 				C4C7232E1E6FCC2F003523A2 /* chaotianmentietu.fmi in Resources */,
 				C4C723311E6FCC2F003523A2 /* compass.png in Resources */,
@@ -2553,6 +2555,7 @@
 				C4C7230C1E6FCC2F003523A2 /* 160002.fmi in Resources */,
 				C4C723271E6FCC2F003523A2 /* bbl.fmi in Resources */,
 				C4C7233A1E6FCC2F003523A2 /* EVEBYEVE.fmi in Resources */,
+				D57782D21EB965BA00AA7BD3 /* 79982.fmap in Resources */,
 				C4C723701E6FCC2F003523A2 /* Vancasa.fmi in Resources */,
 				C4C723141E6FCC2F003523A2 /* 170001.fmi in Resources */,
 				C4C722D61E6FCC2E003523A2 /* 130005.fmi in Resources */,
@@ -2560,7 +2563,8 @@
 				C44F134E1EA855A400AB7809 /* input_plug_ico_card_nor@2x.png in Resources */,
 				C4C722DE1E6FCC2E003523A2 /* 140007.fmi in Resources */,
 				C4C722DC1E6FCC2E003523A2 /* 140005.fmi in Resources */,
-				C4736F311EAD947D003A2244 /* WXOpenIMSDKResource.bundle in Resources */,
+				D566F2AF1EB87D89009AF6CD /* WXOpenIMSDKResource.bundle in Resources */,
+				D57782CB1EB965BA00AA7BD3 /* 70144.fmap in Resources */,
 				C4C7232D1E6FCC2F003523A2 /* bufeitai.fmi in Resources */,
 				C4C723051E6FCC2F003523A2 /* 150010.fmi in Resources */,
 				C4C722CB1E6FCC2E003523A2 /* 120005.fmi in Resources */,
@@ -2589,7 +2593,6 @@
 				C4C723481E6FCC2F003523A2 /* jackjones.fmi in Resources */,
 				C4C722EF1E6FCC2E003523A2 /* 140024.fmi in Resources */,
 				C4C723531E6FCC2F003523A2 /* laoshanghai.fmi in Resources */,
-				C4C7237E1E6FCC2F003523A2 /* 70146.fmap in Resources */,
 				C4C723341E6FCC2F003523A2 /* dawangzongcanting.fmi in Resources */,
 				C4C723151E6FCC2F003523A2 /* 170002.fmi in Resources */,
 				C45B620A1E7A7C7A00F70D3F /* vacation.json in Resources */,
@@ -2631,20 +2634,22 @@
 				C4C7238D1E6FCC2F003523A2 /* route_relax_1.json in Resources */,
 				C4C7238B1E6FCC2F003523A2 /* nodeassociation.json in Resources */,
 				C44F134D1EA855A400AB7809 /* icon_delete@2x.png in Resources */,
-				C4C7237D1E6FCC2F003523A2 /* 70145.fmap in Resources */,
 				C4C722E21E6FCC2E003523A2 /* 140011.fmi in Resources */,
 				C4C7232F1E6FCC2F003523A2 /* coco.fmi in Resources */,
 				C4C7235C1E6FCC2F003523A2 /* mystyle.fmi in Resources */,
 				C4C7237A1E6FCC2F003523A2 /* zhenzhuba.fmi in Resources */,
+				D57782CE1EB965BA00AA7BD3 /* 70147.fmap in Resources */,
 				C4C723621E6FCC2F003523A2 /* putiduogongneng.fmi in Resources */,
 				C4C722E81E6FCC2E003523A2 /* 140017.fmi in Resources */,
 				C4C7235B1E6FCC2F003523A2 /* moxige.fmi in Resources */,
 				C4C7236A1E6FCC2F003523A2 /* tanxianwangguo.fmi in Resources */,
+				D57782CC1EB965BA00AA7BD3 /* 70145.fmap in Resources */,
 				C4C722E51E6FCC2E003523A2 /* 140014.fmi in Resources */,
 				C4C722E11E6FCC2E003523A2 /* 140010.fmi in Resources */,
 				C4C723431E6FCC2F003523A2 /* hefengge.fmi in Resources */,
 				C4C722F71E6FCC2E003523A2 /* 140400.fmi in Resources */,
 				C4C723721E6FCC2F003523A2 /* weilaiyishu.fmi in Resources */,
+				D57782CD1EB965BA00AA7BD3 /* 70146.fmap in Resources */,
 				C4C7231F1E6FCC2F003523A2 /* 180005.fmi in Resources */,
 				C4C723641E6FCC2F003523A2 /* riguan.fmi in Resources */,
 				C4C722D81E6FCC2E003523A2 /* 140001.fmi in Resources */,
@@ -2666,7 +2671,6 @@
 				C4C723681E6FCC2F003523A2 /* shechipin.fmi in Resources */,
 				C4C722C11E6FCC2E003523A2 /* 110001.fmi in Resources */,
 				C4C722C61E6FCC2E003523A2 /* 120000.fmi in Resources */,
-				C4C723801E6FCC2F003523A2 /* 70148.fmap in Resources */,
 				FC07554A1E6EBB7400EAB144 /* AgreementViewController.xib in Resources */,
 				C4C723771E6FCC2F003523A2 /* xls.fmi in Resources */,
 				C4C722BA1E6FCC2E003523A2 /* 100002.fmi in Resources */,
@@ -2691,12 +2695,13 @@
 				C4C723651E6FCC2F003523A2 /* selected.fmi in Resources */,
 				FC5B1AE31E6E50E00038BCA7 /* FontAwesome.ttf in Resources */,
 				C4C7235E1E6FCC2F003523A2 /* only.fmi in Resources */,
+				D57782D11EB965BA00AA7BD3 /* 79981.fmap in Resources */,
 				C4C723841E6FCC2F003523A2 /* acts.json in Resources */,
 				C4C722BE1E6FCC2E003523A2 /* 100006.fmi in Resources */,
-				C4C7237F1E6FCC2F003523A2 /* 70147.fmap in Resources */,
 				C4C722F21E6FCC2E003523A2 /* 140027.fmi in Resources */,
 				C4C722D21E6FCC2E003523A2 /* 130001.fmi in Resources */,
 				C4C723061E6FCC2F003523A2 /* 150011.fmi in Resources */,
+				D57782D01EB965BA00AA7BD3 /* 79980.fmap in Resources */,
 				C44F134B1EA855A400AB7809 /* greeting_message@2x.png in Resources */,
 				C4C722F51E6FCC2E003523A2 /* 140200.fmi in Resources */,
 				C4C7233F1E6FCC2F003523A2 /* hainanshouxin.fmi in Resources */,
@@ -2814,6 +2819,7 @@
 				FC5B1AEA1E6E51510038BCA7 /* GRAlertView.m in Sources */,
 				C4C723971E6FCC2F003523A2 /* FMResultSet.m in Sources */,
 				FC5B19A11E6E465B0038BCA7 /* main.m in Sources */,
+				D566F2A31EB8748B009AF6CD /* SaveNavigationData.m in Sources */,
 				C44F133F1EA855A400AB7809 /* SPCallingCardBubbleChatView.m in Sources */,
 				FC5B1AA71E6E47BF0038BCA7 /* UIImageView+HighlightedWebCache.m in Sources */,
 				C4C723C41E6FCC2F003523A2 /* IndoorMapModelInfoPopView.m in Sources */,
