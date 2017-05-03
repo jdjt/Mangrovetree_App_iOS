@@ -177,10 +177,10 @@ UIAlertViewDelegate>
 
 /**
  *  用户在应用的服务器登录成功之后，向云旺服务器登录之前调用
- *  @param ywLoginId, 用来登录云旺IMSDK的id
- *  @param password, 用来登录云旺IMSDK的密码
- *  @param aSuccessBlock, 登陆成功的回调
- *  @param aFailedBlock, 登录失败的回调
+ *  @param ywLoginId 用来登录云旺IMSDK的id
+ *  @param passWord 用来登录云旺IMSDK的密码
+ *  @param aSuccessBlock 登陆成功的回调
+ *  @param aFailedBlock 登录失败的回调
  */
 - (void)callThisAfterISVAccountLoginSuccessWithYWLoginId:(NSString *)ywLoginId passWord:(NSString *)passWord preloginedBlock:(void(^)())aPreloginedBlock successBlock:(void(^)())aSuccessBlock failedBlock:(void (^)(NSError *))aFailedBlock
 {
@@ -273,7 +273,7 @@ UIAlertViewDelegate>
     } else {
         // OpenIM内网环境，暂时不向开发者开放，需要测试环境的，自行申请另一个Appkey作为测试环境
 //        [[YWAPI sharedInstance] syncInitWithOwnAppKey:@"4272" getError:&error];
-        [[YWAPI sharedInstance] syncInitWithOwnAppKey:@"60028148" getError:&error];
+        [[YWAPI sharedInstance] syncInitWithOwnAppKey:@"23758144" getError:&error];
     }
 
     if (error.code != 0 && error.code != YWSdkInitErrorCodeAlreadyInited) {

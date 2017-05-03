@@ -21,6 +21,7 @@ typedef NS_ENUM(NSInteger,pageModelType)
     pageModel_Receive       = 2,  // 已接单
     pageModel_Complete      = 3,  // 服务员点击完成，需用户确认
     pageModel_waitGrade     = 4,  // 待评价
+    pageModel_systemCancel  = 5,  // 系统自动取消
 };
 
 @property (nonatomic, strong) FrameViewController * frameViewController;

@@ -76,7 +76,7 @@
     {
         case AlertType_systemAutoCancelTask:
         {
-            alert = [BaseAlertViewController initWithHeadTitle:nil andWithDetail:@"" andWithCheckTitles:checkTitles andWithButtonTitles:@[@"确 认"] andWithHeadImage:nil];
+            alert = [BaseAlertViewController initWithHeadTitle:nil andWithDetail:@"服务员忙，请稍后再发" andWithCheckTitles:checkTitles andWithButtonTitles:@[@"确 认"] andWithHeadImage:nil];
         }
             break;
         case AlertType_callTaskComplete:

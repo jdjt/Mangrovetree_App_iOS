@@ -253,6 +253,10 @@
     {
         [self getTaskDetailByTaskCode:self.currentTask.taskCode];
     }
+    else if ([pushMessage[@"messType"] isEqualToString:@"SystemAutoCancelTask"]) //  十分钟服务员未接单自动取消
+    {
+        [self getTaskDetailByTaskCode:self.currentTask.taskCode];
+    }
 }
 
 - (void)setUIByPageModelType:(pageModelType)pageModelType
@@ -340,10 +344,21 @@
             }];
             [self presentViewController:view animated:YES completion:nil];
         }
+        case pageModel_systemCancel:
+        {
+            BaseAlertViewController * alert = [BaseAlertViewController alertWithAlertType:AlertType_systemAutoCancelTask andWithWaiterId:self.currentTask.waiterId];
+            [alert addTarget:self andWithComfirmAction:@selector(systemAutoCancelTask)];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
             break;
         default:
             break;
     }
+}
+
+- (void)systemAutoCancelTask
+{
+    [self setUIByPageModelType:pageModel_systemCancel];
 }
 
 - (void)comfirmTaskYES
@@ -386,6 +401,7 @@
         if ([dic[@"retOk"] isEqualToString:@"0"])
         {
             // 成功
+            self.currentTask = nil;
             [self setUIByPageModelType:pageModel_NOTask];
         }
     }
@@ -403,13 +419,17 @@
         {
             [self setUIByPageModelType:pageModel_Receive];
         }
-        else if ([callTask.taskStatus isEqualToString:@"2"] || [callTask.taskStatus isEqualToString:@"7"])
+        else if ([callTask.taskStatus isEqualToString:@"2"])
         {
             [self setUIByPageModelType:pageModel_Complete];
         }
         else if ([callTask.taskStatus isEqualToString:@"0"])
         {
             [self setUIByPageModelType:pageModel_NOReceive];
+        }
+        else if ([callTask.taskStatus isEqualToString:@"9"] && self.currentTask != nil)
+        {
+            [self setUIByPageModelType:pageModel_systemCancel];
         }
         else
         {
