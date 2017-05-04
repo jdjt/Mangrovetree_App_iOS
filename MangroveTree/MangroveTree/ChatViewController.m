@@ -264,10 +264,21 @@
     NSDateFormatter * formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSInteger timeLong = 0;
-    NSString * startTime = [[NSUserDefaults standardUserDefaults] stringForKey:@"CallTaskStartTime"];
+    
     if (self.pageModelType == pageModelType)
     {
-        if (pageModelType == pageModel_Receive)
+        if (pageModelType == pageModel_NOReceive)
+        {
+            NSString * startTime = [[NSUserDefaults standardUserDefaults] stringForKey:@"CallTaskStartTime"];
+            if (startTime.length > 0)
+            {
+                timeLong = labs((NSInteger)[[formatter dateFromString:startTime] timeIntervalSinceNow]);
+            }
+            if (self.currentTask.produceTime.length > 0 && self.currentTask.nowDate.length > 0)
+                timeLong = (self.currentTask.nowDate.integerValue - self.currentTask.produceTime.integerValue) / 1000;
+            [self.headView startTaskTimerByStartTime:timeLong];
+        }
+        else if (pageModelType == pageModel_Receive)
         {
             [self.headView startTaskTimerByStartTime:(self.currentTask.nowDate.integerValue - self.currentTask.acceptTime.integerValue) / 1000];
         }
@@ -291,6 +302,7 @@
             break;
         case pageModel_NOReceive:
         {
+            NSString * startTime = [[NSUserDefaults standardUserDefaults] stringForKey:@"CallTaskStartTime"];
             self.navigationItem.rightBarButtonItem = self.cancelBarItem;
             self.headView.textStatus = TextStatus_waiting;
             if (startTime.length > 0)
@@ -328,11 +340,17 @@
             break;
         case pageModel_Receive:
         {
-            self.navigationItem.rightBarButtonItem = self.cancelBarItem;
-            [self instantMessageingFormation];
-            self.headView.textStatus = TextStatus_proceed;
-            [self.headView startTaskTimerByStartTime:(self.currentTask.nowDate.integerValue - self.currentTask.acceptTime.integerValue) / 1000];
-            self.textView.hidden = NO;
+            NSString * isFirstReceive = [[NSUserDefaults standardUserDefaults] objectForKey:self.currentTask.taskCode];
+            if ([isFirstReceive isEqualToString:@"1"] == YES)
+            {
+                BaseAlertViewController * alert = [BaseAlertViewController alertWithAlertType:AlertType_waiterOrderReceiving andWithWaiterId:self.currentTask.waiterId];
+                [alert addTarget:self andWithComfirmAction:@selector(waiterReceiveTask)];
+                [self presentViewController:alert animated:YES completion:nil];
+            }
+            else
+            {
+                [self waiterReceiveTask];
+            }
         }
             break;
         case pageModel_waitGrade:
@@ -354,6 +372,15 @@
         default:
             break;
     }
+}
+
+- (void)waiterReceiveTask
+{
+    self.navigationItem.rightBarButtonItem = self.cancelBarItem;
+    [self instantMessageingFormation];
+    self.headView.textStatus = TextStatus_proceed;
+    [self.headView startTaskTimerByStartTime:(self.currentTask.nowDate.integerValue - self.currentTask.acceptTime.integerValue) / 1000];
+    self.textView.hidden = NO;
 }
 
 - (void)systemAutoCancelTask
@@ -389,9 +416,10 @@
         {
             // 成功
             self.currentTask = [[DataManager defaultInstance] getCallTaskByTaskCode:dic[@"taskCode"]];
+            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:self.currentTask.taskCode];
             if (self.frameViewController != nil)
                 self.frameViewController.currentTask = self.currentTask;
-            [self setUIByPageModelType:pageModel_NOReceive];
+            [self getTaskDetailByTaskCode:self.currentTask.taskCode];
         }
     }
     else if (task == self.cancelTaskSession)
@@ -515,10 +543,10 @@
             [self presentViewController:alert animated:YES completion:nil];
         }];
     }
-    else
-    {
-        [self getCustomDetailByCustomId:_customBind.customerId];
-    }
+//    else
+//    {
+//        [self getCustomDetailByCustomId:_customBind.customerId];
+//    }
 }
 
 // 创建及时通讯界面

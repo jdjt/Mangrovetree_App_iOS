@@ -68,7 +68,7 @@
     self.params = params;
     
     // 判断服务器地址
-    NSInteger severIndex = [Util SelectTheServerUrl];
+    NSInteger severIndex = 1;
     self.serverAddress = [[MySingleton sharedSingleton] currentServiceAddress:severIndex byInterFaceType:old];
     NetWorkHelp *netWorkHelp = [[NetWorkHelp alloc] init];
     
