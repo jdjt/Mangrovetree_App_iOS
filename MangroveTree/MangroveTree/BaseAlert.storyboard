@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -270,13 +269,13 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AlertSelectImage_No" translatesAutoresizingMaskIntoConstraints="NO" id="z6W-5E-RdB">
-                                                            <rect key="frame" x="193.5" y="8" width="28.5" height="28.5"/>
+                                                            <rect key="frame" x="201.5" y="8" width="28.5" height="28.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="z6W-5E-RdB" secondAttribute="height" id="qpa-P5-FcF"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dyh-eG-JIE">
-                                                            <rect key="frame" x="4" y="13" width="179.5" height="18.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="Dyh-eG-JIE">
+                                                            <rect key="frame" x="4" y="13" width="187.5" height="18.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                             <color key="textColor" red="0.38039215686274508" green="0.38039215686274508" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -295,7 +294,7 @@
                                                         <constraint firstItem="z6W-5E-RdB" firstAttribute="leading" secondItem="Dyh-eG-JIE" secondAttribute="trailing" constant="10" id="Soh-zH-jeA"/>
                                                         <constraint firstAttribute="bottom" secondItem="z6W-5E-RdB" secondAttribute="bottom" constant="8" id="U8Y-zB-CEm"/>
                                                         <constraint firstAttribute="bottom" secondItem="bgN-s8-m4H" secondAttribute="bottom" id="YLm-ne-26i"/>
-                                                        <constraint firstAttribute="trailingMargin" secondItem="z6W-5E-RdB" secondAttribute="trailing" constant="14" id="kDl-Ee-1qs"/>
+                                                        <constraint firstAttribute="trailing" secondItem="z6W-5E-RdB" secondAttribute="trailing" constant="14" id="kDl-Ee-1qs"/>
                                                         <constraint firstItem="z6W-5E-RdB" firstAttribute="top" secondItem="bbC-h2-J0t" secondAttribute="top" constant="8" id="nCh-h3-rrx"/>
                                                         <constraint firstItem="Dyh-eG-JIE" firstAttribute="top" secondItem="bbC-h2-J0t" secondAttribute="top" constant="13" id="o7P-WR-bBz"/>
                                                         <constraint firstItem="Dyh-eG-JIE" firstAttribute="centerY" secondItem="z6W-5E-RdB" secondAttribute="centerY" id="qdS-zw-AvY"/>
