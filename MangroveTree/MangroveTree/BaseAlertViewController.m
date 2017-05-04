@@ -163,7 +163,7 @@
     self.detailTop.constant = self.detail.length > 0 ? (self.headTitle.length > 0 ? 25 : 32) : 0;
     CGSize detailSize = self.detail.length > 0 ? [self.detail sizeWithAttributes: @{NSFontAttributeName:self.detailFont}] : CGSizeMake(0, 0);
     NSInteger lines = ceilf(detailSize.width / (kScreenWidth - 2 * (self.backGroundLeading.constant + self.detailTraling.constant)));
-    self.detailHeight.constant =  lines > 1 ? (lines * (1 + lineSpace + self.detailFont.lineHeight) - lineSpace) : (lines == 1 ? (self.detailFont.lineHeight + 1) : 0);
+    self.detailHeight.constant =  lines > 1 ? (lines * (1 + lineSpace + self.detailFont.lineHeight) - lineSpace) : (lines == 1 ? (self.detailFont.lineHeight + 5) : 0);
     self.detailLabel.text = self.detail;
     if (self.detail.length > 0)
         [UILabel changeLineSpaceForLabel:self.detailLabel WithSpace:lineSpace];
@@ -181,7 +181,7 @@
     {
         [self.comfirmButton setTitle:self.buttonTitles[0] forState:UIControlStateNormal];
         self.cancelButton.hidden = YES;
-        self.comfirmWidth.constant = self.backGroundView.frame.size.width * 0.5;
+        self.comfirmWidth.constant = kScreenWidth / 2 - self.backGroundLeading.constant;
     }
     else if (self.buttonTitles.count > 1)
     {

@@ -47,14 +47,14 @@
     switch (severIndex)
     {
         case 1:
-            serviceAddress = type == YES ? @"192.168.1.45:8181" : @"103.4.58.124:8080";//@"192.168.10.163:8080";//
+            serviceAddress = type == YES ? @"rc-ws.mymhotel.com" : @"103.4.58.124:8080";//@"192.168.10.163:8080";//
             break;
         case 2:
             serviceAddress = [MySingleton sharedSingleton].interTestUrl;
             break;
         case 0:
         default:
-            serviceAddress = type == YES ?@"192.168.1.45:8181" : @"syw.mymhotel.com";
+            serviceAddress = type == YES ?@"mws.mymhotel.com" : @"syw.mymhotel.com";
             break;
     }
     
