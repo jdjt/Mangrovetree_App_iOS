@@ -5,11 +5,39 @@
       "scale" : "1x"
     },
     {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "tile",
+          "width" : 1,
+          "height" : 1
+        },
+        "cap-insets" : {
+          "bottom" : 36,
+          "top" : 35,
+          "right" : 36,
+          "left" : 35
+        }
+      },
       "idiom" : "universal",
       "filename" : "help_720.png",
       "scale" : "2x"
     },
     {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "tile",
+          "width" : 1,
+          "height" : 1
+        },
+        "cap-insets" : {
+          "bottom" : 54,
+          "top" : 53,
+          "right" : 54,
+          "left" : 53
+        }
+      },
       "idiom" : "universal",
       "filename" : "help_1080.png",
       "scale" : "3x"

@@ -19,6 +19,7 @@
 @property (nonatomic, copy) NSString * address;
 @property (nonatomic, copy) NSString * subTypeName;
 @property (nonatomic, copy) NSString * activityCode;
+@property (nonatomic, copy) NSString * gname;
 
 @property (nonatomic, assign) int rowid;
 @property (nonatomic, assign) int gid;

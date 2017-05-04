@@ -31,6 +31,7 @@
 		A87812AA1EAF5002002A7F40 /* GradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A87812A91EAF5002002A7F40 /* GradeViewController.m */; };
 		A8995A251EA5B228001B83DF /* PDKeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = A8995A241EA5B228001B83DF /* PDKeyChain.m */; };
 		A8995A271EA5B4BB001B83DF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8995A261EA5B4BA001B83DF /* Security.framework */; };
+		A8B3761D1EBAF5760084F41E /* ChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8B3761C1EBAF5760084F41E /* ChatCell.xib */; };
 		A8DC4F2E1EA8AB080056C699 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DC4F2D1EA8AB080056C699 /* UIColor+Hex.m */; };
 		A8E4136F1E7692C40096EA62 /* InforView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E4136E1E7692C40096EA62 /* InforView.m */; };
 		A8E413711E7692D70096EA62 /* InforView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8E413701E7692D70096EA62 /* InforView.xib */; };
@@ -500,6 +501,7 @@
 		A8995A231EA5B228001B83DF /* PDKeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDKeyChain.h; sourceTree = "<group>"; };
 		A8995A241EA5B228001B83DF /* PDKeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDKeyChain.m; sourceTree = "<group>"; };
 		A8995A261EA5B4BA001B83DF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		A8B3761C1EBAF5760084F41E /* ChatCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatCell.xib; sourceTree = "<group>"; };
 		A8DC4F2C1EA8AB080056C699 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
 		A8DC4F2D1EA8AB080056C699 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
 		A8E4136D1E7692C40096EA62 /* InforView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InforView.h; sourceTree = "<group>"; };
@@ -1286,6 +1288,7 @@
 			children = (
 				A861B3FC1E9F0C33002D61F0 /* ChatCell.h */,
 				A861B3FD1E9F0C33002D61F0 /* ChatCell.m */,
+				A8B3761C1EBAF5760084F41E /* ChatCell.xib */,
 				A861B3FF1E9F0C92002D61F0 /* ChatInputBar.h */,
 				A861B4001E9F0C92002D61F0 /* ChatInputBar.m */,
 				A8FDA43C1E9F815D00272B7D /* ChatHeadView.h */,
@@ -2546,6 +2549,7 @@
 				C4C723D31E6FCC2F003523A2 /* SwitchMapInfoView.xib in Resources */,
 				D566F2B11EB87D89009AF6CD /* WXOUIModuleResources.bundle in Resources */,
 				C4C722FA1E6FCC2E003523A2 /* 140700.fmi in Resources */,
+				A8B3761D1EBAF5760084F41E /* ChatCell.xib in Resources */,
 				C4C7232E1E6FCC2F003523A2 /* chaotianmentietu.fmi in Resources */,
 				C4C723311E6FCC2F003523A2 /* compass.png in Resources */,
 				C4C723201E6FCC2F003523A2 /* 190000.fmi in Resources */,

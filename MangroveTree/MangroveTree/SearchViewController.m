@@ -462,6 +462,10 @@
     QueryDBModel * model = _displayResult[indexPath.row];
     cell.subTitleLabel.text = model.name;
     cell.detailLocationLabel.text = [NSString stringWithFormat:@"%@·%@",model.typeName,model.address];
+    if (model.gname)
+    {
+        cell.detailLocationLabel.text = [NSString stringWithFormat:@"%@·%@-%@",model.typeName,model.address,model.gname];
+    }
     return cell;
 }
 

@@ -404,7 +404,7 @@ static DBSearchTool * mDbSearcTool = nil;
 			NSString * ename = [rs stringForColumn:@"ename"];
             NSString * subTypeName = [rs stringForColumn:@"subtypename"];
             NSString * activityCode = [rs stringForColumn:@"activitycode"];
-            
+            NSString * gname = [rs stringForColumn:@"gname"];
 			NSString * mid = [rs stringForColumn:@"mid"];
 			double x = [rs doubleForColumn:@"x"];
 			double y = [rs doubleForColumn:@"y"];
@@ -419,7 +419,7 @@ static DBSearchTool * mDbSearcTool = nil;
 			model.address = address;
             model.subTypeName = subTypeName;
             model.activityCode = activityCode;
-
+            model.gname = gname;
 			model.fid = fid;
 			model.x = x;
 			model.y = y;
@@ -506,7 +506,7 @@ static DBSearchTool * mDbSearcTool = nil;
     NSString * ename = [rs stringForColumn:@"ename"];
     NSString * subTypeName = [rs stringForColumn:@"subtypename"];
     NSString * activityCode = [rs stringForColumn:@"activitycode"];
-    
+    NSString * gname = [rs stringForColumn:@"gname"];
     NSString * mid = [rs stringForColumn:@"mid"];
     NSString * name = [rs stringForColumn:@"name"];
     double x = [rs doubleForColumn:@"x"];
@@ -522,7 +522,7 @@ static DBSearchTool * mDbSearcTool = nil;
     model.address = address;
     model.subTypeName = subTypeName;
     model.activityCode = activityCode;
-    
+    model.gname = gname;
     model.fid = fid;
     model.x = x;
     model.y = y;

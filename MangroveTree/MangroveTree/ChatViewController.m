@@ -26,6 +26,7 @@
 @property (nonatomic, strong) UIView *textView;
 @property (nonatomic, strong) UIBarButtonItem *cancelBarItem;
 @property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, assign) BOOL reset;
 @property (nonatomic, strong) NSString * comfirmStatus;
 @property (nonatomic, strong) FMZoneManager *myZoneManager;
 @property (nonatomic,strong) YWConversation * conversation;
@@ -41,36 +42,11 @@
     self.navigationController.delegate = self;
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:self.headView];
-    [self.headView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:74];
-    [self.headView autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:0];
-    [self.headView autoSetDimensionsToSize:kSizeHead];
     
-    // add tableView
-    [self.view addSubview:self.chatTabelView];
-    self.chatTabelView.backgroundColor = [UIColor colorWithRed:0.922 green:0.925 blue:0.929 alpha:1];
-    [self.chatTabelView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.headView withOffset:0];
-    [self.chatTabelView autoSetDimension:ALDimensionWidth toSize:kScreenWidth];
-
-    // add inputView
-
-    [self.view addSubview:self.chatInputView];
-    [self.chatInputView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.chatTabelView];
-    [self.chatInputView autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
-    [self.chatInputView autoSetDimension:ALDimensionWidth toSize:kScreenWidth];
-    self.chatInputView.delegate = self;
-    
-    // textView 用来承载IM聊天界面
-    self.textView = [[UIView alloc] initWithFrame:self.view.bounds];
-    [self.view addSubview:self.textView];
-    [self.textView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.headView withOffset:0];
-    [self.textView autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
-    [self.textView autoSetDimension:ALDimensionWidth toSize:kScreenWidth];
-    [self.textView autoAlignAxisToSuperviewAxis:ALAxisVertical];
-    self.textView.hidden = YES;
+    [self addUI];
     
     self.pageModelType = pageModel_NOTask;
-    
+    self.reset = NO;
     [self instantMessaging];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(callTaskPush:) name:NotiCallTaskPushMessage object:nil];
@@ -159,7 +135,37 @@
     }
     return _myZoneManager;
 }
+- (void)addUI
+{
+    [self.view addSubview:self.headView];
+    [self.headView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:74];
+    [self.headView autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:0];
+    [self.headView autoSetDimensionsToSize:kSizeHead];
+    
+    // add tableView
+    [self.view addSubview:self.chatTabelView];
+    self.chatTabelView.backgroundColor = [UIColor colorWithRed:0.922 green:0.925 blue:0.929 alpha:1];
+    [self.chatTabelView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.headView withOffset:0];
+    [self.chatTabelView autoSetDimension:ALDimensionWidth toSize:kScreenWidth];
+    
+    // add inputView
+    
+    [self.view addSubview:self.chatInputView];
+    [self.chatInputView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.chatTabelView];
+    [self.chatInputView autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
+    [self.chatInputView autoSetDimension:ALDimensionWidth toSize:kScreenWidth];
+    self.chatInputView.delegate = self;
+    
+    // textView 用来承载IM聊天界面
+    self.textView = [[UIView alloc] initWithFrame:self.view.bounds];
+    [self.view addSubview:self.textView];
+    [self.textView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.headView withOffset:0];
+    [self.textView autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
+    [self.textView autoSetDimension:ALDimensionWidth toSize:kScreenWidth];
+    [self.textView autoAlignAxisToSuperviewAxis:ALAxisVertical];
+    self.textView.hidden = YES;
 
+}
 #pragma mark - UITableView  Delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -178,7 +184,7 @@
     {
         NSDictionary *dic = self.dataSource[0];
         CGFloat height = [NSString heightFromString:dic[@"text"] withFont:[UIFont systemFontOfSize:18.0f]  constraintToWidth:kScreenWidth-8*2];
-        return height +64;
+        return height +100;
     }
     return 0;
 }
@@ -188,16 +194,17 @@
     ChatCell *cell = [tableView dequeueReusableCellWithIdentifier:@"chatCell"];
     if (!cell)
     {
-        cell = [[ChatCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"chatCell"];
-        cell.backgroundColor = [UIColor colorWithRed:0.922 green:0.925 blue:0.929 alpha:1];
-        if (self.dataSource.count > 0)
-            cell.model = self.dataSource[indexPath.row];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell = [[[NSBundle mainBundle]loadNibNamed:@"ChatCell" owner:nil options:nil] lastObject];
     }
+    cell.backgroundColor = [UIColor colorWithRed:0.922 green:0.925 blue:0.929 alpha:1];
+    if (self.dataSource.count > 0)
+        cell.model = self.dataSource[indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    [cell changAgainLocationWithReset:self.reset];
     return cell;
 }
 
-#pragma FUNCTION
+#pragma mark - FUNCTION
 
 - (void)sendMsgByChatBarView:(NSString *)inputText
 {
@@ -222,6 +229,8 @@
     }
 }
 
+#pragma mark - Action
+
 - (void)cancelTaskAction:(UIBarButtonItem *)bar
 {
     [self cancelDesicListWithTastStatus:[self.currentTask.taskStatus isEqualToString:@"0"] ? @"0" : @"1"];
@@ -232,6 +241,11 @@
     if (self.currentTask == nil)
         return;
     [self cancelTask:sender.selectCauseCode andTaskCode:self.currentTask.taskCode];
+}
+
+- (void)againSengButtonAction:(UIButton *)button
+{
+    [self sengMsgToSerive:self.dataSource[0][@"text"]];
 }
 
 - (void)becomeActive
@@ -392,6 +406,7 @@
             if (self.frameViewController != nil)
                 self.frameViewController.currentTask = self.currentTask;
             [self setUIByPageModelType:pageModel_NOReceive];
+            self.reset = NO;
         }
     }
     else if (task == self.cancelTaskSession)
@@ -465,7 +480,11 @@
 {
     if (task == self.seesionSengTask)
     {
-        
+        self.reset = YES;
+        [self.chatTabelView reloadData];
+        BaseAlertViewController *alert = [BaseAlertViewController initWithHeadTitle:nil andWithDetail:@"您的呼叫请求发送失败，是否重新发送？" andWithCheckTitles:nil andWithButtonTitles:@[@"取消",@"重新发送"] andWithHeadImage:nil];
+        [alert addTarget:self andWithComfirmAction:@selector(againSengButtonAction:) andWithCancelAction:nil];
+        [self presentViewController:alert animated:YES completion:nil];
     }
     else if (task == self.cancelTaskSession)
     {
