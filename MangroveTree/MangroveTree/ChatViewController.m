@@ -204,6 +204,14 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    BaseAlertViewController *alert = [BaseAlertViewController initWithHeadTitle:nil andWithDetail:@"您的呼叫请求发送失败，是否重新发送？" andWithCheckTitles:nil andWithButtonTitles:@[@"取消",@"重新发送"] andWithHeadImage:nil];
+    [alert addTarget:self andWithComfirmAction:@selector(againSengButtonAction:) andWithCancelAction:nil];
+    [self presentViewController:alert animated:YES completion:nil];
+
+}
+
 #pragma mark - FUNCTION
 
 - (void)sendMsgByChatBarView:(NSString *)inputText
