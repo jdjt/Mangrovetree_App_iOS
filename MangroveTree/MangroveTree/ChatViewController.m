@@ -385,7 +385,7 @@
 
 - (void)systemAutoCancelTask
 {
-    [self setUIByPageModelType:pageModel_systemCancel];
+    [self setUIByPageModelType:pageModel_NOTask];
 }
 
 - (void)comfirmTaskYES
