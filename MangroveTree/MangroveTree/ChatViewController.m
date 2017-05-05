@@ -219,6 +219,7 @@
     if (self.dataSource.count > 0)
     {
         [MyAlertView showAlert:@"请耐心等待服务员为您服务"];
+        [self.chatInputView inPutViewresignFirstResponder];
         return;
     }
     if (inputText != nil && ![inputText isEqualToString:@""])

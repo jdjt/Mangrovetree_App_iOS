@@ -30,7 +30,7 @@
                           @"taskContent":message,
                           @"mapInfo":@{@"hotelCode":@"2",
                                        @"floorNo":@"11",
-                                       @"mapNo":@"222",
+                                       @"mapNo":@"110",
                                        @"positionX":@"111",
                                        @"positionY":@"22",
                                        @"positionZ":@"333"}};

@@ -15,6 +15,7 @@
 @property (nonatomic,strong) NSMutableArray * delegateArray;
 @property (nonatomic, assign) NSInteger loginCount;
 @property (nonatomic, strong) MBProgressHUD * hud;
+@property (nonatomic, assign) NSInteger hudCounter;
 
 @end
 
@@ -29,6 +30,7 @@
         manager = [self new];
         manager.delegateArray = [[NSMutableArray alloc]init];
         manager.loginCount = 0;
+        manager.hudCounter = 0;
     });
     
     return manager;
@@ -305,6 +307,7 @@
 
 - (void)startHUD
 {
+    self.hudCounter += 1;
     if (!self.hud)
     {
         self.hud = [[MBProgressHUD alloc] initWithWindow:[AppDelegate sharedDelegate].window];
@@ -316,8 +319,8 @@
 }
 - (void)removeHUD
 {
-    
-    if (self.hud)
+    self.hudCounter -= 1;
+    if (self.hud && self.hudCounter == 0)
     {
         [self.hud hide:YES];
         [self.hud removeFromSuperview];
