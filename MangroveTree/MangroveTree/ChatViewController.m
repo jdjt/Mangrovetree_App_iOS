@@ -233,7 +233,7 @@
         [self.dataSource addObject:dic];
         [self.chatTabelView reloadData];
         self.headView.textStatus = TextStatus_waiting;
-        [self sengMsgToSerive:inputText];
+        [self sengMsgToSerive:inputText andAreaName:are];
         [self.chatInputView inPutViewresignFirstResponder];
     }
 }
@@ -254,7 +254,7 @@
 
 - (void)againSengButtonAction:(UIButton *)button
 {
-    [self sengMsgToSerive:self.dataSource[0][@"text"]];
+    [self sengMsgToSerive:self.dataSource[0][@"text"] andAreaName:self.dataSource[0][@"are"]];
 }
 
 - (void)becomeActive

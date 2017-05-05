@@ -24,13 +24,14 @@
                                                                      withByUser:YES andOldInterfaces:YES];
 }
 
-- (void)sengMsgToSerive:(NSString *)message
+- (void)sengMsgToSerive:(NSString *)message andAreaName:(NSString *)areaName
 {
     NSDictionary *dic = @{@"customerId":self.customBind.customerId,
                           @"taskContent":message,
                           @"mapInfo":@{@"hotelCode":@"2",
                                        @"floorNo":@"11",
                                        @"mapNo":@"110",
+                                       @"areaName":areaName,
                                        @"positionX":@"111",
                                        @"positionY":@"22",
                                        @"positionZ":@"333"}};
