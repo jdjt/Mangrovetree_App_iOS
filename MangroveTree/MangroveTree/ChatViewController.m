@@ -32,6 +32,8 @@
 @property (nonatomic,strong) YWConversation * conversation;
 @property (nonatomic,strong) YWConversationViewController * conversationView;
 
+@property (nonatomic, assign) BOOL isSendTaskFail;
+
 @end
 
 @implementation ChatViewController
@@ -47,6 +49,7 @@
     
     self.pageModelType = pageModel_NOTask;
     self.reset = NO;
+    self.isSendTaskFail = NO;
     [self instantMessaging];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(callTaskPush:) name:NotiCallTaskPushMessage object:nil];
@@ -206,10 +209,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    BaseAlertViewController *alert = [BaseAlertViewController initWithHeadTitle:nil andWithDetail:@"您的呼叫请求发送失败，是否重新发送？" andWithCheckTitles:nil andWithButtonTitles:@[@"取消",@"重新发送"] andWithHeadImage:nil];
-    [alert addTarget:self andWithComfirmAction:@selector(againSengButtonAction:) andWithCancelAction:nil];
-    [self presentViewController:alert animated:YES completion:nil];
-
+    if (self.isSendTaskFail == YES)
+    {
+        BaseAlertViewController *alert = [BaseAlertViewController initWithHeadTitle:nil andWithDetail:@"您的呼叫请求发送失败，是否重新发送？" andWithCheckTitles:nil andWithButtonTitles:@[@"取消",@"重新发送"] andWithHeadImage:nil];
+        [alert addTarget:self andWithComfirmAction:@selector(againSengButtonAction:) andWithCancelAction:nil];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 #pragma mark - FUNCTION
@@ -438,6 +443,7 @@
         if ([dic[@"retOk"] isEqualToString:@"0"])
         {
             // 成功
+            self.isSendTaskFail = NO;
             self.currentTask = [[DataManager defaultInstance] getCallTaskByTaskCode:dic[@"taskCode"]];
             [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:self.currentTask.taskCode];
             if (self.frameViewController != nil)
@@ -518,6 +524,7 @@
     if (task == self.seesionSengTask)
     {
         self.reset = YES;
+        self.isSendTaskFail = YES;
         [self.chatTabelView reloadData];
         BaseAlertViewController *alert = [BaseAlertViewController initWithHeadTitle:nil andWithDetail:@"您的呼叫请求发送失败，是否重新发送？" andWithCheckTitles:nil andWithButtonTitles:@[@"取消",@"重新发送"] andWithHeadImage:nil];
         [alert addTarget:self andWithComfirmAction:@selector(againSengButtonAction:) andWithCancelAction:nil];

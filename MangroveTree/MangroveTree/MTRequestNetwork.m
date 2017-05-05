@@ -101,12 +101,17 @@
         [header setObject:@"no-cache" forKey:@"Cache-Control"];
         [MTNetwork setHeaders:header];
         // 代理方法请求开始
+        BOOL onlyOne = YES;
         for (id<MTRequestNetWorkDelegate> delegate in self.delegateArray)
         {
             if (delegate && [delegate respondsToSelector:@selector(startRequest:)])
             {
-                [delegate startRequest:nil];
-                [self startHUD];
+                if (onlyOne == YES)
+                {
+                    [delegate startRequest:nil];
+                    [self startHUD];
+                    onlyOne = NO;
+                }
             }
         }
         NSURLSessionTask * urltask =  [self POSTWithSuccess:^(id responseObject,NSURLSessionTask * task) {

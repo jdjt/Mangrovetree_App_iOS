@@ -74,7 +74,7 @@
             self.timerLabel.textColor = [UIColor colorWithHexString:@"#484b59"];
             break;
         case TextStatus_waiting:
-            self.labelText.text = @"您的服务订单请求已发送，请等待接单后再发送更多内容";
+            self.labelText.text = @"您的呼叫请求已发送，请等待接单";
             self.timerLabel.text = @"等待时长：00:00:00";
             self.timerLabel.textColor = [UIColor colorWithHexString:@"#ed8256"];
             self.labelText.textColor = [UIColor colorWithHexString:@"#484b59"];
