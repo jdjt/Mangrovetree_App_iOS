@@ -2,7 +2,7 @@
 //  DBCallTask+CoreDataProperties.h
 //  MangroveTree
 //
-//  Created by 伊舞寻风 on 2017/4/28.
+//  Created by 伊舞寻风 on 2017/5/6.
 //  Copyright © 2017年 luoyu. All rights reserved.
 //
 
@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *finishTime;
 @property (nullable, nonatomic, copy) NSString *hotelCode;
 @property (nullable, nonatomic, copy) NSString *nowDate;
+@property (nullable, nonatomic, copy) NSString *produceTime;
 @property (nullable, nonatomic, copy) NSString *scoreMod;
 @property (nullable, nonatomic, copy) NSString *scoreTime;
 @property (nullable, nonatomic, copy) NSString *scoreVal;
@@ -41,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *waiterId;
 @property (nullable, nonatomic, copy) NSString *waiteTime;
 @property (nullable, nonatomic, copy) NSString *wImAccount;
-@property (nullable, nonatomic, copy) NSString *produceTime;
+@property (nullable, nonatomic, copy) NSString *waiterName;
 @property (nullable, nonatomic, retain) DBUserLogin *belongUser;
 
 @end

@@ -49,7 +49,7 @@
     [self.timerLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.labelText withOffset:5];
     
     self.timerLabel.text = @"谢谢合作，祝您入住愉快！";
-    self.timerLabel.font = [UIFont systemFontOfSize:17.0f];
+    self.timerLabel.font = [UIFont fontWithName:@"Courier New" size:17.0f];
     self.timerLabel.textColor = [UIColor colorWithHexString:@"#484b59"];
     
 
@@ -75,13 +75,13 @@
             break;
         case TextStatus_waiting:
             self.labelText.text = @"您的呼叫请求已发送，请等待接单";
-            self.timerLabel.text = @"等待时长：00:00:00";
+            self.timerLabel.text = @"等待时长 00:00:00";
             self.timerLabel.textColor = [UIColor colorWithHexString:@"#ed8256"];
             self.labelText.textColor = [UIColor colorWithHexString:@"#484b59"];
             break;
         case TextStatus_proceed:
             self.labelText.text = [NSString stringWithFormat:@"服务员%@已接单，您可以语音聊天啦！",self.waiterId.length > 0 ? self.waiterId : @""];
-            self.timerLabel.text = @"服务时长：00:00:00";
+            self.timerLabel.text = @"服务时长 00:00:00";
             self.timerLabel.textColor = [UIColor colorWithHexString:@"#ed8256"];
             self.labelText.textColor = [UIColor colorWithHexString:@"#484b59"];
             break;
@@ -93,6 +93,21 @@
 - (void)startTaskTimerByStartTime:(NSInteger)time
 {
     self.startTime = time;
+    NSInteger s = self.startTime % 60;
+    NSInteger m;
+    NSInteger h;
+    if (self.startTime / 60 == 0)
+    {
+        m = 0;
+        h = 0;
+    }
+    else
+    {
+        m = self.startTime / 60 % 60;
+        h = self.startTime / 60 / 60;
+    }
+    NSString * timeStr = [NSString stringWithFormat:@"%02ld:%02ld:%02ld",h,m,s];
+    self.timerLabel.text = [NSString stringWithFormat:@"%@%@",self.textStatus == TextStatus_waiting ? @"等待时长 " : @"服务时长 ",timeStr];
     if (!self.timer)
     {
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(myLog:) userInfo:nil repeats:YES];
@@ -115,7 +130,7 @@
         h = self.startTime / 60 / 60;
     }
     NSString * time = [NSString stringWithFormat:@"%02ld:%02ld:%02ld",h,m,s];
-    self.timerLabel.text = [NSString stringWithFormat:@"%@%@",self.textStatus == TextStatus_waiting ? @"等待时长：" : @"服务时长：",time];
+    self.timerLabel.text = [NSString stringWithFormat:@"%@%@",self.textStatus == TextStatus_waiting ? @"等待时长 " : @"服务时长 ",time];
 }
 - (void)stopTimer
 {

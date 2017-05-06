@@ -48,6 +48,7 @@
         <attribute name="waiterDeviceId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="waiterEndTime" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="waiterId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="waiterName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="waiteTime" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="wImAccount" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="belongUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DBUserLogin" inverseName="hasTask" inverseEntity="DBUserLogin" syncable="YES"/>
@@ -80,7 +81,7 @@
     </entity>
     <elements>
         <element name="DBBindCustom" positionX="-252" positionY="-90" width="128" height="343"/>
-        <element name="DBCallTask" positionX="-243" positionY="284" width="128" height="463"/>
+        <element name="DBCallTask" positionX="-243" positionY="284" width="128" height="480"/>
         <element name="DBParameter" positionX="250" positionY="-36" width="128" height="105"/>
         <element name="DBUserLogin" positionX="-450" positionY="42" width="128" height="313"/>
     </elements>

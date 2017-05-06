@@ -2,7 +2,7 @@
 //  DBCallTask+CoreDataProperties.m
 //  MangroveTree
 //
-//  Created by 伊舞寻风 on 2017/4/28.
+//  Created by 伊舞寻风 on 2017/5/6.
 //  Copyright © 2017年 luoyu. All rights reserved.
 //
 
@@ -28,6 +28,7 @@
 @dynamic finishTime;
 @dynamic hotelCode;
 @dynamic nowDate;
+@dynamic produceTime;
 @dynamic scoreMod;
 @dynamic scoreTime;
 @dynamic scoreVal;
@@ -40,7 +41,7 @@
 @dynamic waiterId;
 @dynamic waiteTime;
 @dynamic wImAccount;
-@dynamic produceTime;
+@dynamic waiterName;
 @dynamic belongUser;
 
 @end

@@ -54,7 +54,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(callTaskPush:) name:NotiCallTaskPushMessage object:nil];
     
-    self.title = @"呼叫服务";
+    self.title = @"呼叫管家";
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -117,7 +117,7 @@
 {
     if (!_cancelBarItem)
     {
-        _cancelBarItem = [[UIBarButtonItem alloc] initWithTitle:@"取消任务" style:UIBarButtonItemStylePlain target:self action:@selector(cancelTaskAction:)];
+        _cancelBarItem = [[UIBarButtonItem alloc] initWithTitle:@"取消呼叫" style:UIBarButtonItemStylePlain target:self action:@selector(cancelTaskAction:)];
     }
     return _cancelBarItem;
 }
@@ -247,7 +247,7 @@
 
 - (void)cancelTaskAction:(UIBarButtonItem *)bar
 {
-    [self cancelDesicListWithTastStatus:[self.currentTask.taskStatus isEqualToString:@"0"] ? @"0" : @"1"];
+    [self cancelDesicListWithTastStatus:[self.currentTask.taskStatus isEqualToString:@"0"] ? @"1" : @"2"];
 }
 
 - (void)chooseCancelReason:(BaseAlertViewController *)sender
@@ -361,7 +361,7 @@
         case pageModel_Complete:
         {
             self.navigationItem.rightBarButtonItem = self.cancelBarItem;
-            BaseAlertViewController * alert = [BaseAlertViewController alertWithAlertType:AlertType_callTaskComplete andWithWaiterId:self.currentTask.waiterId];
+            BaseAlertViewController * alert = [BaseAlertViewController alertWithAlertType:AlertType_callTaskComplete andWithWaiterId:self.currentTask.waiterName];
             [alert addTarget:self andWithComfirmAction:@selector(comfirmTaskYES) andWithCancelAction:@selector(comfirmTaskNO)];
             [self presentViewController:alert animated:YES completion:nil];
         }
@@ -372,7 +372,10 @@
             if ([isFirstReceive isEqualToString:@"1"] == YES)
             {
                 [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:self.currentTask.taskCode];
-                BaseAlertViewController * alert = [BaseAlertViewController alertWithAlertType:AlertType_waiterOrderReceiving andWithWaiterId:self.currentTask.waiterId];
+                YWPerson * person = [[YWPerson alloc]initWithPersonId:self.currentTask.wImAccount appKey:@"23759225"];
+                self.conversation = [YWP2PConversation fetchConversationByPerson:person creatIfNotExist:YES baseContext: [SPKitExample sharedInstance].ywIMKit.IMCore];
+                [self.conversation asyncSendMessageBody:[[YWMessageBodyText alloc] initWithMessageText:self.currentTask.taskContent] controlParameters:nil progress:nil completion:nil];
+                BaseAlertViewController * alert = [BaseAlertViewController alertWithAlertType:AlertType_waiterOrderReceiving andWithWaiterId:self.currentTask.waiterName];
                 [alert addTarget:self andWithComfirmAction:@selector(waiterReceiveTask)];
                 [self presentViewController:alert animated:YES completion:nil];
             }
@@ -393,7 +396,7 @@
         }
         case pageModel_systemCancel:
         {
-            BaseAlertViewController * alert = [BaseAlertViewController alertWithAlertType:AlertType_systemAutoCancelTask andWithWaiterId:self.currentTask.waiterId];
+            BaseAlertViewController * alert = [BaseAlertViewController alertWithAlertType:AlertType_systemAutoCancelTask andWithWaiterId:self.currentTask.waiterName];
             [alert addTarget:self andWithComfirmAction:@selector(systemAutoCancelTask)];
             [self presentViewController:alert animated:YES completion:nil];
         }
@@ -466,7 +469,7 @@
     }
     else if (task == self.cancelListSession)
     {
-        BaseAlertViewController * alert = [BaseAlertViewController alertWithAlertType:AlertType_cancelTaskReason andWithCheckTitles:datas andWithWaiterId:self.currentTask.waiterId];
+        BaseAlertViewController * alert = [BaseAlertViewController alertWithAlertType:AlertType_cancelTaskReason andWithCheckTitles:datas andWithWaiterId:self.currentTask.waiterName];
         [alert addTarget:self andWithComfirmAction:@selector(chooseCancelReason:) andWithCancelAction:nil];
         [self presentViewController:alert animated:YES completion:nil];
     }
