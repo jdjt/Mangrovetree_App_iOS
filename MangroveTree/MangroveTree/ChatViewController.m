@@ -371,6 +371,7 @@
             NSString * isFirstReceive = [[NSUserDefaults standardUserDefaults] objectForKey:self.currentTask.taskCode];
             if ([isFirstReceive isEqualToString:@"1"] == YES)
             {
+                [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:self.currentTask.taskCode];
                 BaseAlertViewController * alert = [BaseAlertViewController alertWithAlertType:AlertType_waiterOrderReceiving andWithWaiterId:self.currentTask.waiterId];
                 [alert addTarget:self andWithComfirmAction:@selector(waiterReceiveTask)];
                 [self presentViewController:alert animated:YES completion:nil];

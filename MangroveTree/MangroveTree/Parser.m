@@ -311,10 +311,12 @@
     NSDictionary * dic = (NSDictionary *)dict;
     
     DBUserLogin * user = [[DataManager defaultInstance] findUserLogInByCode:@"1"];
-    DBCallTask * task = [[DataManager defaultInstance] getCallTaskByTaskCode:dic[@"taskCode"]];
-    [user addHasTaskObject:task];;
+    DBBindCustom * bind = [[DataManager defaultInstance] getCustomerBingRoom];
+    bind.customerId = dic[@"customerId"];
+    bind.imAccount = dic[@"imAccount"];
+    user.hasCustomBind = bind;
     
-    [array addObject:task];
+    [array addObject:bind];
     
     return array;
 }
