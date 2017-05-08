@@ -291,6 +291,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
                 break;
             }
         }
+        [self changNavViewStyleByLayerMode:NAVIVARTYPE_OUT];
         [self.mapVC.navigationController popViewControllerAnimated:YES];
 	}
 }

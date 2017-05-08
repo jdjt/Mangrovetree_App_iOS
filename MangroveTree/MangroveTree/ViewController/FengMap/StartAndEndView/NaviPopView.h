@@ -37,7 +37,7 @@ typedef void(^SwitchStartAndEnd)();
 
 - (void)setTimeByLength:(double)length;
 
-- (void)setupInfoByModel:(FMKExternalModel *)model;
+- (void)setupInfoByModel:(NSString *)fid;
 - (void)setupModelInfoByNodel:(QueryDBModel *)model;
 - (void)setupBottomView;
 

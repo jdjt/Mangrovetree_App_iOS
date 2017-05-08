@@ -121,17 +121,17 @@
         [self.delegate enterIndoorMapBtnClick:_indoorMapID];
     }
 }
-- (void)setupInfoByModel:(FMKExternalModel *)model
+- (void)setupInfoByModel:(NSString *)fid
 {
     _enableEnterIndoor = NO;
-    _model = model;
+//    _modelFid = fid;
     if (!_indoorMapInfos) {
         _indoorMapInfos = [ParserJsondata  parserIndoorMap];
     }
-    _modelFid = model.fid;
+    _modelFid = fid;
     //找到对应的室内地图ID
     for (IndoorMapInfo * info in _indoorMapInfos) {
-        if ([model.fid isEqualToString:info.model_fid]) {
+        if ([fid isEqualToString:info.model_fid]) {
             _enableEnterIndoor = YES;
             _indoorMapID = info.map_mid;
         }
@@ -140,32 +140,25 @@
     //设置能否进入室内的布局
     [self setupBottomView];
     
-    QueryDBModel * dbModel = [[DBSearchTool shareDBSearchTool] queryModelByFid:model.fid];
+    QueryDBModel * dbModel = [[DBSearchTool shareDBSearchTool] queryModelByFid:fid];
     //设置模型信息弹框
-    [self setupModelInfoByNodel:dbModel externalModel:model];
+    [self setupModelInfoNameByNodel:dbModel];
     
 }
 
-- (void)setupModelInfoByNodel:(QueryDBModel *)model externalModel:(FMKExternalModel *)eModel;
+- (void)setupModelInfoNameByNodel:(QueryDBModel *)model
 {
     NSString *name = @"暂无名称";
 
-    if ([eModel.name isEqualToString:@""])
+    if ([model.name isEqualToString:@""])
     {
        name = @"暂无名称";
     }
     else
     {
-        name = eModel.name;
+        name = model.name;
     }
     
-    if (!model.address)
-    {
-    }
-    else
-    {
-    }
-
 }
 - (void)setupModelInfoByNodel:(QueryDBModel *)model
 {

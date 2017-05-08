@@ -319,6 +319,7 @@ extern NSString* FMModelSelected;
     FMKExternalModelLayer * modelLayer = [self.fengMapView.map getExternalModelLayerWithGroupID:@(model.gid).stringValue];
     FMKExternalModel * myModel = [modelLayer queryExternalModelByFid:model.fid];
     [self didSelectedEnd:myModel];
+//    [self didSelectedEndByModel:@{}];
 }
 //接收停止导航消息
 - (void)receiveStopNavi:(NSNotification *)noti
@@ -527,14 +528,17 @@ extern NSString* FMModelSelected;
             [self setEnableLocationBtnFrameByView:nil];
             return;
         }
+        [self didSelectedEnd:model];
+
     }
     if ([node isKindOfClass:[FMKLabel class]])
     {
-        if (!_nodeAssociation) [self nodeAssociation];
-        model = [_nodeAssociation externalModelByLabel:(FMKLabel *)node];
+               NSLog(@"%@",((FMKLabel *)node).name);
+        [self didSelectedEndByLabel:(FMKLabel *)node];
     }
-#warning 室外地图id  都是79981  ，此处应该记录当前的点击位置的数据，满足导航入参
-    [self didSelectedEnd:model];
+    
+    
+    
     NSLog(@"%ld %f  %f",model.pointer,model.centerPoint.x,model.centerPoint.y);
     NSMutableDictionary * mapTestDic = [SaveNavigationData shareInstance].mapTestDic;
     [mapTestDic setValue:@"79981" forKey:@"fid"];
@@ -1113,35 +1117,92 @@ extern NSString* FMModelSelected;
 
 #pragma mark - MyMethod
 
+- (void)didSelectedEndByLabel:(FMKLabel *)label
+{
+    QueryDBModel *model = nil;
+    NSArray *result = [[DBSearchTool shareDBSearchTool] queryByKeyWord:label.name];
+    for (QueryDBModel *m in result)
+    {
+        if ([m.name isEqualToString:label.name])
+        {
+            model = m;
+            break;
+        }
+    }
+    
+    if (model)
+    {
+        [self showActivityInfor:model];
+        NSLog(@"%f %f",model.x,model.y);
+        FMKMapStorey mapStorey = 1;
+        FMKMapPoint mapPoint = FMKMapPointMake(model.x, model.y);
+        FMKGeoCoord geoCoord = FMKGeoCoordMake(mapStorey, mapPoint);
+        [self goHere:geoCoord];
+        if (!_nodeAssociation) [self nodeAssociation];
+        [self didSelectedHightlight:[_nodeAssociation externalModelByLabel:label]];
+    }
+}
+
+- (void)showActivityInfor:(QueryDBModel *)model
+{
+    if (model != nil)
+    {
+        [self.naviPopView show];
+        
+        [self.naviPopView setupInfoByModel:model.fid];
+        
+        if (model.activityCode != NULL && ![model.activityCode isEqualToString:@""])
+        {
+            [self.inforView showByView:self.naviPopView];
+            [self.inforView requsrtActivityInforByActivityCode:model.activityCode];
+        }else
+        {
+            [self.inforView hide];
+        }
+    }
+}
 - (void)didSelectedEnd:(FMKExternalModel *)model
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:NotiCloseTopAlert object:nil];
-    [self.naviPopView show];
     NSLog(@"%@ %@",model.fid,model.name);
-    NSString *name = @"";
-    if (self.queryModel.name == nil||[self.queryModel.name isEqualToString:@""])
-        name = model.name;
-    else
-        name = self.queryModel.name;
-    self.queryModel = nil;
-    QueryDBModel *models = [[DBSearchTool shareDBSearchTool] queryModelByFid:model.fid andName:name];
-    
-    [self.naviPopView setupInfoByModel:model];
-    
-    if (models.activityCode != NULL && ![models.activityCode isEqualToString:@""])
+    QueryDBModel *models = nil;
+    NSArray *result = [[DBSearchTool shareDBSearchTool] queryByKeyWord:model.name];
+    for (QueryDBModel *m in result)
     {
-        [self.inforView showByView:self.naviPopView];
-        [self.inforView requsrtActivityInforByActivityCode:models.activityCode];
-    }else
-    {
-        [self.inforView hide];
+        if ([model.fid isEqualToString:m.fid])
+        {
+            models = m;
+            break;
+        }
     }
     
-    //	[self.naviPopView.endPointBtn setTitle:model.name forState:UIControlStateNormal];
-    //	[self.modelInfoPopView show];
+    if (model != nil)
+    {
+        [self.naviPopView show];
+        
+        [self.naviPopView setupInfoByModel:model.fid];
+        
+        if (models.activityCode != NULL && ![models.activityCode isEqualToString:@""])
+        {
+            [self.inforView showByView:self.naviPopView];
+            [self.inforView requsrtActivityInforByActivityCode:models.activityCode];
+        }else
+        {
+            [self.inforView hide];
+        }
+        
+        //	[self.naviPopView.endPointBtn setTitle:model.name forState:UIControlStateNormal];
+        //	[self.modelInfoPopView show];
+        
+        //	[self setEnableLocationBtnFrameByView:self.modelInfoPopView];
+        [self goHere:model.mapCoord];
+        [self didSelectedHightlight:model];
+    }
+
     
-    //	[self setEnableLocationBtnFrameByView:self.modelInfoPopView];
-    [self goHere:model.mapCoord];
+}
+- (void)didSelectedHightlight:(FMKExternalModel *)model
+{
     if (_categoryTag != -1) {
         if (!model.highlight) {
             if (_highlightModel) {
@@ -1164,6 +1225,7 @@ extern NSString* FMModelSelected;
         }
         [self highlightActivityByModel:model];
     }
+
 }
 - (void)highlightActivityByModel:(FMKExternalModel * )model
 {

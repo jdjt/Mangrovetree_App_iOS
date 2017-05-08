@@ -164,7 +164,11 @@ static DBSearchTool * mDbSearcTool = nil;
 //模糊查询
 - (NSArray *)queryByKeyWord:(NSString *)keyWord
 {
+    
 	NSMutableArray * result = [NSMutableArray array];
+    if (keyWord == nil || [keyWord isEqualToString:@""])
+        return result;
+    
 	if (![mDbSearcTool.db open])
 	{
 		NSLog(@"数据库打开失败");
