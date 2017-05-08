@@ -599,6 +599,8 @@ NSString* const FMModelSelected = @"FMModelSelected";
                 return;
             UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:nil action:nil];
             self.navigationItem.backBarButtonItem = barButtonItem;
+            [[DataManager defaultInstance] cleanCoreDatabyEntityName:@"DBBindCustom"];
+            [[DataManager defaultInstance] saveContext];
             [self performSegueWithIdentifier:@"showBind" sender:nil];
         }
     }

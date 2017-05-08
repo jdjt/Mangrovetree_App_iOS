@@ -52,7 +52,7 @@
     else
     {
         //  初始化失败
-        [MyAlertView showAlert:@"呼叫服务组件初始化失败，如需使用呼叫服务请重新启动应用程序"];
+        [MyAlertView showAlert:@"呼叫管家组件初始化失败，如需使用呼叫管家请重新启动应用程序"];
     }
 }
 

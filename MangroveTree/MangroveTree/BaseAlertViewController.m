@@ -76,7 +76,7 @@
     {
         case AlertType_systemAutoCancelTask:
         {
-            alert = [BaseAlertViewController initWithHeadTitle:nil andWithDetail:@"服务员忙，请稍后再发" andWithCheckTitles:checkTitles andWithButtonTitles:@[@"确 认"] andWithHeadImage:nil];
+            alert = [BaseAlertViewController initWithHeadTitle:nil andWithDetail:@"非常抱歉！由于您附近的服务员忙碌，您的呼叫管家请求超时自动取消,请稍后再试。" andWithCheckTitles:checkTitles andWithButtonTitles:@[@"确 认"] andWithHeadImage:nil];
         }
             break;
         case AlertType_callTaskComplete:
@@ -84,12 +84,12 @@
             NSString * head = @"服务员：";
             NSMutableAttributedString * title = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@",head,waiterId]];
             [title addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:255 / 255.0 green:128 / 255.0 blue:75 / 255.0 alpha:1] range:NSMakeRange(head.length,waiterId.length)];
-            alert = [BaseAlertViewController initWithHeadTitle:title andWithDetail:@"您的呼叫服务已完成，请您确认，谢谢配合！" andWithCheckTitles:checkTitles andWithButtonTitles:@[@"未完成",@"已完成"] andWithHeadImage:nil];
+            alert = [BaseAlertViewController initWithHeadTitle:title andWithDetail:@"您的呼叫管家已完成，请您确认，谢谢配合！" andWithCheckTitles:checkTitles andWithButtonTitles:@[@"未完成",@"已完成"] andWithHeadImage:nil];
         }
             break;
         case AlertType_cancelTaskReason:
         {
-            alert = [BaseAlertViewController initWithHeadTitle:[[NSMutableAttributedString alloc]initWithString:@"选择取消呼叫服务原因："] andWithDetail:nil andWithCheckTitles:checkTitles andWithButtonTitles:@[@"呼叫继续",@"放弃呼叫"] andWithHeadImage:nil];
+            alert = [BaseAlertViewController initWithHeadTitle:[[NSMutableAttributedString alloc]initWithString:@"选择取消呼叫管家原因："] andWithDetail:nil andWithCheckTitles:checkTitles andWithButtonTitles:@[@"呼叫继续",@"放弃呼叫"] andWithHeadImage:nil];
             [alert setTitleTextAlignment:NSTextAlignmentLeft];
         }
             break;

@@ -67,9 +67,9 @@
 #pragma mark - NetWork
 - (IBAction)bingRoomAction:(id)sender
 {
-    if (self.roomCode.text.length <= 0 || self.idNumber.text.length < 4)
+    if (self.roomCode.text.length <= 0 || self.idNumber.text.length <= 0)
     {
-        [MyAlertView showAlert:@"请输入正确的房间号与省份证号后四位"];
+        [MyAlertView showAlert:@"房间号或入住人证件号不能为空"];
         return;
     }
     [self bingRoomNetWorking];

@@ -32,6 +32,8 @@
 @property (nonatomic,strong) YWConversation * conversation;
 @property (nonatomic,strong) YWConversationViewController * conversationView;
 
+@property (nonatomic, assign) BOOL isSendTaskFail;
+
 @end
 
 @implementation ChatViewController
@@ -47,11 +49,12 @@
     
     self.pageModelType = pageModel_NOTask;
     self.reset = NO;
+    self.isSendTaskFail = NO;
     [self instantMessaging];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(callTaskPush:) name:NotiCallTaskPushMessage object:nil];
     
-    self.title = @"呼叫服务";
+    self.title = @"呼叫管家";
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -114,7 +117,7 @@
 {
     if (!_cancelBarItem)
     {
-        _cancelBarItem = [[UIBarButtonItem alloc] initWithTitle:@"取消任务" style:UIBarButtonItemStylePlain target:self action:@selector(cancelTaskAction:)];
+        _cancelBarItem = [[UIBarButtonItem alloc] initWithTitle:@"取消呼叫" style:UIBarButtonItemStylePlain target:self action:@selector(cancelTaskAction:)];
     }
     return _cancelBarItem;
 }
@@ -206,10 +209,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    BaseAlertViewController *alert = [BaseAlertViewController initWithHeadTitle:nil andWithDetail:@"您的呼叫请求发送失败，是否重新发送？" andWithCheckTitles:nil andWithButtonTitles:@[@"取消",@"重新发送"] andWithHeadImage:nil];
-    [alert addTarget:self andWithComfirmAction:@selector(againSengButtonAction:) andWithCancelAction:nil];
-    [self presentViewController:alert animated:YES completion:nil];
-
+    if (self.isSendTaskFail == YES)
+    {
+        BaseAlertViewController *alert = [BaseAlertViewController initWithHeadTitle:nil andWithDetail:@"您的呼叫请求发送失败，是否重新发送？" andWithCheckTitles:nil andWithButtonTitles:@[@"取消",@"重新发送"] andWithHeadImage:nil];
+        [alert addTarget:self andWithComfirmAction:@selector(againSengButtonAction:) andWithCancelAction:nil];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 #pragma mark - FUNCTION
@@ -219,6 +224,7 @@
     if (self.dataSource.count > 0)
     {
         [MyAlertView showAlert:@"请耐心等待服务员为您服务"];
+        [self.chatInputView inPutViewresignFirstResponder];
         return;
     }
     if (inputText != nil && ![inputText isEqualToString:@""])
@@ -232,7 +238,7 @@
         [self.dataSource addObject:dic];
         [self.chatTabelView reloadData];
         self.headView.textStatus = TextStatus_waiting;
-        [self sengMsgToSerive:inputText];
+        [self sengMsgToSerive:inputText andAreaName:are];
         [self.chatInputView inPutViewresignFirstResponder];
     }
 }
@@ -241,7 +247,7 @@
 
 - (void)cancelTaskAction:(UIBarButtonItem *)bar
 {
-    [self cancelDesicListWithTastStatus:[self.currentTask.taskStatus isEqualToString:@"0"] ? @"0" : @"1"];
+    [self cancelDesicListWithTastStatus:[self.currentTask.taskStatus isEqualToString:@"0"] ? @"1" : @"2"];
 }
 
 - (void)chooseCancelReason:(BaseAlertViewController *)sender
@@ -253,7 +259,7 @@
 
 - (void)againSengButtonAction:(UIButton *)button
 {
-    [self sengMsgToSerive:self.dataSource[0][@"text"]];
+    [self sengMsgToSerive:self.dataSource[0][@"text"] andAreaName:self.dataSource[0][@"are"]];
 }
 
 - (void)becomeActive
@@ -355,7 +361,7 @@
         case pageModel_Complete:
         {
             self.navigationItem.rightBarButtonItem = self.cancelBarItem;
-            BaseAlertViewController * alert = [BaseAlertViewController alertWithAlertType:AlertType_callTaskComplete andWithWaiterId:self.currentTask.waiterId];
+            BaseAlertViewController * alert = [BaseAlertViewController alertWithAlertType:AlertType_callTaskComplete andWithWaiterId:self.currentTask.waiterName];
             [alert addTarget:self andWithComfirmAction:@selector(comfirmTaskYES) andWithCancelAction:@selector(comfirmTaskNO)];
             [self presentViewController:alert animated:YES completion:nil];
         }
@@ -365,7 +371,11 @@
             NSString * isFirstReceive = [[NSUserDefaults standardUserDefaults] objectForKey:self.currentTask.taskCode];
             if ([isFirstReceive isEqualToString:@"1"] == YES)
             {
-                BaseAlertViewController * alert = [BaseAlertViewController alertWithAlertType:AlertType_waiterOrderReceiving andWithWaiterId:self.currentTask.waiterId];
+                [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:self.currentTask.taskCode];
+                YWPerson * person = [[YWPerson alloc]initWithPersonId:self.currentTask.wImAccount appKey:@"23759225"];
+                self.conversation = [YWP2PConversation fetchConversationByPerson:person creatIfNotExist:YES baseContext: [SPKitExample sharedInstance].ywIMKit.IMCore];
+                [self.conversation asyncSendMessageBody:[[YWMessageBodyText alloc] initWithMessageText:self.currentTask.taskContent] controlParameters:nil progress:nil completion:nil];
+                BaseAlertViewController * alert = [BaseAlertViewController alertWithAlertType:AlertType_waiterOrderReceiving andWithWaiterId:self.currentTask.waiterName];
                 [alert addTarget:self andWithComfirmAction:@selector(waiterReceiveTask)];
                 [self presentViewController:alert animated:YES completion:nil];
             }
@@ -386,7 +396,7 @@
         }
         case pageModel_systemCancel:
         {
-            BaseAlertViewController * alert = [BaseAlertViewController alertWithAlertType:AlertType_systemAutoCancelTask andWithWaiterId:self.currentTask.waiterId];
+            BaseAlertViewController * alert = [BaseAlertViewController alertWithAlertType:AlertType_systemAutoCancelTask andWithWaiterId:self.currentTask.waiterName];
             [alert addTarget:self andWithComfirmAction:@selector(systemAutoCancelTask)];
             [self presentViewController:alert animated:YES completion:nil];
         }
@@ -437,6 +447,7 @@
         if ([dic[@"retOk"] isEqualToString:@"0"])
         {
             // 成功
+            self.isSendTaskFail = NO;
             self.currentTask = [[DataManager defaultInstance] getCallTaskByTaskCode:dic[@"taskCode"]];
             [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:self.currentTask.taskCode];
             if (self.frameViewController != nil)
@@ -458,7 +469,7 @@
     }
     else if (task == self.cancelListSession)
     {
-        BaseAlertViewController * alert = [BaseAlertViewController alertWithAlertType:AlertType_cancelTaskReason andWithCheckTitles:datas andWithWaiterId:self.currentTask.waiterId];
+        BaseAlertViewController * alert = [BaseAlertViewController alertWithAlertType:AlertType_cancelTaskReason andWithCheckTitles:datas andWithWaiterId:self.currentTask.waiterName];
         [alert addTarget:self andWithComfirmAction:@selector(chooseCancelReason:) andWithCancelAction:nil];
         [self presentViewController:alert animated:YES completion:nil];
     }
@@ -517,6 +528,7 @@
     if (task == self.seesionSengTask)
     {
         self.reset = YES;
+        self.isSendTaskFail = YES;
         [self.chatTabelView reloadData];
         BaseAlertViewController *alert = [BaseAlertViewController initWithHeadTitle:nil andWithDetail:@"您的呼叫请求发送失败，是否重新发送？" andWithCheckTitles:nil andWithButtonTitles:@[@"取消",@"重新发送"] andWithHeadImage:nil];
         [alert addTarget:self andWithComfirmAction:@selector(againSengButtonAction:) andWithCancelAction:nil];

@@ -34,6 +34,7 @@
  */
 - (DBBindCustom *)getCustomerBingRoom;
 
+
 /**
  * @abstract 获取指定任务信息
  */

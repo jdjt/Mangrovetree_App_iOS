@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIView *gradeView;
 @property (copy, nonatomic) BlockClick clickBlock;
 @property (assign, nonatomic) NSInteger score;
+@property (nonatomic, strong) DBCallTask * currentTask;
 
 @end
 
@@ -29,6 +30,7 @@
     {
         viewController.transitioningDelegate = viewController;
         viewController.modalPresentationStyle = UIModalPresentationCustom;
+        viewController.currentTask = gradeInfor;
 //            viewController.waiterNumber.text = gradeInfor[@"waiterNumber"];
 //            viewController.tasktime.text = gradeInfor[@"tasktime"]
         viewController.clickBlock = click;
@@ -86,6 +88,16 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
     self.score = 0;
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.waiterNumber.text = self.currentTask.waiterName;
+    NSInteger time = self.currentTask.finishTime.integerValue - self.currentTask.acceptTime.integerValue;
+    NSInteger s = time % 60;
+    NSInteger m = (time / 60) == 0 ? 0 : (time / 60 % 60);
+    NSInteger h = time / 3600;
+    self.tasktime.text = [NSString stringWithFormat:@"%02ld%02ld%02ld",h,m,s];
 }
 
 - (void)didReceiveMemoryWarning
