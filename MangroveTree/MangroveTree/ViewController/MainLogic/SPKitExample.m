@@ -512,7 +512,7 @@ UIAlertViewDelegate>
 - (void)exampleEnableReadFlag
 {
     // 开启单聊已读未读显示开关，如果应用场景不需要，可以关闭
-    [[self.ywIMKit.IMCore getConversationService] setEnableMessageReadFlag:YES];
+    [[self.ywIMKit.IMCore getConversationService] setEnableMessageReadFlag:NO];
 }
 
 #pragma mark - 聊天页面自定义

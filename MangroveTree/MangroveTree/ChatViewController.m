@@ -29,8 +29,9 @@
 @property (nonatomic, assign) BOOL reset;
 @property (nonatomic, strong) NSString * comfirmStatus;
 @property (nonatomic, strong) FMZoneManager *myZoneManager;
-@property (nonatomic,strong) YWConversation * conversation;
-@property (nonatomic,strong) YWConversationViewController * conversationView;
+@property (nonatomic, strong) YWConversation * conversation;
+@property (nonatomic, strong) YWConversationViewController * conversationView;
+@property (nonatomic, strong) BaseAlertViewController * alert;
 
 @property (nonatomic, assign) BOOL isSendTaskFail;
 
@@ -67,7 +68,6 @@
 - (void)viewWillDisAppear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [[MTRequestNetwork defaultManager] removeDelegate:self];
 }
 
 #pragma mark - Getter Method
@@ -211,9 +211,9 @@
 {
     if (self.isSendTaskFail == YES)
     {
-        BaseAlertViewController *alert = [BaseAlertViewController initWithHeadTitle:nil andWithDetail:@"您的呼叫请求发送失败，是否重新发送？" andWithCheckTitles:nil andWithButtonTitles:@[@"取消",@"重新发送"] andWithHeadImage:nil];
-        [alert addTarget:self andWithComfirmAction:@selector(againSengButtonAction:) andWithCancelAction:nil];
-        [self presentViewController:alert animated:YES completion:nil];
+        self.alert = [BaseAlertViewController initWithHeadTitle:nil andWithDetail:@"您的呼叫请求发送失败，是否重新发送？" andWithCheckTitles:nil andWithButtonTitles:@[@"取消",@"重新发送"] andWithHeadImage:nil];
+        [self.alert addTarget:self andWithComfirmAction:@selector(againSengButtonAction:) andWithCancelAction:nil];
+        [self presentViewController:self.alert animated:YES completion:nil];
     }
 }
 
@@ -361,9 +361,11 @@
         case pageModel_Complete:
         {
             self.navigationItem.rightBarButtonItem = self.cancelBarItem;
-            BaseAlertViewController * alert = [BaseAlertViewController alertWithAlertType:AlertType_callTaskComplete andWithWaiterId:self.currentTask.waiterName];
-            [alert addTarget:self andWithComfirmAction:@selector(comfirmTaskYES) andWithCancelAction:@selector(comfirmTaskNO)];
-            [self presentViewController:alert animated:YES completion:nil];
+            if (self.alert != nil)
+                [self.alert dismissViewControllerAnimated:YES completion:nil];
+            self.alert = [BaseAlertViewController alertWithAlertType:AlertType_callTaskComplete andWithWaiterId:self.currentTask.waiterName];
+            [self.alert addTarget:self andWithComfirmAction:@selector(comfirmTaskYES) andWithCancelAction:@selector(comfirmTaskNO)];
+            [self presentViewController:self.alert animated:YES completion:nil];
         }
             break;
         case pageModel_Receive:
@@ -375,9 +377,9 @@
                 YWPerson * person = [[YWPerson alloc]initWithPersonId:self.currentTask.wImAccount appKey:@"23759225"];
                 self.conversation = [YWP2PConversation fetchConversationByPerson:person creatIfNotExist:YES baseContext: [SPKitExample sharedInstance].ywIMKit.IMCore];
                 [self.conversation asyncSendMessageBody:[[YWMessageBodyText alloc] initWithMessageText:self.currentTask.taskContent] controlParameters:nil progress:nil completion:nil];
-                BaseAlertViewController * alert = [BaseAlertViewController alertWithAlertType:AlertType_waiterOrderReceiving andWithWaiterId:self.currentTask.waiterName];
-                [alert addTarget:self andWithComfirmAction:@selector(waiterReceiveTask)];
-                [self presentViewController:alert animated:YES completion:nil];
+                self.alert = [BaseAlertViewController alertWithAlertType:AlertType_waiterOrderReceiving andWithWaiterId:self.currentTask.waiterName];
+                [self.alert addTarget:self andWithComfirmAction:@selector(waiterReceiveTask)];
+                [self presentViewController:self.alert animated:YES completion:nil];
             }
             else
             {
@@ -396,9 +398,11 @@
         }
         case pageModel_systemCancel:
         {
-            BaseAlertViewController * alert = [BaseAlertViewController alertWithAlertType:AlertType_systemAutoCancelTask andWithWaiterId:self.currentTask.waiterName];
-            [alert addTarget:self andWithComfirmAction:@selector(systemAutoCancelTask)];
-            [self presentViewController:alert animated:YES completion:nil];
+            if (self.alert != nil)
+                [self.alert dismissViewControllerAnimated:YES completion:nil];
+            self.alert = [BaseAlertViewController alertWithAlertType:AlertType_systemAutoCancelTask andWithWaiterId:self.currentTask.waiterName];
+            [self.alert addTarget:self andWithComfirmAction:@selector(systemAutoCancelTask)];
+            [self presentViewController:self.alert animated:YES completion:nil];
         }
             break;
         default:
@@ -469,15 +473,15 @@
     }
     else if (task == self.cancelListSession)
     {
-        BaseAlertViewController * alert = [BaseAlertViewController alertWithAlertType:AlertType_cancelTaskReason andWithCheckTitles:datas andWithWaiterId:self.currentTask.waiterName];
-        [alert addTarget:self andWithComfirmAction:@selector(chooseCancelReason:) andWithCancelAction:nil];
-        [self presentViewController:alert animated:YES completion:nil];
+        self.alert = [BaseAlertViewController alertWithAlertType:AlertType_cancelTaskReason andWithCheckTitles:datas andWithWaiterId:self.currentTask.waiterName];
+        [self.alert addTarget:self andWithComfirmAction:@selector(chooseCancelReason:) andWithCancelAction:nil];
+        [self presentViewController:self.alert animated:YES completion:nil];
     }
     else if (task == self.taskDeatilSession)
     {
         // 获取任务详情成功
         DBCallTask * callTask = datas[0];
-        if ([callTask.taskStatus isEqualToString:@"1"])
+        if ([callTask.taskStatus isEqualToString:@"1"] || [callTask.taskStatus isEqualToString:@"7"])
         {
             [self setUIByPageModelType:pageModel_Receive];
         }
@@ -530,9 +534,9 @@
         self.reset = YES;
         self.isSendTaskFail = YES;
         [self.chatTabelView reloadData];
-        BaseAlertViewController *alert = [BaseAlertViewController initWithHeadTitle:nil andWithDetail:@"您的呼叫请求发送失败，是否重新发送？" andWithCheckTitles:nil andWithButtonTitles:@[@"取消",@"重新发送"] andWithHeadImage:nil];
-        [alert addTarget:self andWithComfirmAction:@selector(againSengButtonAction:) andWithCancelAction:nil];
-        [self presentViewController:alert animated:YES completion:nil];
+        self.alert = [BaseAlertViewController initWithHeadTitle:nil andWithDetail:@"您的呼叫请求发送失败，是否重新发送？" andWithCheckTitles:nil andWithButtonTitles:@[@"取消",@"重新发送"] andWithHeadImage:nil];
+        [self.alert addTarget:self andWithComfirmAction:@selector(againSengButtonAction:) andWithCancelAction:nil];
+        [self presentViewController:self.alert animated:YES completion:nil];
     }
     else if (task == self.cancelTaskSession)
     {
@@ -632,6 +636,7 @@
 - (void)dealloc
 {
     [[MTRequestNetwork defaultManager] cancleAllRequest];
+    [[MTRequestNetwork defaultManager] removeDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning
