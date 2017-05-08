@@ -547,7 +547,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
     self.messageLabel.hidden = NO;
     if ([task.taskStatus isEqualToString:@"0"])
         message = @"等待接单";
-    else if ([task.taskStatus isEqualToString:@"1"])
+    else if ([task.taskStatus isEqualToString:@"1"] || [task.taskStatus isEqualToString:@"7"])
         message = @"正在进行";
     else if ([task.taskStatus isEqualToString:@"2"])
         message = @"已完成";
