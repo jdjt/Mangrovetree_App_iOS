@@ -559,7 +559,7 @@
     }
     else if (task == self.scoreTaskSession)
     {
-        
+        [self setUIByPageModelType:pageModel_NOTask];
     }
     else if (task == self.getCustomDetailTask)
     {
