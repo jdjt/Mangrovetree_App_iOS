@@ -529,12 +529,14 @@ extern NSString* FMModelSelected;
             return;
         }
         [self didSelectedEnd:model];
+        [self addEndMarkName:model.name];
 
     }
     if ([node isKindOfClass:[FMKLabel class]])
     {
                NSLog(@"%@",((FMKLabel *)node).name);
         [self didSelectedEndByLabel:(FMKLabel *)node];
+        [self addEndMarkName:((FMKLabel *)node).name];
     }
     
     
@@ -617,7 +619,7 @@ extern NSString* FMModelSelected;
     else
         isNeedLocate = NO;
     NSString *groupID = @"1";
-    if (modelFid.intValue == kDaWangZong || modelFid.intValue == kMuMianA || modelFid.intValue == kMuMianB || modelFid.intValue == KZonglv)
+    if (modelFid.intValue == kDaWangZong || modelFid.intValue == KZonglv)
         groupID = @"2";
     
     [self enterIndoorByIndoorInfo:@{@"mapid":modelFid, @"groupID":groupID,@"isNeedLocate":@(isNeedLocate)}];
@@ -1272,6 +1274,28 @@ extern NSString* FMModelSelected;
     [self.routeDisplayView hide];
     [self.naviPopView hide];
     [self.inforView hide];
+}
+- (void)addEndMarkName:(NSString *)name
+{
+    QueryDBModel *model = nil;
+    NSArray *result = [[DBSearchTool shareDBSearchTool] queryByKeyWord:name];
+    for (QueryDBModel *m in result)
+    {
+        if ([m.name isEqualToString:name])
+        {
+            model = m;
+            break;
+        }
+    }
+    if (model)
+    {
+        [_imageLayer removeAllImageMarker];
+        FMKMapPoint mapPoint = FMKMapPointMake(model.x, model.y);
+        FMKImageMarker * poiPositionMarker = [[FMKImageMarker alloc] initWithImage:[UIImage imageNamed:@"line_icon_fun"] Coord:mapPoint];
+        poiPositionMarker.offsetMode = FMKImageMarker_USERDEFINE;
+        poiPositionMarker.imageOffset = model.z;
+        [_imageLayer addImageMarker:poiPositionMarker animated:NO];
+    }
 }
 
 #pragma mark - Activity Category

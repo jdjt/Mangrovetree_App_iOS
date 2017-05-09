@@ -148,7 +148,7 @@ int const kCallingServiceCount = 5;
 		self.switchMapInfoView.delegate = self;
 		[self initNaviInfo];//初始化路径约束对象
     }
-	
+  
 	self.displayGroupID = _displayGroupID;
     self.resultDistance = NO;
     _showChangeMap = NO;
@@ -913,6 +913,19 @@ int const kCallingServiceCount = 5;
 		
 		FMKModelLayer * modelLayer = (FMKModelLayer *)layer;
 		[self setModelSelected:model modelLayer:modelLayer];
+        NSArray *result = [[DBSearchTool shareDBSearchTool] queryByKeyWord:model.title];
+        for (QueryDBModel *m in result)
+        {
+            if ([m.name isEqualToString:model.title])
+            {
+                self.dbModel = m;
+                break;
+            }
+        }
+        if (self.dbModel)
+        {
+            [self addPositionMarker];
+        }
 	}
     
     
@@ -928,6 +941,7 @@ int const kCallingServiceCount = 5;
     
     
 }
+
 //设置模型选中
 - (void)setModelSelected:(FMKModel *)model modelLayer:(FMKModelLayer *)modelLayer
 {
