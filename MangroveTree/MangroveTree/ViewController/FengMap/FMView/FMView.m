@@ -160,7 +160,6 @@ extern NSString* FMModelSelected;
         //        [self.fengMapView setCompassOrigin:CGPointMake(200, 200)];
         //[self addModelInfoPopView];//模型信息弹框
         //		self.modelInfoPopView.delegate = self;
-        [self addlocateBtn];//定位按钮
         //		[self addRouteView];//路线信息弹框
         [self addNaviPopView];//导航信息弹框
         self.naviPopView.delegate = self;
@@ -205,6 +204,8 @@ extern NSString* FMModelSelected;
 }
 - (void)addlocateBtn
 {
+    if (_enableLocateBtn) return;
+
     _enableLocateBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _enableLocateBtn.frame = CGRectMake(kLocationSpace, kScreenHeight-64-kLocBtnHeight, kLocBtnWidth, kLocBtnHeight);
     [_enableLocateBtn setBackgroundImage:[UIImage imageNamed:@"location_icon_nomarl"] forState:UIControlStateNormal];
@@ -318,7 +319,7 @@ extern NSString* FMModelSelected;
     [self.fengMapView moveToViewCenterByMapCoord:coord];
     FMKExternalModelLayer * modelLayer = [self.fengMapView.map getExternalModelLayerWithGroupID:@(model.gid).stringValue];
     FMKExternalModel * myModel = [modelLayer queryExternalModelByFid:model.fid];
-    [self didSelectedEnd:myModel];
+    [self didSelectedEndByLabel:nil withLabelName:model];
 //    [self didSelectedEndByModel:@{}];
 }
 //接收停止导航消息
@@ -530,12 +531,13 @@ extern NSString* FMModelSelected;
         }
         [self didSelectedEnd:model];
         [self addEndMarkName:model.name];
+        NSLog(@"%f%f",model.centerPoint.x,model.centerPoint.y);
 
     }
     if ([node isKindOfClass:[FMKLabel class]])
     {
                NSLog(@"%@",((FMKLabel *)node).name);
-        [self didSelectedEndByLabel:(FMKLabel *)node];
+        [self didSelectedEndByLabel:(FMKLabel *)node withLabelName:nil];
         [self addEndMarkName:((FMKLabel *)node).name];
     }
     
@@ -566,7 +568,7 @@ extern NSString* FMModelSelected;
     [self.inforView hide];
     [self stopNavi];
     [self.fengMapView showAllOnMap];
-    
+    [self setEnableLocationBtnFrameByView:nil];
 }
 - (void)mapView:(FMKMapView *)mapView didMovedWithPoint:(CGPoint)point
 {
@@ -585,8 +587,10 @@ extern NSString* FMModelSelected;
 - (void)enableLocationInDoor
 {
     FMKMapCoord currentMapCoord = [FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;
+#warning 当前位有定位信息，此处是假的
     if (currentMapCoord.mapID == kOutdoorMapID) {
         [FMKLocationServiceManager shareLocationServiceManager].delegate = self;
+        [self.fengMapView moveToViewCenterByMapCoord:[self getDefaultMapCoord].coord];
     }
     else
     {
@@ -627,8 +631,6 @@ extern NSString* FMModelSelected;
 - (void)goHere:(FMKGeoCoord)coord
 {
     //开始导航
-    [self setEnableLocationBtnFrameByView:self.naviPopView];
-    
     FMNaviAnalyserTool * tool = [FMNaviAnalyserTool shareNaviAnalyserTool];
 #warning 这里需要处理区分是否有定位点信息
     FMKMapCoord startMapCoord = [self getDefaultMapCoord];//[FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;
@@ -659,10 +661,10 @@ extern NSString* FMModelSelected;
         }
     };
     
-    [UIView animateWithDuration:0.3f animations:^{
-        CGRect rect = _enableLocateBtn.frame;
-        _enableLocateBtn.frame = CGRectMake(rect.origin.x, kScreenHeight-kNaviPopViewHeight-rect.size.height-5, rect.size.width, rect.size.height);
-    }];
+//    [UIView animateWithDuration:0.3f animations:^{
+//        CGRect rect = _enableLocateBtn.frame;
+//        _enableLocateBtn.frame = CGRectMake(rect.origin.x, kScreenHeight-kNaviPopViewHeight-rect.size.height-5, rect.size.width, rect.size.height);
+//    }];
     
     //停止导航
     self.naviTopView.stopNaviBlock = ^{
@@ -1121,29 +1123,40 @@ extern NSString* FMModelSelected;
 
 #pragma mark - MyMethod
 
-- (void)didSelectedEndByLabel:(FMKLabel *)label
+- (void)didSelectedEndByLabel:(FMKLabel *)label withLabelName:(QueryDBModel *)model
 {
-    QueryDBModel *model = nil;
-    NSArray *result = [[DBSearchTool shareDBSearchTool] queryByKeyWord:label.name];
-    for (QueryDBModel *m in result)
+    QueryDBModel *currentModel = nil;
+    NSString *searchName = nil;
+    if (label.name) searchName = label.name;
+    else if(model)   searchName = model.name;
+    if (!model)
     {
-        if ([m.name isEqualToString:label.name])
+        NSArray *result = [[DBSearchTool shareDBSearchTool] queryByKeyWord:searchName];
+        for (QueryDBModel *m in result)
         {
-            model = m;
-            break;
+            if ([m.name isEqualToString:label.name])
+            {
+                currentModel = m;
+                break;
+            }
         }
+    }else
+    {
+        currentModel = model;
     }
     
-    if (model)
+    
+    if (currentModel)
     {
-        [self showActivityInfor:model];
-        NSLog(@"%f %f",model.x,model.y);
+        [self showActivityInfor:currentModel];
+        NSLog(@"%f %f",currentModel.x,currentModel.y);
         FMKMapStorey mapStorey = 1;
-        FMKMapPoint mapPoint = FMKMapPointMake(model.x, model.y);
+        FMKMapPoint mapPoint = FMKMapPointMake(currentModel.x, currentModel.y);
         FMKGeoCoord geoCoord = FMKGeoCoordMake(mapStorey, mapPoint);
         [self goHere:geoCoord];
         if (!_nodeAssociation) [self nodeAssociation];
-        [self didSelectedHightlight:[_nodeAssociation externalModelByLabel:label]];
+        if (label.name)
+            [self didSelectedHightlight:[_nodeAssociation externalModelByLabel:label]];
     }
 }
 
@@ -1159,9 +1172,13 @@ extern NSString* FMModelSelected;
         {
             [self.inforView showByView:self.naviPopView];
             [self.inforView requsrtActivityInforByActivityCode:model.activityCode];
+            [self setEnableLocationBtnFrameByView:self.inforView];
+
         }else
         {
             [self.inforView hide];
+            [self setEnableLocationBtnFrameByView:self.naviPopView];
+
         }
     }
 }
@@ -1190,16 +1207,22 @@ extern NSString* FMModelSelected;
         {
             [self.inforView showByView:self.naviPopView];
             [self.inforView requsrtActivityInforByActivityCode:models.activityCode];
+            [self setEnableLocationBtnFrameByView:self.inforView];
+
         }else
         {
             [self.inforView hide];
+            [self setEnableLocationBtnFrameByView:self.naviPopView];
         }
         
         //	[self.naviPopView.endPointBtn setTitle:model.name forState:UIControlStateNormal];
         //	[self.modelInfoPopView show];
         
         //	[self setEnableLocationBtnFrameByView:self.modelInfoPopView];
-        [self goHere:model.mapCoord];
+        FMKMapStorey mapStorey = 1;
+        FMKMapPoint mapPoint = FMKMapPointMake(models.x, models.y);
+        FMKGeoCoord geoCoord = FMKGeoCoordMake(mapStorey, mapPoint);
+        [self goHere:geoCoord];
         [self didSelectedHightlight:model];
     }
 

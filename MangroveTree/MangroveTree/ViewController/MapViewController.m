@@ -117,10 +117,11 @@
         });
     }
     [self.fmView resetTheme];
-
+    
     [self.fmView addLocationDelegate];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.fmView planNaviAct];
+        [self.fmView addlocateBtn];
     });
     
     self.fmView.isFirstLocate = YES;

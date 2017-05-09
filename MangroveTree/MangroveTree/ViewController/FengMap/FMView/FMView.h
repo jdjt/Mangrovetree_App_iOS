@@ -65,7 +65,7 @@ typedef NS_ENUM(NSInteger,ButtonType)
 //重设主题
 - (void)resetTheme;
 - (void)getMacAndStartLocationService;
-
+- (void)addlocateBtn;
 - (void)hideRouteDisplayView;
 - (void)showRouteDisplayView;
 
