@@ -96,8 +96,8 @@
 	
 	self.lengthLabel.text = [NSString stringWithFormat:@"%.2f米",(float)length];
 	
-	float calorie = (float) (time * kHourCalorie + 0.5);
-	[self.powerLabel setTitle:[NSString stringWithFormat:@"消耗%d卡路里",(int)calorie] forState:UIControlStateNormal];
+	float calorie = (float) ((time * kHourCalorie + 0.5)/60);
+	[self.powerLabel setTitle:[NSString stringWithFormat:@"消耗%d卡路里",(int)(roundf(calorie))] forState:UIControlStateNormal];
 }
 
 - (void)swipeGestureAct:(UISwipeGestureRecognizer *)gesture
