@@ -801,6 +801,7 @@ extern NSString* FMModelSelected;
 - (void)startNaviAct
 {
     [self stopNavi];
+    [self getCurrentController].centerVC.function = FUNCTION_DEFAULT;
     FMNaviAnalyserTool * tool = [FMNaviAnalyserTool shareNaviAnalyserTool];
 #warning 这里需要区分是否可以拿到定位信息
     FMKMapCoord currentMapCoord = [self getDefaultMapCoord];//[FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;
@@ -845,6 +846,7 @@ extern NSString* FMModelSelected;
 - (void)stopNavi
 {
     [self hideNaviBar:NO];
+    [self getCurrentController].centerVC.function = FUNCTION_MAP;
     [_imageLayer removeAllImageMarker];
     [FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi = NO;
     [FMNaviAnalyserTool shareNaviAnalyserTool].planNavi = NO;
