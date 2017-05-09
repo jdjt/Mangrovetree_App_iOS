@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "UMessage.h"
+#import "AppDelegate+Notification.h"
 
 @interface AppDelegate ()
 
@@ -18,7 +19,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    self.firstInit = YES;
+    
+    self.currentModule = MODULE_DEFAULT;
     
     // 定义系统状态栏默认风格
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
@@ -62,7 +64,17 @@
     [UMessage didReceiveRemoteNotification:userInfo];
     if (userInfo)
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotiCallTaskPushMessage object:userInfo];
+        switch (self.currentModule)
+        {
+            case MODULE_DEFAULT:
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotiCallTaskPushMessage object:userInfo];
+                break;
+            case MODULE_CHAT:
+                [self showNotificationWith:userInfo];
+                break;
+            default:
+                break;
+        }
     }
 }
 
@@ -107,92 +119,12 @@
 {
     return (AppDelegate *)[UIApplication sharedApplication].delegate;
 }
-
-// 初始化友盟远程推送
-- (void)setupUmengRemoteNotificationEnvironment:(NSDictionary *)launchOptions
+- (void)setCurrentModule:(FunctionModule)currentModule
 {
-    [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
-    
-    // Set AppKey and LaunchOptions
-    [UMessage startWithAppkey:UM_APPKEY launchOptions:launchOptions];
-    
-    [UMessage registerForRemoteNotifications];
-    
-    //调用此方法要注意对iOS10和iOS10以下进行不同的注册
-    //[UMessage registerForRemoteNotifications:<#(nullable NSSet<UIUserNotificationCategory *> *)#> categories10:<#(nullable NSSet<UNNotificationCategory *> *)#>]
-    // [UMessage registerForRemoteNotifications:<#(nullable NSSet<UIUserNotificationCategory *> *)#> categories10:<#(nullable NSSet<UNNotificationCategory *> *)#> withTypesForIos7:<#(UIRemoteNotificationType)#> withTypesForIos8:<#(UIUserNotificationType)#> withTypesForIos10:<#(UNAuthorizationOptions)#>]
-    
-    //  如果你期望使用交互式(只有iOS 8.0及以上有)的通知，请参考下面注释部分的初始化代码
-    //register remoteNotification types （iOS 8.0及其以上，iOS10以下版本）
-    
-    
-    //如果要在iOS10显示交互式的通知，必须注意实现以下代码
-    UIMutableUserNotificationAction *action1 = [[UIMutableUserNotificationAction alloc] init];
-    action1.identifier = @"action1_identifier";
-    action1.title=@"打开应用";
-    action1.activationMode = UIUserNotificationActivationModeForeground;//当点击的时候启动程序
-    
-    UIMutableUserNotificationAction *action2 = [[UIMutableUserNotificationAction alloc] init];  //第二按钮
-    action2.identifier = @"action2_identifier";
-    action2.title=@"忽略";
-    action2.activationMode = UIUserNotificationActivationModeBackground;//当点击的时候不启动程序，在后台处理
-    action2.authenticationRequired = YES;//需要解锁才能处理，如果action.activationMode = UIUserNotificationActivationModeForeground;则这个属性被忽略；
-    action2.destructive = YES;
-    UIMutableUserNotificationCategory *actionCategory1 = [[UIMutableUserNotificationCategory alloc] init];
-    actionCategory1.identifier = @"category1";//这组动作的唯一标示
-    [actionCategory1 setActions:@[action1,action2] forContext:(UIUserNotificationActionContextDefault)];
-    NSSet *categories = [NSSet setWithObjects:actionCategory1, nil];
-    
-    
-    if ([[[UIDevice currentDevice] systemVersion]intValue]>=10) {
-        UNNotificationAction *tenaction1 = [UNNotificationAction actionWithIdentifier:@"tenaction1_identifier" title:@"打开应用" options:UNNotificationActionOptionForeground];
-        
-        UNNotificationAction *tenaction2 = [UNNotificationAction actionWithIdentifier:@"tenaction2_identifier" title:@"忽略" options:UNNotificationActionOptionForeground];
-        
-        //UNNotificationCategoryOptionNone
-        //UNNotificationCategoryOptionCustomDismissAction  清除通知被触发会走通知的代理方法
-        //UNNotificationCategoryOptionAllowInCarPlay       适用于行车模式
-        UNNotificationCategory *tencategory1 = [UNNotificationCategory categoryWithIdentifier:@"tencategory1" actions:@[tenaction2,tenaction1]   intentIdentifiers:@[] options:UNNotificationCategoryOptionCustomDismissAction];
-        NSSet *tencategories = [NSSet setWithObjects:tencategory1, nil];
-        
-        [UMessage registerForRemoteNotifications:categories categories10:tencategories];
-    }else
+    if (_currentModule == currentModule)
     {
-        [UMessage registerForRemoteNotifications:categories categories10:nil];
+        _currentModule = currentModule;
     }
-    //如果对角标，文字和声音的取舍，请用下面的方法
-    //UIRemoteNotificationType types7 = UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound;
-    //UIUserNotificationType types8 = UIUserNotificationTypeAlert|UIUserNotificationTypeSound|UIUserNotificationTypeBadge;
-    //[UMessage registerForRemoteNotifications:categories withTypesForIos7:types7 withTypesForIos8:types8];
-    
-    //for log
-    [UMessage setLogEnabled:YES];
-}
-
-- (void)startNetWorkMonitoring
-{
-    AFNetworkReachabilityManager * manager = [AFNetworkReachabilityManager sharedManager];
-    self.networkStatus =  manager.networkReachabilityStatus;
-    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status)
-     {
-         switch (status)
-         {
-             case AFNetworkReachabilityStatusUnknown:
-                 self.networkStatus = -1;
-                 break;
-             case AFNetworkReachabilityStatusNotReachable:
-                 self.networkStatus = 0;
-                 break;
-             case AFNetworkReachabilityStatusReachableViaWWAN:
-                 self.networkStatus = 1;
-                 break;
-             case AFNetworkReachabilityStatusReachableViaWiFi:
-                 self.networkStatus = 2;
-                 break;
-             default:
-                 break;
-         }
-     }];
 }
 
 @end

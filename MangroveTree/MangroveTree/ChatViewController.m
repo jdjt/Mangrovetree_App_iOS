@@ -61,6 +61,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [AppDelegate sharedDelegate].currentModule = MODULE_CHAT;
+    
     [[MTRequestNetwork defaultManager] registerDelegate:self];
     if (self.currentTask)
         [self getTaskDetailByTaskCode:self.currentTask.taskCode];

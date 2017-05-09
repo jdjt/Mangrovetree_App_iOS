@@ -8,18 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, FunctionModule)
+{
+    MODULE_CHAT     = 0, // 聊天界面
+    MODULE_DEFAULT  = 1, // 默认界面
+};
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
 + (AppDelegate *)sharedDelegate;
 
-/**
- *  @abstract 启动后第一次标记
- */
-@property (assign, nonatomic) BOOL firstInit;
-
 @property (nonatomic, assign) NSInteger networkStatus;
+@property (nonatomic, assign) FunctionModule currentModule;
 
 @end
 

@@ -31,6 +31,7 @@
 		A87812AA1EAF5002002A7F40 /* GradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A87812A91EAF5002002A7F40 /* GradeViewController.m */; };
 		A8995A251EA5B228001B83DF /* PDKeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = A8995A241EA5B228001B83DF /* PDKeyChain.m */; };
 		A8995A271EA5B4BB001B83DF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8995A261EA5B4BA001B83DF /* Security.framework */; };
+		A89FEB041EC153FE00404179 /* AppDelegate+Notification.m in Sources */ = {isa = PBXBuildFile; fileRef = A89FEB031EC153FE00404179 /* AppDelegate+Notification.m */; };
 		A8B3761D1EBAF5760084F41E /* ChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8B3761C1EBAF5760084F41E /* ChatCell.xib */; };
 		A8DC4F2E1EA8AB080056C699 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DC4F2D1EA8AB080056C699 /* UIColor+Hex.m */; };
 		A8E4136F1E7692C40096EA62 /* InforView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E4136E1E7692C40096EA62 /* InforView.m */; };
@@ -501,6 +502,8 @@
 		A8995A231EA5B228001B83DF /* PDKeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDKeyChain.h; sourceTree = "<group>"; };
 		A8995A241EA5B228001B83DF /* PDKeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDKeyChain.m; sourceTree = "<group>"; };
 		A8995A261EA5B4BA001B83DF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		A89FEB021EC153FE00404179 /* AppDelegate+Notification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+Notification.h"; sourceTree = "<group>"; };
+		A89FEB031EC153FE00404179 /* AppDelegate+Notification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+Notification.m"; sourceTree = "<group>"; };
 		A8B3761C1EBAF5760084F41E /* ChatCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatCell.xib; sourceTree = "<group>"; };
 		A8DC4F2C1EA8AB080056C699 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
 		A8DC4F2D1EA8AB080056C699 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
@@ -2089,6 +2092,8 @@
 				D566F2A21EB8748B009AF6CD /* SaveNavigationData.m */,
 				FC5B19A21E6E465B0038BCA7 /* AppDelegate.h */,
 				FC5B19A31E6E465B0038BCA7 /* AppDelegate.m */,
+				A89FEB021EC153FE00404179 /* AppDelegate+Notification.h */,
+				A89FEB031EC153FE00404179 /* AppDelegate+Notification.m */,
 				C44B166E1E70F0E800EE8257 /* MainViewController.h */,
 				C44B166F1E70F0E800EE8257 /* MainViewController.m */,
 				C46A63F31E711E06008A8A29 /* MainGround.storyboard */,
@@ -2773,6 +2778,7 @@
 				C44F13411EA855A400AB7809 /* SPInputViewPluginCallingCard.m in Sources */,
 				A861B4011E9F0C92002D61F0 /* ChatInputBar.m in Sources */,
 				C46BEDD01E9CA7B8009E3379 /* AlertViewCenterCell.m in Sources */,
+				A89FEB041EC153FE00404179 /* AppDelegate+Notification.m in Sources */,
 				FC5B1AEB1E6E51510038BCA7 /* MyAlertView.m in Sources */,
 				A861B4111E9F0FCB002D61F0 /* NSLayoutConstraint+PureLayout.m in Sources */,
 				A8E4136F1E7692C40096EA62 /* InforView.m in Sources */,
