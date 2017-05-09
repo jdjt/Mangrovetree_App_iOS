@@ -93,11 +93,11 @@
 {
     [super viewWillAppear:animated];
     self.waiterNumber.text = self.currentTask.waiterName;
-    NSInteger time = self.currentTask.finishTime.integerValue - self.currentTask.acceptTime.integerValue;
+    NSInteger time = (self.currentTask.finishTime.integerValue - self.currentTask.acceptTime.integerValue) / 1000;
     NSInteger s = time % 60;
     NSInteger m = (time / 60) == 0 ? 0 : (time / 60 % 60);
     NSInteger h = time / 3600;
-    self.tasktime.text = [NSString stringWithFormat:@"%02ld%02ld%02ld",h,m,s];
+    self.tasktime.text = [NSString stringWithFormat:@"%02ld:%02ld:%02ld",h,m,s];
 }
 
 - (void)didReceiveMemoryWarning
