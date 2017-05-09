@@ -1027,6 +1027,15 @@ int const kCallingServiceCount = 5;
 
 - (void)startNaviAct
 {
+    for (UIViewController *VC in self.navigationController.viewControllers)
+    {
+        if ([VC isKindOfClass:[MapViewController class]])
+        {
+            MapViewController *mapVC = (MapViewController *)VC;
+            mapVC.centerVC.function = FUNCTION_MAP;
+        }
+    }
+
 	_isFirstLocate = YES;
 	FMNaviAnalyserTool * naviTool = [FMNaviAnalyserTool shareNaviAnalyserTool];
 	double length = [naviTool.naviResult[@"totalLength"] doubleValue];
@@ -1156,6 +1165,15 @@ int const kCallingServiceCount = 5;
 //停止导航
 - (void)stopNavi
 {
+    for (UIViewController *VC in self.navigationController.viewControllers)
+    {
+        if ([VC isKindOfClass:[MapViewController class]])
+        {
+            MapViewController *mapVC = (MapViewController *)VC;
+            mapVC.centerVC.function = FUNCTION_DEFAULT;
+        }
+    }
+
     [self hideMavBar:NO];
     _highlightModel.selected = NO;
 	[FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi = NO;
