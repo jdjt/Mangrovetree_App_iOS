@@ -82,7 +82,7 @@
         [UIView animateWithDuration:0.2 animations:^{
             self.alpha = 0.9f;
         }];
-        [self.image sd_setImageWithURL:[NSURL URLWithString:model.imgurl] placeholderImage:[UIImage new]];
+        [self.image sd_setImageWithURL:[NSURL URLWithString:model.imgurl] placeholderImage:[UIImage imageNamed:@"mangroveicon"]];
         self.name.text = @"";
         self.text.text = @"";
         self.name.text = model.name;
