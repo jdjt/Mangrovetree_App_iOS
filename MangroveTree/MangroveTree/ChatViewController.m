@@ -298,7 +298,7 @@
     
     if (self.pageModelType == pageModelType)
     {
-        if (pageModelType == pageModel_NOReceive)
+        if (pageModelType == pageModel_NOReceive || pageModelType == pageModel_Complete  )
         {
             NSString * startTime = [[NSUserDefaults standardUserDefaults] stringForKey:@"CallTaskStartTime"];
             if (startTime.length > 0)

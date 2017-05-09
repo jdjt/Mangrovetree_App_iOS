@@ -633,7 +633,12 @@ NSString* const FMModelSelected = @"FMModelSelected";
     }
     else if (task == self.checkBind)
     {
-        
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self showBottomView:Segment_none];
+        }];
+        [alert addAction:action1];
+        [self presentViewController:alert animated:YES completion:nil];
     }
     else if (task == self.proceedTask)
     {
