@@ -304,17 +304,29 @@ extern NSString* FMModelSelected;
 {
     [_imageLayer removeAllImageMarker];
     QueryDBModel * model = noti.object;
-    FMKMapPoint mapPoint = FMKMapPointMake(model.x, model.y);
-    FMKImageMarker * poiPositionMarker = [[FMKImageMarker alloc] initWithImage:[UIImage imageNamed:@"line_icon_fun"] Coord:mapPoint];
-    poiPositionMarker.offsetMode = FMKImageMarker_USERDEFINE;
-    poiPositionMarker.imageOffset = model.z;
-    [_imageLayer addImageMarker:poiPositionMarker animated:NO];
-    [self moveToViewCenterWithDBModel:model];
+    QueryDBModel * currentModel = nil;
+    NSArray *result = [[DBSearchTool shareDBSearchTool] queryByKeyWord:model.name];
+    for (QueryDBModel *m in result)
+    {
+        if ([m.eid isEqualToString:model.eid])
+        {
+            currentModel = m;
+            break;
+        }
+    }
+    if (currentModel)
+    {
+        FMKMapPoint mapPoint = FMKMapPointMake(currentModel.x, currentModel.y);
+        FMKImageMarker * poiPositionMarker = [[FMKImageMarker alloc] initWithImage:[UIImage imageNamed:@"line_icon_fun"] Coord:mapPoint];
+        poiPositionMarker.offsetMode = FMKImageMarker_USERDEFINE;
+        poiPositionMarker.imageOffset = currentModel.z;
+        [_imageLayer addImageMarker:poiPositionMarker animated:NO];
+        [self moveToViewCenterWithDBModel:currentModel];
+    }
 }
 //将搜索页面得到的模型居中并弹框
 - (void)moveToViewCenterWithDBModel:(QueryDBModel *)model
 {
-    self.queryModel = model;
     FMKGeoCoord coord = FMKGeoCoordMake(model.gid, FMKMapPointMake(model.x, model.y));
     [self.fengMapView moveToViewCenterByMapCoord:coord];
     FMKExternalModelLayer * modelLayer = [self.fengMapView.map getExternalModelLayerWithGroupID:@(model.gid).stringValue];
@@ -1135,7 +1147,7 @@ extern NSString* FMModelSelected;
         NSArray *result = [[DBSearchTool shareDBSearchTool] queryByKeyWord:searchName];
         for (QueryDBModel *m in result)
         {
-            if ([m.name isEqualToString:label.name])
+            if ([m.eid isEqualToString:label.eid])
             {
                 currentModel = m;
                 break;
