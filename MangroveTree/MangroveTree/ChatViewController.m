@@ -297,6 +297,10 @@
     {
         [self getTaskDetailByTaskCode:self.currentTask.taskCode];
     }
+    else if ([pushMessage[@"messType"] isEqualToString:@"SystemAutoConfirmTaskToCustomer"]) //  三十分钟自动完成确认
+    {
+        [self getTaskDetailByTaskCode:self.currentTask.taskCode];
+    }
 }
 
 - (void)setUIByPageModelType:(pageModelType)pageModelType

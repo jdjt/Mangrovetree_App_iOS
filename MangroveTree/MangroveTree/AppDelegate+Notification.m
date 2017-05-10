@@ -134,6 +134,12 @@
         [base addTarget:self andWithComfirmAction:@selector(refreshTaskStatus)];
         [self.window.rootViewController presentViewController:base animated:YES completion:nil];
     }
+    else if ([pushMessage[@"messType"] isEqualToString:@"SystemAutoConfirmTaskToCustomer"]) //  三十分钟自动确认完成
+    {
+        BaseAlertViewController *base = [BaseAlertViewController initWithHeadTitle:nil andWithDetail:@"您的呼叫管家等待确认超时，系统默认已完成，请您对此次服务进行评价，谢谢！祝您入住愉快！" andWithCheckTitles:nil andWithButtonTitles:@[@"确 认"] andWithHeadImage:nil];
+        [base addTarget:self andWithComfirmAction:nil];
+        [self.window.rootViewController presentViewController:base animated:YES completion:nil];
+    }
 }
 
 - (void)refreshTaskStatus
