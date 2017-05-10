@@ -525,7 +525,8 @@ extern NSString* FMModelSelected;
             [model.type isEqualToString:treeType])
         {
             [self.fengMapView showAllOnMap];
-            //			[self.modelInfoPopView hide];
+            [self.naviPopView hide];
+            [self.inforView hide];
             [self setEnableLocationBtnFrameByView:nil];
             return;
         }
@@ -1197,11 +1198,11 @@ extern NSString* FMModelSelected;
         }
     }
     
-    if (model != nil)
+    if (models)
     {
         [self.naviPopView show];
         
-        [self.naviPopView setupInfoByModel:model.fid];
+        [self.naviPopView setupInfoByModel:models.fid];
         
         if (models.activityCode != NULL && ![models.activityCode isEqualToString:@""])
         {
@@ -1219,15 +1220,11 @@ extern NSString* FMModelSelected;
         //	[self.modelInfoPopView show];
         
         //	[self setEnableLocationBtnFrameByView:self.modelInfoPopView];
-        FMKMapStorey mapStorey = 1;
-        FMKMapPoint mapPoint = FMKMapPointMake(models.x, models.y);
-        FMKGeoCoord geoCoord = FMKGeoCoordMake(mapStorey, mapPoint);
-        [self goHere:geoCoord];
+        [self goHere:model.mapCoord];
         [self didSelectedHightlight:model];
     }
-
-    
 }
+
 - (void)didSelectedHightlight:(FMKExternalModel *)model
 {
     if (_categoryTag != -1) {

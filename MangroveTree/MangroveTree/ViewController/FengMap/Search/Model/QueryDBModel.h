@@ -20,6 +20,7 @@
 @property (nonatomic, copy) NSString * subTypeName;
 @property (nonatomic, copy) NSString * activityCode;
 @property (nonatomic, copy) NSString * gname;
+@property (nonatomic, copy) NSString * eid;
 
 @property (nonatomic, assign) int rowid;
 @property (nonatomic, assign) int gid;

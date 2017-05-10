@@ -85,7 +85,7 @@
 
 - (void)setTimeByLength:(double)length
 {
-	float time = (float)length/60+0.5;
+	float time = (float)length/60;
 	if (time<1.0) {
 		self.timeLabel.text = @"1分钟";
 	}
@@ -96,7 +96,7 @@
 	
 	self.lengthLabel.text = [NSString stringWithFormat:@"%.2f米",(float)length];
 	
-	float calorie = (float) ((time * kHourCalorie + 0.5)/60);
+	float calorie = (float) ((time * kHourCalorie)/60);
 	[self.powerLabel setTitle:[NSString stringWithFormat:@"消耗%d卡路里",(int)(roundf(calorie))] forState:UIControlStateNormal];
 }
 

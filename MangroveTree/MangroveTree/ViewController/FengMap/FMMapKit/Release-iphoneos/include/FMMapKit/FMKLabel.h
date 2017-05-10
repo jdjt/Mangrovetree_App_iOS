@@ -16,5 +16,7 @@
 @property (nonatomic, assign) BOOL maskMode;
 
 @property (nonatomic, assign) BOOL highlight;
+///标签元素序号
+@property (nonatomic, readonly) NSString *eid;
 
 @end
