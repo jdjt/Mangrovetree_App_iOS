@@ -72,6 +72,11 @@
     // 判断服务器地址
     NSInteger severIndex = 1;
     self.serverAddress = [[MySingleton sharedSingleton] currentServiceAddress:severIndex byInterFaceType:old];
+//    if ([url isEqualToString:@"/hotelcallservice/customer/addTask.json"])
+//    {
+//        self.requestURL = @"/mymhotel-hotelcallservice-web/customer/addTask.json";
+//        self.serverAddress = @"192.168.10.39:8080";
+//    }
     NetWorkHelp *netWorkHelp = [[NetWorkHelp alloc] init];
     
     // 判断查询间隔是否满足足够长的状态（当byUser为NO时，间隔不够时将不发送实际请求）

@@ -32,9 +32,9 @@
                                        @"floorNo":@"11",
                                        @"mapNo":@"79980",
                                        @"areaName":areaName,
-                                       @"positionX":@"111",
-                                       @"positionY":@"22",
-                                       @"positionZ":@"333"}};
+                                       @"positionX":@"1",
+                                       @"positionY":@"1",
+                                       @"positionZ":@"1"}};
     self.seesionSengTask = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
                                                                        webURL:URL_SENG_TASK
                                                                        params:dic

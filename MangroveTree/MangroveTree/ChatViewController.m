@@ -300,6 +300,9 @@
     else if ([pushMessage[@"messType"] isEqualToString:@"SystemAutoConfirmTaskToCustomer"]) //  三十分钟自动完成确认
     {
         [self getTaskDetailByTaskCode:self.currentTask.taskCode];
+        BaseAlertViewController *base = [BaseAlertViewController initWithHeadTitle:nil andWithDetail:@"您的呼叫服务等待确认超时，系统默认服务已完成，谢谢！祝您入住愉快！" andWithCheckTitles:nil andWithButtonTitles:@[@"确 认"] andWithHeadImage:nil];
+        [base addTarget:self andWithComfirmAction:nil];
+        [self presentViewController:base animated:YES completion:nil];
     }
 }
 
