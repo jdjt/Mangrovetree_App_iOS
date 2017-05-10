@@ -77,6 +77,7 @@ extern NSString* FMModelSelected;
 	BOOL _isContainModel;
 	
 	FMKExternalModel * _highlightModel;//高亮显示的模型
+    FMKLabel *_highlightLabel;
 	
 	FMKMapCoord _currentMapCoord;//当前定位位置
 	
@@ -1169,7 +1170,18 @@ extern NSString* FMModelSelected;
         [self goHere:geoCoord];
         if (!_nodeAssociation) [self nodeAssociation];
         if (label.name)
-            [self didSelectedHightlight:[_nodeAssociation externalModelByLabel:label]];
+        {
+            if (_highlightLabel)
+            {
+                _highlightLabel.highlight = NO;
+            }
+            {
+                _highlightLabel = label;
+                _highlightLabel.highlight = YES;
+            }
+            
+//            [self didSelectedHightlight:[_nodeAssociation externalModelByLabel:label]];
+        }
     }
 }
 

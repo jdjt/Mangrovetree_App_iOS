@@ -50,7 +50,7 @@ static DBSearchTool * mDbSearcTool = nil;
 		NSLog(@"数据库打开成功");
 	}
 	NSString * sql = [NSString stringWithFormat:
-					  @"SELECT rowid, * FROM 'stores'"];
+					  @"SELECT rowid, * FROM 'stores' order by rowid asc"];
 	FMResultSet * rs = [mDbSearcTool.db executeQuery:sql];
 	while ([rs next]) {
 		NSString * typename = [rs stringForColumn:@"typename"];
@@ -74,7 +74,7 @@ static DBSearchTool * mDbSearcTool = nil;
     }
 
     NSString * sql = [NSString stringWithFormat:
-                      @"SELECT rowid, * FROM 'stores'"];
+                      @"SELECT rowid, * FROM 'stores' order by rowid asc"];
     FMResultSet * rs = [mDbSearcTool.db executeQuery:sql];
     while ([rs next])
     {
@@ -105,7 +105,7 @@ static DBSearchTool * mDbSearcTool = nil;
 		NSLog(@"数据库打开成功");
 	}
 	NSString * sql = [NSString stringWithFormat:
-					  @"SELECT rowid, * FROM 'stores'"];
+					  @"SELECT rowid, * FROM 'stores' order by rowid asc"];
 	FMResultSet * rs = [mDbSearcTool.db executeQuery:sql];
 	while ([rs next]) {
 		NSString * name = [rs stringForColumn:@"name"];
@@ -122,7 +122,7 @@ static DBSearchTool * mDbSearcTool = nil;
 {
 	if ([mDbSearcTool.db open]) {
 		NSString * sql = [NSString stringWithFormat:
-						  @"SELECT rowid, * FROM 'stores'"];
+						  @"SELECT rowid, * FROM 'stores' order by rowid asc"];
 		FMResultSet * rs = [mDbSearcTool.db executeQuery:sql];
 		while ([rs next]) {
 			NSString * sqlFid = [rs stringForColumn:@"fid"];

@@ -594,7 +594,7 @@
     CGRect rect = self.searchTableView.frame;
     if (show)
     {
-        rect.size.height = kScreenHeight - 76 - 49;
+        rect.size.height = kScreenHeight - 76;
         [UIView animateWithDuration:0.2 animations:^{
             self.searchTableView.frame = rect;
             self.tableViewHeight.constant = rect.size.height;
@@ -629,7 +629,7 @@
     NSArray * arr = [[DBSearchTool shareDBSearchTool] queryByKeyWord:text];
     [_searchResult removeAllObjects];
     [_displayResult removeAllObjects];
-    arr = [self sortBySerachResult:arr];
+//    arr = [self sortBySerachResult:arr];
     [_displayResult addObjectsFromArray:arr];
     if (_searchResult.count > 10) {
         for (int i = 0; i < 10; i++) {
@@ -653,7 +653,7 @@
     [_searchResult removeAllObjects];
     [_displayResult removeAllObjects];
 
-    results = [self sortBySerachResult:results];
+//    results = [self sortBySerachResult:results];
     [_searchResult addObjectsFromArray:results];
     if (_searchResult.count > 10) {
         for (int i = 0; i < 10; i++) {
@@ -675,7 +675,7 @@
     NSArray * results = [[DBSearchTool shareDBSearchTool] queryBySubTypeName:subTypeName];
     [_searchResult removeAllObjects];
     [_displayResult removeAllObjects];
-    results = [self sortBySerachResult:results];
+//    results = [self sortBySerachResult:results];
     [_searchResult addObjectsFromArray:results];
     if (_searchResult.count > 10) {
         for (int i = 0; i < 10; i++) {

@@ -392,7 +392,7 @@
         <scene sceneID="rQf-b2-029">
             <objects>
                 <navigationController id="I7M-cL-o8d" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AA1-gP-46G">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="AA1-gP-46G">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -729,13 +729,13 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tlj-9h-cia">
-                                <rect key="frame" x="0.0" y="150" width="375" height="468"/>
+                                <rect key="frame" x="0.0" y="150" width="375" height="517"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gex-y0-XNI">
-                                        <rect key="frame" x="0.0" y="0.0" width="400" height="468"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="400" height="517"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pqt-xW-BMO">
-                                                <rect key="frame" x="0.0" y="0.0" width="200" height="468"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="517"/>
                                                 <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="200" id="ZWh-FP-ssr"/>
@@ -832,7 +832,7 @@
                                                 </connections>
                                             </collectionView>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="S1s-JI-VtE">
-                                                <rect key="frame" x="200" y="0.0" width="200" height="468"/>
+                                                <rect key="frame" x="200" y="0.0" width="200" height="517"/>
                                                 <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="iaa-zF-RVo">
                                                     <size key="itemSize" width="50" height="50"/>
@@ -983,7 +983,7 @@
                         <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Lj4-QF-hPh" firstAttribute="leading" secondItem="v4T-Xh-0te" secondAttribute="leading" id="6OV-2J-nxP"/>
-                            <constraint firstItem="ZGs-eX-Meg" firstAttribute="top" secondItem="Tlj-9h-cia" secondAttribute="bottom" constant="49" id="FDq-Ch-s7o"/>
+                            <constraint firstItem="ZGs-eX-Meg" firstAttribute="top" secondItem="Tlj-9h-cia" secondAttribute="bottom" id="FDq-Ch-s7o"/>
                             <constraint firstItem="Tlj-9h-cia" firstAttribute="top" secondItem="5AT-Lp-doS" secondAttribute="bottom" id="Fk0-7v-D46"/>
                             <constraint firstAttribute="trailing" secondItem="Tlj-9h-cia" secondAttribute="trailing" id="MlI-Kt-tor"/>
                             <constraint firstItem="Tlj-9h-cia" firstAttribute="leading" secondItem="v4T-Xh-0te" secondAttribute="leading" id="Tmt-op-Jqf"/>
