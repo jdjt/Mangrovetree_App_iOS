@@ -10,8 +10,8 @@
 
 typedef NS_ENUM(NSInteger, FunctionModule)
 {
-    MODULE_CHAT     = 0, // 聊天界面
-    MODULE_DEFAULT  = 1, // 默认界面
+    MODULE_DEFAULT      = 0, // 聊天界面
+    MODULE_CHAT         = 1, // 默认界面
 };
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

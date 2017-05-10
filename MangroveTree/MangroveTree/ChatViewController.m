@@ -237,6 +237,15 @@
         {
             are = [self.myZoneManager getCurrentZone].zone_name;
         }
+        else
+        {
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示信息" message:@"请在获取到定位信息后再尝试发起呼叫服务" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }];
+            [alert addAction:action];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
         NSDictionary *dic = @{@"text":inputText,@"are":are,@"time":[Util getTimeNow]};
         [self.dataSource addObject:dic];
         [self.chatTabelView reloadData];
@@ -321,6 +330,8 @@
     {
         case pageModel_NOTask:
         {
+            if (self.alert)
+                [self.alert dismissViewControllerAnimated:YES completion:nil];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"CallTaskStartTime"];
             self.navigationItem.rightBarButtonItem = nil;
             [self.headView stopTimer];
@@ -374,12 +385,18 @@
         case pageModel_Receive:
         {
             NSString * isFirstReceive = [[NSUserDefaults standardUserDefaults] objectForKey:self.currentTask.taskCode];
-            if ([isFirstReceive isEqualToString:@"1"] == YES)
+            if ([isFirstReceive isEqualToString:@"1"])
             {
                 [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:self.currentTask.taskCode];
                 YWPerson * person = [[YWPerson alloc]initWithPersonId:self.currentTask.wImAccount appKey:@"23759225"];
                 self.conversation = [YWP2PConversation fetchConversationByPerson:person creatIfNotExist:YES baseContext: [SPKitExample sharedInstance].ywIMKit.IMCore];
                 [self.conversation asyncSendMessageBody:[[YWMessageBodyText alloc] initWithMessageText:self.currentTask.taskContent] controlParameters:nil progress:nil completion:nil];
+            }
+            
+            NSString * isFirstAlert = [[NSUserDefaults standardUserDefaults] objectForKey:@"NotiReceiveAlertFirst"];
+            if (![isFirstAlert isEqualToString:@"0"])
+            {
+                [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"NotiReceiveAlertFirst"];
                 self.alert = [BaseAlertViewController alertWithAlertType:AlertType_waiterOrderReceiving andWithWaiterId:self.currentTask.waiterName];
                 [self.alert addTarget:self andWithComfirmAction:@selector(waiterReceiveTask)];
                 [self presentViewController:self.alert animated:YES completion:nil];
@@ -403,9 +420,14 @@
         {
             if (self.alert != nil)
                 [self.alert dismissViewControllerAnimated:YES completion:nil];
-            self.alert = [BaseAlertViewController alertWithAlertType:AlertType_systemAutoCancelTask andWithWaiterId:self.currentTask.waiterName];
-            [self.alert addTarget:self andWithComfirmAction:@selector(systemAutoCancelTask)];
-            [self presentViewController:self.alert animated:YES completion:nil];
+            NSString * isCancelFirst = [[NSUserDefaults standardUserDefaults] objectForKey:@"NotiCancelAlertFirst"];
+            if (![isCancelFirst isEqualToString:@"0"])
+            {
+                [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"NotiCancelAlertFirst"];
+                self.alert = [BaseAlertViewController alertWithAlertType:AlertType_systemAutoCancelTask andWithWaiterId:self.currentTask.waiterName];
+                [self.alert addTarget:self andWithComfirmAction:@selector(systemAutoCancelTask)];
+                [self presentViewController:self.alert animated:YES completion:nil];
+            }
         }
             break;
         default:
@@ -543,7 +565,7 @@
     }
     else if (task == self.cancelTaskSession)
     {
-        
+        [MyAlertView showAlert:@"取消服务失败，请检查网络状态"];
     }
     else if (task == self.cancelListSession)
     {
@@ -551,7 +573,16 @@
     }
     else if (task == self.taskDeatilSession)
     {
-        
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"获取任务详情失败失败" message:@"请检查网络状态后重试" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }];
+        UIAlertAction * action2 = [UIAlertAction actionWithTitle:@"重试" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self getTaskDetailByTaskCode:self.currentTask.taskCode];
+        }];
+        [alert addAction:action1];
+        [alert addAction:action2];
+        [self presentViewController:alert animated:YES completion:nil];
     }
     else if (task == self.comfirmTaskSession)
     {
