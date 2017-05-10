@@ -100,7 +100,7 @@ const int kTopSpace = 10;
 	else if ([view isKindOfClass:[NaviPopView class]])
 	{
 		[UIView animateWithDuration:0.3f animations:^{
-//			self.enableLocateBtn.frame = CGRectMake(kLocationSpace, self.naviPopView.frame.origin.y-kLocationSpace-kLocBtnHeight, kLocBtnWidth, kLocBtnHeight);
+            self.enableLocateBtn.frame = CGRectMake(kLocationSpace, self.naviPopView.frame.origin.y-kLocationSpace-kLocBtnHeight, kLocBtnWidth, kLocBtnHeight);
 		}];
 	}
 	else if([view isKindOfClass:[RouteDisplayView class]])
@@ -109,11 +109,17 @@ const int kTopSpace = 10;
 //			self.enableLocateBtn.frame = CGRectMake(kLocationSpace,kScreenHeight-kLocationSpace-kLocBtnHeight-kRouteViewHeight, kLocBtnWidth, kLocBtnHeight);
 		}];
 	}
+    else if([view isKindOfClass:[InforView class]])
+    {
+        [UIView animateWithDuration:0.3f animations:^{
+            self.enableLocateBtn.frame = CGRectMake(kLocationSpace,kScreenHeight - 44 - 95 - self.naviPopView.frame.size.height - kLocationSpace-kLocBtnWidth, kLocBtnWidth, kLocBtnHeight);
+        }];
+    }
 	else
 	{
-//		[UIView animateWithDuration:0.3f animations:^{
-//			self.enableLocateBtn.frame = CGRectMake(kLocationSpace,kScreenHeight-kLocationSpace-kLocBtnHeight, kLocBtnWidth, kLocBtnHeight);
-//		}];
+		[UIView animateWithDuration:0.3f animations:^{
+            self.enableLocateBtn.frame = CGRectMake(kLocationSpace, kScreenHeight-64-kLocBtnHeight, kLocBtnWidth, kLocBtnHeight);
+		}];
 	}
 }
 - (void)setNaviPopVIewFrameByShow:(BOOL)show
