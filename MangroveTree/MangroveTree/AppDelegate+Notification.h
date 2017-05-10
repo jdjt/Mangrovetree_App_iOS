@@ -16,4 +16,6 @@
 
 - (void)showNotificationWith:(NSDictionary *)userInfo;
 
+- (void)pushNotihandle:(NSDictionary *)userInfo;
+
 @end

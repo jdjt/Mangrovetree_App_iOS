@@ -64,17 +64,44 @@
     [UMessage didReceiveRemoteNotification:userInfo];
     if (userInfo)
     {
-        switch (self.currentModule)
+        [self pushNotihandle:userInfo];
+    }
+}
+
+//iOS10新增：处理前台收到通知的代理方法
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler{
+    NSDictionary * userInfo = notification.request.content.userInfo;
+    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        //应用处于前台时的远程推送接受
+        //关闭U-Push自带的弹出框
+        [UMessage setAutoAlert:NO];
+        [UMessage sendClickReportForRemoteNotification:userInfo];
+        //必须加这句代码
+        [UMessage didReceiveRemoteNotification:userInfo];
+        NSLog(@"%@",userInfo);
+        if (userInfo)
         {
-            case MODULE_DEFAULT:
-                [[NSNotificationCenter defaultCenter] postNotificationName:NotiCallTaskPushMessage object:userInfo];
-                break;
-            case MODULE_CHAT:
-                [self showNotificationWith:userInfo];
-                break;
-            default:
-                break;
+            [self pushNotihandle:userInfo];
         }
+    }else{
+        //应用处于前台时的本地推送接受
+    }
+    //当应用处于前台时提示设置，需要哪个可以设置哪一个
+    completionHandler(UNNotificationPresentationOptionSound);
+}
+
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler{
+    NSDictionary * userInfo = response.notification.request.content.userInfo;
+    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        //应用处于后台时的远程推送接受
+        //必须加这句代码
+        [UMessage didReceiveRemoteNotification:userInfo];
+        if (userInfo)
+        {
+            [self pushNotihandle:userInfo];
+        }
+    }else{
+        //应用处于后台时的本地推送接受
     }
 }
 
@@ -121,7 +148,7 @@
 }
 - (void)setCurrentModule:(FunctionModule)currentModule
 {
-    if (_currentModule == currentModule)
+    if (_currentModule != currentModule)
     {
         _currentModule = currentModule;
     }

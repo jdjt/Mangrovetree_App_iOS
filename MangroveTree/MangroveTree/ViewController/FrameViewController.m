@@ -89,7 +89,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
             [self addLocationOnMap:self.currentTask];
         }
     }
-    [MBProgressHUD hideAllHUDsForView:[AppDelegate sharedDelegate].window animated:YES];
+    //[MBProgressHUD hideAllHUDsForView:[AppDelegate sharedDelegate].window animated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -100,13 +100,14 @@ NSString* const FMModelSelected = @"FMModelSelected";
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    [MBProgressHUD hideAllHUDsForView:[AppDelegate sharedDelegate].window animated:YES];
+    //[MBProgressHUD hideAllHUDsForView:[AppDelegate sharedDelegate].window animated:YES];
 	[_countDownTimer invalidate];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [AppDelegate sharedDelegate].currentModule = MODULE_DEFAULT;
     if (self.currentTask == nil)
         self.messageLabel.hidden = YES;
     else
@@ -183,7 +184,6 @@ NSString* const FMModelSelected = @"FMModelSelected";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetCustomDetail) name:NotiResetCustomDetail object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeTaskStatus:) name:NotiCallTaskPushMessage object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeTaskStatus:) name:UIApplicationDidBecomeActiveNotification object:nil];
-
 }
 - (void)didReceiveMemoryWarning
 {
@@ -633,8 +633,8 @@ NSString* const FMModelSelected = @"FMModelSelected";
     }
     else if (task == self.checkBind)
     {
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"消息提示" message:@"获取绑房信息失败，请检查网络状态后重试" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [self showBottomView:Segment_none];
         }];
         [alert addAction:action1];

@@ -10,6 +10,10 @@
 #import "UMessage.h"
 #import "BaseAlertViewController.h"
 
+@interface AppDelegate ()<UNUserNotificationCenterDelegate>
+
+@end
+
 @implementation AppDelegate (Notification)
 // 初始化友盟远程推送
 - (void)setupUmengRemoteNotificationEnvironment:(NSDictionary *)launchOptions
@@ -20,6 +24,16 @@
     [UMessage startWithAppkey:UM_APPKEY launchOptions:launchOptions];
     
     [UMessage registerForRemoteNotifications];
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    center.delegate = self;
+    UNAuthorizationOptions types10=UNAuthorizationOptionBadge|UNAuthorizationOptionAlert|UNAuthorizationOptionSound;
+    [center requestAuthorizationWithOptions:types10 completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        if (granted) {
+            //点击允许
+        } else {
+            //点击不允许
+        }
+    }];
     
     //调用此方法要注意对iOS10和iOS10以下进行不同的注册
     //[UMessage registerForRemoteNotifications:<#(nullable NSSet<UIUserNotificationCategory *> *)#> categories10:<#(nullable NSSet<UNNotificationCategory *> *)#>]
@@ -102,6 +116,7 @@
     
     if ([pushMessage[@"messType"] isEqualToString:@"WaiterAcceptTask"]) //  服务员接受任务
     {
+        [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"NotiReceiveAlertFirst"];
         BaseAlertViewController *base = [BaseAlertViewController alertWithAlertType:AlertType_waiterOrderReceiving andWithWaiterId:@""];
         [base addTarget:self andWithComfirmAction:nil];
         [self.window.rootViewController presentViewController:base animated:YES completion:nil];
@@ -114,9 +129,30 @@
     }
     else if ([pushMessage[@"messType"] isEqualToString:@"SystemAutoCancelTask"]) //  十分钟服务员未接单自动取消
     {
+        [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"NotiCancelAlertFirst"];
         BaseAlertViewController *base = [BaseAlertViewController alertWithAlertType:AlertType_systemAutoCancelTask andWithWaiterId:@""];
-        [base addTarget:self andWithComfirmAction:nil];
+        [base addTarget:self andWithComfirmAction:@selector(refreshTaskStatus)];
         [self.window.rootViewController presentViewController:base animated:YES completion:nil];
+    }
+}
+
+- (void)refreshTaskStatus
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotiCallTaskPushMessage object:nil];
+}
+
+- (void)pushNotihandle:(NSDictionary *)userInfo
+{
+    switch (self.currentModule)
+    {
+        case MODULE_DEFAULT:
+            [self showNotificationWith:userInfo];
+            break;
+        case MODULE_CHAT:
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotiCallTaskPushMessage object:userInfo];
+            break;
+        default:
+            break;
     }
 }
 
