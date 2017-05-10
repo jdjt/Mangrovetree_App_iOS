@@ -67,10 +67,10 @@
         switch (self.currentModule)
         {
             case MODULE_DEFAULT:
-                [[NSNotificationCenter defaultCenter] postNotificationName:NotiCallTaskPushMessage object:userInfo];
+                [self showNotificationWith:userInfo];
                 break;
             case MODULE_CHAT:
-                [self showNotificationWith:userInfo];
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotiCallTaskPushMessage object:userInfo];
                 break;
             default:
                 break;

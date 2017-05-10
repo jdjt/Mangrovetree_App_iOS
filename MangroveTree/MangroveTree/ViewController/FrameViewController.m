@@ -89,6 +89,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
             [self addLocationOnMap:self.currentTask];
         }
     }
+    [AppDelegate sharedDelegate].currentModule = MODULE_DEFAULT;
     [MBProgressHUD hideAllHUDsForView:[AppDelegate sharedDelegate].window animated:YES];
 }
 
