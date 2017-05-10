@@ -286,6 +286,11 @@
             "label_ids": [81]
         },
         {
+            "externel_fid": "999800168",
+            "externel_name": "火山餐厅",
+            "label_ids": [103]
+        },
+        {
             "externel_fid": "999800127",
             "externel_name": "棕榈王国亲子主题酒店",
             "label_ids": [82]

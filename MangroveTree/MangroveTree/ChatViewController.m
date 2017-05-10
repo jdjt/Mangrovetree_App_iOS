@@ -310,7 +310,7 @@
 {
     NSDateFormatter * formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSInteger timeLong = 0;
+    long long timeLong = 0;
     
     if (self.pageModelType == pageModelType)
     {
@@ -322,12 +322,12 @@
                 timeLong = labs((NSInteger)[[formatter dateFromString:startTime] timeIntervalSinceNow]);
             }
             if (self.currentTask.produceTime.length > 0 && self.currentTask.nowDate.length > 0)
-                timeLong = (self.currentTask.nowDate.integerValue - self.currentTask.produceTime.integerValue) / 1000;
+                timeLong = (self.currentTask.nowDate.longLongValue - self.currentTask.produceTime.longLongValue) / 1000;
             [self.headView startTaskTimerByStartTime:timeLong];
         }
         else if (pageModelType == pageModel_Receive)
         {
-            [self.headView startTaskTimerByStartTime:(self.currentTask.nowDate.integerValue - self.currentTask.acceptTime.integerValue) / 1000];
+            [self.headView startTaskTimerByStartTime:(self.currentTask.nowDate.longLongValue - self.currentTask.acceptTime.longLongValue) / 1000];
         }
         return;
     }
@@ -364,12 +364,14 @@
                 [[NSUserDefaults standardUserDefaults] setObject:[Util getTimeNow] forKey:@"CallTaskStartTime"];
             }
             if (self.currentTask.produceTime.length > 0 && self.currentTask.nowDate.length > 0)
-                timeLong = (self.currentTask.nowDate.integerValue - self.currentTask.produceTime.integerValue) / 1000;
+            {
+                timeLong = ([self.currentTask.nowDate longLongValue] - [self.currentTask.produceTime longLongValue]) / 1000;
+            }
             [self.headView startTaskTimerByStartTime:timeLong];
             
             if (self.currentTask.taskContent != nil && ![self.currentTask.taskContent isEqualToString:@""])
             {
-                NSDate * resetTime = [NSDate dateWithTimeIntervalSince1970:(self.currentTask.produceTime.integerValue / 1000)];
+                NSDate * resetTime = [NSDate dateWithTimeIntervalSince1970:(self.currentTask.produceTime.longLongValue / 1000)];
                 NSDictionary *dic = @{@"text":self.currentTask.taskContent,@"are":self.currentTask.areaName,@"time":[formatter stringFromDate:resetTime]};
                 [self.dataSource removeAllObjects];
                 [self.dataSource addObject:dic];
@@ -419,7 +421,7 @@
             if (self.currentTask == nil)
                 return;
             GradeViewController * view = [GradeViewController initWithGradeInfor:self.currentTask withClick:^(ClickType clickType, NSInteger score) {
-                [self scoreTaskBy:self.currentTask.taskCode andScoreType:clickType == ClickType_Submit ? @"1" : @"2" andScore:clickType == ClickType_Submit ? [NSString stringWithFormat:@"%ld",score] : @"5"];
+                [self scoreTaskBy:self.currentTask.taskCode andScoreType:clickType == ClickType_Submit ? @"1" : @"2" andScore:clickType == ClickType_Submit ? [NSString stringWithFormat:@"%ld",(long)score] : @"5"];
             }];
             [self presentViewController:view animated:YES completion:nil];
         }
@@ -447,7 +449,7 @@
     self.navigationItem.rightBarButtonItem = self.cancelBarItem;
     [self instantMessageingFormation];
     self.headView.textStatus = TextStatus_proceed;
-    [self.headView startTaskTimerByStartTime:(self.currentTask.nowDate.integerValue - self.currentTask.acceptTime.integerValue) / 1000];
+    [self.headView startTaskTimerByStartTime:(self.currentTask.nowDate.longLongValue - self.currentTask.acceptTime.longLongValue) / 1000];
     self.textView.hidden = NO;
 }
 

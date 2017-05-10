@@ -106,7 +106,7 @@
         m = self.startTime / 60 % 60;
         h = self.startTime / 60 / 60;
     }
-    NSString * timeStr = [NSString stringWithFormat:@"%02ld:%02ld:%02ld",h,m,s];
+    NSString * timeStr = [NSString stringWithFormat:@"%02ld:%02ld:%02ld",(long)h,m,s];
     self.timerLabel.text = [NSString stringWithFormat:@"%@%@",self.textStatus == TextStatus_waiting ? @"等待时长 " : @"服务时长 ",timeStr];
     if (!self.timer)
     {

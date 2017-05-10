@@ -1179,8 +1179,7 @@ extern NSString* FMModelSelected;
                 _highlightLabel = label;
                 _highlightLabel.highlight = YES;
             }
-            
-//            [self didSelectedHightlight:[_nodeAssociation externalModelByLabel:label]];
+            [self highlightActivityByModel:[_nodeAssociation externalModelByLabel:label]];
         }
     }
 }
@@ -1269,7 +1268,6 @@ extern NSString* FMModelSelected;
             {
                 [self.fengMapView hiddenActivityListOnMap:@[oldActivity]];
             }
-            
         }
         [self highlightActivityByModel:model];
     }

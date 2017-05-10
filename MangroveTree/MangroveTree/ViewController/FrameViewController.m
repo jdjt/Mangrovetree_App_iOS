@@ -611,7 +611,6 @@ NSString* const FMModelSelected = @"FMModelSelected";
         {
             self.currentTask = datas[0];
             [self changeTaskStatusByCurrentTask:self.currentTask];
-#warning 添加首页呼叫任务提示标识
         }
     }
     else if (task == self.customDetailTask)

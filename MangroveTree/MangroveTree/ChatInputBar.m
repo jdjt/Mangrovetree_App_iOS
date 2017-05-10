@@ -145,6 +145,8 @@
 
 - (void)sendMsgBtnClick:(UIButton *)button
 {
+    if(_mInputTextView.text == nil ||[_mInputTextView.text isEqualToString:@""]|| [_mInputTextView.text isEqualToString:@"请输入您需要的服务内容"])
+        return;
     if ([self.delegate respondsToSelector:@selector(sendMsgByChatBarView:)])
     {
         [self.delegate sendMsgByChatBarView:_mInputTextView.text];
