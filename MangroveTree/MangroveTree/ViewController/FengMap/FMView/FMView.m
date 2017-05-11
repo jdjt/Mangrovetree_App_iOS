@@ -601,6 +601,7 @@ extern NSString* FMModelSelected;
 - (void)enableLocationInDoor
 {
     FMKMapCoord currentMapCoord = [FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;
+    NSStringFromFMKMapCoord(currentMapCoord);
 #warning 当前位有定位信息，此处是假的
     if (currentMapCoord.mapID == kOutdoorMapID) {
         [FMKLocationServiceManager shareLocationServiceManager].delegate = self;
@@ -1004,23 +1005,26 @@ extern NSString* FMModelSelected;
 {
 	if (mapCoord.mapID != kOutdoorMapID && mapCoord.mapID != _cancelMapID.intValue)
 	{
-//		BOOL indoorMapIsExist = [self testIndoorMapIsxistByMapCoord:mapCoord];
-//		if (indoorMapIsExist)
-//		{
-//            self.currentMapCoord = mapCoord;
-//            self.showChangMap = YES;
-//		}
+		BOOL indoorMapIsExist = [self testIndoorMapIsxistByMapCoord:mapCoord.mapID];
+		if (indoorMapIsExist)
+		{
+            self.currentMapCoord = mapCoord;
+            self.showChangMap = YES;
+		}
 	}
 	else
 	{
-//		_locationMarker.hidden = NO;
+		
 //        [_locationMarker locateWithGeoCoord:mapsCoord.coord];
 #warning 这里需要区分是否有定位信息
 //        [_locationMarker locateWithGeoCoord:[self getDefaultMapCoord].coord];
         // 现场使用的方法
-		[_locationMarker locateWithGeoCoord:mapCoord.coord];
+        [_locationMarker locateWithGeoCoord:mapCoord.coord];
+        _locationMarker.hidden = NO;
          
 	}
+//    [_locationMarker locateWithGeoCoord:mapCoord.coord];
+//    _locationMarker.hidden = NO;
 }
 
 - (void)setShowChangMap:(BOOL)showChangMap
@@ -1064,6 +1068,7 @@ extern NSString* FMModelSelected;
 
 - (void)enterIndoorMapBy:(FMKMapCoord)mapCoord
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotiCloseTopAlert object:nil];
     FMIndoorMapVC * indoorMapVC = [[FMIndoorMapVC alloc] initWithMapID:@(self.currentMapCoord.mapID).stringValue];
     indoorMapVC.displayGroupID = @(self.currentMapCoord.coord.storey).stringValue;
     indoorMapVC.isNeedLocate = YES;
