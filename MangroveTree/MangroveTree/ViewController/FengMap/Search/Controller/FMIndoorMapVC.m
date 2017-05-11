@@ -371,7 +371,7 @@ int const kCallingServiceCount = 5;
         NSLog(@"开启了双点模式");
         _locationMarker.hidden = YES;
     }
-
+    NSLog(@"______t%@",NSStringFromFMKMapCoord(mapCoord));
     if(!success) return;
     self.currentMapCoord = mapCoord;
 	_locateGroupID = @(mapCoord.coord.storey).stringValue;
@@ -614,6 +614,7 @@ int const kCallingServiceCount = 5;
 	{
 		[self showProgressWithText:@"您已到达目的地附近"];
 		[self stopNavi];
+        [self showBottomViewBy:YES];
         _showChangeMap = NO;
 	}
 	[self.naviTopView updateLength:surplusLength];
@@ -965,7 +966,9 @@ int const kCallingServiceCount = 5;
     [self.inforView hide];
     [self.mapView showAllOnMap];
     [self stopNavi];
+    [self showBottomViewBy:NO];
 }
+
 - (void)setupModelInfoPopViewByModel:(FMKModel *)model
 {	
 //	[self.modelInfoPopView show];
@@ -1114,6 +1117,7 @@ int const kCallingServiceCount = 5;
             return ;
         
 		[wSelf stopNavi];//先停止导航
+        [wSelf showBottomViewBy:YES];
         NSLog(@"%@",[NSThread currentThread]);
         NSLog(@"%@",[NSThread mainThread]);
 		//开始导航标志位
@@ -1164,6 +1168,8 @@ int const kCallingServiceCount = 5;
 	
 	self.naviPopView.switchStartAndEndBlock = ^{
 		[wSelf stopNavi];
+        [wSelf showBottomViewBy:YES];
+
 		BOOL naviSuccess = [naviTool naviAnalyseByStartMapCoord:endMapCoord endMapCoord:startMapCoord];
 		
 		if (naviSuccess) {
@@ -1180,15 +1186,6 @@ int const kCallingServiceCount = 5;
 //停止导航
 - (void)stopNavi
 {
-    for (UIViewController *VC in self.navigationController.viewControllers)
-    {
-        if ([VC isKindOfClass:[MapViewController class]])
-        {
-            MapViewController *mapVC = (MapViewController *)VC;
-            mapVC.centerVC.function = FUNCTION_DEFAULT;
-        }
-    }
-
     [self hideMavBar:NO];
     _highlightModel.selected = NO;
 	[FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi = NO;
@@ -1271,6 +1268,7 @@ int const kCallingServiceCount = 5;
 	__weak typeof(self)wSelf = self;
 	[alertView addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
 		[wSelf stopNavi];
+        [wSelf showBottomViewBy:NO];
         _showChangeMap = NO;
 	}]];
 	
@@ -1488,5 +1486,15 @@ int const kCallingServiceCount = 5;
     FMKMapCoord mapsCoord = FMKMapCoordMake(79980, geoCoord);
     return mapsCoord;
 }
-
+- (void)showBottomViewBy:(BOOL)show
+{
+    for (UIViewController *VC in self.navigationController.viewControllers)
+    {
+        if ([VC isKindOfClass:[MapViewController class]])
+        {
+            MapViewController *mapVC = (MapViewController *)VC;
+            mapVC.centerVC.function = show == YES? FUNCTION_DEFAULT :FUNCTION_MAP;
+        }
+    }
+}
 @end

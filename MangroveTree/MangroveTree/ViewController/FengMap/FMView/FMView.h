@@ -8,6 +8,7 @@
 #import "FMBaseView.h"
 #import "QueryDBModel.h"
 #import "InforView.h"
+#import "NaviTopView.h"
 
 @class CategoryView,ModelInfoPopView;
 

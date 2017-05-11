@@ -129,6 +129,9 @@
     if ([FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi)
     {
         [self.fmView mapEnterNaviMode];
+    }else
+    {
+        self.fmView.naviTopView.hidden = YES;
     }
     [[FMLocationManager shareLocationManager] setMapView:nil];
     [[FMLocationManager shareLocationManager] setMapView:_fmView.fengMapView];
