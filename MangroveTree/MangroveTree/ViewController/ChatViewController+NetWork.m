@@ -26,15 +26,16 @@
 
 - (void)sengMsgToSerive:(NSString *)message andAreaName:(NSString *)areaName
 {
+    FMKMapCoord mapCoord = [FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;
     NSDictionary *dic = @{@"customerId":self.customBind.customerId,
                           @"taskContent":message,
                           @"mapInfo":@{@"hotelCode":@"2",
-                                       @"floorNo":@"11",
-                                       @"mapNo":@"79980",
+                                       @"floorNo":[NSString stringWithFormat:@"%d",mapCoord.coord.storey],
+                                       @"mapNo":[NSString stringWithFormat:@"%d",mapCoord.mapID],
                                        @"areaName":areaName,
-                                       @"positionX":@"1",
-                                       @"positionY":@"1",
-                                       @"positionZ":@"1"}};
+                                       @"positionX":[NSString stringWithFormat:@"%f",mapCoord.coord.mapPoint.x],
+                                       @"positionY":[NSString stringWithFormat:@"%f",mapCoord.coord.mapPoint.y],
+                                       @"positionZ":[NSString stringWithFormat:@"%d",mapCoord.coord.storey]}};
     self.seesionSengTask = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
                                                                        webURL:URL_SENG_TASK
                                                                        params:dic

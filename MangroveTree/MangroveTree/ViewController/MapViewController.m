@@ -35,6 +35,8 @@
     
     self.view.backgroundColor = [UIColor colorWithRed:177 / 255.0f green:177 / 255.0f blue:177 / 255.0f alpha:1];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(adddelegateToMap) name:@"AddDelegateToMap" object:nil];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"inDoorMap"];
+
 }
 
 - (void)adddelegateToMap

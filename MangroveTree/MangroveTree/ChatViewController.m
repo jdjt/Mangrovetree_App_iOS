@@ -232,7 +232,7 @@
     }
     if (inputText != nil && ![inputText isEqualToString:@""])
     {
-        NSString *are = @"红树林度假世界";
+        NSString *are = @"菩提酒店";
         if ([self.myZoneManager getCurrentZone] != nil && ([self.myZoneManager getCurrentZone].zone_name != nil || ![[self.myZoneManager getCurrentZone].zone_name isEqualToString:@""]))
         {
             are = [self.myZoneManager getCurrentZone].zone_name;
@@ -245,6 +245,7 @@
             }];
             [alert addAction:action];
             [self presentViewController:alert animated:YES completion:nil];
+            return;
         }
         NSDictionary *dic = @{@"text":inputText,@"are":are,@"time":[Util getTimeNow]};
         [self.dataSource addObject:dic];
