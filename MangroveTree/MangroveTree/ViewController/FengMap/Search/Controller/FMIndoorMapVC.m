@@ -954,6 +954,7 @@ int const kCallingServiceCount = 5;
 }
 - (void)mapView:(FMKMapView *)mapView didSingleTapWithPoint:(CGPoint)point
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotiCloseTopAlert object:nil];
     if ([FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi == YES) return;
     if ([FMLocationManager shareLocationManager].isCallingService == YES)
         return;
@@ -986,7 +987,7 @@ int const kCallingServiceCount = 5;
     
 	[self.naviTopView hide];
 #warning 这里需要区分是否能拿到定位服务
-    FMKMapCoord startMapCoord = [self getDefaultMapCoord]; //[FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;
+    FMKMapCoord startMapCoord = [FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;//[self getDefaultMapCoord]; //
     NSLog(@"%@",NSStringFromFMKMapCoord(startMapCoord));
 
 	FMKMapCoord endMapCoord = FMKMapCoordMake(queryModel.mid.intValue, FMKGeoCoordMake(queryModel.gid, FMKMapPointMake(queryModel.x, queryModel.y)));
@@ -1098,7 +1099,7 @@ int const kCallingServiceCount = 5;
 - (void)setupNaviPopView
 {
 #warning 这里需要区分是否可以拿到定位信息
-    FMKMapCoord startMapCoord = [self getDefaultMapCoord]; //[FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;
+    FMKMapCoord startMapCoord = [FMKLocationServiceManager shareLocationServiceManager].currentMapCoord; //[self getDefaultMapCoord];
     
     FMNaviAnalyserTool * tool = [FMNaviAnalyserTool shareNaviAnalyserTool];
     

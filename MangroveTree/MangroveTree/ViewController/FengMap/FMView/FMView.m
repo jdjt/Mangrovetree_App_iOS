@@ -604,7 +604,9 @@ extern NSString* FMModelSelected;
 #warning 当前位有定位信息，此处是假的
     if (currentMapCoord.mapID == kOutdoorMapID) {
         [FMKLocationServiceManager shareLocationServiceManager].delegate = self;
-        [self.fengMapView moveToViewCenterByMapCoord:[self getDefaultMapCoord].coord];
+//        [self.fengMapView moveToViewCenterByMapCoord:[self getDefaultMapCoord].coord];
+        [self.fengMapView moveToViewCenterByMapCoord:currentMapCoord.coord];
+        
     }
     else
     {
@@ -647,7 +649,7 @@ extern NSString* FMModelSelected;
     //开始导航
     FMNaviAnalyserTool * tool = [FMNaviAnalyserTool shareNaviAnalyserTool];
 #warning 这里需要处理区分是否有定位点信息
-    FMKMapCoord startMapCoord = [self getDefaultMapCoord];//[FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;
+    FMKMapCoord startMapCoord = [FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;//[self getDefaultMapCoord]
     FMKMapCoord endMapCoord = FMKMapCoordMake(kOutdoorMapID, coord);
     //路径规划
     BOOL naviSuccess = [tool naviAnalyseByStartMapCoord:startMapCoord endMapCoord:endMapCoord];
@@ -822,7 +824,7 @@ extern NSString* FMModelSelected;
     [self getCurrentController].centerVC.function = FUNCTION_DEFAULT;
     FMNaviAnalyserTool * tool = [FMNaviAnalyserTool shareNaviAnalyserTool];
 #warning 这里需要区分是否可以拿到定位信息
-    FMKMapCoord currentMapCoord = [self getDefaultMapCoord];//[FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;
+    FMKMapCoord currentMapCoord = [FMKLocationServiceManager shareLocationServiceManager].currentMapCoord;//[self getDefaultMapCoord];
     
     BOOL naviResult = [tool naviAnalyseByStartMapCoord:currentMapCoord endMapCoord:tool.endMapCoord];
     if (!naviResult) return;
@@ -1014,9 +1016,9 @@ extern NSString* FMModelSelected;
 //		_locationMarker.hidden = NO;
 //        [_locationMarker locateWithGeoCoord:mapsCoord.coord];
 #warning 这里需要区分是否有定位信息
-        [_locationMarker locateWithGeoCoord:[self getDefaultMapCoord].coord];
+//        [_locationMarker locateWithGeoCoord:[self getDefaultMapCoord].coord];
         // 现场使用的方法
-//		[_locationMarker locateWithGeoCoord:mapCoord.coord];
+		[_locationMarker locateWithGeoCoord:mapCoord.coord];
          
 	}
 }
