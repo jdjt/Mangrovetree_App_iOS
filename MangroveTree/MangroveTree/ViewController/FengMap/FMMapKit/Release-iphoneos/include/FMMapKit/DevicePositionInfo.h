@@ -22,8 +22,8 @@
 @property (nonatomic,strong)NSNumber *  HostStatusId;
 @property (nonatomic,strong)NSNumber *  MapId;
 @property (nonatomic,strong)NSNumber *  TagId;
-@property (nonatomic,strong)NSNumber *  X;
-@property (nonatomic,strong)NSNumber *  Y;
+@property (nonatomic)double   X;
+@property (nonatomic)double   Y;
 @property (nonatomic,copy)NSString * HostName;
 @property (nonatomic,copy)NSString * SerialNo;
 @property (nonatomic,copy)NSString * TagMac;

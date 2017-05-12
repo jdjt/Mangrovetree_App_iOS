@@ -101,7 +101,7 @@ typedef NS_ENUM(NSInteger, FMKLineMode){
 @property (nonatomic,copy)          UIColor*    color;
 ///是否隐藏
 @property (nonatomic,assign)        BOOL        hidden;
-///线标注物的图片 当type为FMKLINE_ARROW时才有效
+///线标注物的图片
 @property (nonatomic,copy)        NSString * imageName;
 
 @property (nonatomic,assign)		BOOL mask;
