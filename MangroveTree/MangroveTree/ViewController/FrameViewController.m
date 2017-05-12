@@ -219,6 +219,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
 - (void)closeTopAlert:(NSNotification *)noti
 {
     self.topAlertView.hidden = YES;
+    self.loginAlertView.hidden = YES;
 }
 
 - (void)backToMain:(NSNotification *)notification

@@ -896,6 +896,7 @@ int const kCallingServiceCount = 5;
 		self.mapView.displayGids = @[_displayGroupID];
 	}
 //    _locationMarker.hidden = [FMKLocationServiceManager shareLocationServiceManager].currentMapCoord.coord.storey != _displayGroupID.intValue;
+    [self stopNavi];
 	[self resetModelLayerDelegate];
 }
 
@@ -1195,6 +1196,12 @@ int const kCallingServiceCount = 5;
 	self.naviResults = nil;
 	_isFirstLocate = YES;
 	_lastMapPoint = FMKMapPointZero();
+    NSArray * imageLayers = [_mapView.map getImageLayerWithGroupID:_displayGroupID];
+    FMKImageLayer * imageLayer;
+    if (imageLayers.count>0) {
+        imageLayer = imageLayers.firstObject;
+        [imageLayer removeAllImageMarker];
+    }
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"FMStopNavi" object:@(YES)];
 }
 

@@ -1021,7 +1021,7 @@ extern NSString* FMModelSelected;
         // 现场使用的方法
         [_locationMarker locateWithGeoCoord:mapCoord.coord];
         _locationMarker.hidden = NO;
-         
+        
 	}
 //    [_locationMarker locateWithGeoCoord:mapCoord.coord];
 //    _locationMarker.hidden = NO;
