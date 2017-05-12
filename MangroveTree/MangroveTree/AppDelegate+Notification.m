@@ -116,7 +116,7 @@
     
     if ([pushMessage[@"messType"] isEqualToString:@"WaiterAcceptTask"]) //  服务员接受任务
     {
-        [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"NotiReceiveAlertFirst"];
+        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"NotiReceiveAlertFirst"];
         BaseAlertViewController *base = [BaseAlertViewController alertWithAlertType:AlertType_waiterOrderReceiving andWithWaiterId:@""];
         [base addTarget:self andWithComfirmAction:nil];
         [self.window.rootViewController presentViewController:base animated:YES completion:nil];
@@ -129,7 +129,7 @@
     }
     else if ([pushMessage[@"messType"] isEqualToString:@"SystemAutoCancelTask"]) //  十分钟服务员未接单自动取消
     {
-        [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"NotiCancelAlertFirst"];
+        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"NotiCancelAlertFirst"];
         BaseAlertViewController *base = [BaseAlertViewController alertWithAlertType:AlertType_systemAutoCancelTask andWithWaiterId:@""];
         [base addTarget:self andWithComfirmAction:@selector(refreshTaskStatus)];
         [self.window.rootViewController presentViewController:base animated:YES completion:nil];
@@ -137,7 +137,7 @@
     else if ([pushMessage[@"messType"] isEqualToString:@"SystemAutoConfirmTaskToCustomer"]) //  三十分钟自动确认完成
     { 
         BaseAlertViewController *base = [BaseAlertViewController initWithHeadTitle:nil andWithDetail:@"您的呼叫服务等待确认超时，系统默认服务已完成，谢谢！祝您入住愉快！" andWithCheckTitles:nil andWithButtonTitles:@[@"确 认"] andWithHeadImage:nil];
-        [base addTarget:self andWithComfirmAction:nil];
+        [base addTarget:self andWithComfirmAction:@selector(refreshTaskStatus)];
         [self.window.rootViewController presentViewController:base animated:YES completion:nil];
     }
 }

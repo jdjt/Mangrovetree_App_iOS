@@ -470,7 +470,7 @@ NSString* const FMModelSelected = @"FMModelSelected";
     if (self.mySelfLocation == nil)
     {
         self.mySelfLocation = [[FMLocationBuilderInfo alloc] init];
-        self.mySelfLocation.loc_mac = task.userDeviceId;
+        self.mySelfLocation.loc_mac = [[DataManager defaultInstance]getParameter].diviceId;
         self.mySelfLocation.loc_desc = @"我的信息";
         self.mySelfLocation.loc_icon = @"clien_icon.png";
     }
@@ -611,6 +611,14 @@ NSString* const FMModelSelected = @"FMModelSelected";
         {
             self.currentTask = datas[0];
             [self changeTaskStatusByCurrentTask:self.currentTask];
+        }
+        else
+        {
+            if (self.currentTask)
+            {
+                [self removeLocationOnMap:self.currentTask];
+                self.currentTask = nil;
+            }
         }
     }
     else if (task == self.customDetailTask)

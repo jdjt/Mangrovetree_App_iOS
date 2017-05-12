@@ -1042,6 +1042,7 @@ extern NSString* FMModelSelected;
             
             UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
                                        {
+                                           [[NSNotificationCenter defaultCenter] postNotificationName:NotiCloseTopAlert object:nil];
                                            [self enterIndoorMapBy:self.currentMapCoord];
                                        }];
             
@@ -1068,7 +1069,6 @@ extern NSString* FMModelSelected;
 
 - (void)enterIndoorMapBy:(FMKMapCoord)mapCoord
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotiCloseTopAlert object:nil];
     FMIndoorMapVC * indoorMapVC = [[FMIndoorMapVC alloc] initWithMapID:@(self.currentMapCoord.mapID).stringValue];
     indoorMapVC.displayGroupID = @(self.currentMapCoord.coord.storey).stringValue;
     indoorMapVC.isNeedLocate = YES;

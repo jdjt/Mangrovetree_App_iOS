@@ -213,6 +213,7 @@
     task.finishEndTime = dic[@"finishEndTime"];
     task.produceTime = dic[@"produceTime"];
     task.waiterName = dic[@"waiterName"];
+    task.waiterDeviceId = dic[@"waiterDeviceId"];
     [array addObject:task];
     
     return array;
@@ -250,6 +251,7 @@
         task.finishEndTime = dic[@"finishEndTime"];
         task.produceTime = dic[@"produceTime"];
         task.waiterName = dic[@"waiterName"];
+        task.waiterDeviceId = dic[@"waiterDeviceId"];
         [array addObject:task];
     }
     

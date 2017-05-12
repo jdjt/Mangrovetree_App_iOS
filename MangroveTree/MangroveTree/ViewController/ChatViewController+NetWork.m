@@ -35,7 +35,7 @@
                                        @"areaName":areaName,
                                        @"positionX":[NSString stringWithFormat:@"%f",mapCoord.coord.mapPoint.x],
                                        @"positionY":[NSString stringWithFormat:@"%f",mapCoord.coord.mapPoint.y],
-                                       @"positionZ":[NSString stringWithFormat:@"%d",mapCoord.coord.storey]}};
+                                       @"positionZ":[[DataManager defaultInstance]getParameter].diviceId}};
     self.seesionSengTask = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
                                                                        webURL:URL_SENG_TASK
                                                                        params:dic

@@ -345,6 +345,7 @@
             [self.headView stopTimer];
             self.headView.textStatus = TextStatus_default;
             self.frameViewController.currentTask = nil;
+            [self.frameViewController removeLocationOnMap:self.currentTask];
             [self.dataSource removeAllObjects];
             [self.chatTabelView reloadData];
             self.textView.hidden = YES;
@@ -404,9 +405,9 @@
             }
             
             NSString * isFirstAlert = [[NSUserDefaults standardUserDefaults] objectForKey:@"NotiReceiveAlertFirst"];
-            if (![isFirstAlert isEqualToString:@"0"])
+            if (![isFirstAlert isEqualToString:@"1"])
             {
-                [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"NotiReceiveAlertFirst"];
+                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"NotiReceiveAlertFirst"];
                 self.alert = [BaseAlertViewController alertWithAlertType:AlertType_waiterOrderReceiving andWithWaiterId:self.currentTask.waiterName];
                 [self.alert addTarget:self andWithComfirmAction:@selector(waiterReceiveTask)];
                 [self presentViewController:self.alert animated:YES completion:nil];
@@ -431,9 +432,9 @@
             if (self.alert != nil)
                 [self.alert dismissViewControllerAnimated:YES completion:nil];
             NSString * isCancelFirst = [[NSUserDefaults standardUserDefaults] objectForKey:@"NotiCancelAlertFirst"];
-            if (![isCancelFirst isEqualToString:@"0"])
+            if (![isCancelFirst isEqualToString:@"1"])
             {
-                [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"NotiCancelAlertFirst"];
+                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"NotiCancelAlertFirst"];
                 self.alert = [BaseAlertViewController alertWithAlertType:AlertType_systemAutoCancelTask andWithWaiterId:self.currentTask.waiterName];
                 [self.alert addTarget:self andWithComfirmAction:@selector(systemAutoCancelTask)];
                 [self presentViewController:self.alert animated:YES completion:nil];
@@ -488,6 +489,8 @@
             // 成功
             self.isSendTaskFail = NO;
             self.currentTask = [[DataManager defaultInstance] getCallTaskByTaskCode:dic[@"taskCode"]];
+            [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"NotiReceiveAlertFirst"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"NotiCancelAlertFirst"];
             [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:self.currentTask.taskCode];
             if (self.frameViewController != nil)
                 self.frameViewController.currentTask = self.currentTask;
