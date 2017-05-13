@@ -21,7 +21,6 @@
     // Override point for customization after application launch.
     
     self.currentModule = MODULE_DEFAULT;
-    
     // 定义系统状态栏默认风格
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [[UINavigationBar appearance] setBackgroundImage:[Util createImageWithColor:[UIColor colorWithHexString:@"#ED8256"]] forBarMetrics:UIBarMetricsDefault];

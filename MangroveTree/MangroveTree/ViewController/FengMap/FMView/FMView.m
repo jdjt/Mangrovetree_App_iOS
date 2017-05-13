@@ -247,10 +247,13 @@ extern NSString* FMModelSelected;
 //添加定位标注物
 - (void)addLocationMarker
 {
-    _locationMarker = [[FMKLocationMarker alloc] initWithPointerImageName:@"pointer.png" DomeImageName:@"dome.png"];
-    [self.fengMapView.map.locateLayer addLocationMarker:_locationMarker];
-    _locationMarker.size = CGSizeMake(70, 70);
-    _locationMarker.hidden = YES;
+    if(!_locationMarker)
+    {
+        _locationMarker = [[FMKLocationMarker alloc] initWithPointerImageName:@"pointer.png" DomeImageName:@"dome.png"];
+        [self.fengMapView.map.locateLayer addLocationMarker:_locationMarker];
+        _locationMarker.size = CGSizeMake(70, 70);
+        _locationMarker.hidden = YES;
+    }
 }
 //获取MAC地址并且开启定位服务
 - (void)getMacAndStartLocationService
@@ -1069,9 +1072,13 @@ extern NSString* FMModelSelected;
             [self.alertView addAction:action2];
             if (inDoorMap == NO)
             {
-                [[self getCurrentController] presentViewController:self.alertView animated:YES completion:^{
-                    
-                }];
+                if ([AppDelegate sharedDelegate].currentModule == MODULE_DEFAULT)
+                {
+                    [[self getCurrentController] presentViewController:self.alertView animated:YES completion:^{
+                        
+                    }];
+                }
+
             }
         }
         else
