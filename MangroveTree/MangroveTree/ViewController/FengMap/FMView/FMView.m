@@ -96,6 +96,7 @@ extern NSString* FMModelSelected;
 @property (nonatomic, copy) NSString * cancelMapID;//取消跳转的mapID
 @property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, strong) FMKNodeAssociation *nodeAssociation;
+@property (nonatomic, assign) double distance;
 
 @end
 
@@ -485,7 +486,8 @@ extern NSString* FMModelSelected;
 - (void)testDistanceWithResult:(BOOL)result distance:(double)distance
 {
     NSLog(@"+++++++++++++++++++++++++++++++++++++++++++++++++");
-    self.resultDistance = result;
+    self.distance = distance;
+//    self.resultDistance = result;
 }
 - (void)updateLocPosition:(FMKMapCoord)mapCoord macAddress:(NSString * )macAddress
 {
@@ -493,20 +495,30 @@ extern NSString* FMModelSelected;
     _locationMarker.hidden = YES;
     if ([macAddress isEqualToString: [[DataManager defaultInstance] getParameter].diviceId] && mapCoord.mapID != kOutdoorMapID)
     {
-        if ([self testIndoorMapIsxistByMapCoord:mapCoord.mapID])
+        if (mapCoord.mapID != kOutdoorMapID)
         {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.currentMapCoord = mapCoord;
-                self.waiterMapCoord = mapCoord;
-                if ([FMKLocationServiceManager shareLocationServiceManager].currentMapCoord.mapID != kOutdoorMapID)
-                {
-                    if (_showChangMap == NO)
+            if ([self testIndoorMapIsxistByMapCoord:mapCoord.mapID])
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.currentMapCoord = mapCoord;
+                    self.waiterMapCoord = mapCoord;
+                    if ([FMKLocationServiceManager shareLocationServiceManager].currentMapCoord.mapID != kOutdoorMapID)
                     {
-                        self.showChangMap = YES;
+                        if (_showChangMap == NO)
+                        {
+                            self.showChangMap = YES;
+                        }
                     }
-                }
-            });
+                });
+            }
+        }else if(mapCoord.mapID == kOutdoorMapID)
+        {
+            if (self.distance <= 10.00)
+            {
+                self.resultDistance = YES;
+            }
         }
+        
     }
 }
 - (void)setResultDistance:(BOOL)resultDistance

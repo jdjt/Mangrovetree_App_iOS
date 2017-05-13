@@ -78,6 +78,7 @@ int const kCallingServiceCount = 5;
 @property (nonatomic, assign) BOOL isFirstLocate;//第一次定位
 @property (nonatomic, assign) int callingServiceCount;//双点服务下初次判断定位次数
 @property (nonatomic, strong) UITextView *textView;
+@property (nonatomic, assign) double distance;
 
 @end
 
@@ -1245,7 +1246,7 @@ int const kCallingServiceCount = 5;
 	
 	[self drawSingleLineByNaviResult:self.naviResults];
 }
-#pragma  mark --drawLine
+#pragma  mark - drawLine
 - (void)drawSingleLineByNaviResult:(NSArray *)result
 {
 	[self.mapView.map.lineLayer removeAllLine];
@@ -1313,7 +1314,8 @@ int const kCallingServiceCount = 5;
 - (void)testDistanceWithResult:(BOOL)result distance:(double)distance
 {
     NSLog(@"+++++++++++++++++++++++++++++++++++++++++++++++++");
-    self.resultDistance = result;
+    self.distance = distance;
+//    self.resultDistance = result;
 }
 - (void)setResultDistance:(BOOL)resultDistance
 {
@@ -1356,22 +1358,28 @@ int const kCallingServiceCount = 5;
         self.currentMapCoord = mapCoord;
         [self enableLocationInOutdoor];
 
-//        if (self.mapID.intValue != mapCoord.mapID)
-//        {
-//            self.showChangeMap = YES;
-//        }else
-//        {
-//            if (_displayGroupID.intValue != mapCoord.coord.storey)
-//            {
-//                self.displayGroupID = @(mapCoord.coord.storey).stringValue;
-//                self.mapView.displayGids = @[@(mapCoord.coord.storey).stringValue];
-//            }
-//        }
+        if (self.mapID.intValue != mapCoord.mapID)
+        {
+            self.showChangeMap = YES;
+        }else
+        {
+            if (_displayGroupID.intValue != mapCoord.coord.storey)
+            {
+                self.displayGroupID = @(mapCoord.coord.storey).stringValue;
+                self.mapView.displayGids = @[@(mapCoord.coord.storey).stringValue];
+                if (self.distance <= 10.00)
+                {
+                    self.resultDistance = YES;
+                }
+            }else if (_displayGroupID.intValue == mapCoord.coord.storey)
+            {
+                if (self.distance <= 10.00)
+                {
+                    self.resultDistance = YES;
+                }
+            }
+        }
     }
-//    if (![macAddress  isEqualToString:[[DataManager defaultInstance] getParameter].diviceId] && self.mapID.intValue != mapCoord.mapID)
-//    {
-//        
-//    }
 }
 
 //判断要设置的楼层ID和已经显示的楼层是否相同
