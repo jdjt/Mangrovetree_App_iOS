@@ -493,7 +493,7 @@ extern NSString* FMModelSelected;
 {
     NSLog(@"_________________%d____________________%d",mapCoord.mapID, [FMKLocationServiceManager shareLocationServiceManager].currentMapCoord.mapID);
     _locationMarker.hidden = YES;
-    if ([macAddress isEqualToString: [[DataManager defaultInstance] getParameter].diviceId] && mapCoord.mapID != kOutdoorMapID)
+    if ([macAddress isEqualToString: [[DataManager defaultInstance] getParameter].diviceId])
     {
         if (mapCoord.mapID != kOutdoorMapID)
         {
@@ -504,10 +504,7 @@ extern NSString* FMModelSelected;
                     self.waiterMapCoord = mapCoord;
                     if ([FMKLocationServiceManager shareLocationServiceManager].currentMapCoord.mapID != kOutdoorMapID)
                     {
-                        if (_showChangMap == NO)
-                        {
-                            self.showChangMap = YES;
-                        }
+                        self.showChangMap = YES;
                     }
                 });
             }
