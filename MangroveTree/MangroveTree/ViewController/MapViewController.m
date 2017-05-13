@@ -122,8 +122,7 @@
     
     [self.fmView addLocationDelegate];
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.fmView planNaviAct];
-        [self.fmView addlocateBtn];
+        [self.fmView addUI];
     });
     
     self.fmView.isFirstLocate = YES;

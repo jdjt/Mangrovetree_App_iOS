@@ -73,7 +73,7 @@ typedef NS_ENUM(NSInteger,ButtonType)
 - (void)addLocationDelegate;
 
 - (void)planNaviAct;
-
+- (void)addUI;
 //地图进入导航模式
 - (void)mapEnterNaviMode;
 - (void)hideNaviBar:(BOOL)hide;
