@@ -162,14 +162,7 @@ extern NSString* FMModelSelected;
         //[self addModelInfoPopView];//模型信息弹框
         //		self.modelInfoPopView.delegate = self;
         //		[self addRouteView];//路线信息弹框
-        [self addNaviPopView];//导航信息弹框
-        self.naviPopView.delegate = self;
-        [self addInforView];
-        [self addNaviTopView];//顶部导航信息框
-        [self addSwitchMapInfoView];
-        self.switchMapInfoView.delegate = self;
-        [self setLayerDelegate];//设置相关图层的代理
-        [self addLocationMarker];//添加定位标注物
+        
         
         //路径规划
         __weak typeof (self)wSelf = self;
@@ -198,6 +191,19 @@ extern NSString* FMModelSelected;
     _categoryView.categoryBtnClickBlock = ^(NSInteger tag,BOOL buttonSelected) {
         wSelf.categoryTag = (int)tag;
     };
+}
+- (void)addUI
+{
+    [self addlocateBtn];
+    [self addNaviPopView];//导航信息弹框
+    self.naviPopView.delegate = self;
+    [self addInforView];
+    [self addNaviTopView];//顶部导航信息框
+    [self addSwitchMapInfoView];
+    self.switchMapInfoView.delegate = self;
+    [self setLayerDelegate];//设置相关图层的代理
+    [self addLocationMarker];//添加定位标注物
+    [self planNaviAct];
 }
 - (void)resetTheme
 {
