@@ -127,9 +127,9 @@ extern NSString* FMModelSelected;
     self.mapFinish = NO;
 	_categoryTag = NSNotFound;
     self.resultDistance = NO;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self getMacAndStartLocationService];//获取MAC地址并且开启定位服务
-    });
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [self getMacAndStartLocationService];//获取MAC地址并且开启定位服务
+//    });
 	
 	_isEnableMove = YES;
     _showChangMap = NO;
@@ -442,6 +442,7 @@ extern NSString* FMModelSelected;
 - (void)mapViewDidFinishLoadingMap:(FMKMapView *)mapView
 {
     dispatch_async(dispatch_get_main_queue(), ^{
+        [self getMacAndStartLocationService];//获取MAC地址并且开启定位服务
         [MBProgressHUD hideAllHUDsForView:[AppDelegate sharedDelegate].window animated:YES];
     });
     self.mapFinish = YES;
