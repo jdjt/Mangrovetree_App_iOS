@@ -1033,6 +1033,7 @@ extern NSString* FMModelSelected;
             self.currentMapCoord = mapCoord;
             self.showChangMap = YES;
 		}
+        [_locationMarker locateWithGeoCoord:FMKGeoCoordMake(1, mapCoord.coord.mapPoint)];
 	}
 	else
 	{
@@ -1052,6 +1053,8 @@ extern NSString* FMModelSelected;
         _locationMarker.hidden = NO;
         
 	}
+    
+
 //    [_locationMarker locateWithGeoCoord:mapCoord.coord];
 //    _locationMarker.hidden = NO;
 }

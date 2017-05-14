@@ -303,8 +303,8 @@ int const kCallingServiceCount = 5;
 			_mapView.displayGids = @[_displayGroupID];
 		}
 		
-		FMKGeoCoord modelCenter = FMKGeoCoordMake(_dbModel.gid, FMKMapPointMake(_dbModel.x, _dbModel.y));
-		[self.mapView moveToViewCenterByMapCoord:modelCenter];
+//		FMKGeoCoord modelCenter = FMKGeoCoordMake(_dbModel.gid, FMKMapPointMake(_dbModel.x, _dbModel.y));
+//		[self.mapView moveToViewCenterByMapCoord:modelCenter];
 		FMKModel * model = [self queryModelByFid:_dbModel.fid groupID:@(_dbModel.gid).stringValue];
 		[self setupModelInfoPopViewByModel:model];
 		model.selected = YES;
@@ -980,7 +980,6 @@ int const kCallingServiceCount = 5;
     
 	[self.naviPopView setupModelInfoByNodel:queryModel];//设置模型弹框信息
 	
-	[self.naviPopView show];
     if (queryModel.activityCode != nil && ![queryModel.activityCode isEqualToString:@""])
     {
         [self.inforView showByView:self.naviPopView];
@@ -1007,7 +1006,9 @@ int const kCallingServiceCount = 5;
     
     if (naviSuccess)
     {
+        [self.naviPopView show];
         [wSelf startNaviAct];//路径规划
+        [self setupNaviPopView];
     }
     else
     {
@@ -1032,11 +1033,7 @@ int const kCallingServiceCount = 5;
 //	};
 //	
 //	
-    if (naviSuccess)
-    {
-        [self setupNaviPopView];
-    }
-	
+
 }
 
 //设置导航信息弹框信息
@@ -1189,7 +1186,7 @@ int const kCallingServiceCount = 5;
 - (void)stopNavi
 {
     [self hideMavBar:NO];
-    _highlightModel.selected = NO;
+//    _highlightModel.selected = NO;
 	[FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi = NO;
 	[FMNaviAnalyserTool shareNaviAnalyserTool].planNavi = NO;
 	[self.mapView.map.lineLayer removeAllLine];
