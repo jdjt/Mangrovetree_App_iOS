@@ -114,7 +114,7 @@
 {
     NSDictionary * pushMessage = userInfo;
     
-    if ([pushMessage[@"messType"] isEqualToString:@"WaiterAcceptTask"]) //  服务员接受任务
+    if ([pushMessage[@"messType"] isEqualToString:@"WaiterAcceptTask"]||[pushMessage[@"messType"] isEqualToString:@"ManagerSendTask"]) //  服务员接受任务
     {
         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"NotiReceiveAlertFirst"];
         BaseAlertViewController *base = [BaseAlertViewController alertWithAlertType:AlertType_waiterOrderReceiving andWithWaiterId:@""];

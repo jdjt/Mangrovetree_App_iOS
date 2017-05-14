@@ -41,6 +41,7 @@
 @property (nonatomic, strong) NSMutableArray * searchResult;
 @property (nonatomic, strong) NSMutableArray * displayResult;
 
+@property (nonatomic, assign) NSInteger pageNumber;
 
 @end
 
@@ -52,6 +53,7 @@
     
     self.segmentSelect = YES;
     self.tableViewShow = NO;
+    self.pageNumber = 0;
     self.searchResult = [NSMutableArray array];
     self.displayResult = [NSMutableArray array];
     [self.searchTextFlied setValue:[UIColor colorWithRed:247 / 255.0f green:247 / 255.0f blue:247 / 255.0f alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
@@ -505,9 +507,23 @@
 //加载更多
 - (void)updateData
 {
-    [_displayResult removeAllObjects];
-    [_displayResult addObjectsFromArray:_searchResult];
-    [self.searchTableView.legendFooter noticeNoMoreData];
+    self.pageNumber += 1;
+    if (self.searchResult.count > (self.pageNumber + 1) * 10)
+    {
+        for (int i = 0; i < 10 ; i++)
+        {
+            [_displayResult addObject:self.searchResult[self.pageNumber * 10 + i]];
+        }
+        [self.searchTableView.legendFooter resetNoMoreData];
+    }
+    else
+    {
+        for (int i = 0; i < self.searchResult.count - self.pageNumber * 10; i++)
+        {
+            [_displayResult addObject:self.searchResult[self.pageNumber * 10 + i]];
+        }
+        [self.searchTableView.legendFooter noticeNoMoreData];
+    }
     [self.searchTableView reloadData];
 }
 
@@ -626,11 +642,12 @@
 //根据搜索框内容搜索
 - (void)queryModelByText:(NSString *)text
 {
+    self.pageNumber = 0;
     NSArray * arr = [[DBSearchTool shareDBSearchTool] queryByKeyWord:text];
     [_searchResult removeAllObjects];
     [_displayResult removeAllObjects];
 //    arr = [self sortBySerachResult:arr];
-    [_displayResult addObjectsFromArray:arr];
+    [_searchResult addObjectsFromArray:arr];
     if (_searchResult.count > 10) {
         for (int i = 0; i < 10; i++) {
             [_displayResult addObject:_searchResult[i]];
@@ -649,6 +666,7 @@
 //根据typeName搜索
 - (void)queryByTypeName:(NSString *)typeName
 {
+    self.pageNumber = 0;
     NSArray * results = [[DBSearchTool shareDBSearchTool] queryByTypeName:typeName];
     [_searchResult removeAllObjects];
     [_displayResult removeAllObjects];
@@ -672,6 +690,7 @@
 }
 - (void)queryBySubTypeName:(NSString *)subTypeName
 {
+    self.pageNumber = 0;
     NSArray * results = [[DBSearchTool shareDBSearchTool] queryBySubTypeName:subTypeName];
     [_searchResult removeAllObjects];
     [_displayResult removeAllObjects];

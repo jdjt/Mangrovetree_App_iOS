@@ -287,7 +287,7 @@
     NSDictionary * pushMessage = noti.object;
     if (self.currentTask == nil)
         return;
-    if ([pushMessage[@"messType"] isEqualToString:@"WaiterAcceptTask"]) //  服务员接受任务
+    if ([pushMessage[@"messType"] isEqualToString:@"WaiterAcceptTask"]||[pushMessage[@"messType"] isEqualToString:@"ManagerSendTask"]) //  服务员接受任务
     {
         [self getTaskDetailByTaskCode:self.currentTask.taskCode];
     }
