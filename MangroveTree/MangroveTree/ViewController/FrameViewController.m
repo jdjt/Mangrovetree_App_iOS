@@ -309,16 +309,12 @@ NSString* const FMModelSelected = @"FMModelSelected";
     [self alertSelect];
     if (tap.view == self.toSearchView)
     {
-        if (self.segmentSelect == Segment_toWhere)
-            return;
         [self showBottomView:Segment_toWhere];
         //去哪跳转
         [self toSearchAction];
     }
     else if (tap.view == self.toWorldPlatform)
     {
-        if (self.segmentSelect == Segment_toWorld)
-            return;
 //        [self showBottomView:Segment_toWorld];
         self.toSearchImage.image = [UIImage imageNamed:@"toSearch_default"];
         self.toWorldPlatformImage.image = [UIImage imageNamed:@"toWorld_act"];
@@ -332,8 +328,6 @@ NSString* const FMModelSelected = @"FMModelSelected";
     }
     else if (tap.view == self.toCallService)
     {
-        if (self.segmentSelect == Segment_toService)
-            return;
         [self showBottomView:Segment_toService];
         [self tapCallService];
     }

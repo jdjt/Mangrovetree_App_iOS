@@ -118,24 +118,25 @@
             [self.view  insertSubview:self.fmView belowSubview:self.scalingLabel];
         });
     }
-    [self.fmView resetTheme];
     
-    [self.fmView addLocationDelegate];
     dispatch_async(dispatch_get_main_queue(), ^{
+        [self.fmView resetTheme];
+        [self.fmView addLocationDelegate];
+        self.fmView.isFirstLocate = YES;
+        
+        if ([FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi)
+        {
+            [self.fmView mapEnterNaviMode];
+        }else
+        {
+            self.fmView.naviTopView.hidden = YES;
+        }
+        [[FMLocationManager shareLocationManager] setMapView:nil];
+        [[FMLocationManager shareLocationManager] setMapView:_fmView.fengMapView];tihuan
         [self.fmView addUI];
     });
     
-    self.fmView.isFirstLocate = YES;
-
-    if ([FMNaviAnalyserTool shareNaviAnalyserTool].hasStartNavi)
-    {
-        [self.fmView mapEnterNaviMode];
-    }else
-    {
-        self.fmView.naviTopView.hidden = YES;
-    }
-    [[FMLocationManager shareLocationManager] setMapView:nil];
-    [[FMLocationManager shareLocationManager] setMapView:_fmView.fengMapView];
+    
 }
 
 - (void)showMangroveIcon:(BOOL)show
