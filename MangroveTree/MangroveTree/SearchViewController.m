@@ -483,6 +483,7 @@
             if (map.fmView.mapFinish == YES)
             {
                 [map.centerVC showBottomView:Segment_none];
+                map.centerVC.function = FUNCTION_MAP;
                 [self didSelectedCellToMapViewByModel:model];
                 [self resetUI];
             }

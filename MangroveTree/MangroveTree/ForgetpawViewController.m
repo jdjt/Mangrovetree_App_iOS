@@ -158,7 +158,7 @@
     NSString* uuid = [self getUUID];
     [params setObject:uuid forKey:@"uuid"];
     [self.loginController.phoneUUIDDictionary setObject:uuid forKey:acc];
-    self.sendCodeTask = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_SCREAT
+    self.sendCodeTask = [[MTRequestNetwork defaultManager] POSTWithTopHead:@REQUEST_HEAD_NORMAL
                                                                     webURL:@URI_GETUKEY
                                                                     params:params
                                                                 withByUser:YES

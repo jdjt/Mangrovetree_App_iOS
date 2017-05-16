@@ -50,11 +50,12 @@
             serviceAddress = type == YES ? @"rc-ws.mymhotel.com" : @"syw.mymhotel.com";//@"103.4.58.124:8080";//@"192.168.10.163:8080";//
             break;
         case 2:
-            serviceAddress = [MySingleton sharedSingleton].interTestUrl;
+            serviceAddress = type == YES ?@"mws.mymhotel.com" : @"syw.mymhotel.com";
+            //serviceAddress = [MySingleton sharedSingleton].interTestUrl;
             break;
         case 0:
         default:
-            serviceAddress = type == YES ?@"mws.mymhotel.com" : @"syw.mymhotel.com";
+            
             break;
     }
     

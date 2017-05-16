@@ -640,7 +640,7 @@
             "uradio_mapwidth": "3542",
             "uradio_mapheight": "1806",
             "fmap_mid": "79982",
-            "fmap_gid": "",
+            "fmap_gid": "3",
             "trans_coords": [
                 12188300.3019,
                 2071002.7113,
@@ -1594,7 +1594,7 @@
             "uradio_mapwidth": "1483",
             "uradio_mapheight": "604",
             "fmap_mid": "79982",
-            "fmap_gid": "4",
+            "fmap_gid": "5",
             "trans_coords": [
                 12188362.4582,
                 2070972.2275,
@@ -1631,6 +1631,24 @@
             "uradio_mapheight": "604",
             "fmap_mid": "79982",
             "fmap_gid": "9",
+            "trans_coords": [
+                12188362.9054,
+                2070972.2546,
+                12188405.6621,
+                2070940.0812,
+                12188485.0373,
+                2071045.7031,
+                12188442.2806,
+                2071077.6648
+            ]
+        },
+        {
+            "uradio_mapid": "42212510",
+            "uradio_mapname": "6-11",
+            "uradio_mapwidth": "1483",
+            "uradio_mapheight": "604",
+            "fmap_mid": "79982",
+            "fmap_gid": "10423123040",
             "trans_coords": [
                 12188362.9054,
                 2070972.2546,
@@ -1936,7 +1954,7 @@
             "uradio_mapwidth": "1385",
             "uradio_mapheight": "1388",
             "fmap_mid": "70146",
-            "fmap_gid": "13",
+            "fmap_gid": "12",
             "trans_coords": [
                 12188128.2028,
                 2071287.5538,
@@ -1954,7 +1972,7 @@
             "uradio_mapwidth": "1385",
             "uradio_mapheight": "1388",
             "fmap_mid": "70146",
-            "fmap_gid": "17",
+            "fmap_gid": "16",
             "trans_coords": [
                 12188128.6492,
                 2071287.5305,
@@ -1972,7 +1990,7 @@
             "uradio_mapwidth": "1385",
             "uradio_mapheight": "1388",
             "fmap_mid": "70146",
-            "fmap_gid": "21",
+            "fmap_gid": "20",
             "trans_coords": [
                 12188126.4745,
                 2071287.1901,
@@ -1990,7 +2008,7 @@
             "uradio_mapwidth": "1674",
             "uradio_mapheight": "2779",
             "fmap_mid": "79981",
-            "fmap_gid": "15",
+            "fmap_gid": "14",
             "trans_coords": [
                 12188212.8458,
                 2071329.3669,
@@ -2008,7 +2026,7 @@
             "uradio_mapwidth": "1674",
             "uradio_mapheight": "2779",
             "fmap_mid": "79981",
-            "fmap_gid": "18",
+            "fmap_gid": "17",
             "trans_coords": [
                 12188215.2301,
                 2071328,
@@ -2116,7 +2134,7 @@
             "uradio_mapwidth": "1437",
             "uradio_mapheight": "647",
             "fmap_mid": "70145",
-            "fmap_gid": "20",
+            "fmap_gid": "19",
             "trans_coords": [
                 12187994.2058,
                 2071305.9874,
@@ -2134,7 +2152,7 @@
             "uradio_mapwidth": "1437",
             "uradio_mapheight": "647",
             "fmap_mid": "70145",
-            "fmap_gid": "22",
+            "fmap_gid": "21",
             "trans_coords": [
                 12187994.273,
                 2071305.6648,
@@ -2278,7 +2296,7 @@
             "uradio_mapwidth": "1385",
             "uradio_mapheight": "1388",
             "fmap_mid": "70146",
-            "fmap_gid": "14",
+            "fmap_gid": "13",
             "trans_coords": [
                 12188127.1482,
                 2071286.8864,
@@ -2296,7 +2314,7 @@
             "uradio_mapwidth": "1385",
             "uradio_mapheight": "1388",
             "fmap_mid": "70146",
-            "fmap_gid": "15",
+            "fmap_gid": "14",
             "trans_coords": [
                 12188126.5845,
                 2071286.7549,
@@ -2314,7 +2332,7 @@
             "uradio_mapwidth": "1385",
             "uradio_mapheight": "1388",
             "fmap_mid": "70146",
-            "fmap_gid": "16",
+            "fmap_gid": "15",
             "trans_coords": [
                 12188127.1647,
                 2071287.3108,
@@ -2332,7 +2350,7 @@
             "uradio_mapwidth": "1385",
             "uradio_mapheight": "1388",
             "fmap_mid": "70146",
-            "fmap_gid": "18",
+            "fmap_gid": "17",
             "trans_coords": [
                 12188127.4907,
                 2071287.151,
@@ -2350,7 +2368,7 @@
             "uradio_mapwidth": "1385",
             "uradio_mapheight": "1388",
             "fmap_mid": "70146",
-            "fmap_gid": "19",
+            "fmap_gid": "18",
             "trans_coords": [
                 12188126.8453,
                 2071287.4075,
@@ -2368,7 +2386,7 @@
             "uradio_mapwidth": "1385",
             "uradio_mapheight": "1388",
             "fmap_mid": "70146",
-            "fmap_gid": "20",
+            "fmap_gid": "19",
             "trans_coords": [
                 12188127.2448,
                 2071287.0329,
@@ -2386,7 +2404,7 @@
             "uradio_mapwidth": "1385",
             "uradio_mapheight": "1388",
             "fmap_mid": "70146",
-            "fmap_gid": "22",
+            "fmap_gid": "21",
             "trans_coords": [
                 12188127.1512,
                 2071286.9701,
@@ -2423,7 +2441,7 @@
             "uradio_mapwidth": "1437",
             "uradio_mapheight": "647",
             "fmap_mid": "70145",
-            "fmap_gid": "18",
+            "fmap_gid": "17",
             "trans_coords": [
                 12187994.2496,
                 2071306.5075,
@@ -2441,7 +2459,7 @@
             "uradio_mapwidth": "1437",
             "uradio_mapheight": "647",
             "fmap_mid": "70145",
-            "fmap_gid": "17",
+            "fmap_gid": "16",
             "trans_coords": [
                 12187994.1178,
                 2071305.4596,
@@ -2459,7 +2477,7 @@
             "uradio_mapwidth": "1437",
             "uradio_mapheight": "647",
             "fmap_mid": "70145",
-            "fmap_gid": "16",
+            "fmap_gid": "15",
             "trans_coords": [
                 12187994.2943,
                 2071305.216,
@@ -2477,7 +2495,7 @@
             "uradio_mapwidth": "1437",
             "uradio_mapheight": "647",
             "fmap_mid": "70145",
-            "fmap_gid": "15",
+            "fmap_gid": "14",
             "trans_coords": [
                 12187994.008,
                 2071305.6539,
@@ -2495,7 +2513,7 @@
             "uradio_mapwidth": "1437",
             "uradio_mapheight": "647",
             "fmap_mid": "70145",
-            "fmap_gid": "14",
+            "fmap_gid": "13",
             "trans_coords": [
                 12187993.6567,
                 2071305.8177,
@@ -2513,7 +2531,7 @@
             "uradio_mapwidth": "1437",
             "uradio_mapheight": "647",
             "fmap_mid": "70145",
-            "fmap_gid": "13",
+            "fmap_gid": "12",
             "trans_coords": [
                 12187993.8879,
                 2071305.6333,
@@ -2675,7 +2693,7 @@
             "uradio_mapwidth": "1187",
             "uradio_mapheight": "2460",
             "fmap_mid": "79981",
-            "fmap_gid": "21",
+            "fmap_gid": "20",
             "trans_coords": [
                 12188334.9591,
                 2071325.6771,
@@ -2693,7 +2711,7 @@
             "uradio_mapwidth": "1471",
             "uradio_mapheight": "2708",
             "fmap_mid": "79981",
-            "fmap_gid": "20",
+            "fmap_gid": "19",
             "trans_coords": [
                 12188275.3913,
                 2071330.1222,
@@ -2711,7 +2729,7 @@
             "uradio_mapwidth": "1674",
             "uradio_mapheight": "2779",
             "fmap_mid": "79981",
-            "fmap_gid": "19",
+            "fmap_gid": "18",
             "trans_coords": [
                 12188214.3757,
                 2071329.7915,
@@ -2729,7 +2747,7 @@
             "uradio_mapwidth": "1674",
             "uradio_mapheight": "2779",
             "fmap_mid": "79981",
-            "fmap_gid": "17",
+            "fmap_gid": "16",
             "trans_coords": [
                 12188215.6733,
                 2071329.6387,
@@ -2747,7 +2765,7 @@
             "uradio_mapwidth": "1674",
             "uradio_mapheight": "2779",
             "fmap_mid": "79981",
-            "fmap_gid": "16",
+            "fmap_gid": "15",
             "trans_coords": [
                 12188214.3913,
                 2071329.4787,
@@ -2765,7 +2783,7 @@
             "uradio_mapwidth": "1674",
             "uradio_mapheight": "2779",
             "fmap_mid": "79981",
-            "fmap_gid": "14",
+            "fmap_gid": "13",
             "trans_coords": [
                 12188215.4758,
                 2071329.3988,
@@ -2819,7 +2837,7 @@
         "uradio_mapwidth": "1437",
         "uradio_mapheight": "647",
         "fmap_mid": "70145",
-        "fmap_gid": "19",
+        "fmap_gid": "18",
         "trans_coords": [
          12187993.8009,
          2071306.0618,
@@ -2837,7 +2855,7 @@
         "uradio_mapwidth": "1437",
         "uradio_mapheight": "647",
         "fmap_mid": "70145",
-        "fmap_gid": "21",
+        "fmap_gid": "20",
         "trans_coords": [
           12187994.7064,
           2071305.8629,

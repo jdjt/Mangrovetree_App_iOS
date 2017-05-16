@@ -14,6 +14,7 @@
 {
 	[UIView animateWithDuration:0.6f animations:^{
 		self.alpha = 1.0f;
+        self.hidden = NO;
 	}];
 }
 
@@ -21,6 +22,7 @@
 {
 	[UIView animateWithDuration:0.6f animations:^{
 		self.alpha = 0.0f;
+        self.hidden = YES;
 	}];
 }
 

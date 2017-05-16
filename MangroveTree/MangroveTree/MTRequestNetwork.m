@@ -70,7 +70,7 @@
     self.params = params;
     
     // 判断服务器地址
-    NSInteger severIndex = 1;
+    NSInteger severIndex = 2;
     self.serverAddress = [[MySingleton sharedSingleton] currentServiceAddress:severIndex byInterFaceType:old];
 //    if ([url isEqualToString:@"/hotelcallservice/customer/addTask.json"])
 //    {
