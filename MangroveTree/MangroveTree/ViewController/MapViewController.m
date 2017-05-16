@@ -132,7 +132,7 @@
             self.fmView.naviTopView.hidden = YES;
         }
         [[FMLocationManager shareLocationManager] setMapView:nil];
-        [[FMLocationManager shareLocationManager] setMapView:_fmView.fengMapView];tihuan
+        [[FMLocationManager shareLocationManager] setMapView:_fmView.fengMapView];
         [self.fmView addUI];
     });
     
