@@ -246,7 +246,7 @@ UIAlertViewDelegate>
         [[[YWAPI sharedInstance] getGlobalPushService] setXPushCertName:@"sandbox"];
     } else {
         /// 默认的情况下，我们都设置为生产证书
-        [[[YWAPI sharedInstance] getGlobalPushService] setXPushCertName:@"production"];
+        [[[YWAPI sharedInstance] getGlobalPushService] setXPushCertName:@"mangrovetree_ios"];
     }
     
 }
